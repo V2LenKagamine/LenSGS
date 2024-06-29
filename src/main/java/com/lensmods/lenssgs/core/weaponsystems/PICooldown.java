@@ -3,6 +3,7 @@ package com.lensmods.lenssgs.core.weaponsystems;
 
 import com.google.common.collect.Maps;
 import com.lensmods.lenssgs.core.items.GunBaseItem;
+import com.lensmods.lenssgs.init.LenDataComponents;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.Util;
 import net.minecraft.world.entity.player.Player;
@@ -17,14 +18,14 @@ public class PICooldown {
 
         private final Map<Item, Pair<Long, Integer>> cooldownMap = Maps.newHashMap();
 
-        public static PICooldown getShootTracker(Player player)
+        public static PICooldown getCDTracker(Player player)
         {
             return SHOOT_TRACKER_MAP.computeIfAbsent(player, player1 -> new PICooldown());
         }
 
         public void putCooldown(ItemStack stacc, GunBaseItem weapon)
         {
-            int rate = 1; //Change dumbass
+            int rate = Math.round(stacc.get(LenDataComponents.FIRE_RATE));
             this.cooldownMap.put(weapon, Pair.of(Util.getMillis(), rate * 50));
         }
 

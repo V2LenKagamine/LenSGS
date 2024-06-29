@@ -7,20 +7,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.TargetBlock;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
-import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.neoforged.fml.util.ObfuscationReflectionHelper;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.function.Predicate;
 
 public class LenUtil {
@@ -333,8 +327,8 @@ public class LenUtil {
             return (source.getTags() == null || source.getTags().equals(target.getTags()));
         }
     }
-
-    private static final Method updateRedstoneOutputMethod = ObfuscationReflectionHelper.findMethod(TargetBlock.class, "m_57391_", LevelAccessor.class, BlockState.class, BlockHitResult.class, Entity.class);
+    /*
+    private static final Method updateRedstoneOutputMethod = ObfuscationReflectionHelper.findMethod(TargetBlock.class, "m_5581_", LevelAccessor.class, BlockState.class, BlockHitResult.class, Projectile.class);
 
     public static int updateTargetBlock(TargetBlock block, LevelAccessor accessor, BlockState state, BlockHitResult result, Entity entity)
     {
@@ -346,5 +340,10 @@ public class LenUtil {
         {
             return 0;
         }
+    }
+     */
+    public static float RandBetween(Random randy,float min,float max)
+    {
+        return randy.nextFloat(min,max);
     }
 }

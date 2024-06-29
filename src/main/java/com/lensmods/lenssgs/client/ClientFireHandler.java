@@ -1,7 +1,6 @@
 package com.lensmods.lenssgs.client;
 
 import com.lensmods.lenssgs.core.items.GunBaseItem;
-import com.lensmods.lenssgs.core.weaponsystems.GunLogic;
 import com.lensmods.lenssgs.networking.messages.CTSFire;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
@@ -60,10 +59,10 @@ public class ClientFireHandler {
     }
     public void shoot(Player player, ItemStack heldItem)
     {
-        if(!(heldItem.getItem() instanceof GunBaseItem))
+        if(!(heldItem.getItem() instanceof GunBaseItem gun))
             return;
 
-        if(!GunLogic.doesHaveAmmo(heldItem) && !player.isCreative())
+        if(!gun.doesHaveAmmo(heldItem) && !player.isCreative())
             return;
 
         if(player.isSpectator())
@@ -76,7 +75,7 @@ public class ClientFireHandler {
         if(!tracker.isOnCooldown(heldItem.getItem()))
         {
             GunBaseItem gunItem = (GunBaseItem) heldItem.getItem();
-            PacketDistributor.sendToServer(new CTSFire(player.getYRot(),player.getXRot()));
+            PacketDistributor.sendToServer(new CTSFire(player.getXRot(),player.getYRot()));
         }
     }
 

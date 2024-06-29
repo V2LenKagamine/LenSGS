@@ -1,6 +1,5 @@
 package com.lensmods.lenssgs.core.entity;
 
-import com.lensmods.lenssgs.core.util.LenUtil;
 import com.lensmods.lenssgs.init.LenDamageTypes;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -31,18 +30,26 @@ import net.neoforged.neoforge.entity.IEntityWithComplexSpawn;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+
+//I ain gonna lie chief half of this is stolen code.
 public class GenericProjectile extends Entity implements IEntityWithComplexSpawn {
     private static final Predicate<Entity> PROJECTILE_TARGETS = input -> input != null && input.isPickable() && !input.isSpectator();
     private static final Predicate<BlockState> IGNORE_LEAVES = input -> input != null && input.getBlock() instanceof LeavesBlock;
 
     protected int OwnerID;
     protected LivingEntity Owner;
-    protected float bonus_dmg = 0f;
+    protected float dmg = 0f;
+    protected int pierce = 0;
+    protected int life = 30;
+    protected double gravityMod = 0;
+
+    private ItemStack visualItem = ItemStack.EMPTY;
 
     public GenericProjectile(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -72,6 +79,18 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         this.yRotO = this.getYRot();
         this.xRotO = this.getXRot();
     }
+    public void set_dmg(float newdmg) {
+        this.dmg = newdmg;
+    }
+    public void set_pierce(int newval) {
+        this.pierce = newval;
+    }
+    public void setGravityMod(int newval) {
+        this.gravityMod = newval;
+    }
+    public ItemStack getVisualItem() {
+        return this.visualItem;
+    }
     private void onHit(HitResult result, Vec3 startVec, Vec3 endVec)
     {
         if(result instanceof BlockHitResult blockHitResult)
@@ -88,11 +107,11 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
 
             if(block instanceof TargetBlock targetBlock)
             {
-                int power = LenUtil.updateTargetBlock(targetBlock, this.level(), state, blockHitResult, this);
                 if(this.Owner instanceof ServerPlayer serverPlayer)
                 {
                     serverPlayer.awardStat(Stats.TARGET_HIT);
-                    CriteriaTriggers.TARGET_BLOCK_HIT.trigger(serverPlayer, this, blockHitResult.getLocation(), power);
+                    CriteriaTriggers.TARGET_BLOCK_HIT.trigger(serverPlayer, this, blockHitResult.getLocation(),
+                            state.getSignal(level(),pos,getDirection()));
                 }
             }
 
@@ -135,30 +154,115 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
 
     @Override
     protected void readAdditionalSaveData(CompoundTag pCompound) {
-
+        this.gravityMod = pCompound.getDouble("gravityMod");
+        this.life = pCompound.getInt("lifetime");
     }
 
     @Override
-    protected void addAdditionalSaveData(CompoundTag pCompound) {}
+    protected void addAdditionalSaveData(CompoundTag pCompound) {
+        pCompound.putDouble("gravityMod",this.gravityMod);
+        pCompound.putInt("lifetime",this.life);
+    }
 
     @Override
     public void writeSpawnData(RegistryFriendlyByteBuf buffer) {
         buffer.writeInt(this.OwnerID);
+        buffer.writeDouble(this.gravityMod);
+        buffer.writeInt(this.life);
     }
 
     @Override
     public void readSpawnData(RegistryFriendlyByteBuf additionalData) {
         this.OwnerID = additionalData.readInt();
+        this.gravityMod = additionalData.readDouble();
+        this.life = additionalData.readInt();
     }
 
     private Vec3 getDirection(LivingEntity shooter, ItemStack weapon)
     {
             return this.getVectorFromRotation(shooter.getXRot(), shooter.getYRot());
     }
+    @Override
+    public void tick()
+    {
+        super.tick();
+        this.updateHeading();
 
+        if(!this.level().isClientSide())
+        {
+            Vec3 startVec = this.position();
+            Vec3 endVec = startVec.add(this.getDeltaMovement());
+            HitResult result = rayTraceBlocks(this.level(), new ClipContext(startVec, endVec, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this), IGNORE_LEAVES);
+            if(result.getType() != HitResult.Type.MISS)
+            {
+                endVec = result.getLocation();
+            }
+
+            List<EntityResult> hitEntities = null;
+            if(this.pierce == 0)
+            {
+                EntityResult entityResult = this.findEntityOnPath(startVec, endVec);
+                if(entityResult != null)
+                {
+                    hitEntities = Collections.singletonList(entityResult);
+                }
+            }
+            else
+            {
+                hitEntities = this.findEntitiesOnPath(startVec, endVec);
+            }
+
+            if(hitEntities != null && hitEntities.size() > 0)
+            {
+                for(EntityResult entityResult : hitEntities)
+                {
+                    result = new EntityHitResult(entityResult.getEntity());
+                    if(((EntityHitResult) result).getEntity() instanceof Player)
+                    {
+                        Player player = (Player) ((EntityHitResult) result).getEntity();
+
+                        if(this.Owner instanceof Player && !((Player) this.Owner).canHarmPlayer(player))
+                        {
+                            result = null;
+                        }
+                    }
+                    if(result != null)
+                    {
+                        this.onHit(result, startVec, endVec);
+                    }
+                }
+            }
+            else
+            {
+                this.onHit(result, startVec, endVec);
+            }
+        }
+
+        double nextPosX = this.getX() + this.getDeltaMovement().x();
+        double nextPosY = this.getY() + this.getDeltaMovement().y();
+        double nextPosZ = this.getZ() + this.getDeltaMovement().z();
+        this.setPos(nextPosX, nextPosY, nextPosZ);
+
+        if(this.gravityMod > 0)
+        {
+            this.setDeltaMovement(this.getDeltaMovement().add(0, this.gravityMod, 0));
+        }
+
+        if(this.tickCount >= this.life)
+        {
+            if (this.isAlive()) {
+                this.onExpire();
+            }
+            this.remove(RemovalReason.KILLED);
+        }
+    }
+
+    protected void onExpire() {
+    //Todo:Boom?
+    }
     public float getDamage()
     {
-        return Math.max(0F, this.bonus_dmg);
+        return Math.max(0F, this.dmg);
     }
     private Vec3 getVectorFromRotation(float pitch, float yaw)
     {

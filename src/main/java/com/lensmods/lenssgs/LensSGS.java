@@ -1,13 +1,18 @@
 package com.lensmods.lenssgs;
 
 import com.lensmods.lenssgs.client.ClientFireHandler;
+import com.lensmods.lenssgs.core.entity.render.GenericProjRender;
+import com.lensmods.lenssgs.datagen.LenDamageGen;
 import com.lensmods.lenssgs.init.LenDataComponents;
+import com.lensmods.lenssgs.init.LenEnts;
 import com.lensmods.lenssgs.init.LenItems;
 import com.lensmods.lenssgs.networking.PacketReg;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.data.DataProvider;
+import net.minecraft.data.PackOutput;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -24,7 +29,9 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -70,6 +77,8 @@ public class LensSGS
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
         LenItems.ITEMS.register(modEventBus);
+        //Register The Entity Thing
+        LenEnts.ENTITIES.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
 
@@ -80,6 +89,7 @@ public class LensSGS
         NeoForge.EVENT_BUS.register(this);
 
         modEventBus.addListener(PacketReg::register);
+        modEventBus.addListener(this::gatherData);
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
@@ -115,6 +125,9 @@ public class LensSGS
         L3NLOGGER.info("HELLO from server starting");
     }
 
+    public void gatherData(GatherDataEvent event) {
+        event.getGenerator().addProvider(event.includeServer(), out -> new LenDamageGen(out));//Todo: Fix whatever the fuck this is
+    }
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
@@ -126,6 +139,10 @@ public class LensSGS
             L3NLOGGER.info("HELLO FROM CLIENT SETUP");
             L3NLOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
             NeoForge.EVENT_BUS.register(ClientFireHandler.get());
+        }
+        @SubscribeEvent
+        public static void registerEntRenders(EntityRenderersEvent.RegisterRenderers event) {
+            event.registerEntityRenderer(LenEnts.GENERIC_PROJ.get(), GenericProjRender::new);
         }
     }
 }
