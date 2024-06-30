@@ -17,7 +17,7 @@ public class GunFireLogic {
         }
         Level worl = player.level();
         ItemStack held = player.getItemInHand(InteractionHand.MAIN_HAND);
-        if(held.getItem() instanceof GunBaseItem gun && (gun.doesHaveAmmo(held) || player.isCreative()))
+        if(held.getItem() instanceof GunBaseItem gun && (WeaponAmmoStats.doesHaveAmmo(held) || player.isCreative()))
         {
             player.setXRot(Mth.clamp(message.xRot(),-90F,90F));//Why is xRot Up/Down? No idea.
             player.setYRot(Mth.wrapDegrees(message.yRot()));
@@ -28,13 +28,14 @@ public class GunFireLogic {
             }
             cdtrack.putCooldown(held,gun);
 
-            int projAmt = gun.getProjAmt(held);
+            int projAmt = WeaponAmmoStats.getProjAmt(held);
             GenericProjectile[] spawned = new GenericProjectile[projAmt];
             for (int i = 0; i < projAmt; i++) {
                 GenericProjectile boolet = new GenericProjectile(LenEnts.GENERIC_PROJ.get(),worl,player,held);
-                boolet.set_dmg(gun.rollDmg(held));
+                boolet.set_dmg(WeaponAmmoStats.rollDmg(held));
                 boolet.set_pierce(0);//Todo: ammo pierce and stuff
                 boolet.setGravityMod(0);
+                boolet.setVelMult(1);
                 worl.addFreshEntity(boolet);
                 spawned[i] = boolet;
                 boolet.tick();

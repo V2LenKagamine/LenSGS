@@ -31,4 +31,8 @@ public class LenDataComponents {
 
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Double>> GRAV_MOD =
             DATA_REG.registerComponentType("grav_mod",builder -> builder.persistent(Codec.DOUBLE).networkSynchronized(ByteBufCodecs.DOUBLE));
+
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<Float>> VEL_MULT =
+            DATA_REG.registerComponentType("vel_mult",builder -> builder.persistent(Codec.FLOAT).networkSynchronized(ByteBufCodecs.FLOAT));
+
 }

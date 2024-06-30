@@ -1,6 +1,7 @@
 package com.lensmods.lenssgs.client;
 
 import com.lensmods.lenssgs.core.items.GunBaseItem;
+import com.lensmods.lenssgs.core.weaponsystems.WeaponAmmoStats;
 import com.lensmods.lenssgs.networking.messages.CTSFire;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
@@ -62,7 +63,7 @@ public class ClientFireHandler {
         if(!(heldItem.getItem() instanceof GunBaseItem gun))
             return;
 
-        if(!gun.doesHaveAmmo(heldItem) && !player.isCreative())
+        if(!WeaponAmmoStats.doesHaveAmmo(heldItem) && !player.isCreative())
             return;
 
         if(player.isSpectator())

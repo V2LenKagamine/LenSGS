@@ -48,6 +48,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     protected int pierce = 0;
     protected int life = 30;
     protected double gravityMod = 0;
+    protected float velMult = 1f ;
 
     private ItemStack visualItem = ItemStack.EMPTY;
 
@@ -62,7 +63,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         this.Owner = shooter;
 
         Vec3 dir = this.getDirection(shooter, weapon);
-        this.setDeltaMovement(dir.x, dir.y, dir.z);
+        this.setDeltaMovement(dir.x * velMult, dir.y * velMult, dir.z * velMult);
         this.updateHeading();
 
         double posX = shooter.xOld + (shooter.getX() - shooter.xOld) / 2.0;
@@ -88,9 +89,13 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     public void setGravityMod(int newval) {
         this.gravityMod = newval;
     }
+    public void setVelMult(int newval) {
+        this.velMult = newval;
+    }
     public ItemStack getVisualItem() {
         return this.visualItem;
     }
+
     private void onHit(HitResult result, Vec3 startVec, Vec3 endVec)
     {
         if(result instanceof BlockHitResult blockHitResult)
@@ -148,6 +153,13 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         float damage = this.getDamage();
         DamageSource source = LenDamageTypes.Sources.projectile(this.level().registryAccess(), this, this.Owner);
         entity.hurt(source, damage);
+        this.pierce--;
+        if(this.pierce <=0) {
+            if (this.isAlive()) {
+                this.onExpire();
+            }
+            this.remove(RemovalReason.KILLED);
+        }
     }
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {}
@@ -156,12 +168,14 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     protected void readAdditionalSaveData(CompoundTag pCompound) {
         this.gravityMod = pCompound.getDouble("gravityMod");
         this.life = pCompound.getInt("lifetime");
+        this.pierce = pCompound.getInt("pierce");
     }
 
     @Override
     protected void addAdditionalSaveData(CompoundTag pCompound) {
         pCompound.putDouble("gravityMod",this.gravityMod);
         pCompound.putInt("lifetime",this.life);
+        pCompound.putInt("pierce",this.pierce);
     }
 
     @Override
@@ -169,6 +183,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         buffer.writeInt(this.OwnerID);
         buffer.writeDouble(this.gravityMod);
         buffer.writeInt(this.life);
+        buffer.writeInt(this.pierce);
     }
 
     @Override
@@ -176,6 +191,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         this.OwnerID = additionalData.readInt();
         this.gravityMod = additionalData.readDouble();
         this.life = additionalData.readInt();
+        this.pierce = additionalData.readInt();
     }
 
     private Vec3 getDirection(LivingEntity shooter, ItemStack weapon)
