@@ -22,18 +22,25 @@ public class LenItems {
             new Item.Properties()
                     .component(LenDataComponents.AMMO_COUNTER.value(),Integer.valueOf(30))
                     .component(LenDataComponents.AMMO_MAX.value(),Integer.valueOf(30))
-                    .component(LenDataComponents.FIRE_RATE.value(),Float.valueOf(30))
+                    .component(LenDataComponents.FIRE_RATE.value(),Float.valueOf(20))
                     .component(LenDataComponents.PROJ_COUNT.value(),Float.valueOf(1))
                     .component(LenDataComponents.DMG_MAX.value(),Float.valueOf(5))
-                    .component(LenDataComponents.DMG_MIN.value(),Float.valueOf(1))
+                    .component(LenDataComponents.DMG_MIN.value(),Float.valueOf(4))
+                    .component(LenDataComponents.GRAV_MOD.value(),Double.valueOf(0))
+                    .component(LenDataComponents.PIERCE_AMT.value(),Integer.valueOf(1))
+                    .component(LenDataComponents.VEL_MULT.value(),Float.valueOf(2))
                     .stacksTo(1)
                     .setNoRepair()));
     public static final DeferredItem<AmmoBaseItem> AMMO_BASE = ITEMS.register("base_ammo_holder",()-> new AmmoBaseItem(
        new Item.Properties()
+               .component(LenDataComponents.AMMO_COUNTER.value(),Integer.valueOf(30))
+               .component(LenDataComponents.AMMO_MAX.value(),Integer.valueOf(30))
                .component(LenDataComponents.FIRE_RATE.value(),Float.valueOf(30))
                .component(LenDataComponents.PROJ_COUNT.value(),Float.valueOf(1))
                .component(LenDataComponents.DMG_MAX.value(),Float.valueOf(5))
-               .component(LenDataComponents.DMG_MIN.value(),Float.valueOf(1))
+               .component(LenDataComponents.DMG_MIN.value(),Float.valueOf(4))
+               .component(LenDataComponents.PIERCE_AMT.value(),Integer.valueOf(1))
+               .component(LenDataComponents.VEL_MULT.value(),Float.valueOf(2))
                .stacksTo(1)
                .setNoRepair()));
 }

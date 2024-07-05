@@ -86,10 +86,10 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     public void set_pierce(int newval) {
         this.pierce = newval;
     }
-    public void setGravityMod(int newval) {
+    public void setGravityMod(double newval) {
         this.gravityMod = newval;
     }
-    public void setVelMult(int newval) {
+    public void setVelMult(float newval) {
         this.velMult = newval;
     }
     public ItemStack getVisualItem() {

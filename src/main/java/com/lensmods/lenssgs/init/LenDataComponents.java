@@ -17,6 +17,9 @@ public class LenDataComponents {
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Integer>> AMMO_COUNTER =
             DATA_REG.registerComponentType("ammo_counter", builder -> builder.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT));
 
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<Integer>> PIERCE_AMT =
+            DATA_REG.registerComponentType("pierce", builder -> builder.persistent(Codec.INT).networkSynchronized(ByteBufCodecs.INT));
+
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<Float>> FIRE_RATE =
             DATA_REG.registerComponentType("fire_rate", builder -> builder.persistent(Codec.FLOAT).networkSynchronized(ByteBufCodecs.FLOAT));
 

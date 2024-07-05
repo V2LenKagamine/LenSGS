@@ -89,6 +89,7 @@ configurations {
 
 dependencies {
     runtimeOnly('curse.maven:JEI-238222:5466551')
+    runtimeOnly('curse.maven:JADE-324717:5493270')
 }
 
 tasks.withType(JavaCompile).configureEach {

@@ -3,6 +3,7 @@ package com.lensmods.lenssgs;
 import com.lensmods.lenssgs.client.ClientFireHandler;
 import com.lensmods.lenssgs.core.entity.render.GenericProjRender;
 import com.lensmods.lenssgs.datagen.LenDamageGen;
+import com.lensmods.lenssgs.datagen.LenModelGen;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import com.lensmods.lenssgs.init.LenEnts;
 import com.lensmods.lenssgs.init.LenItems;
@@ -126,6 +127,7 @@ public class LensSGS
 
     public void gatherData(GatherDataEvent event) {
         event.getGenerator().addProvider(event.includeServer(), (DataProvider.Factory<LenDamageGen>) out -> new LenDamageGen(out,event.getLookupProvider(),event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, (DataProvider.Factory<LenModelGen>) out -> new LenModelGen(out, MODID,event.getExistingFileHelper()));
     }
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)

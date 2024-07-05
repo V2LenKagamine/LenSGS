@@ -18,6 +18,14 @@ public class WeaponAmmoStats {
         return stacc.get(LenDataComponents.VEL_MULT);
     }
 
+    public static int getPierce(ItemStack stacc) {
+        return stacc.get(LenDataComponents.PIERCE_AMT);
+    }
+
+    public static Double getGrav(ItemStack stacc) {
+        return stacc.get(LenDataComponents.GRAV_MOD);
+    }
+
     public static int getProjAmt(ItemStack stacc) {
         float baseProjCount = stacc.get(LenDataComponents.PROJ_COUNT);
         return randy.nextFloat(0,1) < baseProjCount ? Mth.floor(baseProjCount) : Mth.ceil(baseProjCount);

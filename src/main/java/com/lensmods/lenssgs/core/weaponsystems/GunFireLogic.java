@@ -33,9 +33,9 @@ public class GunFireLogic {
             for (int i = 0; i < projAmt; i++) {
                 GenericProjectile boolet = new GenericProjectile(LenEnts.GENERIC_PROJ.get(),worl,player,held);
                 boolet.set_dmg(WeaponAmmoStats.rollDmg(held));
-                boolet.set_pierce(0);//Todo: ammo pierce and stuff
-                boolet.setGravityMod(0);
-                boolet.setVelMult(1);
+                boolet.set_pierce(WeaponAmmoStats.getPierce(held));
+                boolet.setGravityMod(WeaponAmmoStats.getGrav(held));
+                boolet.setVelMult(WeaponAmmoStats.getVelMult(held));
                 worl.addFreshEntity(boolet);
                 spawned[i] = boolet;
                 boolet.tick();
