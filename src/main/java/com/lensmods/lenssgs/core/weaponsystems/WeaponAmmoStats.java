@@ -25,10 +25,10 @@ public class WeaponAmmoStats {
         return stacc.getOrDefault(LenDataComponents.AMMO_COUNTER,0);
     }
     public static int getAmmoMax(ItemStack stacc) {
-        return !(stacc.getOrDefault(LenDataComponents.GUN_STATS,"egg").equals("egg")) ? stacc.get(LenDataComponents.GUN_STATS).getAmmo_max() : 0;
+        return safeGunStats(stacc) ? stacc.get(LenDataComponents.GUN_STATS).getAmmo_max() : 0;
     }
     public static float getVelMult(ItemStack stacc) {
-        return !(stacc.getOrDefault(LenDataComponents.GUN_STATS,"egg").equals("egg")) ? stacc.get(LenDataComponents.GUN_STATS).getVelocityMult() : 1;
+        return safeGunStats(stacc) ? stacc.get(LenDataComponents.GUN_STATS).getVelocityMult() : 1;
     }
 
     public static int getPierce(ItemStack stacc) {
@@ -41,12 +41,12 @@ public class WeaponAmmoStats {
 
 
     public static boolean safeGunStats(ItemStack stacc) {
-        return !(stacc.getOrDefault(LenDataComponents.GUN_STATS,"fuck").equals("fuck"));
+        return stacc.getOrDefault(LenDataComponents.GUN_STATS,null) != null;
     }
 
 
     public static float getAccuracy(ItemStack stacc) {
-        return !(stacc.getOrDefault(LenDataComponents.GUN_STATS,"egg").equals("egg")) ? stacc.get(LenDataComponents.GUN_STATS).getInaccuracy() : 0;
+        return safeGunStats(stacc) ? stacc.get(LenDataComponents.GUN_STATS).getInaccuracy() : 0;
     }
 
     public static int getProjAmt(ItemStack stacc) {

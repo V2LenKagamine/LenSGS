@@ -1,4 +1,4 @@
-// 1.21	2024-07-09T00:20:21.1747341	Recipes
+// 1.21	2024-07-09T05:05:25.2293706	Recipes
 0bfe6dedd3979ceb9ff8e265b9a252df3fb5b72a data/lenssgs/advancement/recipes/combat/automatic_action_crafter.json
 7b65ff88a811aa30bb64620ef453b41de7844c36 data/lenssgs/advancement/recipes/combat/barrel_crafter_extend.json
 49d40425242f7f5ab36417eb7d39540aa9c68a28 data/lenssgs/advancement/recipes/combat/barrel_crafter_long.json
@@ -38,7 +38,7 @@ dd8dc0a5a645b2ed7d9bee0846c4efeb341100bd data/lenssgs/recipe/barrel_crafter_stub
 c616ff25b535146837bd2ff6848dcc4de8097b49 data/lenssgs/recipe/casing_crafter_shell.json
 bc0d517d7158e6d35442f537eeb4a311b9e89a20 data/lenssgs/recipe/casing_crafter_small.json
 35379208b00a98bb82c8bf394e82144469162330 data/lenssgs/recipe/gunprinter_paper.json
-242814307e6567ff0e33ae7b9ab5796c23a521b0 data/lenssgs/recipe/mag_crafter_belt.json
+bf2610ff6b06aeefe3b02747a1a4e0ea33f32d65 data/lenssgs/recipe/mag_crafter_belt.json
 ecbc9ff1954516023e5cc19d30cd2ab8c1eda4e2 data/lenssgs/recipe/mag_crafter_extended.json
 960abacd5a4aaf41c69538734cf815df3649a317 data/lenssgs/recipe/mag_crafter_normal.json
 6f4de5b2403c062965de7441b8a7dacc61ed154c data/lenssgs/recipe/mag_crafter_short.json

@@ -12,6 +12,6 @@ public class GunPartBaseItem extends Item {
     @Override
     public Component getName(ItemStack pStack) {
         var maybe = pStack.getOrDefault(LenDataComponents.GUN_PART_HOLDER,null);
-        return maybe != null ? maybe.getTotalName() : Component.literal("ERRORBAD");
+        return maybe != null ? pStack.get(LenDataComponents.GUN_PART_HOLDER).getTotalName() : Component.literal("ERRORBAD");
     }
 }

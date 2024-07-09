@@ -20,6 +20,8 @@ import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.Vec3;
 
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +31,7 @@ public class LenUtil {
     public static List<EntityHitResult> rayTraceEntityList(Level worldIn, Entity projectile, Vec3 startVec, Vec3 endVec, AABB boundingBox, Predicate<Entity> filter) {
         List<EntityHitResult> entityRayTracelist = new ArrayList<>();
 
-        for(Entity entity1 : worldIn.getEntities(projectile, boundingBox, filter)) {
+        for (Entity entity1 : worldIn.getEntities(projectile, boundingBox, filter)) {
             AABB axisalignedbb = entity1.getBoundingBox().inflate(0.3F);
             Optional<Vec3> optional = axisalignedbb.clip(startVec, endVec);
             if (optional.isPresent()) {
@@ -52,21 +54,34 @@ public class LenUtil {
         return withColor(text, colorCode);
     }
 
-    public static float randBetween(float min, float max)
-    {
-        return LensSGS.RANDY.nextFloat(min,max);
+    public static float randBetween(float min, float max) {
+        return LensSGS.RANDY.nextFloat(min, max);
     }
+
     public static ResourceLocation modId(String key) {
-        if(key.contains(":")) {return ResourceLocation.tryParse(key);}
+        if (key.contains(":")) {
+            return ResourceLocation.tryParse(key);
+        }
         return ResourceLocation.tryParse(LensSGS.MODID + ":" + key);
+    }
+
+    public static String truncateFloat(float input) {
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.UP);
+        return df.format(input);
+    }
+    public static String truncateDouble(Double input) {
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.UP);
+        return df.format(input);
     }
 
     public static GunComp swapData(GunPartHolder dat, GunComp original) {
         List<GunPartHolder> swapped = new ArrayList<>(original.getPartList().size());
-        for(GunPartHolder part : original.getPartList()) {
-            if(part.getName().equals(dat.getName())) {
+        for (GunPartHolder part : original.getPartList()) {
+            if (part.getName().equals(dat.getName())) {
                 swapped.add(dat);
-            }else {
+            } else {
                 swapped.add(part);
             }
         }
@@ -74,25 +89,33 @@ public class LenUtil {
     }
 
     public static Component translatableOf(String s) {
-        return Component.translatable(LensSGS.MODID +"." + s);
+        return Component.translatable(LensSGS.MODID + "." + s);
     }
+
     public static Component spaceAppend(String s) {
-        return Component.literal(" " + s);
+        Component hold = Component.translatable(s);
+        return Component.literal(" ").append(hold);
+    }
+    public static Component spaceAppend(Component s) {
+        return Component.literal(" ").append(s);
     }
 
     public static void showGunData(ItemStack stack, Item.TooltipContext context, List<Component> tooltips, TooltipFlag tooltipFlag) {
-        if (!(stack.getItem() instanceof IModdable)) {return;}
-        GunStats stats = stack.getOrDefault(LenDataComponents.GUN_STATS,new GunStats());
-        if (stats.equals(new GunStats())) {
+        if (!(stack.getItem() instanceof IModdable)) {
+            return;
+        }
+        GunStats stats = stack.getOrDefault(LenDataComponents.GUN_STATS, null);
+        if (stats == null) {
             tooltips.add(translatableOf("gunfake1"));
             tooltips.add(translatableOf("gunfake2"));
+        } else {
+            tooltips.add(translatableOf("mindmg").copy().append(spaceAppend(truncateFloat(stats.getDamageMin())))
+                    .append(spaceAppend(translatableOf("maxdmg"))).append(spaceAppend(truncateFloat(stats.getDamageMin()))));
+            tooltips.add(translatableOf("firerate").copy().append(spaceAppend(truncateFloat(stats.getFirerate())))
+                    .append(spaceAppend(translatableOf("ammomax"))).append(spaceAppend(truncateFloat(stats.getAmmo_max()))));
+            tooltips.add(translatableOf("velocity_mult").copy().append(spaceAppend(truncateFloat(stats.getVelocityMult())))
+                    .append(spaceAppend(translatableOf("grav_mult"))).append(spaceAppend(truncateDouble(stats.getGravMod()))));
+            tooltips.add(translatableOf("ammo_current").copy().append(spaceAppend(truncateFloat(WeaponAmmoStats.ammoAmountLeft(stack)))));
         }
-        tooltips.add(translatableOf("mindmg").copy().append(spaceAppend(stats.getDamageMin().toString()))
-                .append(translatableOf("maxdmg")).append(spaceAppend(stats.getDamageMin().toString())));
-        tooltips.add(translatableOf("firerate").copy().append(spaceAppend(stats.getFirerate().toString()))
-                .append(translatableOf("ammomax")).append(spaceAppend(stats.getAmmo_max().toString())));
-        tooltips.add(translatableOf("velocity_mult").copy().append(spaceAppend(stats.getVelocityMult().toString()))
-                .append(translatableOf("grav_mult")).append(spaceAppend(stats.getGravMod().toString())));
-        tooltips.add(translatableOf("ammo_current").copy().append(spaceAppend(String.valueOf(WeaponAmmoStats.ammoAmountLeft(stack)))));
     }
 }

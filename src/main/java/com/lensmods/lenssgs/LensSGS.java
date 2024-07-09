@@ -1,17 +1,19 @@
 package com.lensmods.lenssgs;
 
 import com.lensmods.lenssgs.client.ClientFireHandler;
+import com.lensmods.lenssgs.client.render.CustomRenderHandler;
 import com.lensmods.lenssgs.core.data.MaterialProvider;
 import com.lensmods.lenssgs.core.entity.render.GenericProjRender;
 import com.lensmods.lenssgs.datagen.*;
 import com.lensmods.lenssgs.init.*;
 import com.lensmods.lenssgs.networking.PacketReg;
 import com.mojang.logging.LogUtils;
-import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataProvider;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -29,6 +31,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -108,13 +111,8 @@ public class LensSGS
     {
         // Some common setup code
         L3NLOGGER.info("HELLO FROM COMMON SETUP");
-
         if (Config.logDirtBlock)
             L3NLOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
-
-        L3NLOGGER.info(Config.magicNumberIntroduction + Config.magicNumber);
-
-        Config.items.forEach((item) -> L3NLOGGER.info("ITEM >> {}", item.toString()));
     }
 
     // Add the example block item to the building blocks tab
@@ -129,7 +127,7 @@ public class LensSGS
     public void onServerStarting(ServerStartingEvent event)
     {
         // Do something when the server starts
-        L3NLOGGER.info("HELLO from server starting");
+        L3NLOGGER.info("Why did you download this mod? Guns are cool, but this mod is coded like garbage!");
     }
 
     public void gatherData(GatherDataEvent event) {
@@ -153,13 +151,22 @@ public class LensSGS
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             // Some client setup code
-            L3NLOGGER.info("HELLO FROM CLIENT SETUP");
-            L3NLOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+            L3NLOGGER.info("YOU FOOL, YOU'RE RUNNING SLIGHTLY STOLEN RENDERING CODE!");
             NeoForge.EVENT_BUS.register(ClientFireHandler.get());
         }
         @SubscribeEvent
         public static void registerEntRenders(EntityRenderersEvent.RegisterRenderers event) {
             event.registerEntityRenderer(LenEnts.GENERIC_PROJ.get(), GenericProjRender::new);
+        }
+        @SubscribeEvent
+        public static void registerGeometryLoaders(ModelEvent.RegisterGeometryLoaders event) {
+            event.register(CustomRenderHandler.ID, CustomRenderHandler.INSTANCE);
+        }
+        @SubscribeEvent
+        public static void registerAdditional(ModelEvent.RegisterAdditional e) {
+            e.register(ModelResourceLocation.standalone(
+                    ResourceLocation.fromNamespaceAndPath( MODID,"gunparts/receiver_standard")
+            ));
         }
     }
 }

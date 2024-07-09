@@ -11,12 +11,14 @@ import com.lensmods.lenssgs.core.items.GunPartBaseItem;
 import com.lensmods.lenssgs.core.items.PartCraftingItem;
 import com.lensmods.lenssgs.core.util.LenUtil;
 import com.lensmods.lenssgs.core.weaponsystems.WeaponAmmoStats;
+import com.lensmods.lenssgs.datagen.LenTagKeys;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import com.lensmods.lenssgs.init.LenDataReg;
 import com.lensmods.lenssgs.init.LenItems;
 import com.lensmods.lenssgs.init.LenRecipes;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -164,11 +166,10 @@ public class GunRecipe extends CustomRecipe {
             }
             case "makinpart" : {
                 ItemStack out = new ItemStack(LenItems.PART_BASE.asItem());
-                ItemStack mainCopy = mainboi;
                 GunMaterial bestmatch = provider.lookup(LenDataReg.GUN_MAT_KEY).get()
-                        .listElements().filter(data -> (Arrays.stream(data.value().getIngredient().getItems()).anyMatch(item -> allButMain.getFirst().is(item.getItem()))))
-                        .findFirst().get().value();
-                out.set(LenDataComponents.GUN_PART_HOLDER,new GunPartHolder(mainCopy.get(LenDataComponents.PART_TYPE), mainCopy.get(LenDataComponents.PART_SUB_TYPE),bestmatch));
+                        .listElements().filter(data -> (Arrays.stream(data.value().getIngredient().getItems()).anyMatch(item ->
+                                item.is(ItemTags.create(LenTagKeys.GUNAMMO_MAT_TAG.location()))))).findFirst().get().value();
+                out.set(LenDataComponents.GUN_PART_HOLDER,new GunPartHolder(mainboi.get(LenDataComponents.PART_TYPE), mainboi.get(LenDataComponents.PART_SUB_TYPE),bestmatch));
                 return out;
             }
             case "makinmain": {

@@ -65,7 +65,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         this.Owner = shooter;
 
         Vec3 dir = this.getDirection(shooter, weapon);
-        this.setDeltaMovement(dir.x * velMult, dir.y * velMult, dir.z * velMult);
+        this.setDeltaMovement((dir.x * 2.5f) * velMult, (dir.y * 2.5f) * velMult, (dir.z * 2.5f) * velMult);
         this.updateHeading();
 
         double posX = shooter.xOld + (shooter.getX() - shooter.xOld) / 2.0;

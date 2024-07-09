@@ -1,5 +1,6 @@
 package com.lensmods.lenssgs.datagen;
 
+import com.lensmods.lenssgs.init.LenItems;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.client.model.generators.ItemModelProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -11,6 +12,8 @@ public class LenModelGen extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-       //Todo: Things?
+        //basicItem(LenItems.AMMO_BASE.get());
+        basicItem(LenItems.GUNPRINTER_PAPER.get());
+
     }
 }

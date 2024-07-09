@@ -1,0 +1,12 @@
+{
+  "lenssgs.ammo_current": "Ammo in Mag: ",
+  "lenssgs.ammomax": "Max Ammo: ",
+  "lenssgs.barrel_long": "Long Barrel",
+  "lenssgs.firerate": "Fire-Rate: ",
+  "lenssgs.grav_mult": "Bullet Gravity: ",
+  "lenssgs.gunfake1": "This gun is entirely fake.",
+  "lenssgs.gunfake2": "That, or the parts are all broken!",
+  "lenssgs.maxdmg": "Max Damage: ",
+  "lenssgs.mindmg": "Min Damage: ",
+  "lenssgs.velocity_mult": "Bullet Speed: *"
+}

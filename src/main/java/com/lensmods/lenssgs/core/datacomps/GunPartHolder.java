@@ -112,9 +112,9 @@ public class GunPartHolder implements MutableDataComponentHolder {
     }
 
     public Component getTotalName() {
-        return LenUtil.translatableOf(material.getMatName() + "." + subType + "."+name);
+        return LenUtil.translatableOf(material.getMatName()).copy().append(LenUtil.spaceAppend(LenUtil.translatableOf(subType)));
     }
     public Component getGunPartName() {
-        return LenUtil.translatableOf(subType+"."+name);
+        return LenUtil.translatableOf(subType);
     }
 }

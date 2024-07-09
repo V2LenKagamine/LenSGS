@@ -12,6 +12,6 @@ public class PartCraftingItem extends Item {
 
     @Override
     public Component getName(ItemStack pStack) {
-        return Component.translatable(pStack.getOrDefault(LenDataComponents.PART_TYPE,"INVALID")+"."+pStack.getOrDefault(LenDataComponents.PART_SUB_TYPE,"none") +".partcrafter");
+        return Component.translatable(pStack.getOrDefault(LenDataComponents.PART_SUB_TYPE,"bad") +".partcrafter");
     }
 }
