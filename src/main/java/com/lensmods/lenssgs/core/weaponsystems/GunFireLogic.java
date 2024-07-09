@@ -9,9 +9,10 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import org.jetbrains.annotations.NotNull;
 
 public class GunFireLogic {
-    public static void handleFireMsg(CTSFire message, ServerPlayer player) {
+    public static void handleFireMsg(CTSFire message, @NotNull ServerPlayer player) {
         if(player.isSpectator()) {
             return;
         }

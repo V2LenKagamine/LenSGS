@@ -1,12 +1,10 @@
 package com.lensmods.lenssgs;
 
 import com.lensmods.lenssgs.client.ClientFireHandler;
+import com.lensmods.lenssgs.core.data.MaterialProvider;
 import com.lensmods.lenssgs.core.entity.render.GenericProjRender;
-import com.lensmods.lenssgs.datagen.LenDamageGen;
-import com.lensmods.lenssgs.datagen.LenModelGen;
-import com.lensmods.lenssgs.init.LenDataComponents;
-import com.lensmods.lenssgs.init.LenEnts;
-import com.lensmods.lenssgs.init.LenItems;
+import com.lensmods.lenssgs.datagen.*;
+import com.lensmods.lenssgs.init.*;
 import com.lensmods.lenssgs.networking.PacketReg;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -14,6 +12,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataProvider;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
@@ -31,6 +30,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -39,11 +39,15 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.slf4j.Logger;
 
+import java.util.Random;
+
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(LensSGS.MODID)
 public class LensSGS
 {
     public static final String MODID = "lenssgs";
+    public static final Random RANDY = new Random();
+    public static final RandomSource STORYTELLER = RandomSource.create();
     // Directly reference a slf4j logger
     public static final Logger L3NLOGGER = LogUtils.getLogger();
     // Create a Deferred Register to hold Blocks which will all be registered under the "examplemod" namespace
@@ -60,9 +64,9 @@ public class LensSGS
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.examplemod")) //The language key for the title of your CreativeModeTab
             .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> LenItems.EXAMPLE_ITEM.get().getDefaultInstance())
+            .icon(() -> LenItems.GUNPRINTER_PAPER.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(LenItems.EXAMPLE_ITEM.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
+                output.accept(LenItems.GUNPRINTER_PAPER.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
@@ -79,6 +83,8 @@ public class LensSGS
         LenItems.ITEMS.register(modEventBus);
         //Register The Entity Thing
         LenEnts.ENTITIES.register(modEventBus);
+        //AHHHH recipes.
+        LenRecipes.RECIPE_SERIALIZERS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
 
@@ -90,6 +96,7 @@ public class LensSGS
 
         modEventBus.addListener(PacketReg::register);
         modEventBus.addListener(this::gatherData);
+        modEventBus.addListener(LenDataReg::register);
         // Register the item to a creative tab
         modEventBus.addListener(this::addCreative);
 
@@ -114,7 +121,7 @@ public class LensSGS
     private void addCreative(BuildCreativeModeTabContentsEvent event)
     {
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
-            event.accept(LenItems.EXAMPLE_BLOCK_ITEM);
+            event.accept(LenItems.AMMO_BASE);
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -126,7 +133,16 @@ public class LensSGS
     }
 
     public void gatherData(GatherDataEvent event) {
+        L3NLOGGER.info("Hello from GatherData! Server:{}", event.includeServer());
+        event.getGenerator().addProvider(event.includeClient(), (DataProvider.Factory<LenLang>) out -> new LenLang(out,LensSGS.MODID,"en_us"));
         event.getGenerator().addProvider(event.includeServer(), (DataProvider.Factory<LenDamageGen>) out -> new LenDamageGen(out,event.getLookupProvider(),event.getExistingFileHelper()));
+        BlockTagsProvider BTP = new LenBlockTagGen(event.getGenerator().getPackOutput(),event.getLookupProvider(),LensSGS.MODID,event.getExistingFileHelper()); //This is literally needed for item tags and I hate it.
+        event.getGenerator().addProvider(event.includeServer(),BTP);
+        event.getGenerator().addProvider(event.includeServer(), (DataProvider.Factory<LenTagKeys>) out->
+                new LenTagKeys(out,event.getLookupProvider(),BTP.contentsGetter()));
+        event.getGenerator().addProvider(event.includeServer(), (DataProvider.Factory<MaterialProvider>) out ->
+                new MaterialProvider(out,LenMaterialGen.VANILLA_MATERIALS_BUILDER, event.getLookupProvider()));
+        event.getGenerator().addProvider((event.includeServer()),(DataProvider.Factory<LenRecipeGen>) out -> new LenRecipeGen(out,event.getLookupProvider()));
         event.getGenerator().addProvider(true, (DataProvider.Factory<LenModelGen>) out -> new LenModelGen(out, MODID,event.getExistingFileHelper()));
     }
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent

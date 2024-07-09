@@ -1,46 +1,39 @@
 package com.lensmods.lenssgs.init;
 
 import com.lensmods.lenssgs.LensSGS;
+import com.lensmods.lenssgs.core.datacomps.GunComp;
 import com.lensmods.lenssgs.core.items.AmmoBaseItem;
 import com.lensmods.lenssgs.core.items.GunBaseItem;
-import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.BlockItem;
+import com.lensmods.lenssgs.core.items.GunPartBaseItem;
+import com.lensmods.lenssgs.core.items.PartCraftingItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.List;
 
 public class LenItems {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(LensSGS.MODID);
 
-    // Creates a new BlockItem with the id "examplemod:example_block", combining the namespace and path
-    public static final DeferredItem<BlockItem> EXAMPLE_BLOCK_ITEM = LenItems.ITEMS.registerSimpleBlockItem("example_block", LensSGS.EXAMPLE_BLOCK);
     // Creates a new food item with the id "examplemod:example_id", nutrition 1 and saturation 2
-    public static final DeferredItem<Item> EXAMPLE_ITEM = ITEMS.registerSimpleItem("example_item", new Item.Properties().food(new FoodProperties.Builder()
-            .alwaysEdible().nutrition(1).saturationModifier(2f).build()));
+    public static final DeferredItem<Item> GUNPRINTER_PAPER = ITEMS.registerSimpleItem("gunprinter_paper", new Item.Properties());
     public static final DeferredItem<GunBaseItem> GUN_BASE = ITEMS.register("base_gun_holder",()-> new GunBaseItem(
             new Item.Properties()
-                    .component(LenDataComponents.AMMO_COUNTER.value(),Integer.valueOf(30))
-                    .component(LenDataComponents.AMMO_MAX.value(),Integer.valueOf(30))
-                    .component(LenDataComponents.FIRE_RATE.value(),Float.valueOf(20))
-                    .component(LenDataComponents.PROJ_COUNT.value(),Float.valueOf(1))
-                    .component(LenDataComponents.DMG_MAX.value(),Float.valueOf(5))
-                    .component(LenDataComponents.DMG_MIN.value(),Float.valueOf(4))
-                    .component(LenDataComponents.GRAV_MOD.value(),Double.valueOf(0))
-                    .component(LenDataComponents.PIERCE_AMT.value(),Integer.valueOf(1))
-                    .component(LenDataComponents.VEL_MULT.value(),Float.valueOf(2))
                     .stacksTo(1)
+                    .component(LenDataComponents.AMMO_COUNTER,0)
+                    .component(LenDataComponents.GUN_COMP,new GunComp(List.of()))
                     .setNoRepair()));
     public static final DeferredItem<AmmoBaseItem> AMMO_BASE = ITEMS.register("base_ammo_holder",()-> new AmmoBaseItem(
        new Item.Properties()
-               .component(LenDataComponents.AMMO_COUNTER.value(),Integer.valueOf(30))
-               .component(LenDataComponents.AMMO_MAX.value(),Integer.valueOf(30))
-               .component(LenDataComponents.FIRE_RATE.value(),Float.valueOf(30))
-               .component(LenDataComponents.PROJ_COUNT.value(),Float.valueOf(1))
-               .component(LenDataComponents.DMG_MAX.value(),Float.valueOf(5))
-               .component(LenDataComponents.DMG_MIN.value(),Float.valueOf(4))
-               .component(LenDataComponents.PIERCE_AMT.value(),Integer.valueOf(1))
-               .component(LenDataComponents.VEL_MULT.value(),Float.valueOf(2))
                .stacksTo(1)
+               .component(LenDataComponents.AMMO_COUNTER,0)
+               .component(LenDataComponents.GUN_COMP,new GunComp(List.of()))
                .setNoRepair()));
+    public static final DeferredItem<GunPartBaseItem> PART_BASE = ITEMS.register("gun_part_base",()-> new GunPartBaseItem(
+            new Item.Properties().setNoRepair().stacksTo(1)
+    ));
+    public static final DeferredItem<PartCraftingItem> PART_CRAFTER =ITEMS.register("part_crafter",()-> new PartCraftingItem(
+            new Item.Properties()
+    ));
 }

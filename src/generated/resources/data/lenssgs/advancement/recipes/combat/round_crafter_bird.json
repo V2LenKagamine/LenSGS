@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "gunpaper": {
+      "conditions": {
+        "items": [
+          {
+            "items": "lenssgs:gunprinter_paper"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "lenssgs:round_crafter_bird"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "gunpaper"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "lenssgs:round_crafter_bird"
+    ]
+  }
+}

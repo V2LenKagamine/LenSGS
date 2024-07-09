@@ -1,0 +1,19 @@
+{
+  "type": "lenssgs:gun_recipe",
+  "inputs": [
+    {
+      "item": "lenssgs:gun_part_base"
+    },
+    {
+      "item": "lenssgs:gun_part_base"
+    },
+    {
+      "item": "lenssgs:gun_part_base"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "lenssgs:base_ammo_holder"
+  },
+  "swapping": false
+}

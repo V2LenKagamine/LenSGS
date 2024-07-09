@@ -1,5 +1,7 @@
 package com.lensmods.lenssgs.core.entity;
 
+import com.lensmods.lenssgs.core.util.LenUtil;
+import com.lensmods.lenssgs.core.weaponsystems.WeaponAmmoStats;
 import com.lensmods.lenssgs.init.LenDamageTypes;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
@@ -196,7 +198,11 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
 
     private Vec3 getDirection(LivingEntity shooter, ItemStack weapon)
     {
+        float inacc = WeaponAmmoStats.getAccuracy(weapon);
+        if(inacc <= 0) {
             return this.getVectorFromRotation(shooter.getXRot(), shooter.getYRot());
+        }
+        return this.getVectorFromRotation(shooter.getXRot() + LenUtil.randBetween(-inacc,inacc),shooter.getYRot() + LenUtil.randBetween(-inacc,inacc));
     }
     @Override
     public void tick()
