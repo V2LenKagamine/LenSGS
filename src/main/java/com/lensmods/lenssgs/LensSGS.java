@@ -65,7 +65,7 @@ public class LensSGS
 
     // Creates a creative tab with the id "examplemod:example_tab" for the example item, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup.examplemod")) //The language key for the title of your CreativeModeTab
+            .title(Component.translatable("itemGroup.lenssgs")) //The language key for the title of your CreativeModeTab
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> LenItems.GUNPRINTER_PAPER.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
@@ -127,7 +127,7 @@ public class LensSGS
     public void onServerStarting(ServerStartingEvent event)
     {
         // Do something when the server starts
-        L3NLOGGER.info("Why did you download this mod? Guns are cool, but this mod is coded like garbage!");
+        L3NLOGGER.info("Why did you download this mod? Guns are cool, but this Len's code is garbage!");
     }
 
     public void gatherData(GatherDataEvent event) {
@@ -162,6 +162,7 @@ public class LensSGS
         public static void registerGeometryLoaders(ModelEvent.RegisterGeometryLoaders event) {
             event.register(CustomRenderHandler.ID, CustomRenderHandler.INSTANCE);
         }
+        //Model reg
         @SubscribeEvent
         public static void registerAdditional(ModelEvent.RegisterAdditional e) {
             e.register(ModelResourceLocation.standalone(

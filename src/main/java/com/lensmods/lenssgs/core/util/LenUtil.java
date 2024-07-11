@@ -12,9 +12,11 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
@@ -39,6 +41,16 @@ public class LenUtil {
             }
         }
         return entityRayTracelist;
+    }
+
+    public static List<ItemStack> getMatchingStackList(Player player, ItemLike find) {
+        List<ItemStack> found = new ArrayList<>();
+        for(ItemStack item : player.getInventory().items) {
+            if(item.is(find.asItem())) {
+
+            }
+        }
+        return found;
     }
 
     public static MutableComponent withColor(MutableComponent text, Color color) {
@@ -110,7 +122,7 @@ public class LenUtil {
             tooltips.add(translatableOf("gunfake2"));
         } else {
             tooltips.add(translatableOf("mindmg").copy().append(spaceAppend(truncateFloat(stats.getDamageMin())))
-                    .append(spaceAppend(translatableOf("maxdmg"))).append(spaceAppend(truncateFloat(stats.getDamageMin()))));
+                    .append(spaceAppend(translatableOf("maxdmg"))).append(spaceAppend(truncateFloat(stats.getDamageMax()))));
             tooltips.add(translatableOf("firerate").copy().append(spaceAppend(truncateFloat(stats.getFirerate())))
                     .append(spaceAppend(translatableOf("ammomax"))).append(spaceAppend(truncateFloat(stats.getAmmo_max()))));
             tooltips.add(translatableOf("velocity_mult").copy().append(spaceAppend(truncateFloat(stats.getVelocityMult())))

@@ -1,0 +1,9 @@
+{
+  "sources": [
+    {
+      "type": "directory",
+      "source": "gun_model",
+      "prefix": "gun_model/"
+    }
+  ]
+}

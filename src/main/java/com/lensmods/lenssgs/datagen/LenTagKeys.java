@@ -25,6 +25,7 @@ public class LenTagKeys extends ItemTagsProvider {
         this.tag(GUNAMMO_MAT_TAG);
         this.tag(GUNAMMO_MAT_TAG)
                 .addOptionalTag(Tags.Items.INGOTS_COPPER)
-                .addOptionalTag(Tags.Items.INGOTS_IRON);
+                .addOptionalTag(Tags.Items.INGOTS_IRON)
+                .addOptionalTag(Tags.Items.INGOTS_GOLD);
     }
 }

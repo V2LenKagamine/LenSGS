@@ -33,5 +33,12 @@ public final class MaterialStats {
             new StatMod(VEL_MULT,-0.1f,MUL,AllowedParts.ROUND),
             new StatMod(GRAVITY_MOD,0.1f,MUL,AllowedParts.ROUND)
     );
+    public static final List<StatMod> GOLD = List.of(
+            new StatMod(PIERCE,-2f,ADD,AllowedParts.ROUND),
+            new StatMod(MAX_DMG,-2f,ADD,AllowedParts.AFFECTS_BASE_DMG),
+            new StatMod(MIN_DMG,-2f,ADD,AllowedParts.AFFECTS_BASE_DMG),
+            new StatMod(INACCURACY_DEG, -1.5f,ADD,AllowedParts.BARREL),
+            new StatMod(PROJ_COUNT,3f,ADD,AllowedParts.ROUND)
+    );
 
 }

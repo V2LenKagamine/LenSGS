@@ -1,14 +1,13 @@
 package com.lensmods.lenssgs.core.util;
 
 import com.lensmods.lenssgs.core.data.AllowedParts;
-import com.lensmods.lenssgs.core.datacomps.GunPartHolder;
+import com.lensmods.lenssgs.core.datacomps.ModelColorPair;
 import com.lensmods.lenssgs.core.items.GunBaseItem;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
-import com.mojang.math.MatrixUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
@@ -139,23 +138,7 @@ public class RenderUtil
 
                 RenderType renderType = getRenderType(stack, entity);
                 VertexConsumer builder;
-                if(stack.getItem() == Items.COMPASS && stack.hasFoil())
-                {
-                    poseStack.pushPose();
-                    PoseStack.Pose entry = poseStack.last();
-                    if(display == ItemDisplayContext.GUI)
-                    {
-                        MatrixUtil.mulComponentWise(entry.pose(), 0.5F);
-                    }
-                    else if(display.firstPerson())
-                    {
-                        MatrixUtil.mulComponentWise(entry.pose(), 0.75F);
-                    }
-                    builder = ItemRenderer.getCompassFoilBuffer(buffer, renderType, entry);
-
-                    poseStack.popPose();
-                }
-                else if(entity)
+                if (entity)
                 {
                     builder = ItemRenderer.getFoilBufferDirect(buffer, renderType, true, stack.hasFoil() || parent.hasFoil());
                 }
@@ -172,6 +155,48 @@ public class RenderUtil
             }
 
             poseStack.popPose();
+        }
+    }
+
+    public static void forceItemWithColor(BakedModel model, ItemDisplayContext display, @Nullable Runnable transform, ItemStack stack, ItemStack parent, PoseStack poseStack, MultiBufferSource buffer, int light, int overlay,Color color)
+    {
+        if(!stack.isEmpty())
+        {
+            poseStack.pushPose();
+            model = model.applyTransform(display, poseStack, false);
+            poseStack.translate(-0.5D, -0.5D, -0.5D);
+            if(stack.getItem() != Items.TRIDENT)
+            {
+                RenderType renderType = getRenderType(stack, true);
+                VertexConsumer builder;
+                builder = ItemRenderer.getFoilBufferDirect(buffer, renderType, true, stack.hasFoil());
+
+                forceRenderModel(model, stack, parent, transform, poseStack, builder, light, overlay,color);
+            }
+            poseStack.popPose();
+        }
+    }
+    public static void forceRenderModel(BakedModel model, ItemStack stack, ItemStack parent, @Nullable Runnable transform, PoseStack poseStack, VertexConsumer buffer, int light, int overlay,Color color)
+    {
+        if(transform != null)
+        {
+            transform.run();
+        }
+        RandomSource random = RandomSource.create();
+        for(Direction direction : Direction.values())
+        {
+            random.setSeed(42L);
+            forceRenderQuads(poseStack, buffer, model.getQuads(null, direction, random), stack, parent, light, overlay,color);
+        }
+        random.setSeed(42L);
+        forceRenderQuads(poseStack, buffer, model.getQuads(null, null, random), stack, parent, light, overlay,color);
+    }
+    private static void forceRenderQuads(PoseStack poseStack, VertexConsumer buffer, List<BakedQuad> quads, ItemStack stack, ItemStack parent, int light, int overlay,Color color)
+    {
+        PoseStack.Pose entry = poseStack.last();
+        for(BakedQuad quad : quads)
+        {
+            buffer.putBulkData(entry, quad, color.getRed(), color.getGreen(), color.getBlue(),color.getAlpha(),light, overlay);
         }
     }
 
@@ -198,7 +223,6 @@ public class RenderUtil
         VertexConsumer builder = ItemRenderer.getFoilBuffer(buffer, renderType, true, stack.hasFoil() || parent.hasFoil());
         renderModel(model, stack, parent, transform, poseStack, builder, light, overlay);
     }
-
     public static void renderModel(BakedModel model, ItemStack stack, ItemStack parent, @Nullable Runnable transform, PoseStack poseStack, VertexConsumer buffer, int light, int overlay)
     {
         if(transform != null)
@@ -221,10 +245,6 @@ public class RenderUtil
         for(BakedQuad quad : quads)
         {
             int color = -1;
-            if(quad.isTinted())
-            {
-                color = getItemStackColor(stack, parent, quad.getTintIndex());
-            }
             float red = (float) ((int)color >> 16 & 255) / 255.0F;
             float green = (float) ((int)color >> 8 & 255) / 255.0F;
             float blue = (float) ((int)color & 255) / 255.0F;
@@ -252,7 +272,6 @@ public class RenderUtil
 
         //TODO test
         model = model.applyTransform(display, poseStack, leftHanded);
-
         /* Flips the model and normals if left handed. */
         if(leftHanded)
         {
@@ -267,54 +286,57 @@ public class RenderUtil
         {
             if(!(heldItem.getItem() instanceof GunBaseItem)) { return;}
             if(!(Minecraft.getInstance().options.getCameraType().isFirstPerson())){return;}
-            if(heldItem.getOrDefault(LenDataComponents.GUN_COMP,"bad").equals("bad")) {return;}
+            if(heldItem.getOrDefault(LenDataComponents.PART_COLOR_LIST,null) == null) {return;}
             boolean isShortHanded = false;
-            for (GunPartHolder part : heldItem.get(LenDataComponents.GUN_COMP).getPartList()){
-                if (part.getSubType().equals(AllowedParts.RECIEVER_PISTOL)) {isShortHanded = true; break; }
+            for(ModelColorPair part : heldItem.get(LenDataComponents.PART_COLOR_LIST)) {
+                if (part.model().equals(AllowedParts.RECIEVER_PISTOL)) {
+                    isShortHanded = true;
+                    break;
+                }
             }
             poseStack.mulPose(Axis.YP.rotationDegrees(180F));
             float translateX = ItemTransforms.NO_TRANSFORMS.firstPersonRightHand.translation.x();
             int side = hand.getOpposite() == HumanoidArm.RIGHT ? 1 : -1;
-            poseStack.translate(translateX * side, 0, 0);
+            poseStack.translate(translateX * side, 0.18f, 0);
             boolean slim = player.getSkin().model() == PlayerSkin.Model.SLIM;
             float armWidth = slim ? 3.0F : 4.0F;
             poseStack.pushPose();
             if(isShortHanded)
             {
-
-                poseStack.translate(0, 0.1, -0.675);
-                poseStack.scale(0.5F, 0.5F, 0.5F);
+                poseStack.translate(0.1f, 0.45, -0.7);
+                poseStack.scale(0.75F, 0.75F, 0.75F);
                 poseStack.translate(-4.0 * 0.0625 * side, 0, 0);
                 poseStack.translate(-(armWidth / 2.0) * 0.0625 * side, -1.6, 0);
                 poseStack.mulPose(Axis.XP.rotationDegrees(80F));
                 RenderUtil.renderFirstPersonArm(player, hand, poseStack, buffer, light);
             } else {
                 // Front arm holding the barrel
+                    poseStack.translate(-0.06f, 0.18, 0.125);
+                    poseStack.scale(0.75F, 0.75F, 0.75F);
+                    poseStack.translate(4.0 * 0.0625 * side, 0, 0);
+                    poseStack.translate((armWidth / 2.0) * 0.0625 * side, 0, 0);
+                    poseStack.translate(-0.3125 * side, -1.7, -0.4375);
 
-                poseStack.scale(0.5F, 0.5F, 0.5F);
-                poseStack.translate(4.0 * 0.0625 * side, 0, 0);
-                poseStack.translate((armWidth / 2.0) * 0.0625 * side, 0, 0);
-                poseStack.translate(-0.3125 * side, -1.7, -0.4375);
+                    poseStack.mulPose(Axis.XP.rotationDegrees(80F));
+                    poseStack.mulPose(Axis.YP.rotationDegrees(15F * -side));
+                    poseStack.mulPose(Axis.ZP.rotationDegrees(15F * -side));
+                    poseStack.mulPose(Axis.XP.rotationDegrees(-35F));
 
-                poseStack.mulPose(Axis.XP.rotationDegrees(80F));
-                poseStack.mulPose(Axis.YP.rotationDegrees(15F * -side));
-                poseStack.mulPose(Axis.ZP.rotationDegrees(15F * -side));
-                poseStack.mulPose(Axis.XP.rotationDegrees(-35F));
-
-                RenderUtil.renderFirstPersonArm(player, hand.getOpposite(), poseStack, buffer, light);
+                    RenderUtil.renderFirstPersonArm(player, hand.getOpposite(), poseStack, buffer, light);
 
                 poseStack.popPose();
-                // Back arm holding the handle
+                // Back arm holding the handle,slightly rotated
                 poseStack.pushPose();
 
-                poseStack.translate(0, 0.1, -0.675);
-                poseStack.scale(0.5F, 0.5F, 0.5F);
-                poseStack.translate(-4.0 * 0.0625 * side, 0, 0);
-                poseStack.translate(-(armWidth / 2.0) * 0.0625 * side, -1.6, 0);
-                poseStack.mulPose(Axis.XP.rotationDegrees(80F));
+                    poseStack.translate(0.07f, 0.45, -0.75);
+                    poseStack.scale(0.75F, 0.75F, 0.75F);
+                    poseStack.translate(-4.0 * 0.0625 * side, 0, 0);
+                    poseStack.translate(-(armWidth / 2.0) * 0.0625 * side, -1.6, 0);
 
-                RenderUtil.renderFirstPersonArm(player, hand, poseStack, buffer, light);
-
+                    poseStack.mulPose(Axis.XP.rotationDegrees(80F));
+                    poseStack.mulPose(Axis.YP.rotationDegrees(6F * -side));
+                    poseStack.mulPose(Axis.ZP.rotationDegrees(2F * -side));
+                    RenderUtil.renderFirstPersonArm(player, hand, poseStack, buffer, light);
             }
             poseStack.popPose();
         }

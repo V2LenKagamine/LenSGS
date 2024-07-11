@@ -16,12 +16,10 @@ public class LenMaterialGen {
 
     public static final List<GunMaterial> VANILLA_MATS = List.of(
             new GunMaterial("copper", MaterialStats.COPPER, Tags.Items.INGOTS_COPPER, null,Color.COPPER),
-            new GunMaterial("iron",MaterialStats.IRON,Tags.Items.INGOTS_IRON,null,Color.IRON)
+            new GunMaterial("iron",MaterialStats.IRON,Tags.Items.INGOTS_IRON,null,Color.IRON),
+            new GunMaterial("gold",MaterialStats.GOLD,Tags.Items.INGOTS_GOLD,null,Color.GOLD)
     );
 
-    public static RegistrySetBuilder VANILLA_MATERIALS_BUILDER = new RegistrySetBuilder().add(LenDataReg.GUN_MAT_KEY, boot -> {
-        VANILLA_MATS.forEach(mat -> {
-            boot.register(ResourceKey.create(LenDataReg.GUN_MAT_KEY,ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,mat.getMatName())),mat);
-        });
-    });
+    public static RegistrySetBuilder VANILLA_MATERIALS_BUILDER = new RegistrySetBuilder().add(LenDataReg.GUN_MAT_KEY, boot -> VANILLA_MATS.forEach(mat ->
+            boot.register(ResourceKey.create(LenDataReg.GUN_MAT_KEY,ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,mat.getMatName())),mat)));
 }

@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.lensmods.lenssgs.LensSGS;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.client.model.ElementsModel;
 import net.neoforged.neoforge.client.model.geometry.IGeometryLoader;
 
 public class CustomRenderHandler implements IGeometryLoader<CustomRenderGeo> {
@@ -17,8 +16,7 @@ public class CustomRenderHandler implements IGeometryLoader<CustomRenderGeo> {
 
     @Override
     public CustomRenderGeo read(JsonObject jsonObject, JsonDeserializationContext context) throws JsonParseException {
-        ElementsModel base = context.deserialize(jsonObject, ElementsModel.class);
-        return new CustomRenderGeo(base, (jsonObject.get("fake").getAsBoolean()));
+        return new CustomRenderGeo();
     }
 }
 

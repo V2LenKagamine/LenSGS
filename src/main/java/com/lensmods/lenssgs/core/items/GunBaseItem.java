@@ -5,13 +5,18 @@ import com.lensmods.lenssgs.client.render.CustomGunRenderer;
 import com.lensmods.lenssgs.core.data.AllowedParts;
 import com.lensmods.lenssgs.core.datacomps.GunPartHolder;
 import com.lensmods.lenssgs.core.util.LenUtil;
+import com.lensmods.lenssgs.core.weaponsystems.WeaponAmmoStats;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 import java.util.List;
@@ -64,5 +69,42 @@ public class GunBaseItem extends Item implements IModdable,IClientItemExtensions
                 return CustomGunRenderer.get();
             }
         });
+    }
+
+    @Override
+    public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
+        if(pRemainingUseDuration <= 0) {
+            WeaponAmmoStats.attemptReload(pLivingEntity,pStack,pLevel);
+        }
+    }
+
+    @Override
+    public int getUseDuration(ItemStack pStack, LivingEntity pEntity) {
+        ItemStack main = pEntity.getMainHandItem();
+        if(main.getOrDefault(LenDataComponents.AMMO_COUNTER,null) != null && main.getOrDefault(LenDataComponents.GUN_COMP,null) != null
+        && main.getOrDefault(LenDataComponents.GUN_STATS,null)!=null) {
+            boolean mag = false;
+            for (GunPartHolder part : main.get(LenDataComponents.GUN_COMP).getPartList()) {
+                if (part.getName().contains(AllowedParts.MAGAZINE)) {
+                    mag =true;
+                    break;
+                }
+            }
+            if(mag) {
+                return main.get(LenDataComponents.GUN_STATS).getAmmo_max() * 2;
+            }else return main.get(LenDataComponents.GUN_STATS).getAmmo_max() * 12;
+        }
+        return super.getUseDuration(pStack, pEntity);
+    }
+
+    @Override
+    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
+        ItemStack main = pPlayer.getMainHandItem();
+        if(main.getOrDefault(LenDataComponents.AMMO_COUNTER,null) != null && main.getOrDefault(LenDataComponents.GUN_STATS,null) != null) {
+            if(main.get(LenDataComponents.AMMO_COUNTER) != main.get(LenDataComponents.GUN_STATS).getAmmo_max()) {
+                pPlayer.startUsingItem(pUsedHand);
+            }
+        }
+        return InteractionResultHolder.fail(main);
     }
 }

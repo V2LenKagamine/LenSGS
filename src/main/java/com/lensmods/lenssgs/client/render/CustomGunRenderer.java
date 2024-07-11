@@ -2,6 +2,7 @@ package com.lensmods.lenssgs.client.render;
 
 import com.lensmods.lenssgs.LensSGS;
 import com.lensmods.lenssgs.core.datacomps.GunComp;
+import com.lensmods.lenssgs.core.datacomps.ModelColorPair;
 import com.lensmods.lenssgs.core.items.GunBaseItem;
 import com.lensmods.lenssgs.core.util.RenderUtil;
 import com.lensmods.lenssgs.init.LenDataComponents;
@@ -72,10 +73,6 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
             }
 
             LocalPlayer player = Objects.requireNonNull(Minecraft.getInstance().player);
-            //BakedModel model = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"gunparts/sorry_nothing")));
-            float scaleX = ItemTransforms.NO_TRANSFORMS.firstPersonRightHand.scale.x();
-            float scaleY = ItemTransforms.NO_TRANSFORMS.firstPersonRightHand.scale.y();
-            float scaleZ = ItemTransforms.NO_TRANSFORMS.firstPersonRightHand.scale.z();
             float translateX = ItemTransforms.NO_TRANSFORMS.firstPersonRightHand.translation.x();
             float translateY = ItemTransforms.NO_TRANSFORMS.firstPersonRightHand.translation.y();
             float translateZ = ItemTransforms.NO_TRANSFORMS.firstPersonRightHand.translation.z();
@@ -87,18 +84,12 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
             /* Applies custom bobbing animations */
             this.applyBobbingTransforms(poseStack, partialTicks);
 
-            /* Applies equip progress animation translations */
-            /*
-            float equipProgress = po;
-            //poseStack.translate(0, equipProgress * -0.6F, 0);
-            poseStack.mulPose(Axis.XP.rotationDegrees(equipProgress * -50F));
-            */
             // Values are based on fuck around and find out.
             //X is R-L, Y is U-D, Z is F-B Rel to Origin
             int offset = handy == InteractionHand.MAIN_HAND ? 1 : -1;
-            poseStack.translate(0.52 * offset, 1.25, -0.14);
+            poseStack.translate(0.52 * offset, 01.1, 0.2);
 
-            /* Applies recoil and reload rotations */
+            /* Applies basic stuff transforms */
             this.applySwayTransforms(poseStack, player, translateX, translateY, translateZ, partialTicks);
             this.applySprintingTransforms(army, poseStack, partialTicks);
             this.applyShieldTransforms(poseStack, player, partialTicks);
@@ -112,7 +103,6 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
             poseStack.pushPose();
             ItemDisplayContext display = handy == InteractionHand.MAIN_HAND ? ItemDisplayContext.FIRST_PERSON_RIGHT_HAND : ItemDisplayContext.FIRST_PERSON_LEFT_HAND;
             this.renderWeapon(Minecraft.getInstance().player, heldItem, display, poseStack, pBuffer, packedLight, partialTicks);
-
             RenderUtil.renderFirstPersonArms(Minecraft.getInstance().player, army, heldItem, poseStack, pBuffer, packedLight, partialTicks);
             poseStack.popPose();
         }
@@ -142,7 +132,7 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
             poseStack.translate(-(Mth.sin(distanceWalked * (float) Math.PI) * bobbing * 0.5F), -(-Math.abs(Mth.cos(distanceWalked * (float) Math.PI) * bobbing)), 0.0D);
 
             /* Slows down the bob by half */
-            bobbing *= player.isSprinting() ? 8.0 : 4.0;
+            bobbing *= player.isSprinting() ? 8f : 4f;
             /* The new controlled bobbing */
             poseStack.mulPose(Axis.ZP.rotationDegrees((Mth.sin(distanceWalked * (float) Math.PI) * bobbing * 3.0F)));
             poseStack.mulPose(Axis.XP.rotationDegrees((Math.abs(Mth.cos(distanceWalked * (float) Math.PI - 0.2F) * bobbing) * 5.0F)));
@@ -174,32 +164,31 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
     }
 
 
-    public boolean renderWeapon(@Nullable LivingEntity entity, ItemStack stack, ItemDisplayContext display, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light, float partialTicks)
+    public void renderWeapon(@Nullable LivingEntity entity, ItemStack stack, ItemDisplayContext display, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light, float partialTicks)
     {
         if(stack.getItem() instanceof GunBaseItem)
         {
             poseStack.pushPose();
 
-            ItemStack model = ItemStack.EMPTY;
-            if(!(stack.getOrDefault(LenDataComponents.OVERRIDE_MODEL,null) == null)) {
-                model = stack.get(LenDataComponents.OVERRIDE_MODEL);
-            }
-
             RenderUtil.applyTransformType(stack, poseStack, display, entity);
 
-            this.renderGun(entity, display, model.isEmpty() ? stack : model, poseStack, renderTypeBuffer, light, partialTicks);
-
+            this.renderGun(entity, display, stack, poseStack, renderTypeBuffer, light, partialTicks);
             poseStack.popPose();
-            return true;
         }
-        return false;
     }
 
     private void renderGun(@Nullable LivingEntity entity, ItemDisplayContext display, ItemStack stack, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light, float partialTicks)
     {
-        BakedModel bakedModel = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath( LensSGS.MODID,"gunparts/receiver_standard")));
-
-        Minecraft.getInstance().getItemRenderer().render(stack, ItemDisplayContext.NONE, false, poseStack, renderTypeBuffer, light, OverlayTexture.NO_OVERLAY, bakedModel);
+        if(stack.getOrDefault(LenDataComponents.PART_COLOR_LIST,null) != null) {
+            for (ModelColorPair pair : stack.get(LenDataComponents.PART_COLOR_LIST)) {
+                poseStack.pushPose();
+                BakedModel bakedModel = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID, "gunparts/"+pair.model())));
+                if (bakedModel != Minecraft.getInstance().getModelManager().getMissingModel()) {
+                    RenderUtil.forceItemWithColor(bakedModel,ItemDisplayContext.NONE,null,stack,stack,poseStack,renderTypeBuffer,light,OverlayTexture.NO_OVERLAY,pair.color());
+                }
+                poseStack.popPose();
+            }
+        }
     }
 
     private void applySprintingTransforms(HumanoidArm hand, PoseStack poseStack, float partialTicks) {

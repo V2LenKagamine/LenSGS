@@ -33,22 +33,7 @@ public class GunStats implements MutableDataComponentHolder {
         this.comps = new PatchedDataComponentMap(DataComponentMap.EMPTY);
         LensSGS.L3NLOGGER.error("SOMEBODY MADE A NULL GUNSTATS. BAD.");
     }
-    public GunStats(DataComponentPatch patch, int ammoMax, int peirce, int firerate, float projectileCount, float damageMax, float damageMin, float velMulti, double gravMod) {
-        this.comps = PatchedDataComponentMap.fromPatch(
-                DataComponentMap.EMPTY,
-                patch
-        );
-        ammo_max = ammoMax;
-        this.peirce = peirce;
-        this.firerate = firerate;
-        this.inaccuracy = 0;
-        projectile_count = projectileCount;
-        damage_max = damageMax;
-        damage_min = damageMin;
-        vel_multi = velMulti;
-        grav_mod = gravMod;
-    }
-    public GunStats(Integer ammo_max, Integer peirce, Integer firerate,Float inaccuracy ,Float projectile_count, Float damage_max, Float damage_min, Float vel_multi, Double grav_mod, DataComponentPatch patch) {
+    public GunStats(int ammo_max, int peirce, int firerate,float inaccuracy ,float projectile_count, float damage_max, float damage_min, float vel_multi, double grav_mod, DataComponentPatch patch) {
         this.comps = PatchedDataComponentMap.fromPatch(
                 DataComponentMap.EMPTY,
                 patch
@@ -65,18 +50,18 @@ public class GunStats implements MutableDataComponentHolder {
     }
     public GunStats(int ammoMax, int peirce, int firerate,float inaccuracy ,float projectileCount, float damageMax, float damageMin, float velMulti, double gravMod) {
         this.comps = new PatchedDataComponentMap(PatchedDataComponentMap.EMPTY);
-        ammo_max = ammoMax;
+        this.ammo_max = ammoMax;
         this.peirce = peirce;
         this.firerate = firerate;
         this.inaccuracy = inaccuracy;
-        projectile_count = projectileCount;
-        damage_max = damageMax;
-        damage_min = damageMin;
-        vel_multi = velMulti;
-        grav_mod = gravMod;
+        this.projectile_count = projectileCount;
+        this.damage_max = damageMax;
+        this.damage_min = damageMin;
+        this.vel_multi = velMulti;
+        this.grav_mod = gravMod;
     }
     public GunStats(SubStreamCodec subA, SubStreamCodec2 subB, DataComponentPatch patch) {
-        this(patch,subA.ammoMax,subA.peirce,subA.fireRate,subB.projCount,subB.dmgMax,subB.dmgMin,subB.velMul,subB.grav);
+        this(subA.ammoMax,subA.peirce,subA.fireRate, subA.inacc, subB.projCount,subB.dmgMax,subB.dmgMin,subB.velMul,subB.grav,patch);
     }
 
     public static final Codec<GunStats> CODEC = RecordCodecBuilder.create(inst ->
@@ -130,9 +115,6 @@ public class GunStats implements MutableDataComponentHolder {
                 SubStreamCodec2::new
         );
     }
-    public GunStats(Integer integer, Integer integer1, Integer integer2, Float aFloat, Float aFloat1, Float aFloat2, Float aFloat3, Double aDouble, DataComponentPatch patch) {
-        this(patch,integer,integer1,integer2,aFloat,aFloat1,aFloat2,aFloat3,aDouble);
-    }
 
     public Double getGravMod() {
         return this.grav_mod;
@@ -161,7 +143,6 @@ public class GunStats implements MutableDataComponentHolder {
     public Integer getPierce() {
         return this.peirce;
     }
-
 
     public Integer getAmmo_max() {
         return this.ammo_max;

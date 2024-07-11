@@ -1,5 +1,6 @@
 package com.lensmods.lenssgs.core.items;
 
+import com.lensmods.lenssgs.core.util.LenUtil;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
@@ -12,6 +13,6 @@ public class PartCraftingItem extends Item {
 
     @Override
     public Component getName(ItemStack pStack) {
-        return Component.translatable(pStack.getOrDefault(LenDataComponents.PART_SUB_TYPE,"bad") +".partcrafter");
+        return LenUtil.translatableOf(pStack.getOrDefault(LenDataComponents.PART_SUB_TYPE,"bad")).copy().append(LenUtil.spaceAppend(LenUtil.translatableOf("part_crafter")));
     }
 }

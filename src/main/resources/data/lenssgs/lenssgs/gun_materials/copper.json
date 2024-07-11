@@ -1,9 +1,9 @@
 {
   "color": {
     "alpha": 1.0,
-    "blue": 0.42352942,
-    "green": 0.50980395,
-    "red": 0.8901961
+    "blue": 0.21960784,
+    "green": 0.5686275,
+    "red": 0.9019608
   },
   "ingredient": {
     "tag": "c:ingots/copper"

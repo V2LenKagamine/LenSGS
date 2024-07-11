@@ -3,15 +3,17 @@ package com.lensmods.lenssgs.core.weaponsystems;
 import com.lensmods.lenssgs.LensSGS;
 import com.lensmods.lenssgs.core.data.AllowedParts;
 import com.lensmods.lenssgs.core.data.MaterialStats;
-import com.lensmods.lenssgs.core.datacomps.GunComp;
-import com.lensmods.lenssgs.core.datacomps.GunPartHolder;
-import com.lensmods.lenssgs.core.datacomps.GunStats;
-import com.lensmods.lenssgs.core.datacomps.StatMod;
+import com.lensmods.lenssgs.core.datacomps.*;
 import com.lensmods.lenssgs.core.util.LenUtil;
 import com.lensmods.lenssgs.init.LenDataComponents;
+import com.lensmods.lenssgs.init.LenItems;
 import net.minecraft.util.Mth;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WeaponAmmoStats {
@@ -59,6 +61,24 @@ public class WeaponAmmoStats {
         return maxDmg > minDmg ? LenUtil.randBetween(minDmg,maxDmg) : minDmg;
     }
 
+    public static void attemptReload(LivingEntity ent, ItemStack item, Level world) {
+        if(item.getOrDefault(LenDataComponents.GUN_STATS,null)!=null && item.getOrDefault(LenDataComponents.AMMO_COUNTER,null)!= null) {
+            ItemStack ammo = LenUtil.getMatchingStackList((Player) ent, LenItems.AMMO_BASE).getFirst();
+            int ammoCurrent = item.get(LenDataComponents.AMMO_COUNTER);
+            GunStats stats = item.get(LenDataComponents.GUN_STATS);
+            if(ammoAmountLeft(ammo) >=1&& ammo.getOrDefault(LenDataComponents.AMMO_COUNTER,null)!=null) {
+                int ammoInAmmo = (int) Math.floor(ammo.get(LenDataComponents.AMMO_COUNTER) * AMMO_POINTS_MUL);
+                int removed = Math.min(stats.getAmmo_max() - ammoCurrent,ammoInAmmo);
+                item.set(LenDataComponents.AMMO_COUNTER,ammoCurrent + removed);
+                ammo.set(LenDataComponents.AMMO_COUNTER,ammoInAmmo - removed);
+                return;
+            }
+            LensSGS.L3NLOGGER.error("Someone is trying to reload with no ammo stats, bad!:{}",ent);
+            return;
+        }
+        LensSGS.L3NLOGGER.error("Someone is trying to reload a gun with no stats, bad!:{}",ent);
+    }
+
     public static void recalculateGunData(ItemStack gun) { //Please only call this during crafting FTLOG.
         GunComp data = gun.getOrDefault(LenDataComponents.GUN_COMP,new GunComp(List.of()));
         if (data.getPartList().isEmpty()) {
@@ -72,7 +92,7 @@ public class WeaponAmmoStats {
         int bonusPeirce =0;
         float peirceMul =1;
         float periceMulFinal=1;
-        int newFR = 30;
+        int newFR = 20;
         int bonusFR =0;
         float frmul =1;
         float frMulFinal=1;
@@ -100,6 +120,16 @@ public class WeaponAmmoStats {
         double bonusGrav=0d;
         float gravMod=1f;
         float gravModFinal =1f;
+
+        int mulammoParts =0;
+        int mulpierceParts = 0;
+        int mulfireParts =0;
+        int mulinaccParts =0;
+        int mulprojParts =0;
+        int muldmgMaxParts =0;
+        int muldmgMinParts =0;
+        int mulvelParts =0;
+        int mulgravParts =0;
         //THE WALL ENDS
         for(GunPartHolder part : data.getPartList()) {
             for (StatMod stats : part.getMaterial().getStatModList()) {
@@ -113,6 +143,7 @@ public class WeaponAmmoStats {
                         }
                         if (stats.modType().equals(MaterialStats.MUL)) {
                             ammoMul += stats.val();
+                            mulammoParts++;
                         }
                     }
                     case MaterialStats.PIERCE: {
@@ -121,6 +152,7 @@ public class WeaponAmmoStats {
                         }
                         if (stats.modType().equals(MaterialStats.MUL)) {
                             peirceMul += stats.val();
+                            mulpierceParts++;
                         }
                     }
                     case MaterialStats.FIRE_RATE: {
@@ -129,6 +161,7 @@ public class WeaponAmmoStats {
                         }
                         if (stats.modType().equals(MaterialStats.MUL)) {
                             frmul += stats.val();
+                            mulfireParts++;
                         }
                     }
                     case MaterialStats.PROJ_COUNT: {
@@ -137,6 +170,7 @@ public class WeaponAmmoStats {
                         }
                         if (stats.modType().equals(MaterialStats.MUL)) {
                             projMul += stats.val();
+                            mulprojParts++;
                         }
                     }
                     case MaterialStats.MAX_DMG: {
@@ -145,6 +179,7 @@ public class WeaponAmmoStats {
                         }
                         if (stats.modType().equals(MaterialStats.MUL)) {
                             damageMulMax += stats.val();
+                            muldmgMaxParts++;
                         }
                     }
                     case MaterialStats.MIN_DMG: {
@@ -153,6 +188,7 @@ public class WeaponAmmoStats {
                         }
                         if (stats.modType().equals(MaterialStats.MUL)) {
                             damageMulMin += stats.val();
+                            muldmgMinParts++;
                         }
                     }
                     case MaterialStats.GRAVITY_MOD: {
@@ -161,6 +197,7 @@ public class WeaponAmmoStats {
                         }
                         if (stats.modType().equals(MaterialStats.MUL)) {
                             gravMod += stats.val();
+                            mulgravParts++;
                         }
                     }
                     case MaterialStats.VEL_MULT: {
@@ -169,6 +206,7 @@ public class WeaponAmmoStats {
                         }
                         if (stats.modType().equals(MaterialStats.MUL)) {
                             velMul += stats.val();
+                            mulvelParts++;
                         }
                     }
                     case MaterialStats.INACCURACY_DEG: {
@@ -177,6 +215,7 @@ public class WeaponAmmoStats {
                         }
                         if (stats.modType().equals(MaterialStats.MUL)) {
                             inaccMod += stats.val();
+                            mulinaccParts++;
                         }
                     }
                 }
@@ -191,29 +230,32 @@ public class WeaponAmmoStats {
         int dmgMinParts =0;
         int velParts =0;
         int gravParts =0;
+        List<ModelColorPair> partColorList = new ArrayList<>();
         for(GunPartHolder part : data.getPartList()) { //Yes we JUST iterated over it, but we need these calculated AFTER the stats are set.
             switch (part.getSubType()) { //The unit of a switch case. Yes these are hardcoded. Dont wanna do data-stuff for them. maybe TODO?
                 case AllowedParts.RECIEVER_PISTOL: {
                     damageMulMinFinal += 0.8f;
                     dmgMinParts++;
+                    damageMulMaxFinal += 0.9f;
+                    dmgMaxParts++;
                     newInacc += 2.5f;
                     inaccParts++;
                     break;
                 }
                 case AllowedParts.RECIEVER_STANDARD: {
-                    damageMulMaxFinal += 1.05f;
+                    damageMulMaxFinal += 1.2f;
                     dmgMaxParts++;
-                    damageMulMaxFinal += 1.05f;
+                    damageMulMaxFinal += 1.2f;
                     dmgMinParts++;
                     break;
                 }
                 case AllowedParts.RECIEVER_BULLPUP: {
-                    newInacc -= 0.75f;
+                    newInacc += 0.25f;
                     inaccParts++;
                     break;
                 }
                 case AllowedParts.ACTION_MANUAL: {
-                    ammoMulFinal -= 0.9f;
+                    ammoMulFinal += 0.1f;
                     ammoParts++;
                     damageMulMaxFinal += 1.75f;
                     dmgMaxParts++;
@@ -325,6 +367,8 @@ public class WeaponAmmoStats {
                     break;
                 }
                 case AllowedParts.CASING_SMALL: {
+                    ammoMulFinal += 1.25f*AMMO_POINTS_MUL;
+                    ammoParts++;
                     damageMulMaxFinal += 0.75f;
                     dmgMaxParts++;
                     damageMulMinFinal += 0.75f;
@@ -332,10 +376,12 @@ public class WeaponAmmoStats {
                     break;
                 }
                 case AllowedParts.CASING_NORMAL: {
-                    //Sorry nothing.
+                    //Sorry nothing
                     break;
                 }
                 case AllowedParts.CASING_LARGE: {
+                    ammoMulFinal += 0.75f * AMMO_POINTS_MUL;
+                    ammoParts++;
                     damageMulMaxFinal += 1.25f;
                     dmgMaxParts++;
                     damageMulMinFinal += 1.25f;
@@ -343,6 +389,8 @@ public class WeaponAmmoStats {
                     break;
                 }
                 case AllowedParts.CASING_SHELL: {
+                    ammoMulFinal += 0.9f * AMMO_POINTS_MUL;
+                    ammoParts++;
                     damageMulMaxFinal += 1.1f;
                     dmgMaxParts++;
                     damageMulMinFinal += 1.1f;
@@ -372,6 +420,8 @@ public class WeaponAmmoStats {
                     break;
                 }
                 case AllowedParts.PROPELLANT_LIGHT: {
+                    ammoMulFinal += 1.25f * AMMO_POINTS_MUL;
+                    ammoParts++;
                     damageMulMaxFinal += 0.9f;
                     dmgMaxParts++;
                     damageMulMinFinal += 0.9f;
@@ -385,6 +435,8 @@ public class WeaponAmmoStats {
                     break;
                 }
                 case AllowedParts.PROPELLANT_HEAVY: {
+                    ammoMulFinal += 0.75f * AMMO_POINTS_MUL;
+                    ammoParts++;
                     damageMulMaxFinal += 1.1f;
                     dmgMaxParts++;
                     damageMulMinFinal += 1.1f;
@@ -395,17 +447,20 @@ public class WeaponAmmoStats {
                 }
                 default: {break;} //Sorry Nothing.
             }
+            //And then the rendering stuff
+            partColorList.add(new ModelColorPair(part.getSubType(),part.getMaterial().getColor()));
         }
-
-        gun.set(LenDataComponents.GUN_STATS,new GunStats(
-                 Math.max((int)Math.floor(((newAmmoMax + bonusAmmoMax) * ammoMul) * (ammoMulFinal/(ammoParts != 0 ? ammoParts : 1))),1),
-                Math.max((int) Math.floor(((newPeirce + bonusPeirce) * peirceMul) * (periceMulFinal/(pierceParts != 0 ? pierceParts : 1))),1),
-                Math.max((int)Math.floor(((newFR + bonusFR) * frmul) * (frMulFinal/(fireParts != 0 ? fireParts : 1))),1),
-                Math.max(((newInacc + bonusInacc) * inaccMod) * (inaccModFinal/(inaccParts != 0 ? inaccParts : 1)),0),
-                Math.max(((newProj + bonusProj) * projMul) * (projMulFinal/(projParts != 0 ? projParts : 1)),1),
-                Math.max(((newdmgMax + bonusDmgMax) * damageMulMax) * (damageMulMaxFinal/(dmgMaxParts != 0 ? dmgMaxParts : 1)),0.5f),
-                Math.max(((newdmgMin + bonusDmgMin) * damageMulMin) * (damageMulMinFinal/(dmgMinParts != 0 ? dmgMinParts : 1)),0.25f),
-                Math.max(((newVelMul + bonusVel) * velMul) * ((velMulFinal/velParts != 0 ? velParts : 1)),0.05f),
-                ((newGrav + bonusGrav) * gravMod) * ((gravModFinal/gravParts != 0 ? gravParts : 1))));
+        gun.set(LenDataComponents.PART_COLOR_LIST,partColorList);
+        GunStats finalStats =new GunStats( //mostly for debug
+                Math.max((int)Math.floor((((newAmmoMax + bonusAmmoMax) * ((ammoMul/ mulammoParts != 0 ? mulammoParts : 1) * ammoMul)) * (ammoMulFinal/(ammoParts != 0 ? ammoParts : 1))) * AMMO_POINTS_MUL),1),
+                Math.max((int) Math.floor(((newPeirce + bonusPeirce) * (( peirceMul / mulpierceParts != 0 ? mulpierceParts : 1) * peirceMul)) * (periceMulFinal/(pierceParts != 0 ? pierceParts : 1))),1),
+                Math.max((int)Math.floor(((newFR + bonusFR) * (( frmul/ mulfireParts != 0 ? mulfireParts : 1) * frmul)) * (frMulFinal/(fireParts != 0 ? fireParts : 1))),1),
+                Math.max(((newInacc + bonusInacc) * (( inaccMod / mulinaccParts != 0 ? mulinaccParts : 1) * inaccMod)) * (inaccModFinal/(inaccParts != 0 ? inaccParts : 1)),0),
+                Math.max(((newProj + bonusProj) * ((projMul /mulprojParts  != 0 ? mulprojParts : 1) * projMul)) * (projMulFinal/(projParts != 0 ? projParts : 1)),1),
+                Math.max(((newdmgMax + bonusDmgMax) * (( damageMulMax/ muldmgMaxParts != 0 ? muldmgMaxParts : 1) * damageMulMax)) * (damageMulMaxFinal/(dmgMaxParts != 0 ? dmgMaxParts : 1)),0.5f),
+                Math.max(((newdmgMin + bonusDmgMin) * ((damageMulMin/ muldmgMinParts != 0 ? muldmgMinParts : 1) * damageMulMin)) * (damageMulMinFinal/(dmgMinParts != 0 ? dmgMinParts : 1)),0.25f),
+                Math.max(((newVelMul + bonusVel) * (( velMul/ mulvelParts != 0 ? mulvelParts : 1) * velMul)) * ((velMulFinal/velParts != 0 ? velParts : 1)),0.05f),
+                ((newGrav + bonusGrav) * ((gravMod/ mulgravParts != 0 ? mulgravParts : 1) * gravMod)) * ((gravModFinal/gravParts != 0 ? gravParts : 1)));
+        gun.set(LenDataComponents.GUN_STATS,finalStats);
     }
 }

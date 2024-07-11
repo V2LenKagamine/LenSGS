@@ -5,9 +5,10 @@ import com.lensmods.lenssgs.core.datacomps.*;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.List;
 
 public class LenDataComponents {
 
@@ -39,6 +40,7 @@ public class LenDataComponents {
 
     public static final DeferredHolder<DataComponentType<?>,DataComponentType<String>> PART_SUB_TYPE =
             DATA_REG.registerComponentType("part_sub_type",builder -> builder.persistent(Codec.STRING).networkSynchronized(ByteBufCodecs.STRING_UTF8));
-    public static final DeferredHolder<DataComponentType<?>,DataComponentType<ItemStack>> OVERRIDE_MODEL =
-            DATA_REG.registerComponentType("model_item",builder -> builder.persistent(ItemStack.CODEC).networkSynchronized((ItemStack.STREAM_CODEC)));
+
+    public static final DeferredHolder<DataComponentType<?>,DataComponentType<List<ModelColorPair>>> PART_COLOR_LIST =
+            DATA_REG.registerComponentType("part_color_list",builder -> builder.persistent(ModelColorPair.CODEC.listOf()).networkSynchronized(ModelColorPair.SCODEC.apply(ByteBufCodecs.list())));
 }

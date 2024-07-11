@@ -6,7 +6,6 @@ import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.texture.MissingTextureAtlasSprite;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
-import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -21,38 +20,27 @@ public class GunModel implements IDynamicBakedModel {
     private static final Material MISSING_TEXTURE =
             new Material(TextureAtlas.LOCATION_BLOCKS, MissingTextureAtlasSprite.getLocation());
 
-    private final boolean useAmbientOcclusion;
-    private final boolean isGui3d;
-    private final boolean usesBlockLight;
-    private final TextureAtlasSprite particle;
     private final ItemOverrides overrides;
-    private final BakedModel model;
-    private final boolean fake;
 
-    public GunModel(BakedModel bakedModel, boolean useAmbientOcclusion, boolean isGui3d, boolean usesBlockLight, TextureAtlasSprite particle, ItemOverrides overrides,boolean fake) {
-        this.model = bakedModel;
-        this.useAmbientOcclusion = useAmbientOcclusion;
-        this.isGui3d = isGui3d;
-        this.usesBlockLight = usesBlockLight;
-        this.particle = particle;
+    public GunModel(ItemOverrides overrides) {
         this.overrides = overrides;
-        this.fake = fake;
+
     }
 
     // Use our attributes. Refer to the article on baked models for more information on the method's effects.
     @Override
     public boolean useAmbientOcclusion() {
-        return useAmbientOcclusion;
+        return false;
     }
 
     @Override
     public boolean isGui3d() {
-        return isGui3d;
+        return false;
     }
 
     @Override
     public boolean usesBlockLight() {
-        return usesBlockLight;
+        return false;
     }
 
     @Override
@@ -71,7 +59,6 @@ public class GunModel implements IDynamicBakedModel {
         return true;
     }
 
-
     // This is where the magic happens. Return a list of the quads to render here. Parameters are:
     // - The blockstate being rendered. May be null if rendering an item.
     // - The side being culled against. May be null, which means quads that cannot be occluded should be returned.
@@ -83,7 +70,6 @@ public class GunModel implements IDynamicBakedModel {
 
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState blockState, @Nullable Direction direction, RandomSource randomSource, ModelData modelData, @Nullable RenderType renderType) {
-        if(fake) {return List.of();}
-        return this.model.getQuads(blockState,direction,randomSource);
+        return List.of();
     }
 }

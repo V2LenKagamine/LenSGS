@@ -2,6 +2,7 @@ package com.lensmods.lenssgs.core.weaponsystems;
 
 import com.lensmods.lenssgs.core.entity.GenericProjectile;
 import com.lensmods.lenssgs.core.items.GunBaseItem;
+import com.lensmods.lenssgs.init.LenDataComponents;
 import com.lensmods.lenssgs.init.LenEnts;
 import com.lensmods.lenssgs.networking.messages.CTSFire;
 import net.minecraft.server.level.ServerPlayer;
@@ -41,7 +42,10 @@ public class GunFireLogic {
                 spawned[i] = boolet;
                 boolet.tick();
             }
-            //Todo: Subtract ammo and other things here.
+            if (!player.isCreative()) {
+                int temp = held.get(LenDataComponents.AMMO_COUNTER);
+                held.set(LenDataComponents.AMMO_COUNTER, temp - 1);
+            }
         }
     }
 }

@@ -49,7 +49,7 @@ public class Color {
     public static final Color CORAL = named("Coral", 0xFF7F50);
     public static final Color CORNFLOWERBLUE = named("CornflowerBlue", 0x6495ED);
     public static final Color CORNSILK = named("Cornsilk", 0xFFF8DC);
-    public static final Color COPPER = named("Copper",0xE3826C);
+    public static final Color COPPER = named("Copper",0xE69138);
     public static final Color CRIMSON = named("Crimson", 0xDC143C);
     public static final Color CYAN = named("Cyan", 0x00FFFF);
     public static final Color DARKBLUE = named("DarkBlue", 0x00008B);
@@ -92,7 +92,7 @@ public class Color {
     public static final Color HOTPINK = named("HotPink", 0xFF69B4);
     public static final Color INDIANRED = named("IndianRed", 0xCD5C5C);
     public static final Color INDIGO = named("Indigo", 0x4B0082);
-    public static final Color IRON = named("Iron", 0xA19D94);
+    public static final Color IRON = named("Iron", 0xCCCCCC);
     public static final Color IVORY = named("Ivory", 0xFFFFF0);
     public static final Color KHAKI = named("Khaki", 0xF0E68C);
     public static final Color LAVENDER = named("Lavender", 0xE6E6FA);

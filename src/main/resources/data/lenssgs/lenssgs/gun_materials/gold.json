@@ -1,0 +1,59 @@
+{
+  "color": {
+    "alpha": 1.0,
+    "blue": 0.0,
+    "green": 0.84313726,
+    "red": 1.0
+  },
+  "ingredient": {
+    "tag": "c:ingots/gold"
+  },
+  "partType": "gold",
+  "statModList": [
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_pierce",
+      "val": -2.0
+    },
+    {
+      "allowedParts": [
+        "casing",
+        "bullet",
+        "prop"
+      ],
+      "modType": "add",
+      "stat": "stat_max_damage",
+      "val": -2.0
+    },
+    {
+      "allowedParts": [
+        "casing",
+        "bullet",
+        "prop"
+      ],
+      "modType": "add",
+      "stat": "stat_min_damage",
+      "val": -2.0
+    },
+    {
+      "allowedParts": [
+        "barrel"
+      ],
+      "modType": "add",
+      "stat": "stat_inaccuracy",
+      "val": -1.5
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_projectile_count",
+      "val": 3.0
+    }
+  ],
+  "traitLevelList": []
+}
