@@ -1,7 +1,10 @@
 package com.lensmods.lenssgs.core.weaponsystems;
 
+import com.lensmods.lenssgs.core.datacomps.GunStatTraitPair;
+import com.lensmods.lenssgs.core.datacomps.TraitLevel;
 import com.lensmods.lenssgs.core.entity.GenericProjectile;
 import com.lensmods.lenssgs.core.items.GunBaseItem;
+import com.lensmods.lenssgs.core.util.LenUtil;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import com.lensmods.lenssgs.init.LenEnts;
 import com.lensmods.lenssgs.networking.messages.CTSFire;
@@ -11,6 +14,8 @@ import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class GunFireLogic {
     public static void handleFireMsg(CTSFire message, @NotNull ServerPlayer player) {
@@ -31,20 +36,29 @@ public class GunFireLogic {
             cdtrack.putCooldown(held,gun);
 
             int projAmt = WeaponAmmoStats.getProjAmt(held);
-            GenericProjectile[] spawned = new GenericProjectile[projAmt];
-            for (int i = 0; i < projAmt; i++) {
-                GenericProjectile boolet = new GenericProjectile(LenEnts.GENERIC_PROJ.get(),worl,player,held);
-                boolet.set_dmg(WeaponAmmoStats.rollDmg(held));
-                boolet.set_pierce(WeaponAmmoStats.getPierce(held));
-                boolet.setGravityMod(WeaponAmmoStats.getGrav(held));
-                boolet.setVelMult(WeaponAmmoStats.getVelMult(held));
-                worl.addFreshEntity(boolet);
-                spawned[i] = boolet;
-                boolet.tick();
+            GunStatTraitPair lastAmmoLoaded = WeaponAmmoStats.getLastAmmo(held);
+            if(lastAmmoLoaded == null && !WeaponAmmoStats.safeGunStats(held)) {
+                player.displayClientMessage(LenUtil.translatableOf("no_ammo"),true);
             }
-            if (!player.isCreative()) {
-                int temp = held.get(LenDataComponents.AMMO_COUNTER);
-                held.set(LenDataComponents.AMMO_COUNTER, temp - 1);
+            else {
+                List<TraitLevel> ammotraits = lastAmmoLoaded.getTraits();
+                ammotraits.addAll(held.get(LenDataComponents.GUN_STAT_TRAITS).getTraits());
+                GenericProjectile[] spawned = new GenericProjectile[projAmt];
+                for (int i = 0; i < projAmt; i++) {
+                    GenericProjectile boolet = new GenericProjectile(LenEnts.GENERIC_PROJ.get(), worl, player, held);
+                    boolet.set_dmg(WeaponAmmoStats.rollDmg(held));
+                    boolet.set_pierce(WeaponAmmoStats.getPierce(held));
+                    boolet.setGravityMod(WeaponAmmoStats.getGrav(held));
+                    boolet.setVelMult(WeaponAmmoStats.getVelMult(held));
+                    boolet.setTraits(ammotraits);
+                    worl.addFreshEntity(boolet);
+                    spawned[i] = boolet;
+                    boolet.tick();
+                }
+                if (!player.isCreative()) {
+                    int temp = held.get(LenDataComponents.AMMO_COUNTER);
+                    held.set(LenDataComponents.AMMO_COUNTER, temp - 1 * WeaponAmmoStats.AMMO_POINTS_MUL);
+                }
             }
         }
     }

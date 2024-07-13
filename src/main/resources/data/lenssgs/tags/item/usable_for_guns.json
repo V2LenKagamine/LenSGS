@@ -1,6 +1,10 @@
 {
   "values": [
     {
+      "id": "#c:cobblestones",
+      "required": false
+    },
+    {
       "id": "#c:ingots/copper",
       "required": false
     },
@@ -10,6 +14,18 @@
     },
     {
       "id": "#c:ingots/gold",
+      "required": false
+    },
+    {
+      "id": "#c:gems/diamond",
+      "required": false
+    },
+    {
+      "id": "#c:ingots/netherite",
+      "required": false
+    },
+    {
+      "id": "#c:gunpowders",
       "required": false
     }
   ]

@@ -134,6 +134,7 @@ public class Color {
     public static final Color MOCCASIN = named("Moccasin", 0xFFE4B5);
     public static final Color NAVAJOWHITE = named("NavajoWhite", 0xFFDEAD);
     public static final Color NAVY = named("Navy", 0x000080);
+    public static final Color NETHERITE = named("Netherite",0x31292A);
     public static final Color OLDLACE = named("OldLace", 0xFDF5E6);
     public static final Color OLIVE = named("Olive", 0x808000);
     public static final Color OLIVEDRAB = named("OliveDrab", 0x6B8E23);

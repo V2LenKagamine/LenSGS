@@ -1,5 +1,6 @@
 package com.lensmods.lenssgs.core.entity;
 
+import com.lensmods.lenssgs.core.datacomps.TraitLevel;
 import com.lensmods.lenssgs.core.util.LenUtil;
 import com.lensmods.lenssgs.core.weaponsystems.WeaponAmmoStats;
 import com.lensmods.lenssgs.init.LenDamageTypes;
@@ -7,6 +8,7 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
@@ -34,6 +36,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -51,6 +54,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     protected int life = 30;
     protected double gravityMod = 0;
     protected float velMult = 1f ;
+    protected List<TraitLevel> traits = new ArrayList<>();
 
     private ItemStack visualItem = ItemStack.EMPTY;
 
@@ -65,7 +69,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         this.Owner = shooter;
 
         Vec3 dir = this.getDirection(shooter, weapon);
-        this.setDeltaMovement((dir.x * 2.5f) * velMult, (dir.y * 2.5f) * velMult, (dir.z * 2.5f) * velMult);
+        this.setDeltaMovement((dir.x * 2f) * velMult, (dir.y * 2f) * velMult, (dir.z * 2f) * velMult);
         this.updateHeading();
 
         double posX = shooter.xOld + (shooter.getX() - shooter.xOld) / 2.0;
@@ -94,6 +98,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     public void setVelMult(float newval) {
         this.velMult = newval;
     }
+    public void setTraits(List<TraitLevel> traits) { this.traits = traits;}
     public ItemStack getVisualItem() {
         return this.visualItem;
     }
@@ -112,7 +117,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
             BlockState state = this.level().getBlockState(pos);
             Block block = state.getBlock();
 
-            if(block instanceof TargetBlock targetBlock)
+            if(block instanceof TargetBlock)
             {
                 if(this.Owner instanceof ServerPlayer serverPlayer)
                 {
@@ -126,14 +131,20 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
             {
                 bell.attemptToRing(this.level(), pos, blockHitResult.getDirection());
             }
-
+            this.pierce--;
+            if(this.pierce <=0) {
+                if (this.isAlive()) {
+                    this.onExpire();
+                }
+                this.remove(RemovalReason.KILLED);
+            }
             return;
         }
 
         if(result instanceof EntityHitResult entityHitResult)
         {
             Entity entity = entityHitResult.getEntity();
-            if(entity.getId() == this.OwnerID)
+            if(entity.getId() == this.OwnerID || entity instanceof GenericProjectile)
             {
                 return;
             }
@@ -171,6 +182,12 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         this.gravityMod = pCompound.getDouble("gravityMod");
         this.life = pCompound.getInt("lifetime");
         this.pierce = pCompound.getInt("pierce");
+
+        List<TraitLevel> tstore = new ArrayList<>();
+        for (int i = 0; i <pCompound.getInt("traitamt"); i++ ) {
+            tstore.add(new TraitLevel(pCompound.getString("trait"+i),pCompound.getInt("level"+i)));
+        }
+        this.traits = tstore;
     }
 
     @Override
@@ -178,6 +195,12 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         pCompound.putDouble("gravityMod",this.gravityMod);
         pCompound.putInt("lifetime",this.life);
         pCompound.putInt("pierce",this.pierce);
+        pCompound.putInt("traitamt",this.traits.isEmpty() ? 0:traits.size());
+        for(int i = 0; i<traits.size();i++) {
+            TraitLevel traitL = traits.get(i);
+            pCompound.putString("trait"+i,traitL.trait());
+            pCompound.putInt("level"+i,traitL.level());
+        }
     }
 
     @Override
@@ -186,6 +209,12 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         buffer.writeDouble(this.gravityMod);
         buffer.writeInt(this.life);
         buffer.writeInt(this.pierce);
+        buffer.writeInt(this.traits.isEmpty() ? 0 : traits.size());
+        for(int i = 0; i<traits.size();i++) {
+            TraitLevel traitL = traits.get(i);
+            FriendlyByteBuf.writeUUID(buffer, UUID.fromString(traitL.trait()));
+            buffer.writeInt(traitL.level());
+        }
     }
 
     @Override
@@ -194,6 +223,11 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         this.gravityMod = additionalData.readDouble();
         this.life = additionalData.readInt();
         this.pierce = additionalData.readInt();
+        List<TraitLevel> tstore = new ArrayList<>();
+        for (int i = 0; i <additionalData.readInt(); i++ ) {
+            tstore.add(new TraitLevel(additionalData.readUUID().toString(),additionalData.readInt()));
+        }
+        this.traits = tstore;
     }
 
     private Vec3 getDirection(LivingEntity shooter, ItemStack weapon)

@@ -20,6 +20,10 @@ public class LenLang extends LanguageProvider {
         keyof("velocity_mult", "Bullet Speed:*");
         keyof("grav_mult", "Bullet Gravity:");
         keyof("ammo_current","Ammo in Mag:");
+        keyof("proj_count","Projectile Count:");
+        keyof("inacc","Inaccuracy:");
+        keyof("no_ammo","You need to have reloaded with a bullet at least once before firing a gun;Even in creative!");
+        itemkeyof("gunprinter_paper","Gun-Printer Paper");
         //Parts
         keyof("receiver_pistol","Pistol Receiver");
         keyof("receiver_standard","Rifle Receiver");
@@ -28,6 +32,7 @@ public class LenLang extends LanguageProvider {
         keyof("action_single","Single Action");
         keyof("action_automatic","Automatic Action");
         keyof("barrel_stub","Stub Barrel");
+        keyof("barrel_short","Short Barrel");
         keyof("barrel_normal","Normal Barrel");
         keyof("barrel_long","Long Barrel");
         keyof("barrel_extended","Extended Barrel");
@@ -49,13 +54,19 @@ public class LenLang extends LanguageProvider {
         keyof("prop_heavy","Heavy Propellant");
         keyof("part_crafter","Part Crafter");
         //Materials
+        keyof("stone","Stone");
         keyof("copper","Copper");
         keyof("iron","Iron");
         keyof("gold","Gold");
-
+        keyof("diamond","Diamond");
+        keyof("netherite","Netherite");
+        keyof("gunpowder","Gunpowder");
     }
 
     protected void keyof(String key,String toTranslate) {
         add(LensSGS.MODID + "." + key,toTranslate);
+    }
+    protected void itemkeyof(String key,String toTranslate) {
+        add("item."+ LensSGS.MODID + "." + key,toTranslate);
     }
 }

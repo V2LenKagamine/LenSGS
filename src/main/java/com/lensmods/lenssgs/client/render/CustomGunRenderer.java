@@ -1,7 +1,6 @@
 package com.lensmods.lenssgs.client.render;
 
 import com.lensmods.lenssgs.LensSGS;
-import com.lensmods.lenssgs.core.datacomps.GunComp;
 import com.lensmods.lenssgs.core.datacomps.ModelColorPair;
 import com.lensmods.lenssgs.core.items.GunBaseItem;
 import com.lensmods.lenssgs.core.util.RenderUtil;
@@ -14,7 +13,6 @@ import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.LightTexture;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.block.model.ItemTransforms;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderDispatcher;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.resources.model.BakedModel;
@@ -32,7 +30,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.LightLayer;
 
 import javax.annotation.Nullable;
-import java.util.List;
 import java.util.Objects;
 
 public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
@@ -62,8 +59,8 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
     @Override
     public void renderByItem(ItemStack heldItem, ItemDisplayContext pDisplayContext, PoseStack poseStack, MultiBufferSource pBuffer, int pPackedLight, int overlay) {
         if (heldItem.getItem() instanceof GunBaseItem) {
-            float partialTicks = Minecraft.getInstance().gameRenderer.getMainCamera().getPartialTickTime();
-            InteractionHand handy = Minecraft.getInstance().player.getUsedItemHand();
+            float partialTicks = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(true);
+            InteractionHand handy = Minecraft.getInstance().player.getMainHandItem() == heldItem ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
             HumanoidArm army = handy == InteractionHand.MAIN_HAND ? HumanoidArm.RIGHT : HumanoidArm.LEFT;
 
             if(handy == InteractionHand.OFF_HAND)
@@ -73,37 +70,25 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
             }
 
             LocalPlayer player = Objects.requireNonNull(Minecraft.getInstance().player);
-            float translateX = ItemTransforms.NO_TRANSFORMS.firstPersonRightHand.translation.x();
-            float translateY = ItemTransforms.NO_TRANSFORMS.firstPersonRightHand.translation.y();
-            float translateZ = ItemTransforms.NO_TRANSFORMS.firstPersonRightHand.translation.z();
 
-
-
-            GunComp gunComp = heldItem.getOrDefault(LenDataComponents.GUN_COMP,new GunComp(List.of()));
 
             /* Applies custom bobbing animations */
-            this.applyBobbingTransforms(poseStack, partialTicks);
 
             // Values are based on fuck around and find out.
-            //X is R-L, Y is U-D, Z is F-B Rel to Origin
-            int offset = handy == InteractionHand.MAIN_HAND ? 1 : -1;
-            poseStack.translate(0.52 * offset, 01.1, 0.2);
-
+            //X is L-R, Y is U-D, Z is F-B Rel to Origin
+            float side = handy == InteractionHand.MAIN_HAND ? 1:-1;
+            poseStack.translate(0.52 ,1.55, (0.052f*-side) - 0.052f);
             /* Applies basic stuff transforms */
-            this.applySwayTransforms(poseStack, player, translateX, translateY, translateZ, partialTicks);
-            this.applySprintingTransforms(army, poseStack, partialTicks);
-            this.applyShieldTransforms(poseStack, player, partialTicks);
-
-
             int blockLight = player.isOnFire() ? 15 : player.level().getBrightness(LightLayer.BLOCK, BlockPos.containing(player.getEyePosition(partialTicks)));
             blockLight = Math.min(blockLight, 15);
             int packedLight = LightTexture.pack(blockLight, player.level().getBrightness(LightLayer.SKY, BlockPos.containing(player.getEyePosition(partialTicks))));
-
+            this.applyBobbingTransforms(poseStack, partialTicks);
+            this.applySwayTransforms(poseStack, player, 0, 0, 0, partialTicks);
+            this.applySprintingTransforms(army, poseStack, partialTicks);
+            this.applyShieldTransforms(poseStack, player, partialTicks);
             /* Renders the first persons arms from the grip type of the weapon */
             poseStack.pushPose();
-            ItemDisplayContext display = handy == InteractionHand.MAIN_HAND ? ItemDisplayContext.FIRST_PERSON_RIGHT_HAND : ItemDisplayContext.FIRST_PERSON_LEFT_HAND;
-            this.renderWeapon(Minecraft.getInstance().player, heldItem, display, poseStack, pBuffer, packedLight, partialTicks);
-            RenderUtil.renderFirstPersonArms(Minecraft.getInstance().player, army, heldItem, poseStack, pBuffer, packedLight, partialTicks);
+            this.renderWeapon(Minecraft.getInstance().player, heldItem,army, pDisplayContext, poseStack, pBuffer, packedLight, partialTicks);
             poseStack.popPose();
         }
     }
@@ -164,27 +149,31 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
     }
 
 
-    public void renderWeapon(@Nullable LivingEntity entity, ItemStack stack, ItemDisplayContext display, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light, float partialTicks)
+    public void renderWeapon(@Nullable LivingEntity entity, ItemStack stack,HumanoidArm handy ,ItemDisplayContext display, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light, float partialTicks)
     {
         if(stack.getItem() instanceof GunBaseItem)
         {
-            poseStack.pushPose();
-
-            RenderUtil.applyTransformType(stack, poseStack, display, entity);
-
+            float side = entity.getMainHandItem() == stack ? 1 : -1;
+            poseStack.scale(1.3f,1.3f,1.3f);
+            poseStack.translate((0.025f*side) - 0.025f,-0.22f*side,(0.05f*side) - 0.05f);
+            poseStack.mulPose(Axis.XP.rotationDegrees(3.9f));
+            poseStack.mulPose(Axis.YP.rotationDegrees(7.5f*side));
             this.renderGun(entity, display, stack, poseStack, renderTypeBuffer, light, partialTicks);
-            poseStack.popPose();
+            RenderUtil.renderFirstPersonArms(Minecraft.getInstance().player,display ,handy, stack, poseStack, renderTypeBuffer, light, partialTicks);
         }
     }
 
     private void renderGun(@Nullable LivingEntity entity, ItemDisplayContext display, ItemStack stack, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light, float partialTicks)
     {
         if(stack.getOrDefault(LenDataComponents.PART_COLOR_LIST,null) != null) {
+
             for (ModelColorPair pair : stack.get(LenDataComponents.PART_COLOR_LIST)) {
                 poseStack.pushPose();
+
                 BakedModel bakedModel = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID, "gunparts/"+pair.model())));
                 if (bakedModel != Minecraft.getInstance().getModelManager().getMissingModel()) {
-                    RenderUtil.forceItemWithColor(bakedModel,ItemDisplayContext.NONE,null,stack,stack,poseStack,renderTypeBuffer,light,OverlayTexture.NO_OVERLAY,pair.color());
+                    RenderUtil.applyTransformType(poseStack, display, entity,bakedModel);
+                    RenderUtil.forceItemWithColorBlend(bakedModel,ItemDisplayContext.NONE,null,stack,poseStack,renderTypeBuffer,light, OverlayTexture.NO_OVERLAY,pair.color(),0.25f);
                 }
                 poseStack.popPose();
             }

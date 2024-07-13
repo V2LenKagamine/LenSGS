@@ -25,7 +25,7 @@ public class PICooldown {
 
         public void putCooldown(ItemStack stacc, GunBaseItem weapon)
         {
-            int rate = Math.round(stacc.get(LenDataComponents.GUN_STATS).getFirerate());
+            int rate = Math.round(stacc.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getFirerate());
             this.cooldownMap.put(weapon, Pair.of(Util.getMillis(), rate * 50));
         }
 

@@ -1,6 +1,7 @@
 package com.lensmods.lenssgs.datagen;
 
 import com.lensmods.lenssgs.LensSGS;
+import com.lensmods.lenssgs.core.data.AllowedParts;
 import com.lensmods.lenssgs.core.data.MaterialStats;
 import com.lensmods.lenssgs.core.datacomps.GunMaterial;
 import com.lensmods.lenssgs.core.util.Color;
@@ -14,12 +15,22 @@ import java.util.List;
 
 public class LenMaterialGen {
 
+    public static final List<String> PROPELLANT_ONLY = List.of(AllowedParts.PROPELLANT);
+    public static final List<String> NOT_PROPELLANT = List.of(AllowedParts.CASING,AllowedParts.ROUND,AllowedParts.ACTION,AllowedParts.MAGAZINE,AllowedParts.BARREL,AllowedParts.RECEIVER,
+            AllowedParts.STOCK);
+
     public static final List<GunMaterial> VANILLA_MATS = List.of(
-            new GunMaterial("copper", MaterialStats.COPPER, Tags.Items.INGOTS_COPPER, null,Color.COPPER),
-            new GunMaterial("iron",MaterialStats.IRON,Tags.Items.INGOTS_IRON,null,Color.IRON),
-            new GunMaterial("gold",MaterialStats.GOLD,Tags.Items.INGOTS_GOLD,null,Color.GOLD)
+            new GunMaterial("stone", MaterialStats.STONE, null,Tags.Items.COBBLESTONES,Color.GREY,NOT_PROPELLANT),
+            new GunMaterial("copper", MaterialStats.COPPER, null,Tags.Items.INGOTS_COPPER,Color.COPPER,NOT_PROPELLANT),
+            new GunMaterial("iron",MaterialStats.IRON,null,Tags.Items.INGOTS_IRON,Color.IRON,NOT_PROPELLANT),
+            new GunMaterial("gold",MaterialStats.GOLD,null,Tags.Items.INGOTS_GOLD,Color.GOLD,NOT_PROPELLANT),
+            new GunMaterial("diamond",MaterialStats.DIAMOND,null,Tags.Items.GEMS_DIAMOND,Color.LIGHTCYAN,NOT_PROPELLANT),
+            new GunMaterial("netherite",MaterialStats.NETHERITE,null,Tags.Items.INGOTS_NETHERITE,Color.NETHERITE,NOT_PROPELLANT),
+            new GunMaterial("gunpowder",MaterialStats.GUNPOWDER,null,Tags.Items.GUNPOWDERS,Color.GRAY,PROPELLANT_ONLY)
+
     );
 
-    public static RegistrySetBuilder VANILLA_MATERIALS_BUILDER = new RegistrySetBuilder().add(LenDataReg.GUN_MAT_KEY, boot -> VANILLA_MATS.forEach(mat ->
-            boot.register(ResourceKey.create(LenDataReg.GUN_MAT_KEY,ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,mat.getMatName())),mat)));
+    public static RegistrySetBuilder VANILLA_MATERIALS_BUILDER = new RegistrySetBuilder().add(LenDataReg.GUN_MAT_KEY, boot -> VANILLA_MATS.forEach(mat ->{
+            boot.register(ResourceKey.create(LenDataReg.GUN_MAT_KEY,ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,mat.getMatName())),mat);
+    }));
 }

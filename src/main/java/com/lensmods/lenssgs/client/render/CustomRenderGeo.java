@@ -10,11 +10,14 @@ import net.neoforged.neoforge.client.model.geometry.IUnbakedGeometry;
 import java.util.function.Function;
 
 public class CustomRenderGeo implements IUnbakedGeometry<CustomRenderGeo> {
+    //private final BlockModel base;
     public CustomRenderGeo() {
+        //this.base = base;
     }
 
     @Override
     public BakedModel bake(IGeometryBakingContext context, ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides) {
+        //BakedModel baked = new ElementsModel(base.getElements()).bake(context,baker,spriteGetter,modelState,overrides);
         return new GunModel(overrides);
     }
 

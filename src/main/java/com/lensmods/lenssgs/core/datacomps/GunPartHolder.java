@@ -19,15 +19,15 @@ import java.util.Objects;
 public class GunPartHolder implements MutableDataComponentHolder {
     private final String name;
     private final String subType;
-    private final GunMaterial material;
+    private final String material;
     private final PatchedDataComponentMap map;
-    public GunPartHolder(String name,@Nullable String subtype,GunMaterial material,PatchedDataComponentMap mappy) {
+    public GunPartHolder(String name,@Nullable String subtype,String material,PatchedDataComponentMap mappy) {
         this.name=name;
         this.subType = subtype != null ? subtype : "none";
         this.material=material;
         this.map = mappy;
     }
-    public GunPartHolder(String name,String subType, GunMaterial gun, DataComponentPatch patch) {
+    public GunPartHolder(String name,String subType, String gun, DataComponentPatch patch) {
         this.name=name;
         this.material = gun;
         this.subType = subType;
@@ -36,7 +36,7 @@ public class GunPartHolder implements MutableDataComponentHolder {
                 patch
         );
     }
-    public GunPartHolder(String name,String subtype,GunMaterial gun) {
+    public GunPartHolder(String name,String subtype,String gun) {
         this.name = name;
         this.material=gun;
         this.subType = subtype;
@@ -47,7 +47,7 @@ public class GunPartHolder implements MutableDataComponentHolder {
         return name;
     }
 
-    public GunMaterial getMaterial() {
+    public String getMaterial() {
         return material;
     }
     public String getSubType() {
@@ -58,7 +58,7 @@ public class GunPartHolder implements MutableDataComponentHolder {
             inst.group(
                Codec.STRING.fieldOf("name").forGetter(GunPartHolder::getName),
                Codec.STRING.fieldOf("subType").forGetter(GunPartHolder::getSubType),
-               GunMaterial.GUN_MAT_CODEC.fieldOf("material").forGetter(GunPartHolder::getMaterial),
+               Codec.STRING.fieldOf("material").forGetter(GunPartHolder::getMaterial),
                     DataComponentPatch.CODEC.optionalFieldOf("map",DataComponentPatch.EMPTY).forGetter(hold -> hold.map.asPatch())
             ).apply(inst,GunPartHolder::new)
     );
@@ -66,7 +66,7 @@ public class GunPartHolder implements MutableDataComponentHolder {
     public static final StreamCodec<RegistryFriendlyByteBuf, GunPartHolder> GUN_PART_SCODEC = StreamCodec.composite(
             ByteBufCodecs.STRING_UTF8, GunPartHolder::getName,
             ByteBufCodecs.STRING_UTF8, GunPartHolder::getSubType,
-            GunMaterial.GUN_MAT_SCODEC,GunPartHolder::getMaterial,
+            ByteBufCodecs.STRING_UTF8,GunPartHolder::getMaterial,
             DataComponentPatch.STREAM_CODEC,holder -> holder.map.asPatch(),
             GunPartHolder::new
     );
@@ -112,7 +112,7 @@ public class GunPartHolder implements MutableDataComponentHolder {
     }
 
     public Component getTotalName() {
-        return LenUtil.translatableOf(material.getMatName()).copy().append(LenUtil.spaceAppend(LenUtil.translatableOf(subType)));
+        return LenUtil.translatableOf(material).copy().append(LenUtil.spaceAppend(LenUtil.translatableOf(subType)));
     }
     public Component getGunPartName() {
         return LenUtil.translatableOf(subType);

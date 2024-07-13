@@ -1,4 +1,13 @@
 {
+  "allowedOn": [
+    "casing",
+    "bullet",
+    "action",
+    "magazine",
+    "barrel",
+    "receiver",
+    "stock"
+  ],
   "color": {
     "alpha": 1.0,
     "blue": 0.21960784,

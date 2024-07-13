@@ -4,6 +4,7 @@ import com.lensmods.lenssgs.LensSGS;
 import com.lensmods.lenssgs.api.IModdable;
 import com.lensmods.lenssgs.core.datacomps.GunComp;
 import com.lensmods.lenssgs.core.datacomps.GunPartHolder;
+import com.lensmods.lenssgs.core.datacomps.GunStatTraitPair;
 import com.lensmods.lenssgs.core.datacomps.GunStats;
 import com.lensmods.lenssgs.core.weaponsystems.WeaponAmmoStats;
 import com.lensmods.lenssgs.init.LenDataComponents;
@@ -16,7 +17,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.EntityHitResult;
@@ -43,11 +43,11 @@ public class LenUtil {
         return entityRayTracelist;
     }
 
-    public static List<ItemStack> getMatchingStackList(Player player, ItemLike find) {
+    public static List<ItemStack> getMatchingStackList(Player player, Item find) {
         List<ItemStack> found = new ArrayList<>();
         for(ItemStack item : player.getInventory().items) {
             if(item.is(find.asItem())) {
-
+                found.add(item);
             }
         }
         return found;
@@ -116,18 +116,21 @@ public class LenUtil {
         if (!(stack.getItem() instanceof IModdable)) {
             return;
         }
-        GunStats stats = stack.getOrDefault(LenDataComponents.GUN_STATS, null);
+        GunStatTraitPair stats = stack.getOrDefault(LenDataComponents.GUN_STAT_TRAITS, null);
         if (stats == null) {
             tooltips.add(translatableOf("gunfake1"));
             tooltips.add(translatableOf("gunfake2"));
         } else {
-            tooltips.add(translatableOf("mindmg").copy().append(spaceAppend(truncateFloat(stats.getDamageMin())))
-                    .append(spaceAppend(translatableOf("maxdmg"))).append(spaceAppend(truncateFloat(stats.getDamageMax()))));
-            tooltips.add(translatableOf("firerate").copy().append(spaceAppend(truncateFloat(stats.getFirerate())))
-                    .append(spaceAppend(translatableOf("ammomax"))).append(spaceAppend(truncateFloat(stats.getAmmo_max()))));
-            tooltips.add(translatableOf("velocity_mult").copy().append(spaceAppend(truncateFloat(stats.getVelocityMult())))
-                    .append(spaceAppend(translatableOf("grav_mult"))).append(spaceAppend(truncateDouble(stats.getGravMod()))));
-            tooltips.add(translatableOf("ammo_current").copy().append(spaceAppend(truncateFloat(WeaponAmmoStats.ammoAmountLeft(stack)))));
+            GunStats realStats = stats.getStats();
+            tooltips.add(translatableOf("mindmg").copy().append(spaceAppend(truncateFloat(realStats.getDamageMin())))
+                    .append(spaceAppend(translatableOf("maxdmg"))).append(spaceAppend(truncateFloat(realStats.getDamageMax()))));
+            tooltips.add(translatableOf("firerate").copy().append(spaceAppend(truncateFloat(realStats.getFirerate())))
+                    .append(spaceAppend(translatableOf("ammomax"))).append(spaceAppend(truncateFloat(realStats.getAmmo_max()/WeaponAmmoStats.AMMO_POINTS_MUL))));
+            tooltips.add(translatableOf("velocity_mult").copy().append(spaceAppend(truncateFloat(realStats.getVelocityMult())))
+                    .append(spaceAppend(translatableOf("grav_mult"))).append(spaceAppend(truncateDouble(realStats.getGravMod()))));
+            tooltips.add(translatableOf("inacc").copy().append(spaceAppend(truncateFloat(realStats.getInaccuracy())))
+                    .append(spaceAppend("proj_count")).append(spaceAppend(truncateFloat(realStats.getProjCount()))));
+            tooltips.add(translatableOf("ammo_current").copy().append(spaceAppend(truncateFloat(WeaponAmmoStats.ammoAmountLeft(stack)/WeaponAmmoStats.AMMO_POINTS_MUL))));
         }
     }
 }

@@ -16,6 +16,8 @@ public class CustomRenderHandler implements IGeometryLoader<CustomRenderGeo> {
 
     @Override
     public CustomRenderGeo read(JsonObject jsonObject, JsonDeserializationContext context) throws JsonParseException {
+        //jsonObject.remove("loader");
+        //BlockModel base = context.deserialize(jsonObject, ElementsModel.class);
         return new CustomRenderGeo();
     }
 }

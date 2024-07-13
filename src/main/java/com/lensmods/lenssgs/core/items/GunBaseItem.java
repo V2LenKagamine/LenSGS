@@ -73,7 +73,7 @@ public class GunBaseItem extends Item implements IModdable,IClientItemExtensions
 
     @Override
     public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
-        if(pRemainingUseDuration <= 0) {
+        if(pRemainingUseDuration <= 1) {
             WeaponAmmoStats.attemptReload(pLivingEntity,pStack,pLevel);
         }
     }
@@ -82,7 +82,7 @@ public class GunBaseItem extends Item implements IModdable,IClientItemExtensions
     public int getUseDuration(ItemStack pStack, LivingEntity pEntity) {
         ItemStack main = pEntity.getMainHandItem();
         if(main.getOrDefault(LenDataComponents.AMMO_COUNTER,null) != null && main.getOrDefault(LenDataComponents.GUN_COMP,null) != null
-        && main.getOrDefault(LenDataComponents.GUN_STATS,null)!=null) {
+        && main.getOrDefault(LenDataComponents.GUN_STAT_TRAITS,null)!=null) {
             boolean mag = false;
             for (GunPartHolder part : main.get(LenDataComponents.GUN_COMP).getPartList()) {
                 if (part.getName().contains(AllowedParts.MAGAZINE)) {
@@ -91,20 +91,20 @@ public class GunBaseItem extends Item implements IModdable,IClientItemExtensions
                 }
             }
             if(mag) {
-                return main.get(LenDataComponents.GUN_STATS).getAmmo_max() * 2;
-            }else return main.get(LenDataComponents.GUN_STATS).getAmmo_max() * 12;
+                return main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() * 2;
+            }else return main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() * 12;
         }
         return super.getUseDuration(pStack, pEntity);
     }
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        ItemStack main = pPlayer.getMainHandItem();
-        if(main.getOrDefault(LenDataComponents.AMMO_COUNTER,null) != null && main.getOrDefault(LenDataComponents.GUN_STATS,null) != null) {
-            if(main.get(LenDataComponents.AMMO_COUNTER) != main.get(LenDataComponents.GUN_STATS).getAmmo_max()) {
+        ItemStack main = pPlayer.getItemInHand(pUsedHand);
+        if(main.getOrDefault(LenDataComponents.AMMO_COUNTER,null) != null && main.getOrDefault(LenDataComponents.GUN_STAT_TRAITS,null) != null) {
+            if(main.get(LenDataComponents.AMMO_COUNTER) != main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max()) {
                 pPlayer.startUsingItem(pUsedHand);
             }
         }
-        return InteractionResultHolder.fail(main);
+        return InteractionResultHolder.pass(main);
     }
 }

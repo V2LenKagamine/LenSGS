@@ -104,7 +104,7 @@ public class LenRecipeGen extends RecipeProvider {
                 .save(out);
         DataShapedBuilder.betterShaped(RecipeCategory.MISC, new ItemStack(LenItems.PART_CRAFTER.get()),"barrel_crafter_normal",
                         Pair.of(LenDataComponents.PART_TYPE.get(),AllowedParts.BARREL),
-                        Pair.of(LenDataComponents.PART_SUB_TYPE.get(),AllowedParts.BARREL_STUB))
+                        Pair.of(LenDataComponents.PART_SUB_TYPE.get(),AllowedParts.BARREL_FAIR))
                 .pattern("  s")
                 .pattern("ppp")
                 .pattern("  s")

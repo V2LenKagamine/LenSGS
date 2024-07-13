@@ -2,6 +2,7 @@ package com.lensmods.lenssgs;
 
 import com.lensmods.lenssgs.client.ClientFireHandler;
 import com.lensmods.lenssgs.client.render.CustomRenderHandler;
+import com.lensmods.lenssgs.core.data.AllowedParts;
 import com.lensmods.lenssgs.core.data.MaterialProvider;
 import com.lensmods.lenssgs.core.entity.render.GenericProjRender;
 import com.lensmods.lenssgs.datagen.*;
@@ -165,9 +166,9 @@ public class LensSGS
         //Model reg
         @SubscribeEvent
         public static void registerAdditional(ModelEvent.RegisterAdditional e) {
-            e.register(ModelResourceLocation.standalone(
-                    ResourceLocation.fromNamespaceAndPath( MODID,"gunparts/receiver_standard")
-            ));
+            for(String s : AllowedParts.ANY_GUN_SUB_PART) {
+                e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/"+s)));
+            }
         }
     }
 }

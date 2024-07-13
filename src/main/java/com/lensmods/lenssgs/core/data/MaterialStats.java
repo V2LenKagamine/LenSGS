@@ -16,29 +16,61 @@ public final class MaterialStats {
     public static final String VEL_MULT = "stat_velocity_mul";
     public static final String INACCURACY_DEG = "stat_inaccuracy";
     //STAT MOD MODE
-    public static final String MUL = "multiply"; // Add all together, multiply by that
+    public static final String MUL_TOTAL = "total_multiply"; // Add all together, multiply final product by this number.
+    public static final String AVG_MUL = "multiply"; // Add all together, multiply by that avg
     public static final String ADD = "add"; //adds to base stat.
 
+    public static final List<StatMod> STONE = List.of(
+            new StatMod(MAX_DMG,-1f,ADD,AllowedParts.AFFECTS_BASE_DMG),
+            new StatMod(MIN_DMG,-1f,ADD,AllowedParts.AFFECTS_BASE_DMG),
+            new StatMod(VEL_MULT,-0.25f,ADD,AllowedParts.AFFECTS_VEL),
+            new StatMod(PROJ_COUNT, -2f,ADD,AllowedParts.ROUND),
+            new StatMod(AMMO_MAX,0.5f, AVG_MUL,AllowedParts.MAGAZINE),
+            new StatMod(INACCURACY_DEG,-2f,ADD,AllowedParts.BARREL,AllowedParts.ROUND),
+            new StatMod(GRAVITY_MOD, 0.8f,ADD,AllowedParts.ROUND)
+    );
+
     public static final List<StatMod> COPPER = List.of(
-            new StatMod(AMMO_MAX,0.75f,MUL,AllowedParts.MAGAZINE),
+            new StatMod(AMMO_MAX,0.75f, AVG_MUL,AllowedParts.MAGAZINE),
             new StatMod(PIERCE,-1F,ADD,AllowedParts.ROUND),
-            new StatMod(FIRE_RATE,0.95f,MUL,AllowedParts.AFFECTS_FIRE_RATE),
+            new StatMod(FIRE_RATE,0.95f, AVG_MUL,AllowedParts.AFFECTS_FIRE_RATE),
             new StatMod(MAX_DMG,-1F,ADD,AllowedParts.AFFECTS_BASE_DMG),
-            new StatMod(VEL_MULT,0.1f,MUL,AllowedParts.ROUND)
+            new StatMod(VEL_MULT,0.1f, AVG_MUL,AllowedParts.ROUND)
     );
     public static final List<StatMod> IRON = List.of(
-            new StatMod(AMMO_MAX,0.9f,MUL,AllowedParts.CASING),
-            new StatMod(FIRE_RATE,1.05f,MUL,AllowedParts.AFFECTS_FIRE_RATE),
+            new StatMod(AMMO_MAX,0.9f, AVG_MUL,AllowedParts.CASING),
+            new StatMod(FIRE_RATE,1.05f, AVG_MUL,AllowedParts.AFFECTS_FIRE_RATE),
             new StatMod(MAX_DMG,1F,ADD,AllowedParts.AFFECTS_BASE_DMG),
-            new StatMod(VEL_MULT,-0.1f,MUL,AllowedParts.ROUND),
-            new StatMod(GRAVITY_MOD,0.1f,MUL,AllowedParts.ROUND)
+            new StatMod(VEL_MULT,-0.1f, AVG_MUL,AllowedParts.ROUND),
+            new StatMod(GRAVITY_MOD,0.1f, AVG_MUL,AllowedParts.ROUND)
     );
     public static final List<StatMod> GOLD = List.of(
+            new StatMod(AMMO_MAX,0.6f, AVG_MUL,AllowedParts.MAGAZINE),
             new StatMod(PIERCE,-2f,ADD,AllowedParts.ROUND),
             new StatMod(MAX_DMG,-2f,ADD,AllowedParts.AFFECTS_BASE_DMG),
             new StatMod(MIN_DMG,-2f,ADD,AllowedParts.AFFECTS_BASE_DMG),
             new StatMod(INACCURACY_DEG, -1.5f,ADD,AllowedParts.BARREL),
             new StatMod(PROJ_COUNT,3f,ADD,AllowedParts.ROUND)
     );
-
+    public static final List<StatMod> DIAMOND = List.of(
+            new StatMod(AMMO_MAX,1.25f, AVG_MUL,AllowedParts.MAGAZINE),
+            new StatMod(PIERCE,2f,ADD,AllowedParts.ROUND),
+            new StatMod(MAX_DMG,3.5f,ADD,AllowedParts.AFFECTS_BASE_DMG),
+            new StatMod(MIN_DMG,-1.5f,ADD,AllowedParts.AFFECTS_BASE_DMG),
+            new StatMod(VEL_MULT,-0.25f,ADD,AllowedParts.AFFECTS_VEL),
+            new StatMod(PROJ_COUNT, -2f,ADD,AllowedParts.ROUND),
+            new StatMod(INACCURACY_DEG,1.25f, AVG_MUL,AllowedParts.AFFECTS_PROJ_COUNT) //This is intentional trust me
+    );
+    public static final List<StatMod> NETHERITE = List.of(
+            new StatMod(AMMO_MAX,1.5f, AVG_MUL,AllowedParts.MAGAZINE),
+            new StatMod(AMMO_MAX,0.8f, AVG_MUL,AllowedParts.CASING),
+            new StatMod(PIERCE,3f,ADD,AllowedParts.ROUND),
+            new StatMod(MAX_DMG,2.5f,ADD,AllowedParts.AFFECTS_BASE_DMG),
+            new StatMod(MIN_DMG,4f,ADD,AllowedParts.AFFECTS_BASE_DMG),
+            new StatMod(INACCURACY_DEG, -2.5f,ADD,AllowedParts.BARREL),
+            new StatMod(PROJ_COUNT,0.8f, AVG_MUL,AllowedParts.ROUND)
+    );
+    public static final List<StatMod> GUNPOWDER = List.of(
+            new StatMod(AMMO_MAX,1f, AVG_MUL,AllowedParts.PROPELLANT) //This is here because I am too lazy to check that it wont throw a fit at an empty list.
+    );
 }

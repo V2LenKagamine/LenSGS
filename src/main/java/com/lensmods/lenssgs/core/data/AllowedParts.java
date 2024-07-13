@@ -55,6 +55,8 @@ public final class AllowedParts {
     public static final String PROPELLANT_HEAVY = "prop_heavy";
     //Lists
     public static final List<String> ANY_PART = List.of(STOCK,BARREL,ACTION,MAGAZINE,CASING,ROUND,PROPELLANT,RECEIVER);
+    public static final List<String> ANY_GUN_SUB_PART = List.of(RECIEVER_PISTOL,RECIEVER_BULLPUP,RECIEVER_STANDARD,ACTION_SINGLE,ACTION_MANUAL,ACTION_AUTOMATIC,
+            BARREL_STUB,BARREL_SHORT,BARREL_FAIR,BARREL_LONG,BARREL_EXTENDED,STOCK_SHORT,STOCK_FULL,MAGAZINE_SHORT,MAGAZINE_NORMAL,MAGAZINE_EXTENDED,MAGAZINE_BELT);
     public static final List<String> ANY_GUN_PART = List.of(STOCK,BARREL,ACTION,MAGAZINE,RECEIVER);
     public static final List<String> ANY_BULLET_PART = List.of(CASING,ROUND,PROPELLANT);
 
@@ -64,7 +66,7 @@ public final class AllowedParts {
     //These should be for MUL
     public static final List<String> AFFECTS_AMMO = List.of(MAGAZINE,CASING);
     public static final List<String> AFFECTS_PIERCE = List.of(ROUND,CASING,BARREL);
-    public static final List<String> AFFECTS_PROJ_COUNT = List.of(ROUND,BARREL);
+    public static final List<String> AFFECTS_PROJ_COUNT = List.of(ROUND);
     public static final List<String> AFFECTS_DMG_MOD = List.of(STOCK,BARREL);
     public static final List<String> AFFECTS_BASE_DMG = ANY_BULLET_PART;
     public static final List<String> AFFECTS_GRAVITY = List.of(BARREL,CASING,ROUND);

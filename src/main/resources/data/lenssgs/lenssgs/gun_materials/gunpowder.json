@@ -1,0 +1,26 @@
+{
+  "allowedOn": [
+    "prop"
+  ],
+  "color": {
+    "alpha": 1.0,
+    "blue": 0.5019608,
+    "green": 0.5019608,
+    "red": 0.5019608
+  },
+  "ingredient": {
+    "tag": "c:gunpowders"
+  },
+  "partType": "gunpowder",
+  "statModList": [
+    {
+      "allowedParts": [
+        "prop"
+      ],
+      "modType": "multiply",
+      "stat": "stat_ammo_max",
+      "val": 1.0
+    }
+  ],
+  "traitLevelList": []
+}

@@ -1,4 +1,4 @@
-// 1.21	2024-07-11T03:31:38.6306305	Recipes
+// 1.21	2024-07-13T00:02:03.7115804	Recipes
 0bfe6dedd3979ceb9ff8e265b9a252df3fb5b72a data/lenssgs/advancement/recipes/combat/automatic_action_crafter.json
 7b65ff88a811aa30bb64620ef453b41de7844c36 data/lenssgs/advancement/recipes/combat/barrel_crafter_extend.json
 49d40425242f7f5ab36417eb7d39540aa9c68a28 data/lenssgs/advancement/recipes/combat/barrel_crafter_long.json
@@ -30,7 +30,7 @@ a12f5036e0b549de1d50fef08fcf983c5750ca93 data/lenssgs/advancement/recipes/misc/g
 1013f1338a816f83e30e98bbd264cda04e2e3cd2 data/lenssgs/recipe/automatic_action_crafter.json
 57a7351f7f10005092f874f2f7da62e6b57e58c2 data/lenssgs/recipe/barrel_crafter_extend.json
 cb82a85a68759fcc2d64ba7b79b0c11075d2cf56 data/lenssgs/recipe/barrel_crafter_long.json
-0caeff0a058ac6233cafe4f2955731da17febe56 data/lenssgs/recipe/barrel_crafter_normal.json
+f0fa52072eb92fccc6cacc02ca9351775944efba data/lenssgs/recipe/barrel_crafter_normal.json
 b5396c219ad9098113d7481c0e927de739cbcb9c data/lenssgs/recipe/barrel_crafter_short.json
 dd8dc0a5a645b2ed7d9bee0846c4efeb341100bd data/lenssgs/recipe/barrel_crafter_stub.json
 150eadb7a54174a75350499c55a6de607e7ed2ce data/lenssgs/recipe/casing_crafter_large.json

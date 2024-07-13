@@ -16,7 +16,7 @@
   ],
   "result": {
     "components": {
-      "lenssgs:part_sub_type": "barrel_stub",
+      "lenssgs:part_sub_type": "barrel_normal",
       "lenssgs:part_type": "barrel"
     },
     "count": 1,

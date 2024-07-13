@@ -14,6 +14,7 @@ import net.neoforged.neoforge.client.model.IDynamicBakedModel;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GunModel implements IDynamicBakedModel {
@@ -21,8 +22,10 @@ public class GunModel implements IDynamicBakedModel {
             new Material(TextureAtlas.LOCATION_BLOCKS, MissingTextureAtlasSprite.getLocation());
 
     private final ItemOverrides overrides;
+    //private final BakedModel model;
 
     public GunModel(ItemOverrides overrides) {
+        //this.model = baked;
         this.overrides = overrides;
 
     }
@@ -53,6 +56,8 @@ public class GunModel implements IDynamicBakedModel {
         return overrides;
     }
 
+
+
     // Override this to true if you want to use a custom block entity renderer instead of the default renderer.
     @Override
     public boolean isCustomRenderer() {
@@ -70,6 +75,7 @@ public class GunModel implements IDynamicBakedModel {
 
     @Override
     public List<BakedQuad> getQuads(@Nullable BlockState blockState, @Nullable Direction direction, RandomSource randomSource, ModelData modelData, @Nullable RenderType renderType) {
-        return List.of();
+        List<BakedQuad> list = new ArrayList<>();
+        return list;
     }
 }
