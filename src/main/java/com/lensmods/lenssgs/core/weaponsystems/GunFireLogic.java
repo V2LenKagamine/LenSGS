@@ -15,6 +15,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GunFireLogic {
@@ -41,7 +42,7 @@ public class GunFireLogic {
                 player.displayClientMessage(LenUtil.translatableOf("no_ammo"),true);
             }
             else {
-                List<TraitLevel> ammotraits = lastAmmoLoaded.getTraits();
+                List<TraitLevel> ammotraits = new ArrayList<>(lastAmmoLoaded.getTraits());
                 ammotraits.addAll(held.get(LenDataComponents.GUN_STAT_TRAITS).getTraits());
                 GenericProjectile[] spawned = new GenericProjectile[projAmt];
                 for (int i = 0; i < projAmt; i++) {

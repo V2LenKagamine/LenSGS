@@ -11,8 +11,10 @@ public class LenLang extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
+        //Generic
         keyof("gunfake1", "This gun is entirely fake.");
         keyof("gunfake2", "That, or the parts are all broken!");
+        keyof("gunmat_useful","This looks usable for a Gun or Ammo...");
         keyof("mindmg","Min Damage:");
         keyof("maxdmg","Max Damage:");
         keyof("firerate", "Fire-Rate:");
@@ -23,6 +25,15 @@ public class LenLang extends LanguageProvider {
         keyof("proj_count","Projectile Count:");
         keyof("inacc","Inaccuracy:");
         keyof("no_ammo","You need to have reloaded with a bullet at least once before firing a gun;Even in creative!");
+        keyof("refills_ammo","Can be used to restore some ammo of a bullet-stack.");
+        //Keybinds
+        add("key.categories.lenssgs","Len's Gun Shenanigans");
+        bindkeyof("cycle.back", "Tooltip Cycle Back");
+        bindkeyof("cycle.next", "Tooltip Cycle Forward");
+        bindkeyof("displayConstruction","Show Gun Parts");
+        bindkeyof("displayStats","Display Gun Stats");
+        bindkeyof("displayTraits", "Display Gun Traits");
+        //Items
         itemkeyof("gunprinter_paper","Gun-Printer Paper");
         //Parts
         keyof("receiver_pistol","Pistol Receiver");
@@ -68,5 +79,8 @@ public class LenLang extends LanguageProvider {
     }
     protected void itemkeyof(String key,String toTranslate) {
         add("item."+ LensSGS.MODID + "." + key,toTranslate);
+    }
+    protected void bindkeyof(String key,String toTranslate) {
+        add("key."+ LensSGS.MODID + "." + key,toTranslate);
     }
 }

@@ -1,4 +1,4 @@
-// 1.21	2024-07-13T00:02:03.7115804	Recipes
+// 1.21	2024-07-13T23:55:24.0732077	Recipes
 0bfe6dedd3979ceb9ff8e265b9a252df3fb5b72a data/lenssgs/advancement/recipes/combat/automatic_action_crafter.json
 7b65ff88a811aa30bb64620ef453b41de7844c36 data/lenssgs/advancement/recipes/combat/barrel_crafter_extend.json
 49d40425242f7f5ab36417eb7d39540aa9c68a28 data/lenssgs/advancement/recipes/combat/barrel_crafter_long.json
@@ -58,5 +58,6 @@ e9d8417a32d504961f1f9449b61cab0b3896f49f data/lenssgs/recipe/round_crafter_buck.
 e4f6f7be203ade67e89929235708f279007cf799 data/minecraft/recipe/make_ammo.json
 35dd9b87d47d972f4c510ee2d939171a6c539728 data/minecraft/recipe/make_gun.json
 d3b937a2f89a43dac00404a48429d1c52a8797b3 data/minecraft/recipe/make_part.json
+61b4749ecf7bd3a5e47c2d24772c43d31ec6e075 data/minecraft/recipe/reload_ammo.json
 59b1a62bcd2f5cbe5508b4b6014ece463fafb775 data/minecraft/recipe/swap_part_ammo.json
 a67bfa54f8e2aabb762dd4535479e92eb802ac0e data/minecraft/recipe/swap_part_gun.json

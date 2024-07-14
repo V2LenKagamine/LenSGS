@@ -1,0 +1,43 @@
+{
+  "allowedOn": [
+    "bullet",
+    "barrel"
+  ],
+  "color": {
+    "alpha": 1.0,
+    "blue": 0.0,
+    "green": 0.27058825,
+    "red": 1.0
+  },
+  "ingredient": {
+    "tag": "c:rods/blaze"
+  },
+  "partType": "blaze",
+  "statModList": [
+    {
+      "allowedParts": [
+        "barrel"
+      ],
+      "modType": "add",
+      "stat": "stat_min_damage",
+      "val": 0.5
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_min_damage",
+      "val": 1.0
+    }
+  ],
+  "traitLevelList": [
+    {
+      "allowedParts": [
+        "all"
+      ],
+      "level": 1,
+      "trait": "blazing"
+    }
+  ]
+}

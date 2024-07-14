@@ -1,5 +1,6 @@
 package com.lensmods.lenssgs.core.entity;
 
+import com.lensmods.lenssgs.core.data.MaterialStats;
 import com.lensmods.lenssgs.core.datacomps.TraitLevel;
 import com.lensmods.lenssgs.core.util.LenUtil;
 import com.lensmods.lenssgs.core.weaponsystems.WeaponAmmoStats;
@@ -8,7 +9,6 @@ import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
@@ -36,7 +36,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.UUID;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -93,7 +92,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         this.pierce = newval;
     }
     public void setGravityMod(double newval) {
-        this.gravityMod = newval;
+        this.gravityMod = -newval;
     }
     public void setVelMult(float newval) {
         this.velMult = newval;
@@ -163,9 +162,17 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
 
     protected void onHitEntity(Entity entity, Vec3 hitVec, Vec3 startVec, Vec3 endVec)
     {
+        for(TraitLevel trait : traits) {
+            switch (trait.trait()) {
+                case MaterialStats.BLAZING: {
+                    entity.igniteForSeconds(trait.level() * 5);
+                }
+            }
+        }
         float damage = this.getDamage();
         DamageSource source = LenDamageTypes.Sources.projectile(this.level().registryAccess(), this, this.Owner);
         entity.hurt(source, damage);
+
         this.pierce--;
         if(this.pierce <=0) {
             if (this.isAlive()) {
@@ -212,7 +219,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         buffer.writeInt(this.traits.isEmpty() ? 0 : traits.size());
         for(int i = 0; i<traits.size();i++) {
             TraitLevel traitL = traits.get(i);
-            FriendlyByteBuf.writeUUID(buffer, UUID.fromString(traitL.trait()));
+            buffer.writeUtf(traitL.trait());
             buffer.writeInt(traitL.level());
         }
     }
@@ -225,7 +232,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         this.pierce = additionalData.readInt();
         List<TraitLevel> tstore = new ArrayList<>();
         for (int i = 0; i <additionalData.readInt(); i++ ) {
-            tstore.add(new TraitLevel(additionalData.readUUID().toString(),additionalData.readInt()));
+            tstore.add(new TraitLevel(additionalData.readUtf(),additionalData.readInt()));
         }
         this.traits = tstore;
     }
@@ -299,7 +306,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         double nextPosZ = this.getZ() + this.getDeltaMovement().z();
         this.setPos(nextPosX, nextPosY, nextPosZ);
 
-        if(this.gravityMod > 0)
+        if(this.gravityMod != 0)
         {
             this.setDeltaMovement(this.getDeltaMovement().add(0, this.gravityMod, 0));
         }

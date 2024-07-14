@@ -1,0 +1,26 @@
+{
+  "allowedOn": [
+    "stock"
+  ],
+  "color": {
+    "alpha": 1.0,
+    "blue": 0.5294118,
+    "green": 0.72156864,
+    "red": 0.87058824
+  },
+  "ingredient": {
+    "tag": "c:rods/wooden"
+  },
+  "partType": "wood",
+  "statModList": [
+    {
+      "allowedParts": [
+        "stock"
+      ],
+      "modType": "add",
+      "stat": "stat_inaccuracy",
+      "val": -0.5
+    }
+  ],
+  "traitLevelList": []
+}

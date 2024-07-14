@@ -1,10 +1,12 @@
 package com.lensmods.lenssgs;
 
 import com.lensmods.lenssgs.client.ClientFireHandler;
+import com.lensmods.lenssgs.client.GunTooltipHandler;
 import com.lensmods.lenssgs.client.render.CustomRenderHandler;
 import com.lensmods.lenssgs.core.data.AllowedParts;
 import com.lensmods.lenssgs.core.data.MaterialProvider;
 import com.lensmods.lenssgs.core.entity.render.GenericProjRender;
+import com.lensmods.lenssgs.core.util.KeyManager;
 import com.lensmods.lenssgs.datagen.*;
 import com.lensmods.lenssgs.init.*;
 import com.lensmods.lenssgs.networking.PacketReg;
@@ -33,6 +35,7 @@ import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
@@ -98,6 +101,7 @@ public class LensSGS
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
 
+
         modEventBus.addListener(PacketReg::register);
         modEventBus.addListener(this::gatherData);
         modEventBus.addListener(LenDataReg::register);
@@ -149,11 +153,20 @@ public class LensSGS
     public static class ClientModEvents
     {
         @SubscribeEvent
+        public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
+            event.register(KeyManager.CYCLE_BACK.get());
+            event.register(KeyManager.CYCLE_NEXT.get());
+            event.register(KeyManager.DISPLAY_STATS.get());
+            event.register(KeyManager.DISPLAY_TRAITS.get());
+            event.register(KeyManager.DISPLAY_CONSTRUCTION.get());
+        }
+        @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             // Some client setup code
             L3NLOGGER.info("YOU FOOL, YOU'RE RUNNING SLIGHTLY STOLEN RENDERING CODE!");
             NeoForge.EVENT_BUS.register(ClientFireHandler.get());
+            NeoForge.EVENT_BUS.register(GunTooltipHandler.INSTANCE);
         }
         @SubscribeEvent
         public static void registerEntRenders(EntityRenderersEvent.RegisterRenderers event) {

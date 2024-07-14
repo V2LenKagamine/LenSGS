@@ -1,8 +1,10 @@
-// 1.21	2024-07-13T00:02:03.7095778	Registries
+// 1.21	2024-07-13T23:55:24.072206	Registries
+d20ce1dcff79805e7abb8b9ec584b5b673dcf4a7 data/lenssgs/lenssgs/gun_materials/blaze.json
 673c891c8db58a8d1dc73c453ee11531193c769e data/lenssgs/lenssgs/gun_materials/copper.json
-c2bebdd13c51b708dc32bef3d99d124e49a9247e data/lenssgs/lenssgs/gun_materials/diamond.json
+09e4efb4a0a164ebfac8fb69aa0dbf0c9eb5efd9 data/lenssgs/lenssgs/gun_materials/diamond.json
 dac1291bf171c5e148defec0d63adf0532dc5a08 data/lenssgs/lenssgs/gun_materials/gold.json
 c9d511f043ec0d22f427780bfbed50015abd4bb8 data/lenssgs/lenssgs/gun_materials/gunpowder.json
-96bcd66bafcaa8904778b6062c14b2b0bc58387c data/lenssgs/lenssgs/gun_materials/iron.json
+3863a6f50729c47900455ea7ff508c4d93386f3a data/lenssgs/lenssgs/gun_materials/iron.json
 80a8dcbe48aa100915bd58bca62d0b09fe0d539b data/lenssgs/lenssgs/gun_materials/netherite.json
-c278658d12eff6fc0e301ff98739394ab69a6490 data/lenssgs/lenssgs/gun_materials/stone.json
+6f6145d43f85bff677cf3b6290cfb82a51b3fbc2 data/lenssgs/lenssgs/gun_materials/stone.json
+855155b08927934140b43c70acf687a4c59a2863 data/lenssgs/lenssgs/gun_materials/wood.json

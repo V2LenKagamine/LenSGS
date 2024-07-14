@@ -5,6 +5,7 @@ import com.lensmods.lenssgs.core.data.AllowedParts;
 import com.lensmods.lenssgs.core.data.MaterialMap;
 import com.lensmods.lenssgs.core.data.MaterialStats;
 import com.lensmods.lenssgs.core.datacomps.*;
+import com.lensmods.lenssgs.core.items.AmmoBaseItem;
 import com.lensmods.lenssgs.core.util.LenUtil;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import com.lensmods.lenssgs.init.LenItems;
@@ -29,7 +30,7 @@ public class WeaponAmmoStats {
         return stacc.getOrDefault(LenDataComponents.AMMO_COUNTER,0);
     }
     public static int getAmmoMax(ItemStack stacc) {
-        return safeGunStats(stacc) ? stacc.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() : 0;
+        return safeGunStats(stacc) ? stacc.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max()/AMMO_POINTS_MUL : 0;
     }
     public static float getVelMult(ItemStack stacc) {
         return safeGunStats(stacc) && safeGunLastAmmo(stacc) ? Math.clamp(stacc.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getVelocityMult() + stacc.get(LenDataComponents.LAST_AMMO).getStats().getVelocityMult(),0.05f ,5f) : 1;
@@ -40,7 +41,7 @@ public class WeaponAmmoStats {
     }
 
     public static Double getGrav(ItemStack stacc) {
-        return safeGunStats(stacc) && safeGunLastAmmo(stacc)  ? Math.clamp(stacc.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getGravMod() + stacc.get(LenDataComponents.LAST_AMMO).getStats().getGravMod(),-1,1) : 0;
+        return safeGunStats(stacc) && safeGunLastAmmo(stacc)  ? Math.clamp(stacc.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getGravMod() + stacc.get(LenDataComponents.LAST_AMMO).getStats().getGravMod(),-0.01d,0.01d) : 0;
     }
 
     public static float getAccuracy(ItemStack stacc) {
@@ -76,7 +77,7 @@ public class WeaponAmmoStats {
             int ammoCurrent = item.get(LenDataComponents.AMMO_COUNTER);
             GunStats stats = item.get(LenDataComponents.GUN_STAT_TRAITS).getStats();
             if(ammoAmountLeft(ammo) >=1&& ammo.getOrDefault(LenDataComponents.AMMO_COUNTER,null)!=null) {
-                int ammoInAmmo = ammo.get(LenDataComponents.AMMO_COUNTER) * AMMO_POINTS_MUL;
+                int ammoInAmmo = ammo.get(LenDataComponents.AMMO_COUNTER);
                 int removed = Math.min(stats.getAmmo_max() - ammoCurrent,ammoInAmmo);
                 item.set(LenDataComponents.AMMO_COUNTER,ammoCurrent + removed);
                 if(!((Player) ent).isCreative()) {
@@ -103,9 +104,10 @@ public class WeaponAmmoStats {
         if (data.getPartList().isEmpty()) {
             LensSGS.L3NLOGGER.error("Someone is crafting a gun with no parts. Not good.");
         } //WALL OF VARIABLES
+        boolean ammo = gun.getItem() instanceof AmmoBaseItem;
 
         List<TraitLevel> finalTraits = new ArrayList<>(); //Todo: get traits and set appropriately
-        int newAmmoMax = AMMO_POINTS_MUL;
+        int newAmmoMax = ammo ? 100* AMMO_POINTS_MUL :AMMO_POINTS_MUL;
         int bonusAmmoMax =0;
         float ammoMul =1;
         float totalAmmoMul = 1f;
@@ -115,7 +117,7 @@ public class WeaponAmmoStats {
         float peirceMul =1;
         float totalPeirceMul = 1f;
 
-        int newFR = 20;
+        int newFR = ammo ? 0 : 20;
         int bonusFR =0;
         float frmul =1;
         float totalFrMul = 1f;
@@ -125,13 +127,13 @@ public class WeaponAmmoStats {
         float inaccMod =1;
         float totalInaccMul = 1f;
 
-        float newProj =1;
+        float newProj = ammo ? 1 : 0;
         float bonusProj=0;
         float projMul =1;
         float totalProjMul =1f;
 
-        float newdmgMin=1f;
-        float newdmgMax=1.5f;
+        float newdmgMin=ammo ? 1f:0;
+        float newdmgMax=ammo ? 1.5f:0;
         float bonusDmgMin =0;
         float bonusDmgMax =0;
         float damageMulMax =1f;
@@ -275,6 +277,14 @@ public class WeaponAmmoStats {
                     }
                 }
             }
+            for (TraitLevel trait : MaterialMap.loadedMats(provider).get(part.getMaterial()).getTraitLevelList()) {
+                if(!(trait.allowedParts().contains(part.getName()) || trait.allowedParts().stream().anyMatch(test -> test.equals("all")))) {continue; }
+                /*
+                switch (trait.trait()) {
+                }
+                 */
+                finalTraits.add(trait);
+            }
         }
         List<ModelColorPair> partColorList = new ArrayList<>();
         for(GunPartHolder part : data.getPartList()) { //Yes we JUST iterated over it, but we need these calculated AFTER the stats are set.
@@ -374,7 +384,7 @@ public class WeaponAmmoStats {
                     break;
                 }
                 case AllowedParts.CASING_SMALL: {
-                    totalAmmoMul += 0.125f*AMMO_POINTS_MUL;
+                    totalAmmoMul += 0.125f;
                     totalMaxMul -= 0.125f;
                     totalMinMul -= 0.125f;
                     break;
@@ -384,13 +394,13 @@ public class WeaponAmmoStats {
                     break;
                 }
                 case AllowedParts.CASING_LARGE: {
-                    totalAmmoMul -= 0.125f*AMMO_POINTS_MUL;
+                    totalAmmoMul -= 0.125f;
                     totalMaxMul += 0.125f;
                     totalMinMul += 0.125f;
                     break;
                 }
                 case AllowedParts.CASING_SHELL: {
-                    totalAmmoMul -= 0.05f * AMMO_POINTS_MUL;
+                    totalAmmoMul -= 0.05f;
                     totalMaxMul += 0.05f;
                     totalMinMul += 0.05f;
                     totalAmmoMul -= 0.05f;
@@ -413,7 +423,7 @@ public class WeaponAmmoStats {
                     break;
                 }
                 case AllowedParts.PROPELLANT_LIGHT: {
-                    totalAmmoMul += 0.125f * AMMO_POINTS_MUL;
+                    totalAmmoMul += 0.125f;
                     totalMaxMul -= 0.05f;
                     totalMinMul -= 0.05f;
                     velMul -= 0.08f;
@@ -425,7 +435,7 @@ public class WeaponAmmoStats {
                     break;
                 }
                 case AllowedParts.PROPELLANT_HEAVY: {
-                    totalAmmoMul -= 0.125f * AMMO_POINTS_MUL;
+                    totalAmmoMul -= 0.125f;
                     totalMaxMul += 0.05f;
                     totalMinMul += 0.05f;
                     velMul += 0.08f;
@@ -437,17 +447,30 @@ public class WeaponAmmoStats {
             //And then the rendering stuff
             partColorList.add(new ModelColorPair(part.getSubType(),MaterialMap.loadedMats(provider).get(part.getMaterial()).getColor()));
         }
+        int finalAmmo = Math.max((int)Math.floor((((newAmmoMax  * ((ammoMul/ mulammoParts != 0 ? mulammoParts : 1))))*totalAmmoMul) + bonusAmmoMax), AMMO_POINTS_MUL);
+        int finalPeirce = Math.max((int)Math.floor(((newPeirce * (( peirceMul / mulpierceParts != 0 ? mulpierceParts : 1))))*totalPeirceMul)+bonusPeirce,1);
+        int finalFr = Math.max((int)Math.floor(((newFR * ((frmul/ mulfireParts != 0 ? mulfireParts : 1)))) * totalFrMul) + bonusFR,1);
+        float finalInaccuracy = Math.max(((newInacc * (( inaccMod / mulinaccParts != 0 ? mulinaccParts : 1))) * totalInaccMul)+ bonusInacc,0);
+        float finalProjectileCount = Math.max(((newProj * ((projMul /mulprojParts  != 0 ? mulprojParts : 1))) * totalProjMul) + bonusProj,1);
+        float finalMaxDmg = Math.max(((newdmgMax * ((damageMulMax/ muldmgMaxParts != 0 ? muldmgMaxParts : 1)))*totalMaxMul) + bonusDmgMax,0.5f);
+        float finalMinDmg = Math.max(((newdmgMin  * ((damageMulMin/ muldmgMinParts != 0 ? muldmgMinParts : 1)))*totalMinMul)+bonusDmgMin,0.25f);
+        float finalVel = Math.max(((newVelMul * (( velMul/ mulvelParts != 0 ? mulvelParts : 1)))*totalVelMul)+ bonusVel,0.05f);
+        double finalGrav = Math.clamp(((newGrav * (gravMod/ mulgravParts != 0 ? mulgravParts : 1))*totalGravMul)+ bonusGrav,-0.01d,0.01d);
         gun.set(LenDataComponents.PART_COLOR_LIST,partColorList);
         GunStats finalStats =new GunStats( //mostly for debug
-                Math.max((int)Math.floor((((newAmmoMax + bonusAmmoMax) * ((ammoMul/ mulammoParts != 0 ? mulammoParts : 1) * ammoMul)))*totalAmmoMul * AMMO_POINTS_MUL),1*AMMO_POINTS_MUL),
-                Math.max((int)Math.floor(((newPeirce + bonusPeirce) * (( peirceMul / mulpierceParts != 0 ? mulpierceParts : 1) * peirceMul))*totalPeirceMul),1),
-                Math.max((int)Math.floor(((newFR + bonusFR) * (( frmul/ mulfireParts != 0 ? mulfireParts : 1) * frmul))*totalFrMul),1),
-                Math.max(((newInacc + bonusInacc) * (( inaccMod / mulinaccParts != 0 ? mulinaccParts : 1) * inaccMod))*totalInaccMul,0),
-                Math.max(((newProj + bonusProj) * ((projMul /mulprojParts  != 0 ? mulprojParts : 1) * projMul))*totalProjMul,1),
-                Math.max(((newdmgMax + bonusDmgMax) * ((damageMulMax/ muldmgMaxParts != 0 ? muldmgMaxParts : 1)))*totalMaxMul,0.5f),
-                Math.max(((newdmgMin + bonusDmgMin) * ((damageMulMin/ muldmgMinParts != 0 ? muldmgMinParts : 1)))*totalMinMul,0.25f),
-                Math.max(((newVelMul + bonusVel) * (( velMul/ mulvelParts != 0 ? mulvelParts : 1) * velMul))*totalVelMul,0.05f),
-                ((newGrav + bonusGrav) * ((gravMod/ mulgravParts != 0 ? mulgravParts : 1) * gravMod))*totalGravMul);
+                finalAmmo,
+                finalPeirce,
+                finalFr,
+                finalInaccuracy,
+                finalProjectileCount,
+                finalMaxDmg,
+                finalMinDmg,
+                finalVel,
+                finalGrav);
         gun.set(LenDataComponents.GUN_STAT_TRAITS,new GunStatTraitPair(finalStats,finalTraits));
+        if(ammo && safeGunStats(gun)) {
+            int lastcount = gun.get(LenDataComponents.AMMO_COUNTER);
+            gun.set(LenDataComponents.AMMO_COUNTER,Math.min(lastcount,finalAmmo));
+        }
     }
 }

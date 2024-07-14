@@ -76,8 +76,7 @@
     },
     {
       "allowedParts": [
-        "bullet",
-        "barrel"
+        "bullet"
       ],
       "modType": "multiply",
       "stat": "stat_inaccuracy",

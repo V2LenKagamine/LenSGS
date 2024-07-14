@@ -61,6 +61,7 @@ public class LenRecipeGen extends RecipeProvider {
         GunFromItems("swap_part_gun",List.of(LenItems.PART_BASE.get(),LenItems.GUN_BASE.get()),LenItems.GUN_BASE.get(),out,true);//Swap GunParts
         GunFromItems("swap_part_ammo",List.of(LenItems.PART_BASE.get(),LenItems.AMMO_BASE.get()),LenItems.AMMO_BASE.get(),out,true); //Swap Ammo parts
         GunFromIng("make_part", List.of(Ingredient.of(LenItems.PART_CRAFTER.get()),Ingredient.of(LenTagKeys.GUNAMMO_MAT_TAG)), LenItems.PART_BASE.get(), out,false); //Parts
+        GunFromIng("reload_ammo",List.of(Ingredient.of(LenTagKeys.REFILLS_AMMO_TAG),Ingredient.of(LenItems.AMMO_BASE.get())), LenItems.AMMO_BASE.get(),out,false);
         //Stocks
         DataShapedBuilder.betterShaped(RecipeCategory.MISC, new ItemStack(LenItems.PART_CRAFTER.get()),"stock_crafter_short",
                         Pair.of(LenDataComponents.PART_TYPE.get(),AllowedParts.STOCK),

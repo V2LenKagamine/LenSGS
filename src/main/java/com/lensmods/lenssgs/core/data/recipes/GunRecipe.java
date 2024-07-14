@@ -95,16 +95,21 @@ public class GunRecipe extends CustomRecipe {
         }
         if (output.getItem() instanceof AmmoBaseItem && !swapping) {
             List<String> weHave = new ArrayList<>();
+            boolean reloading =false;
             for (ItemStack item : craftingInput.items()) { //Making Ammo check if its valid.
                 if(item.getItem() == Items.AIR) {continue;}
+                if(item.is(LenTagKeys.REFILLS_AMMO_TAG)) {
+                    reloading = true;
+                    continue;
+                }
                 String partName = item.getOrDefault(LenDataComponents.GUN_PART_HOLDER,null)!=null ? item.get(LenDataComponents.GUN_PART_HOLDER).getName(): "FUCK";
-                if(!weHave.contains(partName) && AllowedParts.AMMO_MANDITORY.contains(partName)) {
+                if(item.getItem() instanceof AmmoBaseItem || (!weHave.contains(partName) && AllowedParts.AMMO_MANDITORY.contains(partName))) {
                     weHave.add(partName);
                     continue; //Yep, we need this part.
                 }
                 return false;
             }
-            if(weHave.size() == AllowedParts.AMMO_MANDITORY.size()) {
+            if(weHave.size() == AllowedParts.AMMO_MANDITORY.size() || reloading) {
                 return true;
             }
         }
@@ -143,7 +148,7 @@ public class GunRecipe extends CustomRecipe {
                     whatrewedoin = "gunmod";
                     mainboi = maygun.copy();
                     break label;}
-                case AmmoBaseItem ammoBaseItem when swapping:{
+                case AmmoBaseItem ammoBaseItem:{
                     whatrewedoin = "ammomod";
                     mainboi = maygun.copy();
                     break label;}
@@ -242,9 +247,9 @@ public class GunRecipe extends CustomRecipe {
         GunComp gunDat = gunthing.get(LenDataComponents.GUN_COMP);
         for(int i =0;i <list.size();i++) {
             ItemStack boi = input.getItem(i);
-            if(boi.getItem() instanceof AmmoBaseItem || boi.getItem() instanceof GunBaseItem) {
+            if(boi.getItem() instanceof AmmoBaseItem || boi.getItem() instanceof GunBaseItem || boi.is(LenTagKeys.REFILLS_AMMO_TAG)) {
                 list.set(i,ItemStack.EMPTY);
-            } else {
+            } else{
                 for(GunPartHolder part : gunDat.getPartList()) {
                     if(part.getName().equals(boi.get(LenDataComponents.GUN_PART_HOLDER).getName())) { //Return part from gun.
                         ItemStack returned = new ItemStack(LenItems.PART_BASE.get());
@@ -262,7 +267,8 @@ public class GunRecipe extends CustomRecipe {
                 if(mainboi.getOrDefault(LenDataComponents.AMMO_COUNTER,null)!=null && mainboi.getOrDefault(LenDataComponents.GUN_STAT_TRAITS,null)!=null) {
                     if (mainboi.get(LenDataComponents.AMMO_COUNTER) < mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max()) {
                         var current = mainboi.get(LenDataComponents.AMMO_COUNTER);
-                        int torestore = Math.min(mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() - current,4*WeaponAmmoStats.AMMO_POINTS_MUL);
+                        int lacking = mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() - current;
+                        int torestore = lacking < 0 ? mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() : Math.max(lacking,4*WeaponAmmoStats.AMMO_POINTS_MUL);
                         mainboi.set(LenDataComponents.AMMO_COUNTER,torestore);
                         return mainboi;
                     }

@@ -15,11 +15,9 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
-import java.util.List;
 import java.util.function.Consumer;
 
 public class GunBaseItem extends Item implements IModdable,IClientItemExtensions {
@@ -55,12 +53,12 @@ public class GunBaseItem extends Item implements IModdable,IClientItemExtensions
         }
         return Component.literal("LOUD INCORRECT BUZZER AKA ERROR");
     }
-
+/*
     @Override
     public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
         LenUtil.showGunData(pStack, pContext, pTooltipComponents, pTooltipFlag);
     }
-
+*/
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {

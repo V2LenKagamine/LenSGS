@@ -20,14 +20,16 @@ public class LenMaterialGen {
             AllowedParts.STOCK);
 
     public static final List<GunMaterial> VANILLA_MATS = List.of(
-            new GunMaterial("stone", MaterialStats.STONE, null,Tags.Items.COBBLESTONES,Color.GREY,NOT_PROPELLANT),
-            new GunMaterial("copper", MaterialStats.COPPER, null,Tags.Items.INGOTS_COPPER,Color.COPPER,NOT_PROPELLANT),
-            new GunMaterial("iron",MaterialStats.IRON,null,Tags.Items.INGOTS_IRON,Color.IRON,NOT_PROPELLANT),
-            new GunMaterial("gold",MaterialStats.GOLD,null,Tags.Items.INGOTS_GOLD,Color.GOLD,NOT_PROPELLANT),
-            new GunMaterial("diamond",MaterialStats.DIAMOND,null,Tags.Items.GEMS_DIAMOND,Color.LIGHTCYAN,NOT_PROPELLANT),
-            new GunMaterial("netherite",MaterialStats.NETHERITE,null,Tags.Items.INGOTS_NETHERITE,Color.NETHERITE,NOT_PROPELLANT),
-            new GunMaterial("gunpowder",MaterialStats.GUNPOWDER,null,Tags.Items.GUNPOWDERS,Color.GRAY,PROPELLANT_ONLY)
+            new GunMaterial("wood",MaterialStats.WOOD,null,Tags.Items.RODS_WOODEN,Color.BURLYWOOD,List.of(AllowedParts.STOCK)),
+            new GunMaterial("stone", MaterialStats.STONE_STATS, null,Tags.Items.COBBLESTONES,Color.GREY,NOT_PROPELLANT),
+            new GunMaterial("copper", MaterialStats.COPPER_STATS, null,Tags.Items.INGOTS_COPPER,Color.COPPER,NOT_PROPELLANT),
+            new GunMaterial("iron",MaterialStats.IRON_STATS,null,Tags.Items.INGOTS_IRON,Color.IRON,NOT_PROPELLANT),
+            new GunMaterial("gold",MaterialStats.GOLD_STATS,null,Tags.Items.INGOTS_GOLD,Color.GOLD,NOT_PROPELLANT),
+            new GunMaterial("diamond",MaterialStats.DIAMOND_STATS,null,Tags.Items.GEMS_DIAMOND,Color.LIGHTCYAN,NOT_PROPELLANT),
+            new GunMaterial("netherite",MaterialStats.NETHERITE_STATS,null,Tags.Items.INGOTS_NETHERITE,Color.NETHERITE,NOT_PROPELLANT),
+            new GunMaterial("gunpowder",MaterialStats.GUNPOWDER_STATS,null,Tags.Items.GUNPOWDERS,Color.GRAY,PROPELLANT_ONLY),
 
+            new GunMaterial("blaze",MaterialStats.BLAZEROD_STATS,MaterialStats.BLAZEROD_TRAITS,Tags.Items.RODS_BLAZE,Color.PEACHPUFF,List.of(AllowedParts.ROUND,AllowedParts.BARREL))
     );
 
     public static RegistrySetBuilder VANILLA_MATERIALS_BUILDER = new RegistrySetBuilder().add(LenDataReg.GUN_MAT_KEY, boot -> VANILLA_MATS.forEach(mat ->{

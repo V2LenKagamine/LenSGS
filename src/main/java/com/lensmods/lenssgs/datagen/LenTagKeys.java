@@ -29,12 +29,14 @@ public class LenTagKeys extends ItemTagsProvider {
 
         this.tag(GUNAMMO_MAT_TAG);
         this.tag(GUNAMMO_MAT_TAG)
+                .addOptionalTag(Tags.Items.RODS_WOODEN)
                 .addOptionalTag(Tags.Items.COBBLESTONES)
                 .addOptionalTag(Tags.Items.INGOTS_COPPER)
                 .addOptionalTag(Tags.Items.INGOTS_IRON)
                 .addOptionalTag(Tags.Items.INGOTS_GOLD)
                 .addOptionalTag(Tags.Items.GEMS_DIAMOND)
                 .addOptionalTag(Tags.Items.INGOTS_NETHERITE)
-                .addOptionalTag(Tags.Items.GUNPOWDERS);
+                .addOptionalTag(Tags.Items.GUNPOWDERS)
+                .addOptionalTag(Tags.Items.RODS_BLAZE);
     }
 }

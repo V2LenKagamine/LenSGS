@@ -1,0 +1,16 @@
+{
+  "type": "lenssgs:gun_recipe",
+  "inputs": [
+    {
+      "tag": "lenssgs:refills_ammo"
+    },
+    {
+      "item": "lenssgs:base_ammo_holder"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "lenssgs:base_ammo_holder"
+  },
+  "swapping": false
+}

@@ -22,7 +22,7 @@ public record TraitLevel(String trait, int level, List<String> allowedParts) {
             (trait1, level1, allowedParts1) -> new TraitLevel(trait1, level1, allowedParts1.stream().toList())
     );
 
-    public TraitLevel(String string, int anInt) {
-        this(string,anInt,List.of("all"));
+    public TraitLevel(String key, int level) {
+        this(key,level,List.of("all"));
     }
 }

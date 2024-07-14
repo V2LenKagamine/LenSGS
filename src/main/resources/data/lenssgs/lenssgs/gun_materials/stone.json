@@ -81,7 +81,7 @@
       ],
       "modType": "add",
       "stat": "stat_gravity_mod",
-      "val": 0.8
+      "val": 0.001
     }
   ],
   "traitLevelList": []

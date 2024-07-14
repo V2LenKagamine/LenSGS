@@ -61,7 +61,7 @@
       ],
       "modType": "multiply",
       "stat": "stat_gravity_mod",
-      "val": 0.1
+      "val": 1.1
     }
   ],
   "traitLevelList": []
