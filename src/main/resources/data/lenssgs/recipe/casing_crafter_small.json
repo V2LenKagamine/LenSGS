@@ -10,8 +10,8 @@
     }
   },
   "pattern": [
-    "   ",
-    "psp",
+    "s s",
+    "p p",
     "sps"
   ],
   "result": {

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "d": {
+      "tag": "c:storage_blocks/diamond"
+    },
+    "n": {
+      "tag": "c:ingots/netherite"
+    },
+    "s": {
+      "tag": "c:nether_stars"
+    }
+  },
+  "pattern": [
+    "nsn",
+    "ndn",
+    "nsn"
+  ],
+  "result": {
+    "count": 1,
+    "id": "lenssgs:void_metal"
+  }
+}

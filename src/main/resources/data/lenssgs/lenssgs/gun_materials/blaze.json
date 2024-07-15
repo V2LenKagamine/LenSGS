@@ -1,12 +1,13 @@
 {
   "allowedOn": [
     "bullet",
-    "barrel"
+    "barrel",
+    "prop"
   ],
   "color": {
     "alpha": 1.0,
-    "blue": 0.0,
-    "green": 0.27058825,
+    "blue": 0.18039216,
+    "green": 0.79607844,
     "red": 1.0
   },
   "ingredient": {

@@ -56,6 +56,15 @@ public class LenRecipeGen extends RecipeProvider {
                 .define('g',Items.GUNPOWDER)
                 .unlockedBy("paper",InventoryChangeTrigger.TriggerInstance.hasItems(Items.PAPER))
                 .save(out);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,LenItems.VOIDMETAL,1)
+                .pattern("nsn")
+                .pattern("ndn")
+                .pattern("nsn")
+                .define('n',Tags.Items.INGOTS_NETHERITE)
+                .define('d',Tags.Items.STORAGE_BLOCKS_DIAMOND)
+                .define('s',Tags.Items.NETHER_STARS)
+                .unlockedBy("netherstar",InventoryChangeTrigger.TriggerInstance.hasItems(Items.NETHER_STAR))
+                .save(out);
         GunFromItems("make_gun",List.of(LenItems.PART_BASE.get(),LenItems.PART_BASE.get(),LenItems.PART_BASE.get()),LenItems.GUN_BASE.get(),out,false); //The gun
         GunFromItems("make_ammo",List.of(LenItems.PART_BASE.get(),LenItems.PART_BASE.get(),LenItems.PART_BASE.get()),LenItems.AMMO_BASE.get(),out,false); //The Ammo
         GunFromItems("swap_part_gun",List.of(LenItems.PART_BASE.get(),LenItems.GUN_BASE.get()),LenItems.GUN_BASE.get(),out,true);//Swap GunParts
@@ -166,7 +175,7 @@ public class LenRecipeGen extends RecipeProvider {
         //Receivers
         DataShapedBuilder.betterShaped(RecipeCategory.MISC, new ItemStack(LenItems.PART_CRAFTER.get()),"receiver_crafter_pistol",
                         Pair.of(LenDataComponents.PART_TYPE.get(),AllowedParts.RECEIVER),
-                        Pair.of(LenDataComponents.PART_SUB_TYPE.get(),AllowedParts.RECIEVER_PISTOL))
+                        Pair.of(LenDataComponents.PART_SUB_TYPE.get(),AllowedParts.RECEIVER_PISTOL))
                 .pattern("s  ")
                 .pattern("ppp")
                 .pattern("s p")
@@ -176,7 +185,7 @@ public class LenRecipeGen extends RecipeProvider {
                 .save(out);
         DataShapedBuilder.betterShaped(RecipeCategory.MISC, new ItemStack(LenItems.PART_CRAFTER.get()),"receiver_crafter_standard",
                         Pair.of(LenDataComponents.PART_TYPE.get(),AllowedParts.RECEIVER),
-                        Pair.of(LenDataComponents.PART_SUB_TYPE.get(),AllowedParts.RECIEVER_STANDARD))
+                        Pair.of(LenDataComponents.PART_SUB_TYPE.get(),AllowedParts.RECEIVER_STANDARD))
                 .pattern("ss ")
                 .pattern("ppp")
                 .pattern("psp")
@@ -186,7 +195,7 @@ public class LenRecipeGen extends RecipeProvider {
                 .save(out);
         DataShapedBuilder.betterShaped(RecipeCategory.MISC, new ItemStack(LenItems.PART_CRAFTER.get()),"receiver_crafter_bull",
                         Pair.of(LenDataComponents.PART_TYPE.get(),AllowedParts.RECEIVER),
-                        Pair.of(LenDataComponents.PART_SUB_TYPE.get(),AllowedParts.RECIEVER_BULLPUP))
+                        Pair.of(LenDataComponents.PART_SUB_TYPE.get(),AllowedParts.RECEIVER_BULLPUP))
                 .pattern(" s ")
                 .pattern("ppp")
                 .pattern("p s")
@@ -239,8 +248,8 @@ public class LenRecipeGen extends RecipeProvider {
         DataShapedBuilder.betterShaped(RecipeCategory.MISC, new ItemStack(LenItems.PART_CRAFTER.get()),"casing_crafter_small",
                         Pair.of(LenDataComponents.PART_TYPE.get(),AllowedParts.CASING),
                         Pair.of(LenDataComponents.PART_SUB_TYPE.get(),AllowedParts.CASING_SMALL))
-                .pattern("   ")
-                .pattern("psp")
+                .pattern("s s")
+                .pattern("p p")
                 .pattern("sps")
                 .define('s', Tags.Items.RODS_WOODEN)
                 .define('p', LenItems.GUNPRINTER_PAPER)

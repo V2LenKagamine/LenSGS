@@ -61,8 +61,45 @@
       ],
       "modType": "multiply",
       "stat": "stat_velocity_mul",
-      "val": 0.1
+      "val": 0.9
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "action",
+        "casing"
+      ],
+      "modType": "add",
+      "stat": "stat_fire_rate",
+      "val": -2.5
+    },
+    {
+      "allowedParts": [
+        "barrel",
+        "receiver"
+      ],
+      "modType": "add",
+      "stat": "stat_inaccuracy",
+      "val": 2.5
+    },
+    {
+      "allowedParts": [
+        "stock"
+      ],
+      "modType": "add",
+      "stat": "stat_inaccuracy",
+      "val": -0.5
     }
   ],
-  "traitLevelList": []
+  "traitLevelList": [
+    {
+      "allowedParts": [
+        "casing",
+        "bullet",
+        "receiver"
+      ],
+      "level": 1,
+      "trait": "shocking"
+    }
+  ]
 }

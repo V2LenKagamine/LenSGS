@@ -70,6 +70,9 @@ public class WeaponAmmoStats {
     public static boolean safeGunLastAmmo(ItemStack stacc) {
         return stacc.getOrDefault(LenDataComponents.LAST_AMMO,null) !=null;
     }
+    public static boolean safeGunComp(ItemStack stacc) {
+        return stacc.getOrDefault(LenDataComponents.GUN_COMP,null) !=null;
+    }
 
     public static void attemptReload(LivingEntity ent, ItemStack item, Level world) {
         if(item.getOrDefault(LenDataComponents.GUN_STAT_TRAITS,null)!=null && item.getOrDefault(LenDataComponents.AMMO_COUNTER,null)!= null) {
@@ -78,13 +81,24 @@ public class WeaponAmmoStats {
             GunStats stats = item.get(LenDataComponents.GUN_STAT_TRAITS).getStats();
             if(ammoAmountLeft(ammo) >=1&& ammo.getOrDefault(LenDataComponents.AMMO_COUNTER,null)!=null) {
                 int ammoInAmmo = ammo.get(LenDataComponents.AMMO_COUNTER);
-                int removed = Math.min(stats.getAmmo_max() - ammoCurrent,ammoInAmmo);
-                item.set(LenDataComponents.AMMO_COUNTER,ammoCurrent + removed);
-                if(!((Player) ent).isCreative()) {
-                    ammo.set(LenDataComponents.AMMO_COUNTER, ammoInAmmo - removed);
+                var ammoTraits = ammo.getOrDefault(LenDataComponents.GUN_STAT_TRAITS,null);
+                if(ammoTraits == null) {
+                    int removed = Math.min(stats.getAmmo_max() - ammoCurrent, ammoInAmmo);
+                    item.set(LenDataComponents.AMMO_COUNTER, ammoCurrent + removed);
+                    if (!(((Player) ent).isCreative())) {
+                        ammo.set(LenDataComponents.AMMO_COUNTER, ammoInAmmo - removed);
+                    }
+                    item.set(LenDataComponents.LAST_AMMO, ammo.get(LenDataComponents.GUN_STAT_TRAITS));
+                    return;
+                } else {
+                    int removed = Math.min(stats.getAmmo_max() - ammoCurrent, ammoInAmmo);
+                    item.set(LenDataComponents.AMMO_COUNTER, ammoCurrent + removed);
+                    if (!(((Player) ent).isCreative()) || ammoTraits.getTraits().stream().noneMatch(trait -> trait.trait().equals(MaterialStats.ECOLOGICAL))) {
+                        ammo.set(LenDataComponents.AMMO_COUNTER, ammoInAmmo - removed);
+                    }
+                    item.set(LenDataComponents.LAST_AMMO, ammo.get(LenDataComponents.GUN_STAT_TRAITS));
+                    return;
                 }
-                item.set(LenDataComponents.LAST_AMMO,ammo.get(LenDataComponents.GUN_STAT_TRAITS));
-                return;
             }
             LensSGS.L3NLOGGER.error("Someone is trying to reload with no ammo stats, bad!:{}",ent);
             return;
@@ -117,7 +131,7 @@ public class WeaponAmmoStats {
         float peirceMul =1;
         float totalPeirceMul = 1f;
 
-        int newFR = ammo ? 0 : 20;
+        int newFR = ammo ? 0 : 100;
         int bonusFR =0;
         float frmul =1;
         float totalFrMul = 1f;
@@ -178,6 +192,7 @@ public class WeaponAmmoStats {
                         if(stats.modType().equals(MaterialStats.MUL_TOTAL)){
                             totalAmmoMul+=stats.val();
                         }
+                        break;
                     }
                     case MaterialStats.PIERCE: {
                         if (stats.modType().equals(MaterialStats.ADD)) {
@@ -190,6 +205,7 @@ public class WeaponAmmoStats {
                         if(stats.modType().equals(MaterialStats.MUL_TOTAL)){
                             totalPeirceMul+= stats.val();
                         }
+                        break;
                     }
                     case MaterialStats.FIRE_RATE: {
                         if (stats.modType().equals(MaterialStats.ADD)) {
@@ -202,6 +218,7 @@ public class WeaponAmmoStats {
                         if(stats.modType().equals(MaterialStats.MUL_TOTAL)){
                             totalFrMul += stats.val();
                         }
+                        break;
                     }
                     case MaterialStats.PROJ_COUNT: {
                         if (stats.modType().equals(MaterialStats.ADD)) {
@@ -214,6 +231,7 @@ public class WeaponAmmoStats {
                         if(stats.modType().equals(MaterialStats.MUL_TOTAL)){
                             projMul+= stats.val();
                         }
+                        break;
                     }
                     case MaterialStats.MAX_DMG: {
                         if (stats.modType().equals(MaterialStats.ADD)) {
@@ -226,6 +244,7 @@ public class WeaponAmmoStats {
                         if(stats.modType().equals(MaterialStats.MUL_TOTAL)){
                             totalMaxMul += stats.val();
                         }
+                        break;
                     }
                     case MaterialStats.MIN_DMG: {
                         if (stats.modType().equals(MaterialStats.ADD)) {
@@ -238,6 +257,7 @@ public class WeaponAmmoStats {
                         if(stats.modType().equals(MaterialStats.MUL_TOTAL)){
                             totalMinMul += stats.val();
                         }
+                        break;
                     }
                     case MaterialStats.GRAVITY_MOD: {
                         if (stats.modType().equals(MaterialStats.ADD)) {
@@ -250,6 +270,7 @@ public class WeaponAmmoStats {
                         if(stats.modType().equals(MaterialStats.MUL_TOTAL)){
                             totalGravMul+= stats.val();
                         }
+                        break;
                     }
                     case MaterialStats.VEL_MULT: {
                         if (stats.modType().equals(MaterialStats.ADD)) {
@@ -262,6 +283,7 @@ public class WeaponAmmoStats {
                         if(stats.modType().equals(MaterialStats.MUL_TOTAL)){
                             totalVelMul += stats.val();
                         }
+                        break;
                     }
                     case MaterialStats.INACCURACY_DEG: {
                         if (stats.modType().equals(MaterialStats.ADD)) {
@@ -274,6 +296,7 @@ public class WeaponAmmoStats {
                         if(stats.modType().equals(MaterialStats.MUL_TOTAL)){
                             totalInaccMul += stats.val();
                         }
+                        break;
                     }
                 }
             }
@@ -283,24 +306,31 @@ public class WeaponAmmoStats {
                 switch (trait.trait()) {
                 }
                  */
-                finalTraits.add(trait);
+                if(finalTraits.contains(trait)) {
+                    int curLev = finalTraits.stream().filter(traitL -> traitL.trait().equals(trait.trait())).findFirst().get().level();
+                    finalTraits.remove(trait);
+                    finalTraits.add(new TraitLevel(trait.trait(), trait.level() + curLev));
+                }
+                else {
+                    finalTraits.add(trait);
+                }
             }
         }
         List<ModelColorPair> partColorList = new ArrayList<>();
         for(GunPartHolder part : data.getPartList()) { //Yes we JUST iterated over it, but we need these calculated AFTER the stats are set.
             switch (part.getSubType()) { //The unit of a switch case. Yes these are hardcoded. Dont wanna do data-stuff for them. maybe TODO?
-                case AllowedParts.RECIEVER_PISTOL: {
+                case AllowedParts.RECEIVER_PISTOL: {
                     totalMinMul -= 0.2f;
                     totalMaxMul -= 0.1f;
                     bonusInacc -= 2.5f;
                     break;
                 }
-                case AllowedParts.RECIEVER_STANDARD: {
+                case AllowedParts.RECEIVER_STANDARD: {
                     totalMinMul += 0.1f;
                     totalMaxMul += 0.1f;
                     break;
                 }
-                case AllowedParts.RECIEVER_BULLPUP: {
+                case AllowedParts.RECEIVER_BULLPUP: {
                     bonusInacc -= 0.25f;
                     break;
                 }
@@ -447,15 +477,18 @@ public class WeaponAmmoStats {
             //And then the rendering stuff
             partColorList.add(new ModelColorPair(part.getSubType(),MaterialMap.loadedMats(provider).get(part.getMaterial()).getColor()));
         }
-        int finalAmmo = Math.max((int)Math.floor((((newAmmoMax  * ((ammoMul/ mulammoParts != 0 ? mulammoParts : 1))))*totalAmmoMul) + bonusAmmoMax), AMMO_POINTS_MUL);
-        int finalPeirce = Math.max((int)Math.floor(((newPeirce * (( peirceMul / mulpierceParts != 0 ? mulpierceParts : 1))))*totalPeirceMul)+bonusPeirce,1);
-        int finalFr = Math.max((int)Math.floor(((newFR * ((frmul/ mulfireParts != 0 ? mulfireParts : 1)))) * totalFrMul) + bonusFR,1);
-        float finalInaccuracy = Math.max(((newInacc * (( inaccMod / mulinaccParts != 0 ? mulinaccParts : 1))) * totalInaccMul)+ bonusInacc,0);
-        float finalProjectileCount = Math.max(((newProj * ((projMul /mulprojParts  != 0 ? mulprojParts : 1))) * totalProjMul) + bonusProj,1);
-        float finalMaxDmg = Math.max(((newdmgMax * ((damageMulMax/ muldmgMaxParts != 0 ? muldmgMaxParts : 1)))*totalMaxMul) + bonusDmgMax,0.5f);
-        float finalMinDmg = Math.max(((newdmgMin  * ((damageMulMin/ muldmgMinParts != 0 ? muldmgMinParts : 1)))*totalMinMul)+bonusDmgMin,0.25f);
-        float finalVel = Math.max(((newVelMul * (( velMul/ mulvelParts != 0 ? mulvelParts : 1)))*totalVelMul)+ bonusVel,0.05f);
-        double finalGrav = Math.clamp(((newGrav * (gravMod/ mulgravParts != 0 ? mulgravParts : 1))*totalGravMul)+ bonusGrav,-0.01d,0.01d);
+        int finalAmmo = Math.max((int)Math.floor((((newAmmoMax  * ((ammoMul/ (mulammoParts != 0 ? mulammoParts : 1)))))*totalAmmoMul) + bonusAmmoMax), AMMO_POINTS_MUL);
+        int finalPeirce = Math.max((int)Math.floor(((newPeirce * (( peirceMul / (mulpierceParts != 0 ? mulpierceParts : 1)))))*totalPeirceMul)+bonusPeirce,1);
+        int finalFr = Math.max((int)Math.floor(((newFR * ((frmul/ (mulfireParts != 0 ? mulfireParts : 1))))) * totalFrMul) + bonusFR,1);
+        float finalInaccuracy = Math.max(((newInacc * (( inaccMod / (mulinaccParts != 0 ? mulinaccParts : 1)))) * totalInaccMul)+ bonusInacc,0);
+        float finalProjectileCount = Math.max(((newProj * ((projMul /(mulprojParts  != 0 ? mulprojParts : 1)))) * totalProjMul) + bonusProj,ammo? 1: 0);
+        float finalMaxDmg = Math.max(((newdmgMax * ((damageMulMax/ (muldmgMaxParts != 0 ? muldmgMaxParts : 1))))*totalMaxMul) + bonusDmgMax,0.5f);
+        float finalMinDmg = Math.max(((newdmgMin  * ((damageMulMin/ (muldmgMinParts != 0 ? muldmgMinParts : 1))))*totalMinMul)+bonusDmgMin,0.25f);
+        float finalVel = Math.max(((newVelMul * (( velMul/ (mulvelParts != 0 ? mulvelParts : 1))))*totalVelMul)+ bonusVel,0.05f);
+        double finalGrav = Math.clamp(((newGrav * (gravMod/ (mulgravParts != 0 ? mulgravParts : 1)))*totalGravMul)+ bonusGrav,-0.01d,0.01d);
+        if(finalMinDmg > finalMaxDmg) {
+            finalMaxDmg = finalMinDmg;
+        }
         gun.set(LenDataComponents.PART_COLOR_LIST,partColorList);
         GunStats finalStats =new GunStats( //mostly for debug
                 finalAmmo,

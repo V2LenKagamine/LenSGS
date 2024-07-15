@@ -5,11 +5,12 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.List;
 
-public record StatMod(String stat, Float val,String modType, List<String> allowedParts) {
+public record StatMod(String stat, Float val,String modType, List<String> allowedParts) implements Comparable<StatMod>{
 
     public StatMod(String stat, Float val, String modType, String... allowedParts) {
         this(stat,val,modType, Arrays.stream(allowedParts).toList());
@@ -29,5 +30,10 @@ public record StatMod(String stat, Float val,String modType, List<String> allowe
             ByteBufCodecs.STRING_UTF8.apply(ByteBufCodecs.list()),StatMod::allowedParts,
             StatMod::new
     );
+
+    @Override
+    public int compareTo(@NotNull StatMod o) {
+        return stat.compareTo(o.stat);
+    }
 }
 

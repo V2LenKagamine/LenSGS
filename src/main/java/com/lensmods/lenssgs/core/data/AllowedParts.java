@@ -11,9 +11,9 @@ public final class AllowedParts {
     public static final String MAGAZINE = "magazine";
     public static final String STOCK = "stock";
     //Receiver Types
-    public static final String RECIEVER_PISTOL = "receiver_pistol";
-    public static final String RECIEVER_STANDARD = "receiver_standard";
-    public static final String RECIEVER_BULLPUP = "receiver_bullpup";
+    public static final String RECEIVER_PISTOL = "receiver_pistol";
+    public static final String RECEIVER_STANDARD = "receiver_standard";
+    public static final String RECEIVER_BULLPUP = "receiver_bullpup";
     //Action-subtypes
     public static final String ACTION_MANUAL = "action_manual";
     public static final String ACTION_SINGLE = "action_single";
@@ -55,7 +55,7 @@ public final class AllowedParts {
     public static final String PROPELLANT_HEAVY = "prop_heavy";
     //Lists
     public static final List<String> ANY_PART = List.of(STOCK,BARREL,ACTION,MAGAZINE,CASING,ROUND,PROPELLANT,RECEIVER);
-    public static final List<String> ANY_GUN_SUB_PART = List.of(RECIEVER_PISTOL,RECIEVER_BULLPUP,RECIEVER_STANDARD,ACTION_SINGLE,ACTION_MANUAL,ACTION_AUTOMATIC,
+    public static final List<String> ANY_GUN_SUB_PART = List.of(RECEIVER_PISTOL, RECEIVER_BULLPUP, RECEIVER_STANDARD,ACTION_SINGLE,ACTION_MANUAL,ACTION_AUTOMATIC,
             BARREL_STUB,BARREL_SHORT,BARREL_FAIR,BARREL_LONG,BARREL_EXTENDED,STOCK_SHORT,STOCK_FULL,MAGAZINE_SHORT,MAGAZINE_NORMAL,MAGAZINE_EXTENDED,MAGAZINE_BELT);
     public static final List<String> ANY_GUN_PART = List.of(STOCK,BARREL,ACTION,MAGAZINE,RECEIVER);
     public static final List<String> ANY_BULLET_PART = List.of(CASING,ROUND,PROPELLANT);
@@ -63,7 +63,7 @@ public final class AllowedParts {
     public static final List<String> GUN_MANDITORY = List.of(RECEIVER,BARREL,ACTION);
     public static final List<String> AMMO_MANDITORY = List.of(CASING,ROUND,PROPELLANT);
 
-    //These should be for MUL
+
     public static final List<String> AFFECTS_AMMO = List.of(MAGAZINE,CASING);
     public static final List<String> AFFECTS_PIERCE = List.of(ROUND,CASING,BARREL);
     public static final List<String> AFFECTS_PROJ_COUNT = List.of(ROUND);
@@ -73,5 +73,6 @@ public final class AllowedParts {
     public static final List<String> AFFECTS_VEL_BASE = ANY_BULLET_PART;
     public static final List<String> AFFECTS_VEL = List.of(BARREL,CASING,ROUND,PROPELLANT);
     public static final List<String> AFFECTS_FIRE_RATE = List.of(STOCK,ACTION,CASING);
+    public static final List<String> AFFECTS_INACC = List.of(STOCK,ROUND,RECEIVER);
 
 }

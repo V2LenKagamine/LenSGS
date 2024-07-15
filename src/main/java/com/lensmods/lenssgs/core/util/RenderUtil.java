@@ -316,39 +316,42 @@ public class RenderUtil
         float startV = 0;
         float endU = Mth.PI * 2;
         float endV = Mth.PI;
-        float stepU = (endU - startU) / radius;
-        float stepV = (endV - startV) / radius;
+        float stepU = (endU - startU) / sectors;
+        float stepV = (endV - startV) / sectors;
         poseStack.translate(0.5f, 0.5f, 0.5f);
         for (int i = 0; i <=sectors; ++i) {
             for (int j = 0; j <= sectors; ++j) {
-                float u = i * stepU + startU;
-                float v = j * stepV + startV;
-                float un = (i + 1 == radius) ? endU : (i + 1) * stepU + startU;
-                float vn = (j + 1 == radius) ? endV : (j + 1) * stepV + startV;
-                Vector3f p0 = parametricSphere(u, v, radius);
-                Vector3f p1 = parametricSphere(u, vn, radius);
-                Vector3f p2 = parametricSphere(un, v, radius);
-                Vector3f p3 = parametricSphere(un, vn, radius);
-                float textureU = u / endU * radius;
-                float textureV = v / endV * radius;
-                float textureUN = un / endU * radius;
-                float textureVN = vn / endV * radius;
-                vertexPosColorUVLight(consume, last, p0.x(), p0.y(), p0.z(), color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha(), textureU, textureV, packedLight);
-                vertexPosColorUVLight(consume, last, p2.x(), p2.y(), p2.z(), color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha(),  textureUN, textureV,packedLight);
-                vertexPosColorUVLight(consume, last, p1.x(), p1.y(), p1.z(), color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha(),  textureU, textureVN,packedLight);
-                vertexPosColorUVLight(consume, last, p3.x(), p3.y(), p3.z(), color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha(),  textureUN, textureVN,packedLight);
-                vertexPosColorUVLight(consume, last, p1.x(), p1.y(), p1.z(), color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha(),  textureU, textureVN,packedLight);
-                vertexPosColorUVLight(consume, last, p2.x(), p2.y(), p2.z(), color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha(),  textureUN, textureV,packedLight);
+                // V-points
+                float u1 = i * stepU + startU;
+                float v1 = j * stepV + startV;
+                float u2 = (i + 1 == sectors) ? endU : (i + 1) * stepU + startU;
+                float v2 = (j + 1 == sectors) ? endV : (j + 1) * stepV + startV;
+                Vector3f p0 = parametricSphere(u1, v1, radius);
+                Vector3f p1 = parametricSphere(u1, v2, radius);
+                Vector3f p2 = parametricSphere(u2, v1, radius);
+                Vector3f p3 = parametricSphere(u2, v2, radius);
+
+                float textureU1 = u1 / endU * radius;
+                float textureV1 = v1 / endV * radius;
+                float textureU2 = u2 / endU * radius;
+                float textureV2 = v2 / endV * radius;
+                vertexPosColorUVLight(consume, last, p0.x(), p0.y(), p0.z(), 0, 0, 0, 1, textureU1, textureV1, packedLight);
+                vertexPosColorUVLight(consume, last, p2.x(), p2.y(), p2.z(), 0, 0, 0, 1,  textureU2, textureV1, packedLight);
+                vertexPosColorUVLight(consume, last, p1.x(), p1.y(), p1.z(), 0, 0, 0, 1,  textureU1, textureV2, packedLight);
+
+                vertexPosColorUVLight(consume, last, p3.x(), p3.y(), p3.z(), 0, 0, 0, 1,  textureU2, textureV2, packedLight);
+                vertexPosColorUVLight(consume, last, p1.x(), p1.y(), p1.z(), 0, 0, 0, 1,  textureU1, textureV2, packedLight);
+                vertexPosColorUVLight(consume, last, p2.x(), p2.y(), p2.z(), 0, 0, 0, 1,  textureU2, textureV1, packedLight);
             }
         }
         poseStack.popPose();
     }
-    public static Vector3f parametricSphere(float u, float v, float r) {
-        return new Vector3f(Mth.cos(u) * Mth.sin(v) * r, Mth.cos(v) * r, Mth.sin(u) * Mth.sin(v) * r);
+    public static Vector3f parametricSphere(float theta, float phi, float radius) {
+        return new Vector3f(Mth.cos(theta) * Mth.sin(phi) * radius, Mth.cos(phi) * radius, Mth.sin(theta) * Mth.sin(phi) * radius);
     }
     public static void vertexPosColorUVLight(VertexConsumer vertexConsumer, Matrix4f last, float x, float y, float z, float r, float g, float b, float a, float u, float v, int light) {
         vertexConsumer.addVertex(last, x, y, z)
-                .setColor(r, g, b, a)
+                .setColor(r,g,b,a)
                 .setUv(u, v)
                 .setLight(light);
     }
@@ -376,7 +379,7 @@ public class RenderUtil
             if(heldItem.getOrDefault(LenDataComponents.PART_COLOR_LIST,null) == null) {return;}
             boolean isShortHanded = false;
             for(ModelColorPair part : heldItem.get(LenDataComponents.PART_COLOR_LIST)) {
-                if (part.model().equals(AllowedParts.RECIEVER_PISTOL)) {
+                if (part.model().equals(AllowedParts.RECEIVER_PISTOL)) {
                     isShortHanded = true;
                     break;
                 }

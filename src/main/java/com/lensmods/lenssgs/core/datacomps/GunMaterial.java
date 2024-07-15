@@ -15,10 +15,11 @@ import net.minecraft.world.item.crafting.Ingredient;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class GunMaterial {
+public class GunMaterial{
     private final String matName;
     private final List<StatMod> statModList;
     @Nullable private final List<TraitLevel> traitLevelList;
@@ -57,6 +58,9 @@ public class GunMaterial {
     }
     public GunMaterial(String matName, List<StatMod> statMods, @Nullable List<TraitLevel> traitLevels, TagKey<Item> ing, Color color, List<String> blacklistedParts) {
         this(matName,statMods,traitLevels,Ingredient.of(ing),color,blacklistedParts);
+    }
+    public GunMaterial(String matName, List<StatMod> statMods, @Nullable List<TraitLevel> traitLevels, TagKey<Item> ing, Color color, String... blacklistedParts) {
+        this(matName,statMods,traitLevels,Ingredient.of(ing),color, Arrays.stream(blacklistedParts).toList());
     }
     public MutableComponent getHumanName() {
         return Component.translatable(LensSGS.MODID + "." +this.matName);

@@ -73,7 +73,8 @@ public class LensSGS
             .withTabsBefore(CreativeModeTabs.COMBAT)
             .icon(() -> LenItems.GUNPRINTER_PAPER.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
-                output.accept(LenItems.GUNPRINTER_PAPER.get()); // Add the example item to the tab. For your own tabs, this method is preferred over the event
+                output.accept(LenItems.GUNPRINTER_PAPER.get());
+                output.accept(LenItems.VOIDMETAL.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
@@ -90,6 +91,8 @@ public class LensSGS
         LenItems.ITEMS.register(modEventBus);
         //Register The Entity Thing
         LenEnts.ENTITIES.register(modEventBus);
+        LenEnts.EFFECTS.register(modEventBus);
+        LenEnts.POTIONS.register(modEventBus);
         //AHHHH recipes.
         LenRecipes.RECIPE_SERIALIZERS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
@@ -132,7 +135,7 @@ public class LensSGS
     public void onServerStarting(ServerStartingEvent event)
     {
         // Do something when the server starts
-        L3NLOGGER.info("Why did you download this mod? Guns are cool, but this Len's code is garbage!");
+        L3NLOGGER.info("Why did you download this mod? Guns are cool, but Len's code is garbage!");
     }
 
     public void gatherData(GatherDataEvent event) {
@@ -148,10 +151,13 @@ public class LensSGS
         event.getGenerator().addProvider((event.includeServer()),(DataProvider.Factory<LenRecipeGen>) out -> new LenRecipeGen(out,event.getLookupProvider()));
         event.getGenerator().addProvider(true, (DataProvider.Factory<LenModelGen>) out -> new LenModelGen(out, MODID,event.getExistingFileHelper()));
     }
+
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
     @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
     public static class ClientModEvents
     {
+
+
         @SubscribeEvent
         public static void registerKeyMappings(RegisterKeyMappingsEvent event) {
             event.register(KeyManager.CYCLE_BACK.get());
@@ -164,7 +170,7 @@ public class LensSGS
         public static void onClientSetup(FMLClientSetupEvent event)
         {
             // Some client setup code
-            L3NLOGGER.info("YOU FOOL, YOU'RE RUNNING SLIGHTLY STOLEN RENDERING CODE!");
+            L3NLOGGER.info("You better appreciate those gun models, they were incredibly difficult to make!");
             NeoForge.EVENT_BUS.register(ClientFireHandler.get());
             NeoForge.EVENT_BUS.register(GunTooltipHandler.INSTANCE);
         }

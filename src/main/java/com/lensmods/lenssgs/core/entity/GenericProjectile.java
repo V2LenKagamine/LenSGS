@@ -5,6 +5,7 @@ import com.lensmods.lenssgs.core.datacomps.TraitLevel;
 import com.lensmods.lenssgs.core.util.LenUtil;
 import com.lensmods.lenssgs.core.weaponsystems.WeaponAmmoStats;
 import com.lensmods.lenssgs.init.LenDamageTypes;
+import com.lensmods.lenssgs.init.LenEnts;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -15,12 +16,15 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.ClipContext;
+import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BellBlock;
 import net.minecraft.world.level.block.Block;
@@ -41,7 +45,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 
-//I ain gonna lie chief half of this is stolen code.
+//Heavily Modified from MrCrazyfish gun Mod. Like, really heavily, but the base is still visible
 public class GenericProjectile extends Entity implements IEntityWithComplexSpawn {
     private static final Predicate<Entity> PROJECTILE_TARGETS = input -> input != null && input.isPickable() && !input.isSpectator();
     private static final Predicate<BlockState> IGNORE_LEAVES = input -> input != null && input.getBlock() instanceof LeavesBlock;
@@ -51,10 +55,16 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     protected float dmg = 0f;
     protected int pierce = 0;
     protected int life = 30;
+    public float getPercentLifeLeft() {
+        return ((float) tickCount / life);
+    }
     protected double gravityMod = 0;
     protected float velMult = 1f ;
     protected List<TraitLevel> traits = new ArrayList<>();
-
+    protected boolean secondLife = false;
+    public boolean getSecondLife() {
+        return secondLife;
+    }
     private ItemStack visualItem = ItemStack.EMPTY;
 
     public GenericProjectile(EntityType<?> pEntityType, Level pLevel) {
@@ -132,10 +142,13 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
             }
             this.pierce--;
             if(this.pierce <=0) {
-                if (this.isAlive()) {
+                if(secondLife) {
+                    this.onDoom();
+                    this.remove(RemovalReason.KILLED);
+                }
+                if (this.isAlive() && !secondLife) {
                     this.onExpire();
                 }
-                this.remove(RemovalReason.KILLED);
             }
             return;
         }
@@ -166,6 +179,36 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
             switch (trait.trait()) {
                 case MaterialStats.BLAZING: {
                     entity.igniteForSeconds(trait.level() * 5);
+                    break;
+                }
+                case MaterialStats.SHOCKING: {
+                    if(LenUtil.randBetween(0f,100f) < trait.level()* 5) {
+                       LightningBolt bonk = new LightningBolt(EntityType.LIGHTNING_BOLT,entity.level());
+                       bonk.setPos(hitVec);
+                       bonk.setDamage(this.getDamage()*0.25f);
+                       bonk.tick();
+                    }
+                }
+                case MaterialStats.TRACING: {
+                    if (entity instanceof LivingEntity living) {
+                        MobEffectInstance boi = new MobEffectInstance(MobEffects.GLOWING, 200 * trait.level(), 0);
+                        living.addEffect(boi);
+                    }
+                }
+                case MaterialStats.BLINDING: {
+                    if (entity instanceof LivingEntity living) {
+                        MobEffectInstance boi = new MobEffectInstance(MobEffects.BLINDNESS, 200 * trait.level(), 0);
+                        living.addEffect(boi);
+                    }
+                }
+                case MaterialStats.CONCUSSIVE: {
+                    if (entity instanceof LivingEntity living) {
+                        var vec = this.getDeltaMovement();
+                        living.knockback(0.2d *trait.level(), vec.x,vec.y);
+                    }
+                }
+                case MaterialStats.LACERATING: {
+                    //Todo: Bleed Effect
                 }
             }
         }
@@ -175,10 +218,13 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
 
         this.pierce--;
         if(this.pierce <=0) {
-            if (this.isAlive()) {
+            if(secondLife) {
+                this.onDoom();
+                this.remove(RemovalReason.KILLED);
+            }
+            if (this.isAlive()&& !secondLife) {
                 this.onExpire();
             }
-            this.remove(RemovalReason.KILLED);
         }
     }
     @Override
@@ -195,6 +241,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
             tstore.add(new TraitLevel(pCompound.getString("trait"+i),pCompound.getInt("level"+i)));
         }
         this.traits = tstore;
+        this.secondLife = pCompound.getBoolean("second");
     }
 
     @Override
@@ -208,6 +255,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
             pCompound.putString("trait"+i,traitL.trait());
             pCompound.putInt("level"+i,traitL.level());
         }
+        pCompound.putBoolean("second",this.secondLife);
     }
 
     @Override
@@ -222,6 +270,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
             buffer.writeUtf(traitL.trait());
             buffer.writeInt(traitL.level());
         }
+        buffer.writeBoolean(this.secondLife);
     }
 
     @Override
@@ -235,6 +284,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
             tstore.add(new TraitLevel(additionalData.readUtf(),additionalData.readInt()));
         }
         this.traits = tstore;
+        this.secondLife = additionalData.readBoolean();
     }
 
     private Vec3 getDirection(LivingEntity shooter, ItemStack weapon)
@@ -246,58 +296,59 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         return this.getVectorFromRotation(shooter.getXRot() + LenUtil.randBetween(-inacc,inacc),shooter.getYRot() + LenUtil.randBetween(-inacc,inacc));
     }
     @Override
-    public void tick()
-    {
+    public void tick() {
         super.tick();
         this.updateHeading();
 
-        if(!this.level().isClientSide())
-        {
-            Vec3 startVec = this.position();
-            Vec3 endVec = startVec.add(this.getDeltaMovement());
-            HitResult result = rayTraceBlocks(this.level(), new ClipContext(startVec, endVec, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this), IGNORE_LEAVES);
-            if(result.getType() != HitResult.Type.MISS)
-            {
-                endVec = result.getLocation();
-            }
-
-            List<EntityResult> hitEntities = null;
-            if(this.pierce == 0)
-            {
-                EntityResult entityResult = this.findEntityOnPath(startVec, endVec);
-                if(entityResult != null)
-                {
-                    hitEntities = Collections.singletonList(entityResult);
+        if (!this.level().isClientSide()) {
+            if (!secondLife) {
+                Vec3 startVec = this.position();
+                Vec3 endVec = startVec.add(this.getDeltaMovement());
+                HitResult result = rayTraceBlocks(this.level(), new ClipContext(startVec, endVec, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this), IGNORE_LEAVES);
+                if (result.getType() != HitResult.Type.MISS) {
+                    endVec = result.getLocation();
                 }
-            }
-            else
-            {
-                hitEntities = this.findEntitiesOnPath(startVec, endVec);
-            }
 
-            if(hitEntities != null && hitEntities.size() > 0)
-            {
-                for(EntityResult entityResult : hitEntities)
-                {
-                    result = new EntityHitResult(entityResult.getEntity());
-                    if(((EntityHitResult) result).getEntity() instanceof Player)
-                    {
-                        Player player = (Player) ((EntityHitResult) result).getEntity();
+                List<EntityResult> hitEntities = null;
+                if (this.pierce == 0) {
+                    EntityResult entityResult = this.findEntityOnPath(startVec, endVec);
+                    if (entityResult != null) {
+                        hitEntities = Collections.singletonList(entityResult);
+                    }
+                } else {
+                    hitEntities = this.findEntitiesOnPath(startVec, endVec);
+                }
 
-                        if(this.Owner instanceof Player && !((Player) this.Owner).canHarmPlayer(player))
-                        {
-                            result = null;
+                if (hitEntities != null && hitEntities.size() > 0) {
+                    for (EntityResult entityResult : hitEntities) {
+                        result = new EntityHitResult(entityResult.getEntity());
+                        if (((EntityHitResult) result).getEntity() instanceof Player player) {
+                            if (this.Owner instanceof Player && !((Player) this.Owner).canHarmPlayer(player)) {
+                                result = null;
+                            }
+                        }
+                        if (result != null) {
+                            this.onHit(result, startVec, endVec);
                         }
                     }
-                    if(result != null)
-                    {
-                        this.onHit(result, startVec, endVec);
-                    }
+                }else {
+                    this.onHit(result, startVec, endVec);
                 }
             }
-            else
-            {
-                this.onHit(result, startVec, endVec);
+            else if(!level().isClientSide) {
+                int rad = 12;
+                Vec3 start = new Vec3(position().x + rad,position().y + rad,position().z + rad);
+                Vec3 end = new Vec3(position().x - rad,position().y - rad,position().z - rad);
+                AABB succbox = new AABB(start,end);
+                List<Entity> targets = level().getEntities(this,succbox,PROJECTILE_TARGETS);
+                for (Entity ent : targets) {
+                    if (ent == Owner) {continue;};
+                    double delx = (this.position().x() - ent.position().x);
+                    double dely = (this.position().y() - ent.position().y);
+                    double delz = (this.position().z() - ent.position().z);
+                    double dist = distanceTo(ent);
+                    ent.addDeltaMovement(new Vec3(delx*((-dist+10f)*0.0125f),dely*((-dist+10f)*0.00125f),delz*((-dist+10f)*0.00125f)));
+                }
             }
         }
 
@@ -311,17 +362,46 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
             this.setDeltaMovement(this.getDeltaMovement().add(0, this.gravityMod, 0));
         }
 
+
         if(this.tickCount >= this.life)
         {
-            if (this.isAlive()) {
+            if(secondLife) {
+                this.onDoom();
+                this.remove(RemovalReason.KILLED);
+            }
+            if (this.isAlive() && !secondLife) {
                 this.onExpire();
             }
-            this.remove(RemovalReason.KILLED);
         }
     }
 
     protected void onExpire() {
-    //Todo:Boom?
+        if(traits.stream().anyMatch(trait -> trait.trait().equals(MaterialStats.VOID_TOUCHED))) {
+            this.secondLife = true;
+            this.visualItem = new ItemStack(Items.ENDER_EYE,1);
+            TraitLevel trait = traits.stream().filter(traitLevel -> traitLevel.trait().equals(MaterialStats.VOID_TOUCHED)).findFirst().get();
+            this.life = (50 * trait.level() + life);
+            this.setDeltaMovement(new Vec3(0,0,0));
+            this.setGravityMod(0d);
+            this.tick();
+        }
+    }
+    protected void onDoom() {
+        if(traits.stream().anyMatch(trait -> trait.trait().equals(MaterialStats.EXPLOSIVE))) {
+            TraitLevel trait = traits.stream().filter(traitLevel -> traitLevel.trait().equals(MaterialStats.EXPLOSIVE)).findFirst().get();
+            Explosion bakoom = new Explosion(level(),this,position().x,position().y,position().z,trait.level() * 2,false, Explosion.BlockInteraction.KEEP);
+            bakoom.finalizeExplosion(true);
+            bakoom.explode();
+        }
+        if(traits.stream().anyMatch(trait -> trait.trait().equals(MaterialStats.LINGERING))) {
+            TraitLevel trait = traits.stream().filter(traitLevel -> traitLevel.trait().equals(MaterialStats.LINGERING)).findFirst().get();
+            AreaEffectCloud cloud = new AreaEffectCloud(this.level(),this.getX(),this.getY()+0.5f,this.getZ());
+            cloud.setDuration(100 * trait.level());
+            cloud.setOwner(this.Owner);
+            cloud.setRadius(2 * trait.level());
+            cloud.setPotionContents(new PotionContents(LenEnts.POTIONS.getRegistry().get().wrapAsHolder(LenEnts.LACERATE_POTION.get())));
+            cloud.tick();
+        }
     }
     public float getDamage()
     {

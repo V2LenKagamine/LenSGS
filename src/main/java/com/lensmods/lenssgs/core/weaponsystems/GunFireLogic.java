@@ -38,7 +38,7 @@ public class GunFireLogic {
 
             int projAmt = WeaponAmmoStats.getProjAmt(held);
             GunStatTraitPair lastAmmoLoaded = WeaponAmmoStats.getLastAmmo(held);
-            if(lastAmmoLoaded == null && !WeaponAmmoStats.safeGunStats(held)) {
+            if(lastAmmoLoaded == null || !WeaponAmmoStats.safeGunStats(held)) {
                 player.displayClientMessage(LenUtil.translatableOf("no_ammo"),true);
             }
             else {

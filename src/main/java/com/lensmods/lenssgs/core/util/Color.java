@@ -170,6 +170,7 @@ public class Color {
     public static final Color SNOW = named("Snow", 0xFFFAFA);
     public static final Color SPRINGGREEN = named("SpringGreen", 0x00FF7F);
     public static final Color STEELBLUE = named("SteelBlue", 0x4682B4);
+    public static final Color SUNGLOW =named("Sunglow",0xFFCB2E);
     public static final Color TAN = named("Tan", 0xD2B48C);
     public static final Color TEAL = named("Teal", 0x008080);
     public static final Color THISTLE = named("Thistle", 0xD8BFD8);

@@ -1,0 +1,65 @@
+{
+  "allowedOn": [
+    "bullet"
+  ],
+  "color": {
+    "alpha": 1.0,
+    "blue": 0.85882354,
+    "green": 0.4392157,
+    "red": 0.5764706
+  },
+  "ingredient": {
+    "tag": "c:gems/amethyst"
+  },
+  "partType": "amethyst",
+  "statModList": [
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_projectile_count",
+      "val": 3.0
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "total_multiply",
+      "stat": "stat_projectile_count",
+      "val": 0.25
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_max_damage",
+      "val": -1.0
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_min_damage",
+      "val": -0.5
+    }
+  ],
+  "traitLevelList": [
+    {
+      "allowedParts": [
+        "all"
+      ],
+      "level": 2,
+      "trait": "shattering"
+    },
+    {
+      "allowedParts": [
+        "all"
+      ],
+      "level": 1,
+      "trait": "lacerating"
+    }
+  ]
+}

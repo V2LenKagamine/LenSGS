@@ -10,14 +10,14 @@
   ],
   "color": {
     "alpha": 1.0,
-    "blue": 1.0,
-    "green": 1.0,
-    "red": 0.8784314
+    "blue": 0.19607843,
+    "green": 0.8039216,
+    "red": 0.19607843
   },
   "ingredient": {
-    "tag": "c:gems/diamond"
+    "tag": "c:gems/emerald"
   },
-  "partType": "diamond",
+  "partType": "emerald",
   "statModList": [
     {
       "allowedParts": [
@@ -42,7 +42,7 @@
       ],
       "modType": "add",
       "stat": "stat_max_damage",
-      "val": 0.5
+      "val": 3.5
     },
     {
       "allowedParts": [
@@ -51,7 +51,7 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 3.0
+      "val": -1.5
     },
     {
       "allowedParts": [
@@ -71,7 +71,7 @@
       ],
       "modType": "add",
       "stat": "stat_fire_rate",
-      "val": 7.0
+      "val": 10.0
     },
     {
       "allowedParts": [
@@ -87,7 +87,7 @@
       ],
       "modType": "add",
       "stat": "stat_inaccuracy",
-      "val": -3.0
+      "val": -2.5
     },
     {
       "allowedParts": [
@@ -103,14 +103,7 @@
       "allowedParts": [
         "all"
       ],
-      "level": 1,
-      "trait": "blinding"
-    },
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
+      "level": 2,
       "trait": "lacerating"
     }
   ]

@@ -96,6 +96,7 @@ public class GunStats implements MutableDataComponentHolder {
             DataComponentPatch.STREAM_CODEC, somuch -> somuch.comps.asPatch(),
             GunStats::new);
 
+
     private record SubStreamCodec(int ammoMax, int peirce, int fireRate,float inacc) {
         private static final StreamCodec<ByteBuf,SubStreamCodec> THIS = StreamCodec.composite(
                 ByteBufCodecs.INT,SubStreamCodec::ammoMax,

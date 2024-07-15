@@ -37,9 +37,9 @@
     },
     {
       "allowedParts": [
-        "casing",
         "bullet",
-        "prop"
+        "casing",
+        "receiver"
       ],
       "modType": "add",
       "stat": "stat_max_damage",
@@ -47,9 +47,9 @@
     },
     {
       "allowedParts": [
-        "casing",
         "bullet",
-        "prop"
+        "casing",
+        "receiver"
       ],
       "modType": "add",
       "stat": "stat_min_damage",
@@ -57,11 +57,20 @@
     },
     {
       "allowedParts": [
-        "barrel"
+        "barrel",
+        "action"
       ],
       "modType": "add",
       "stat": "stat_inaccuracy",
       "val": -1.5
+    },
+    {
+      "allowedParts": [
+        "stock"
+      ],
+      "modType": "add",
+      "stat": "stat_inaccuracy",
+      "val": 4.0
     },
     {
       "allowedParts": [

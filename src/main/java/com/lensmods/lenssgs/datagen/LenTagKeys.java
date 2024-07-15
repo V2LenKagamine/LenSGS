@@ -37,6 +37,17 @@ public class LenTagKeys extends ItemTagsProvider {
                 .addOptionalTag(Tags.Items.GEMS_DIAMOND)
                 .addOptionalTag(Tags.Items.INGOTS_NETHERITE)
                 .addOptionalTag(Tags.Items.GUNPOWDERS)
-                .addOptionalTag(Tags.Items.RODS_BLAZE);
+                .addOptionalTag(Tags.Items.RODS_BLAZE)
+                .addOptionalTag(Tags.Items.SLIMEBALLS)
+                .addOptionalTag(Tags.Items.GEMS_PRISMARINE)
+                .addOptionalTag(Tags.Items.RODS_BREEZE)
+                .addOptionalTag(Tags.Items.GEMS_QUARTZ)
+                .addOptionalTag(Tags.Items.GEMS_AMETHYST)
+                .addOptionalTag(Tags.Items.GEMS_EMERALD)
+                .addOptional(ResourceLocation.withDefaultNamespace("nether_star"))
+                .addOptional(ResourceLocation.withDefaultNamespace("prismarine_shard"))
+                .addOptional(ResourceLocation.withDefaultNamespace("tnt"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"void_metal"))
+                .addOptional(ResourceLocation.withDefaultNamespace("dragon_breath"));
     }
 }

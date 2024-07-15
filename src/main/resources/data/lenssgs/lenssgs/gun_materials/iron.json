@@ -62,6 +62,24 @@
       "modType": "multiply",
       "stat": "stat_gravity_mod",
       "val": 1.1
+    },
+    {
+      "allowedParts": [
+        "magazine",
+        "receiver"
+      ],
+      "modType": "add",
+      "stat": "stat_fire_rate",
+      "val": 5.0
+    },
+    {
+      "allowedParts": [
+        "barrel",
+        "stock"
+      ],
+      "modType": "add",
+      "stat": "stat_fire_rate",
+      "val": -5.0
     }
   ],
   "traitLevelList": []

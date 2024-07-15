@@ -17,7 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
-public class GunComp implements MutableDataComponentHolder {
+public class GunComp implements MutableDataComponentHolder{
     private List<GunPartHolder> parts;
     private final PatchedDataComponentMap comps;
 

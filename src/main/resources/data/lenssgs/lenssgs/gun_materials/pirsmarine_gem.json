@@ -1,0 +1,56 @@
+{
+  "allowedOn": [
+    "bullet"
+  ],
+  "color": {
+    "alpha": 1.0,
+    "blue": 1.0,
+    "green": 1.0,
+    "red": 0.8784314
+  },
+  "ingredient": {
+    "tag": "c:gems/prismarine"
+  },
+  "partType": "pirsmarine_gem",
+  "statModList": [
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_projectile_count",
+      "val": 1.0
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_max_damage",
+      "val": 1.0
+    }
+  ],
+  "traitLevelList": [
+    {
+      "allowedParts": [
+        "all"
+      ],
+      "level": 1,
+      "trait": "shattering"
+    },
+    {
+      "allowedParts": [
+        "all"
+      ],
+      "level": 1,
+      "trait": "tracing"
+    },
+    {
+      "allowedParts": [
+        "all"
+      ],
+      "level": 1,
+      "trait": "blinding"
+    }
+  ]
+}

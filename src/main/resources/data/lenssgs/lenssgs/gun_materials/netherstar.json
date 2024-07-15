@@ -1,0 +1,91 @@
+{
+  "allowedOn": [
+    "bullet",
+    "prop"
+  ],
+  "color": {
+    "alpha": 1.0,
+    "blue": 1.0,
+    "green": 1.0,
+    "red": 1.0
+  },
+  "ingredient": {
+    "item": "minecraft:nether_star"
+  },
+  "partType": "netherstar",
+  "statModList": [
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_min_damage",
+      "val": 0.5
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_max_damage",
+      "val": 0.5
+    },
+    {
+      "allowedParts": [
+        "bullet",
+        "prop"
+      ],
+      "modType": "add",
+      "stat": "stat_inaccuracy",
+      "val": -5.0
+    },
+    {
+      "allowedParts": [
+        "bullet",
+        "prop"
+      ],
+      "modType": "add",
+      "stat": "stat_projectile_count",
+      "val": 5.0
+    },
+    {
+      "allowedParts": [
+        "prop"
+      ],
+      "modType": "multiply",
+      "stat": "stat_min_damage",
+      "val": 1.25
+    },
+    {
+      "allowedParts": [
+        "prop"
+      ],
+      "modType": "multiply",
+      "stat": "stat_max_damage",
+      "val": 1.25
+    }
+  ],
+  "traitLevelList": [
+    {
+      "allowedParts": [
+        "all"
+      ],
+      "level": 2,
+      "trait": "shattering"
+    },
+    {
+      "allowedParts": [
+        "all"
+      ],
+      "level": 2,
+      "trait": "shocking"
+    },
+    {
+      "allowedParts": [
+        "all"
+      ],
+      "level": 2,
+      "trait": "tracing"
+    }
+  ]
+}

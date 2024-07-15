@@ -1,34 +1,34 @@
 {
   "allowedOn": [
-    "stock",
-    "bullet"
+    "bullet",
+    "stock"
   ],
   "color": {
     "alpha": 1.0,
-    "blue": 0.5294118,
-    "green": 0.72156864,
-    "red": 0.87058824
+    "blue": 0.19607843,
+    "green": 0.8039216,
+    "red": 0.19607843
   },
   "ingredient": {
-    "tag": "c:rods/wooden"
+    "tag": "c:slimeballs"
   },
-  "partType": "wood",
+  "partType": "slime",
   "statModList": [
     {
       "allowedParts": [
         "bullet"
       ],
       "modType": "total_multiply",
-      "stat": "stat_min_damage",
-      "val": 0.05
+      "stat": "stat_max_damage",
+      "val": 0.25
     },
     {
       "allowedParts": [
         "bullet"
       ],
       "modType": "total_multiply",
-      "stat": "stat_max_damage",
-      "val": 0.05
+      "stat": "stat_min_damage",
+      "val": 0.25
     },
     {
       "allowedParts": [
@@ -36,16 +36,16 @@
       ],
       "modType": "add",
       "stat": "stat_inaccuracy",
-      "val": -0.5
+      "val": -3.0
     }
   ],
   "traitLevelList": [
     {
       "allowedParts": [
-        "all"
+        "bullet"
       ],
       "level": 1,
-      "trait": "eco_friendly"
+      "trait": "concussive"
     }
   ]
 }

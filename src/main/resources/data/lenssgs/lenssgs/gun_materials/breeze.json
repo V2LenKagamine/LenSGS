@@ -1,0 +1,66 @@
+{
+  "allowedOn": [
+    "barrel",
+    "prop"
+  ],
+  "color": {
+    "alpha": 1.0,
+    "blue": 0.9019608,
+    "green": 0.84705883,
+    "red": 0.6784314
+  },
+  "ingredient": {
+    "tag": "c:rods/breeze"
+  },
+  "partType": "breeze",
+  "statModList": [
+    {
+      "allowedParts": [
+        "barrel",
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_gravity_mod",
+      "val": -0.2
+    },
+    {
+      "allowedParts": [
+        "barrel",
+        "bullet",
+        "prop"
+      ],
+      "modType": "add",
+      "stat": "stat_velocity_mul",
+      "val": 0.2
+    },
+    {
+      "allowedParts": [
+        "barrel",
+        "bullet",
+        "prop"
+      ],
+      "modType": "add",
+      "stat": "stat_min_damage",
+      "val": 1.0
+    },
+    {
+      "allowedParts": [
+        "barrel",
+        "bullet",
+        "prop"
+      ],
+      "modType": "add",
+      "stat": "stat_max_damage",
+      "val": 1.0
+    }
+  ],
+  "traitLevelList": [
+    {
+      "allowedParts": [
+        "all"
+      ],
+      "level": 3,
+      "trait": "concussive"
+    }
+  ]
+}

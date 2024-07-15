@@ -21,9 +21,7 @@
   "statModList": [
     {
       "allowedParts": [
-        "casing",
-        "bullet",
-        "prop"
+        "casing"
       ],
       "modType": "add",
       "stat": "stat_max_damage",
@@ -31,13 +29,29 @@
     },
     {
       "allowedParts": [
-        "casing",
-        "bullet",
-        "prop"
+        "casing"
       ],
       "modType": "add",
       "stat": "stat_min_damage",
       "val": -1.0
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "barrel"
+      ],
+      "modType": "multiply",
+      "stat": "stat_max_damage",
+      "val": 0.9
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "barrel"
+      ],
+      "modType": "multiply",
+      "stat": "stat_min_damage",
+      "val": 0.8
     },
     {
       "allowedParts": [
@@ -49,6 +63,16 @@
       "modType": "add",
       "stat": "stat_velocity_mul",
       "val": -0.25
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "action",
+        "casing"
+      ],
+      "modType": "add",
+      "stat": "stat_fire_rate",
+      "val": 10.0
     },
     {
       "allowedParts": [
@@ -81,7 +105,15 @@
       ],
       "modType": "add",
       "stat": "stat_gravity_mod",
-      "val": 0.001
+      "val": 0.005
+    },
+    {
+      "allowedParts": [
+        "stock"
+      ],
+      "modType": "add",
+      "stat": "stat_inaccuracy",
+      "val": -0.75
     }
   ],
   "traitLevelList": []
