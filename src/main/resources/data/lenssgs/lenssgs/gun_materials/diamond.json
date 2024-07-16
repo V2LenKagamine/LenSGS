@@ -95,20 +95,20 @@
       ],
       "modType": "multiply",
       "stat": "stat_inaccuracy",
-      "val": 1.25
+      "val": 0.75
     }
   ],
   "traitLevelList": [
     {
       "allowedParts": [
-        "all"
+        "bullet"
       ],
       "level": 1,
       "trait": "blinding"
     },
     {
       "allowedParts": [
-        "all"
+        "bullet"
       ],
       "level": 1,
       "trait": "lacerating"

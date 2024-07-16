@@ -188,6 +188,17 @@ public class LensSGS
             for(String s : AllowedParts.ANY_GUN_SUB_PART) {
                 e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/"+s)));
             }
+            e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/action_automatic_bullpup")));
+            e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/action_manual_bullpup")));
+            e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/action_single_bullpup")));
+            e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/magazine_belt_bullpup")));
+            e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/magazine_short_bullpup")));
+            e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/magazine_normal_bullpup")));
+            e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/magazine_extended_bullpup")));
+            e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/stock_full_bullpup")));
+            e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/stock_short_bullpup")));
+            e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/receiver_bullpup_bullpup")));
+
         }
     }
 }

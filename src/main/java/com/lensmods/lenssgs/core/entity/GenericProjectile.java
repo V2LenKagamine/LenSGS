@@ -24,7 +24,6 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.level.ClipContext;
-import net.minecraft.world.level.Explosion;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.BellBlock;
 import net.minecraft.world.level.block.Block;
@@ -78,7 +77,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         this.Owner = shooter;
 
         Vec3 dir = this.getDirection(shooter, weapon);
-        this.setDeltaMovement((dir.x * 2f) * velMult, (dir.y * 2f) * velMult, (dir.z * 2f) * velMult);
+        this.setDeltaMovement((dir.x* 1.5f) * velMult, (dir.y* 1.5f) * velMult, (dir.z* 1.5f) * velMult);
         this.updateHeading();
 
         double posX = shooter.xOld + (shooter.getX() - shooter.xOld) / 2.0;
@@ -204,11 +203,14 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
                 case MaterialStats.CONCUSSIVE: {
                     if (entity instanceof LivingEntity living) {
                         var vec = this.getDeltaMovement();
-                        living.knockback(0.2d *trait.level(), vec.x,vec.y);
+                        living.knockback(0.5d *trait.level(), vec.x,vec.y);
                     }
                 }
                 case MaterialStats.LACERATING: {
-                    //Todo: Bleed Effect
+                    if (entity instanceof LivingEntity living) {
+                        MobEffectInstance boi = new MobEffectInstance(LenEnts.LACERATE_EFFECT, 200 * trait.level(), 0);
+                        living.addEffect(boi);
+                    }
                 }
             }
         }
@@ -336,7 +338,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
                 }
             }
             else if(!level().isClientSide) {
-                int rad = 12;
+                double rad = 12;
                 Vec3 start = new Vec3(position().x + rad,position().y + rad,position().z + rad);
                 Vec3 end = new Vec3(position().x - rad,position().y - rad,position().z - rad);
                 AABB succbox = new AABB(start,end);
@@ -346,8 +348,8 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
                     double delx = (this.position().x() - ent.position().x);
                     double dely = (this.position().y() - ent.position().y);
                     double delz = (this.position().z() - ent.position().z);
-                    double dist = distanceTo(ent);
-                    ent.addDeltaMovement(new Vec3(delx*((-dist+10f)*0.0125f),dely*((-dist+10f)*0.00125f),delz*((-dist+10f)*0.00125f)));
+                    double dist = rad - distanceTo(ent);
+                    ent.addDeltaMovement(new Vec3(delx*(dist)*0.005d,dely*(dist)*0.005d,delz*(dist)*0.005d));
                 }
             }
         }
@@ -379,19 +381,35 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         if(traits.stream().anyMatch(trait -> trait.trait().equals(MaterialStats.VOID_TOUCHED))) {
             this.secondLife = true;
             this.visualItem = new ItemStack(Items.ENDER_EYE,1);
+            if(!level().isClientSide) {
+                setPos(position().add(0f, 0.75f, 0f));
+            }
             TraitLevel trait = traits.stream().filter(traitLevel -> traitLevel.trait().equals(MaterialStats.VOID_TOUCHED)).findFirst().get();
             this.life = (50 * trait.level() + life);
             this.setDeltaMovement(new Vec3(0,0,0));
             this.setGravityMod(0d);
-            this.tick();
+        }
+        if (!secondLife) {
+            onDoom();
+            remove(RemovalReason.KILLED);
         }
     }
     protected void onDoom() {
         if(traits.stream().anyMatch(trait -> trait.trait().equals(MaterialStats.EXPLOSIVE))) {
             TraitLevel trait = traits.stream().filter(traitLevel -> traitLevel.trait().equals(MaterialStats.EXPLOSIVE)).findFirst().get();
-            Explosion bakoom = new Explosion(level(),this,position().x,position().y,position().z,trait.level() * 2,false, Explosion.BlockInteraction.KEEP);
-            bakoom.finalizeExplosion(true);
-            bakoom.explode();
+            float rad = trait.level() * 1.25f;
+            Vec3 start = new Vec3(position().x + rad,position().y + rad,position().z + rad);
+            Vec3 end = new Vec3(position().x - rad,position().y - rad,position().z - rad);
+            AABB boombox = new AABB(start,end);
+            List<Entity> targets = level().getEntities(this,boombox,PROJECTILE_TARGETS);
+            for (Entity hit : targets) {
+                float damage =this.getDamage()* (0.1f * trait.level());
+                DamageSource source = LenDamageTypes.Sources.projectile(this.level().registryAccess(), this, this.Owner);
+                hit.hurt(source, damage);
+                if(hit instanceof LivingEntity living) {
+                    living.knockback(trait.level()*0.2f,-(position().x),-(position().y));
+                }
+            }
         }
         if(traits.stream().anyMatch(trait -> trait.trait().equals(MaterialStats.LINGERING))) {
             TraitLevel trait = traits.stream().filter(traitLevel -> traitLevel.trait().equals(MaterialStats.LINGERING)).findFirst().get();
@@ -402,11 +420,25 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
             cloud.setPotionContents(new PotionContents(LenEnts.POTIONS.getRegistry().get().wrapAsHolder(LenEnts.LACERATE_POTION.get())));
             cloud.tick();
         }
+        if(traits.stream().anyMatch(trait -> trait.trait().equals(MaterialStats.VOID_TOUCHED))) {
+            TraitLevel trait = traits.stream().filter(traitLevel -> traitLevel.trait().equals(MaterialStats.VOID_TOUCHED)).findFirst().get();
+            double rad = trait.level();
+            Vec3 start = new Vec3(position().x + rad,position().y + rad,position().z + rad);
+            Vec3 end = new Vec3(position().x - rad,position().y - rad,position().z - rad);
+            AABB doombox = new AABB(start,end);
+            List<Entity> targets = level().getEntities(this,doombox,PROJECTILE_TARGETS);
+            for (Entity hit : targets) {
+                float damage = this.getDamage();
+                DamageSource source = LenDamageTypes.Sources.projectile(this.level().registryAccess(), this, this.Owner);
+                hit.hurt(source, damage);
+            }
+        }
     }
     public float getDamage()
     {
         return Math.max(0F, this.dmg);
     }
+    //Dont touch anything down below here.
     private Vec3 getVectorFromRotation(float pitch, float yaw)
     {
         float f = Mth.cos(-yaw * 0.017453292F - (float) Math.PI);

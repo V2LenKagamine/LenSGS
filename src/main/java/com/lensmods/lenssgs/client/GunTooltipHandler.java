@@ -98,11 +98,19 @@ public final class GunTooltipHandler {
             if (mat.getTraitLevelList() == null) {
                 return;
             }
-            List<TraitLevel> traits = mat.getTraitLevelList().stream().filter(key -> (key.allowedParts().contains(parts.get(index)) || key.allowedParts().contains("all"))).toList();
             e.getToolTip().add(translatableOf(parts.get(index)).copy().withStyle(ChatFormatting.GRAY));
+            List<TraitLevel> traits = mat.getTraitLevelList().stream().filter(key -> (key.allowedParts().contains(parts.get(index)) || key.allowedParts().contains("all"))).toList();
+            Map<String,Integer> toDisplay = new HashMap<>();
             for (TraitLevel trait : traits.stream().sorted().toList()) {
-                e.getToolTip().add(translatableOf(trait.trait()).copy().withColor(Color.LIGHTCYAN.getColor()).append(spaceAppend(" Lvl:" + trait.level())).withColor(Color.LIGHTGREEN.getColor()));
+                if(toDisplay.containsKey(trait.trait())) {
+                    int temp = toDisplay.get(trait.trait());
+                    toDisplay.remove(trait.trait());
+                    toDisplay.put(trait.trait(),temp+trait.level());
+                } else {
+                    toDisplay.put(trait.trait(),trait.level());
+                }
             }
+            toDisplay.forEach((key,value) ->  e.getToolTip().add(translatableOf(key).copy().withColor(Color.LIGHTCYAN.getColor()).append(spaceAppend(String.valueOf(value)))));
         }
     }
 
@@ -118,7 +126,7 @@ public final class GunTooltipHandler {
                 tooltips.add(translatableOf("mindmg").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getDamageMin()))).append(bonusAppend(truncateFloat(lastAmmo.getDamageMin())))
                         .append(spaceAppend(translatableOf("maxdmg"))).withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getDamageMax()))).append(bonusAppend(truncateFloat(lastAmmo.getDamageMax()))));
                 tooltips.add(translatableOf("firerate").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getFirerate()))).append(bonusAppend(truncateFloat(lastAmmo.getFirerate())))
-                        .append(spaceAppend(translatableOf("ammomax"))).withColor(Color.LIGHTGREEN.getColor()).append(spaceAppend(truncateFloat(realStats.getAmmo_max() / WeaponAmmoStats.AMMO_POINTS_MUL))));
+                        .append(spaceAppend(translatableOf("ammomax"))).withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getAmmo_max() / WeaponAmmoStats.AMMO_POINTS_MUL))));
                 tooltips.add(translatableOf("velocity_mult").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getVelocityMult()))).append(bonusAppend(truncateFloat(lastAmmo.getVelocityMult())))
                         .append(spaceAppend(translatableOf("grav_mult"))).withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateDouble(realStats.getGravMod()))).append(bonusAppend(truncateDouble(lastAmmo.getGravMod()))));
                 tooltips.add(translatableOf("inacc").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getInaccuracy()))).append(bonusAppend(truncateFloat(lastAmmo.getInaccuracy())))
@@ -146,9 +154,17 @@ public final class GunTooltipHandler {
                     GunMaterial mat = MaterialMap.loadedMats(prov).get(part.getMaterial());
                     if (mat != null) {
                         List<TraitLevel> mattraits = mat.getTraitLevelList().stream().filter(key -> key.allowedParts().contains(part.getName()) || key.allowedParts().contains("all")).toList();
+                        Map<String,Integer> toDisplay = new HashMap<>();
                         for (TraitLevel trait : mattraits.stream().sorted().toList()) {
-                            e.getToolTip().add(translatableOf(trait.trait()).copy().withColor(Color.LIGHTCYAN.getColor()).append(spaceAppend(String.valueOf(trait.level()))));
+                            if(toDisplay.containsKey(trait.trait())) {
+                                int temp = toDisplay.get(trait.trait());
+                                toDisplay.remove(trait.trait());
+                                toDisplay.put(trait.trait(),temp+trait.level());
+                            } else {
+                                toDisplay.put(trait.trait(),trait.level());
+                            }
                         }
+                        toDisplay.forEach((key,value) ->  e.getToolTip().add(translatableOf(key).copy().withColor(Color.LIGHTCYAN.getColor()).append(spaceAppend(String.valueOf(value)))));
                     }
                 }
             }
@@ -165,9 +181,17 @@ public final class GunTooltipHandler {
                     }
                 }
                 if (KeyManager.DISPLAY_TRAITS.get().isDown()) {
-                    for (TraitLevel trait : mattraits) {
-                        e.getToolTip().add(translatableOf(trait.trait()).copy().withColor(Color.LIGHTCYAN.getColor()).append(spaceAppend(" Lvl:" + trait.level())).withColor(Color.LIGHTGREEN.getColor()));
+                    Map<String,Integer> toDisplay = new HashMap<>();
+                    for (TraitLevel trait : mattraits.stream().sorted().toList()) {
+                        if(toDisplay.containsKey(trait.trait())) {
+                            int temp = toDisplay.get(trait.trait());
+                            toDisplay.remove(trait.trait());
+                            toDisplay.put(trait.trait(),temp+trait.level());
+                        } else {
+                            toDisplay.put(trait.trait(),trait.level());
+                        }
                     }
+                    toDisplay.forEach((key,value) ->  e.getToolTip().add(translatableOf(key).copy().withColor(Color.LIGHTCYAN.getColor()).append(spaceAppend(String.valueOf(value)))));
                 }
             }
         } else if (KeyManager.DISPLAY_CONSTRUCTION.get().isDown() && WeaponAmmoStats.safeGunComp(stack)) {

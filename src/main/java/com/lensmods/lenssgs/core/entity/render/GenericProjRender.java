@@ -36,8 +36,9 @@ public class GenericProjRender extends EntityRenderer<GenericProjectile> {
         }
         poseStack.pushPose();
             if(entity.getVisualItem().is(Items.ENDER_EYE) && entity.getSecondLife()) {
+                poseStack.translate(-0.5f,-0.5f,-0.5f);
                 RenderUtil.renderSphere(poseStack,pBuffer, LenRenderTypes.END_TRIANGLES,light,
-                        entity.getPercentLifeLeft() < 0.88f ? 3 * (Mth.square(entity.getPercentLifeLeft())) : (3 * (-4.5f * Mth.square(entity.getPercentLifeLeft())+4.5f)),18, Color.BLACK);
+                        entity.getPercentLifeLeft() < 0.88f ?  1.5f*(Mth.square(entity.getPercentLifeLeft())) :  1.5f*(-4.5f * Mth.square(entity.getPercentLifeLeft())+4.5f),18, Color.BLACK);
             }
             else {
                 poseStack.mulPose(Axis.YP.rotationDegrees(180F));

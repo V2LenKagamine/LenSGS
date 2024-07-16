@@ -81,9 +81,9 @@ public class LenLang extends LanguageProvider {
         keyof(RECEIVER_PISTOL,"Pistol Receiver");
         keyof(RECEIVER_STANDARD,"Rifle Receiver");
         keyof(RECEIVER_BULLPUP,"Bullpup Receiver");
-        keyof(ACTION_MANUAL,"Manual Action");
+        keyof(ACTION_MANUAL,"Break Action");
         keyof(ACTION_SINGLE,"Single Action");
-        keyof(ACTION_AUTOMATIC,"Automatic Action");
+        keyof(ACTION_AUTOMATIC,"Double Action");
         keyof(BARREL_STUB,"Stub Barrel");
         keyof(BARREL_SHORT,"Short Barrel");
         keyof(BARREL_FAIR,"Normal Barrel");

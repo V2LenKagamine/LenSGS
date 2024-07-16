@@ -1,0 +1,38 @@
+{
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "lenssgs:gun_model/gunparts/receiver_standard",
+		"particle": "lenssgs:gun_model/gunparts/receiver_standard"
+	},
+	"elements": [
+		{
+			"name": "magwell",
+			"from": [7.75, -2.8, 10.8],
+			"to": [8.25, 0.7, 12.3],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, -0.05, 11.55]},
+			"faces": {
+				"north": {"uv": [7.25, 7.5, 8.5, 9.5], "texture": "#0", "tintindex": 0},
+				"east": {"uv": [8.5, 9.5, 10.25, 11.75], "rotation": 270, "texture": "#0", "tintindex": 0},
+				"south": {"uv": [7.25, 11.75, 8.5, 13.75], "rotation": 180, "texture": "#0", "tintindex": 0},
+				"west": {"uv": [7.25, 9.5, 5.5, 11.75], "rotation": 270, "texture": "#0", "tintindex": 0},
+				"up": {"uv": [8.75, 9.5, 8.5, 11.75], "rotation": 180, "texture": "#0", "tintindex": 0},
+				"down": {"uv": [0, 0, 0, 0], "texture": "#0", "tintindex": 0}
+			}
+		}
+	],
+	"groups": [
+		0,
+		{
+			"name": "buffer_tube_assembly",
+			"origin": [8, 3.19289, 16.775],
+			"color": 0,
+			"children": []
+		},
+		{
+			"name": "foregrip",
+			"origin": [8, 1.45, 8.3],
+			"color": 0,
+			"children": []
+		}
+	]
+}

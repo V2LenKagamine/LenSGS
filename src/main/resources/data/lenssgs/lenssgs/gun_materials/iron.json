@@ -53,7 +53,7 @@
       ],
       "modType": "multiply",
       "stat": "stat_velocity_mul",
-      "val": -0.1
+      "val": 0.9
     },
     {
       "allowedParts": [

@@ -158,25 +158,39 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
             poseStack.translate((0.025f*side) - 0.025f,-0.22f*side,(0.05f*side) - 0.05f);
             poseStack.mulPose(Axis.XP.rotationDegrees(3.9f));
             poseStack.mulPose(Axis.YP.rotationDegrees(7.5f*side));
-            this.renderGun(entity, display, stack, poseStack, renderTypeBuffer, light, partialTicks);
-            RenderUtil.renderFirstPersonArms(Minecraft.getInstance().player,display ,handy, stack, poseStack, renderTypeBuffer, light, partialTicks);
+            this.renderGun(entity, display,handy,stack, poseStack, renderTypeBuffer, light, partialTicks);
         }
     }
 
-    private void renderGun(@Nullable LivingEntity entity, ItemDisplayContext display, ItemStack stack, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light, float partialTicks)
+    private void renderGun(@Nullable LivingEntity entity, ItemDisplayContext display,HumanoidArm handy,ItemStack stack, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light, float partialTicks)
     {
         if(stack.getOrDefault(LenDataComponents.PART_COLOR_LIST,null) != null) {
-
+            boolean bullpup=false;
+            for (ModelColorPair pair : stack.get(LenDataComponents.PART_COLOR_LIST)) {
+                if(pair.model().contains("bullpup")) {
+                    bullpup=true;
+                    break;
+                }
+            }
             for (ModelColorPair pair : stack.get(LenDataComponents.PART_COLOR_LIST)) {
                 poseStack.pushPose();
-
-                BakedModel bakedModel = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID, "gunparts/"+pair.model())));
+                BakedModel bakedModel;
+                if(bullpup) { //Bullpup, load bullpup models
+                    bakedModel = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID, "gunparts/" + pair.model()+"_bullpup")));
+                    if (bakedModel == Minecraft.getInstance().getModelManager().getMissingModel()) { //if we fail, load normal.
+                        bakedModel = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID, "gunparts/" + pair.model())));
+                    }
+                }
+                else {
+                    bakedModel = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID, "gunparts/" + pair.model())));
+                }
                 if (bakedModel != Minecraft.getInstance().getModelManager().getMissingModel()) {
                     RenderUtil.applyTransformType(poseStack, display, entity,bakedModel);
                     RenderUtil.forceItemWithColorBlend(bakedModel,ItemDisplayContext.NONE,null,stack,poseStack,renderTypeBuffer,light, OverlayTexture.NO_OVERLAY,pair.color(),0.25f);
                 }
                 poseStack.popPose();
             }
+            RenderUtil.renderFirstPersonArms(Minecraft.getInstance().player,display ,handy, stack, poseStack, renderTypeBuffer, light, partialTicks,bullpup);
         }
     }
 

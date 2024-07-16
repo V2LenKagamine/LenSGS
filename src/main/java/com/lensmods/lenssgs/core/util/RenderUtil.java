@@ -372,7 +372,7 @@ public class RenderUtil
             poseStack.last().normal().mul(normal);
         }
     }
-    public static void renderFirstPersonArms(LocalPlayer player,ItemDisplayContext context ,HumanoidArm hand, ItemStack heldItem, PoseStack poseStack, MultiBufferSource buffer, int light, float partialTick) {
+    public static void renderFirstPersonArms(LocalPlayer player,ItemDisplayContext context ,HumanoidArm hand, ItemStack heldItem, PoseStack poseStack, MultiBufferSource buffer, int light, float partialTick,boolean isBullpup) {
         {
             if(!(heldItem.getItem() instanceof GunBaseItem)) { return;}
             if(!context.firstPerson()){return;}
@@ -415,7 +415,9 @@ public class RenderUtil
                 poseStack.popPose();
                 // Back arm holding the handle,slightly rotated
                 poseStack.pushPose();
-
+                if (isBullpup){
+                    poseStack.translate(0,0,.2f);
+                }
                 poseStack.translate(-0.095f*side, 0.425, -0.75);
                 poseStack.scale(0.75F, 0.75F, 0.75F);
                 poseStack.translate(-4.0 * 0.0625 * side, 0, 0);

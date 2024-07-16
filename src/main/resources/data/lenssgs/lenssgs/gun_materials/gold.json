@@ -74,6 +74,16 @@
     },
     {
       "allowedParts": [
+        "stock",
+        "action",
+        "casing"
+      ],
+      "modType": "add",
+      "stat": "stat_fire_rate",
+      "val": -10.0
+    },
+    {
+      "allowedParts": [
         "bullet"
       ],
       "modType": "add",

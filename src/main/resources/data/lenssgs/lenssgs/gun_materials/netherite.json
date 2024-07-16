@@ -43,7 +43,7 @@
       ],
       "modType": "multiply",
       "stat": "stat_fire_rate",
-      "val": 0.75
+      "val": 1.25
     },
     {
       "allowedParts": [

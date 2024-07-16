@@ -101,7 +101,7 @@
   "traitLevelList": [
     {
       "allowedParts": [
-        "all"
+        "bullet"
       ],
       "level": 2,
       "trait": "lacerating"

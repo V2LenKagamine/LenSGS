@@ -1,0 +1,32 @@
+{
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "lenssgs:gun_model/gunparts/receiver_standard",
+		"particle": "lenssgs:gun_model/gunparts/receiver_standard"
+	},
+	"elements": [
+		{
+			"name": "buffer_tube_end",
+			"from": [7.66967, 2.775, 15.225],
+			"to": [8.26967, 3.575, 17.45],
+			"rotation": {"angle": 0, "axis": "z", "origin": [7.73798, 3.21831, 16]},
+			"faces": {
+				"east": {"uv": [11.25, 5.75, 10.25, 5.25], "rotation": 270, "texture": "#0", "tintindex": 0},
+				"west": {"uv": [11.25, 5.25, 10.25, 5.75], "rotation": 90, "texture": "#0"}
+			}
+		},
+		{
+			"name": "buffer_tube_end",
+			"from": [7.41423, 2.41438, 15.25],
+			"to": [8.16423, 3.21438, 17.425],
+			"rotation": {"angle": -45, "axis": "z", "origin": [7.91298, 3.11831, 16]},
+			"faces": {
+				"north": {"uv": [10.25, 5.25, 10.75, 5.5], "rotation": 270, "texture": "#0"},
+				"east": {"uv": [11.25, 5.75, 10.25, 5.25], "rotation": 270, "texture": "#0"},
+				"south": {"uv": [10.25, 5.25, 10.75, 5.5], "rotation": 90, "texture": "#0"},
+				"west": {"uv": [11.25, 5.25, 10.25, 5.75], "rotation": 90, "texture": "#0"},
+				"down": {"uv": [7.75, 10, 8, 11], "rotation": 270, "texture": "#0"}
+			}
+		}
+	]
+}

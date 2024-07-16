@@ -112,9 +112,16 @@
   "traitLevelList": [
     {
       "allowedParts": [
+        "bullet"
+      ],
+      "level": 1,
+      "trait": "voidtouched"
+    },
+    {
+      "allowedParts": [
         "all"
       ],
-      "level": 2,
+      "level": 1,
       "trait": "voidtouched"
     }
   ]

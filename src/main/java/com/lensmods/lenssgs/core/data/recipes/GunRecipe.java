@@ -283,8 +283,8 @@ public class GunRecipe extends CustomRecipe {
                         WeaponAmmoStats.recalculateGunData(mainboi,prov);
                         return mainboi;
                     }
-                }
-                mainboi.set(LenDataComponents.GUN_COMP, LenUtil.swapData(ing.get(LenDataComponents.GUN_PART_HOLDER),gunData));
+                }//Adding, right?
+                mainboi.set(LenDataComponents.GUN_COMP, LenUtil.addData(ing.get(LenDataComponents.GUN_PART_HOLDER),gunData));
                 WeaponAmmoStats.recalculateGunData(mainboi,prov);
                 return mainboi;
             }

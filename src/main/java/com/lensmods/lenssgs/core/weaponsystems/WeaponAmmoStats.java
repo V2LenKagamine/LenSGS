@@ -131,7 +131,7 @@ public class WeaponAmmoStats {
         float peirceMul =1;
         float totalPeirceMul = 1f;
 
-        int newFR = ammo ? 0 : 100;
+        int newFR = ammo ? 0 : 20;
         int bonusFR =0;
         float frmul =1;
         float totalFrMul = 1f;
@@ -174,6 +174,8 @@ public class WeaponAmmoStats {
         int muldmgMinParts =0;
         int mulvelParts =0;
         int mulgravParts =0;
+
+        List<ModelColorPair> partColorList = new ArrayList<>();
         //THE WALL ENDS
         for(GunPartHolder part : data.getPartList()) {
             for (StatMod stats : MaterialMap.loadedMats(provider).get(part.getMaterial()).getStatModList()) {
@@ -315,9 +317,6 @@ public class WeaponAmmoStats {
                     finalTraits.add(trait);
                 }
             }
-        }
-        List<ModelColorPair> partColorList = new ArrayList<>();
-        for(GunPartHolder part : data.getPartList()) { //Yes we JUST iterated over it, but we need these calculated AFTER the stats are set.
             switch (part.getSubType()) { //The unit of a switch case. Yes these are hardcoded. Dont wanna do data-stuff for them. maybe TODO?
                 case AllowedParts.RECEIVER_PISTOL: {
                     totalMinMul -= 0.2f;
@@ -337,16 +336,18 @@ public class WeaponAmmoStats {
                 case AllowedParts.ACTION_MANUAL: {
                     totalAmmoMul -= 0.9f;
                     totalMaxMul += 0.75f;
-                    totalMinMul += 0.80;
+                    totalMinMul += 0.80f;
+                    totalFrMul +=0.5f;
                     break;
                 }
                 case AllowedParts.ACTION_SINGLE: {
                     totalMaxMul += 0.2f;
                     totalMinMul += 0.3f;
+                    totalFrMul += 0.15f;
                     break;
                 }
                 case AllowedParts.ACTION_AUTOMATIC: {
-                    totalFrMul +=0.2f;
+                    totalFrMul -=0.2f;
                     break;
                 }
                 case AllowedParts.BARREL_STUB: {
@@ -474,7 +475,7 @@ public class WeaponAmmoStats {
                 }
                 default: {break;} //Sorry Nothing.
             }
-            //And then the rendering stuff
+            //rendering thing
             partColorList.add(new ModelColorPair(part.getSubType(),MaterialMap.loadedMats(provider).get(part.getMaterial()).getColor()));
         }
         int finalAmmo = Math.max((int)Math.floor((((newAmmoMax  * ((ammoMul/ (mulammoParts != 0 ? mulammoParts : 1)))))*totalAmmoMul) + bonusAmmoMax), AMMO_POINTS_MUL);

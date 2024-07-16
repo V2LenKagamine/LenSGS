@@ -1,7 +1,9 @@
 package com.lensmods.lenssgs.client;
 
+import com.lensmods.lenssgs.core.data.AllowedParts;
 import com.lensmods.lenssgs.core.items.GunBaseItem;
 import com.lensmods.lenssgs.core.weaponsystems.WeaponAmmoStats;
+import com.lensmods.lenssgs.init.LenDataComponents;
 import com.lensmods.lenssgs.networking.messages.CTSFire;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
@@ -50,11 +52,16 @@ public class ClientFireHandler {
         if(event.isAttack())
         {
             ItemStack heldItem = player.getMainHandItem();
-            if(heldItem.getItem() instanceof GunBaseItem gun)
+            if(heldItem.getItem() instanceof GunBaseItem)
             {
                 event.setSwingHand(false);
                 event.setCanceled(true);
                 this.shoot(player, heldItem);
+                if(WeaponAmmoStats.safeGunComp(heldItem)) {
+                    if(heldItem.get(LenDataComponents.GUN_COMP).getPartList().stream().noneMatch(part -> part.getName().equals(AllowedParts.ACTION_AUTOMATIC))){
+                        mc.options.keyUse.setDown(false);
+                    }
+                }
             }
         }
     }

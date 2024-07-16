@@ -1,0 +1,53 @@
+{
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "lenssgs:gun_model/gunparts/receiver_standard",
+		"particle": "lenssgs:gun_model/gunparts/receiver_standard"
+	},
+	"elements": [
+		{
+			"name": "buffer_tube_end",
+			"from": [7.59467, 2.75, 15.175],
+			"to": [8.34467, 3.575, 17.45],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7.96967, 3.25, 16]},
+			"faces": {
+				"east": {"uv": [11.25, 5.75, 10.25, 5.25], "rotation": 270, "texture": "#0", "tintindex": 0},
+				"west": {"uv": [11.25, 5.25, 10.25, 5.75], "rotation": 90, "texture": "#0"}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "buffer_tube_assembly",
+			"origin": [8, 3.19289, 16.775],
+			"color": 0,
+			"children": []
+		},
+		{
+			"name": "foregrip",
+			"origin": [8, 1.45, 8.3],
+			"color": 0,
+			"children": []
+		},
+		{
+			"name": "barrel_normal",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				{
+					"name": "buffer_tube_assembly",
+					"origin": [8, 3.19289, 16.775],
+					"color": 0,
+					"children": []
+				},
+				{
+					"name": "foregrip",
+					"origin": [8, 1.45, 8.3],
+					"color": 0,
+					"children": []
+				}
+			]
+		},
+		0
+	]
+}

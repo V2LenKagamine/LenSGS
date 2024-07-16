@@ -1,0 +1,120 @@
+{
+	"texture_size": [32, 32],
+	"textures": {
+		"0": "lenssgs:gun_model/gunparts/receiver_standard",
+		"particle": "lenssgs:gun_model/gunparts/receiver_standard"
+	},
+	"elements": [
+		{
+			"name": "buffer_tube_back",
+			"from": [7.725, 2.06789, 17.7],
+			"to": [8.275, 3.49289, 19.525],
+			"rotation": {"angle": 0, "axis": "z", "origin": [8, 2.77414, 19.3]},
+			"faces": {
+				"north": {"uv": [0, 0, 0, 0], "rotation": 90, "texture": "#0", "tintindex": 0},
+				"east": {"uv": [9.75, 0, 8.75, 2], "rotation": 270, "texture": "#0", "tintindex": 0},
+				"south": {"uv": [8.75, 2, 9.75, 3], "rotation": 270, "texture": "#0", "tintindex": 0},
+				"west": {"uv": [10.75, 2, 9.75, 0], "rotation": 270, "texture": "#0", "tintindex": 0},
+				"up": {"uv": [8.75, 3, 10.75, 4], "rotation": 270, "texture": "#0", "tintindex": 0},
+				"down": {"uv": [8.75, 4, 10.75, 5], "rotation": 270, "texture": "#0", "tintindex": 0}
+			}
+		},
+		{
+			"name": "buffer_tube_back",
+			"from": [7.65, 1.91789, 19.525],
+			"to": [8.35, 3.61789, 20.1],
+			"rotation": {"angle": 0, "axis": "x", "origin": [8, 2.77414, 19.3]},
+			"faces": {
+				"north": {"uv": [8.75, 4, 10.75, 5], "rotation": 90, "texture": "#0", "tintindex": 0},
+				"east": {"uv": [9.75, 0, 8.75, 2], "rotation": 180, "texture": "#0", "tintindex": 0},
+				"south": {"uv": [6, 0, 8.25, 0.75], "rotation": 270, "texture": "#0", "tintindex": 0},
+				"west": {"uv": [10.75, 2, 9.75, 0], "texture": "#0", "tintindex": 0},
+				"up": {"uv": [8.75, 3, 10.75, 4], "rotation": 270, "texture": "#0", "tintindex": 0},
+				"down": {"uv": [8.75, 2, 9.75, 3], "rotation": 270, "texture": "#0", "tintindex": 0}
+			}
+		}
+	],
+	"groups": [
+		{
+			"name": "buffer_tube_assembly",
+			"origin": [8, 3.19289, 16.775],
+			"color": 0,
+			"children": []
+		},
+		{
+			"name": "foregrip",
+			"origin": [8, 1.45, 8.3],
+			"color": 0,
+			"children": []
+		},
+		{
+			"name": "barrel_normal",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				{
+					"name": "buffer_tube_assembly",
+					"origin": [8, 3.19289, 16.775],
+					"color": 0,
+					"children": []
+				},
+				{
+					"name": "foregrip",
+					"origin": [8, 1.45, 8.3],
+					"color": 0,
+					"children": []
+				}
+			]
+		},
+		{
+			"name": "stock_full",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				{
+					"name": "buffer_tube_assembly",
+					"origin": [8, 3.19289, 16.775],
+					"color": 0,
+					"children": [0, 1]
+				},
+				{
+					"name": "foregrip",
+					"origin": [8, 1.45, 8.3],
+					"color": 0,
+					"children": []
+				}
+			]
+		},
+		{
+			"name": "buffer_tube_assembly",
+			"origin": [8, 3.19289, 16.775],
+			"color": 0,
+			"children": []
+		},
+		{
+			"name": "foregrip",
+			"origin": [8, 1.45, 8.3],
+			"color": 0,
+			"children": []
+		},
+		{
+			"name": "barrel_normal",
+			"origin": [8, 8, 8],
+			"color": 0,
+			"children": [
+				{
+					"name": "buffer_tube_assembly",
+					"origin": [8, 3.19289, 16.775],
+					"color": 0,
+					"children": []
+				},
+				{
+					"name": "foregrip",
+					"origin": [8, 1.45, 8.3],
+					"color": 0,
+					"children": []
+				}
+			]
+		}
+	]
+}

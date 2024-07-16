@@ -77,7 +77,7 @@ public final class MaterialStats {
             new StatMod(AMMO_MAX,0.9f, AVG_MUL, CASING),
             new StatMod(FIRE_RATE,1.05f, AVG_MUL,AFFECTS_FIRE_RATE),
             new StatMod(MAX_DMG,1F,ADD,AFFECTS_BASE_DMG),
-            new StatMod(VEL_MULT,-0.1f, AVG_MUL,ROUND),
+            new StatMod(VEL_MULT,0.9f, AVG_MUL,ROUND),
             new StatMod(GRAVITY_MOD,1.1f, AVG_MUL,ROUND),
             new StatMod(FIRE_RATE,5f,ADD,MAGAZINE,RECEIVER),
             new StatMod(FIRE_RATE,-5F,ADD,BARREL,STOCK)
@@ -89,6 +89,7 @@ public final class MaterialStats {
             new StatMod(MIN_DMG,-2f,ADD,ROUND,CASING,RECEIVER),
             new StatMod(INACCURACY_DEG, -1.5f,ADD,BARREL,ACTION),
             new StatMod(INACCURACY_DEG,4F,ADD,STOCK),
+            new StatMod(FIRE_RATE, -10f,ADD,AFFECTS_FIRE_RATE),
             new StatMod(PROJ_COUNT,3f,ADD,ROUND)
     );
     public static final List<StatMod> DIAMOND_STATS = List.of(
@@ -100,12 +101,12 @@ public final class MaterialStats {
             new StatMod(FIRE_RATE,7f,ADD,ACTION,STOCK),
             new StatMod(PROJ_COUNT, -2f,ADD,ROUND),
             new StatMod(INACCURACY_DEG, -3f,ADD,STOCK),
-            new StatMod(INACCURACY_DEG,1.25f, AVG_MUL,ROUND) //This is intentional trust me//This is intentional trust me
+            new StatMod(INACCURACY_DEG,0.75f, AVG_MUL,ROUND)
     );
 
     public static final List<TraitLevel>DIAMOND_TRAITS = List.of(
-            new TraitLevel(BLINDING,1),
-            new TraitLevel(LACERATING,1)
+            new TraitLevel(BLINDING,1,ROUND),
+            new TraitLevel(LACERATING,1,ROUND)
     );
 
     public static final List<StatMod> EMERALD_STATS = List.of(
@@ -121,13 +122,13 @@ public final class MaterialStats {
             new StatMod(INACCURACY_DEG,1.25f, AVG_MUL,ROUND)
     );
     public static final List<TraitLevel>EMERALD_TRAITS = List.of(
-            new TraitLevel(LACERATING,2)
+            new TraitLevel(LACERATING,2,ROUND)
     );
 
     public static final List<StatMod> NETHERITE_STATS = List.of(
             new StatMod(AMMO_MAX,1.5f, AVG_MUL,MAGAZINE),
             new StatMod(AMMO_MAX,0.8f, AVG_MUL, CASING),
-            new StatMod(FIRE_RATE,0.75F,AVG_MUL,AFFECTS_FIRE_RATE),
+            new StatMod(FIRE_RATE,1.25F,AVG_MUL,AFFECTS_FIRE_RATE),
             new StatMod(MIN_DMG,1.1F,AVG_MUL,AFFECTS_FIRE_RATE),
             new StatMod(MAX_DMG,1.1F,AVG_MUL,AFFECTS_FIRE_RATE),
             new StatMod(INACCURACY_DEG,0.8F,AVG_MUL,STOCK,RECEIVER,ACTION,ROUND),
@@ -152,7 +153,8 @@ public final class MaterialStats {
     );
 
     public static final List<TraitLevel> VOID_TRAITS = List.of(
-            new TraitLevel(VOID_TOUCHED,2)
+            new TraitLevel(VOID_TOUCHED,1,ROUND),
+            new TraitLevel(VOID_TOUCHED,1)
     );
     public static final List<StatMod> GUNPOWDER_STATS = List.of(
             new StatMod(AMMO_MAX,1f, AVG_MUL,PROPELLANT) //This is here because I am too lazy to check that it wont throw a fit at an empty list.

@@ -81,7 +81,11 @@ public class LenUtil {
         df.setRoundingMode(RoundingMode.UP);
         return df.format(input*100);
     }
-
+    public static GunComp addData(GunPartHolder dat, GunComp original) {
+        List<GunPartHolder> added = new ArrayList<>(original.getPartList());
+        added.add(dat);
+        return new GunComp(added);
+    }
     public static GunComp swapData(GunPartHolder dat, GunComp original) {
         List<GunPartHolder> swapped = new ArrayList<>(original.getPartList().size());
         for (GunPartHolder part : original.getPartList()) {
