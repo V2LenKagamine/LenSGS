@@ -14,6 +14,10 @@ public class LenLang extends LanguageProvider {
 
     @Override
     protected void addTranslations() {
+        //Sounds
+        keyof("gun_click","Gun Clicks");
+        keyof("gun_shot","Gun Fires");
+        keyof("void_reave","Void Beckons");
         //Generic
         add("itemGroup.lenssgs","Len's SGS");
         keyof("gunfake1", "This gun is entirely fake.");

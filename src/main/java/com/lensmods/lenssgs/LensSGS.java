@@ -93,6 +93,7 @@ public class LensSGS
         LenEnts.ENTITIES.register(modEventBus);
         LenEnts.EFFECTS.register(modEventBus);
         LenEnts.POTIONS.register(modEventBus);
+        LenSounds.SOUNDS.register(modEventBus);
         //AHHHH recipes.
         LenRecipes.RECIPE_SERIALIZERS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
@@ -150,6 +151,7 @@ public class LensSGS
                 new MaterialProvider(out,LenMaterialGen.VANILLA_MATERIALS_BUILDER, event.getLookupProvider()));
         event.getGenerator().addProvider((event.includeServer()),(DataProvider.Factory<LenRecipeGen>) out -> new LenRecipeGen(out,event.getLookupProvider()));
         event.getGenerator().addProvider(true, (DataProvider.Factory<LenModelGen>) out -> new LenModelGen(out, MODID,event.getExistingFileHelper()));
+        event.getGenerator().addProvider(true, (DataProvider.Factory<LenSoundGen>) out -> new LenSoundGen(out,event.getExistingFileHelper()));
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
@@ -165,6 +167,7 @@ public class LensSGS
             event.register(KeyManager.DISPLAY_STATS.get());
             event.register(KeyManager.DISPLAY_TRAITS.get());
             event.register(KeyManager.DISPLAY_CONSTRUCTION.get());
+            event.register(KeyManager.RELOAD.get());
         }
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
@@ -198,7 +201,7 @@ public class LensSGS
             e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/stock_full_bullpup")));
             e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/stock_short_bullpup")));
             e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/receiver_bullpup_bullpup")));
-
+            e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"ammo/box")));
         }
     }
 }

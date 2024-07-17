@@ -1,5 +1,7 @@
 package com.lensmods.lenssgs.core.weaponsystems;
 
+import com.lensmods.lenssgs.core.data.AllowedParts;
+import com.lensmods.lenssgs.core.datacomps.GunPartHolder;
 import com.lensmods.lenssgs.core.datacomps.GunStatTraitPair;
 import com.lensmods.lenssgs.core.datacomps.TraitLevel;
 import com.lensmods.lenssgs.core.entity.GenericProjectile;
@@ -7,12 +9,17 @@ import com.lensmods.lenssgs.core.items.GunBaseItem;
 import com.lensmods.lenssgs.core.util.LenUtil;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import com.lensmods.lenssgs.init.LenEnts;
+import com.lensmods.lenssgs.init.LenSounds;
 import com.lensmods.lenssgs.networking.messages.CTSFire;
+import com.lensmods.lenssgs.networking.messages.CTSReload;
+import com.lensmods.lenssgs.networking.messages.STCFireSync;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -31,11 +38,9 @@ public class GunFireLogic {
             player.setYRot(Mth.wrapDegrees(message.yRot()));
 
             PICooldown cdtrack = PICooldown.getCDTracker(player);
-            if(cdtrack.hasCooldown(gun) && cdtrack.getRemaining(gun) > 100) { //Todo: make Tolerance config or gamerule?
+            if(cdtrack.hasCooldown(held) && cdtrack.getRemaining(held) > 100) { //Todo: make Tolerance config or gamerule?
                 return;
             }
-            cdtrack.putCooldown(held,gun);
-
             int projAmt = WeaponAmmoStats.getProjAmt(held);
             GunStatTraitPair lastAmmoLoaded = WeaponAmmoStats.getLastAmmo(held);
             if(lastAmmoLoaded == null || !WeaponAmmoStats.safeGunStats(held)) {
@@ -43,6 +48,9 @@ public class GunFireLogic {
             }
             else {
                 List<TraitLevel> ammotraits = new ArrayList<>(lastAmmoLoaded.getTraits());
+                int cdTime =held.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getFirerate() + lastAmmoLoaded.getStats().getFirerate();
+                cdtrack.putCooldown(held,Math.round(cdTime));
+                PacketDistributor.sendToPlayer(player,new STCFireSync(cdTime));
                 ammotraits.addAll(held.get(LenDataComponents.GUN_STAT_TRAITS).getTraits());
                 GenericProjectile[] spawned = new GenericProjectile[projAmt];
                 for (int i = 0; i < projAmt; i++) {
@@ -58,7 +66,49 @@ public class GunFireLogic {
                 }
                 if (!player.isCreative()) {
                     int temp = held.get(LenDataComponents.AMMO_COUNTER);
-                    held.set(LenDataComponents.AMMO_COUNTER, temp - 1 * WeaponAmmoStats.AMMO_POINTS_MUL);
+                    held.set(LenDataComponents.AMMO_COUNTER, temp - WeaponAmmoStats.AMMO_POINTS_MUL);
+                }
+                breaker:
+                for (GunPartHolder part : held.get(LenDataComponents.GUN_COMP).getPartList()) {
+                    switch (part.getSubType()) {
+                        case AllowedParts.RECEIVER_BULLPUP -> {
+                            worl.playSound(null, player.getX(), player.getY(), player.getZ(), LenSounds.GUN_SHOT_BULLPUP.get(), SoundSource.PLAYERS);
+                            break breaker;
+                        }
+                        case AllowedParts.RECEIVER_PISTOL -> {
+                            worl.playSound(null, player.getX(), player.getY(), player.getZ(), LenSounds.GUN_SHOT_PISTOL.get(), SoundSource.PLAYERS);
+                            break breaker;
+                        }
+                        case AllowedParts.RECEIVER_STANDARD -> {
+                            worl.playSound(null, player.getX(), player.getY(), player.getZ(), LenSounds.GUN_SHOT_RIFLE.get(), SoundSource.PLAYERS);
+                            break breaker;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    public static void handleReloadMsg(CTSReload mess,@NotNull ServerPlayer player) {
+        if(player.isSpectator()) {
+            return;
+        }
+        ItemStack main = player.getItemInHand(InteractionHand.MAIN_HAND);
+        if(main.getItem() instanceof GunBaseItem) {
+            if(main.getOrDefault(LenDataComponents.AMMO_COUNTER,null) != null && main.getOrDefault(LenDataComponents.GUN_COMP,null) != null
+                    && main.getOrDefault(LenDataComponents.GUN_STAT_TRAITS,null)!=null) {
+                boolean mag = false;
+                for (GunPartHolder part : main.get(LenDataComponents.GUN_COMP).getPartList()) {
+                    if (part.getName().contains(AllowedParts.MAGAZINE)) {
+                        mag =true;
+                        break;
+                    }
+                }
+                if(!ReloadTracker.getReloadTracker(player).hasReloadTimer(main)) {
+                    if (mag) {
+                        ReloadTracker.getReloadTracker(player).putReloadTime(main, (int)Math.ceil(main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() * 0.25f/WeaponAmmoStats.AMMO_POINTS_MUL));
+                    }else {
+                        ReloadTracker.getReloadTracker(player).putReloadTime(main, (int)Math.ceil(main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() * 12f)/WeaponAmmoStats.AMMO_POINTS_MUL);
+                    }
                 }
             }
         }

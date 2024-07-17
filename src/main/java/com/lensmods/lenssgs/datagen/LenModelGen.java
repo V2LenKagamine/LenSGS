@@ -12,7 +12,6 @@ public class LenModelGen extends ItemModelProvider {
 
     @Override
     protected void registerModels() {
-        //basicItem(LenItems.AMMO_BASE.get());
         basicItem(LenItems.PART_CRAFTER.get());
         basicItem(LenItems.GUNPRINTER_PAPER.get());
         basicItem(LenItems.VOIDMETAL.get());

@@ -18,7 +18,7 @@ public class LaceratedEffect extends MobEffect {
     public boolean applyEffectTick(LivingEntity livingEntity, int amplifier) {
         Registry<DamageType> dTypeReg = livingEntity.damageSources().damageTypes;
         Holder.Reference<DamageType> dType = dTypeReg.getHolderOrThrow(DamageTypes.MAGIC);
-        livingEntity.hurt(new DamageSource(dType), 1.0F);
+        livingEntity.hurt(new DamageSource(dType), amplifier*0.75f);
         return true;
     }
 

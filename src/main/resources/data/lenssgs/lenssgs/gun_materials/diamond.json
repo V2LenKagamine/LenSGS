@@ -51,7 +51,7 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 3.0
+      "val": 1.5
     },
     {
       "allowedParts": [
@@ -71,7 +71,7 @@
       ],
       "modType": "add",
       "stat": "stat_fire_rate",
-      "val": 7.0
+      "val": 3.0
     },
     {
       "allowedParts": [
@@ -83,7 +83,8 @@
     },
     {
       "allowedParts": [
-        "stock"
+        "stock",
+        "receiver"
       ],
       "modType": "add",
       "stat": "stat_inaccuracy",

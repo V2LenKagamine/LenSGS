@@ -93,11 +93,12 @@
     {
       "allowedParts": [
         "barrel",
-        "bullet"
+        "bullet",
+        "receiver"
       ],
       "modType": "add",
       "stat": "stat_inaccuracy",
-      "val": -2.0
+      "val": 2.0
     },
     {
       "allowedParts": [

@@ -5,12 +5,12 @@ import com.lensmods.lenssgs.client.render.CustomGunRenderer;
 import com.lensmods.lenssgs.core.data.AllowedParts;
 import com.lensmods.lenssgs.core.datacomps.GunPartHolder;
 import com.lensmods.lenssgs.core.util.LenUtil;
+import com.lensmods.lenssgs.core.weaponsystems.ReloadTracker;
 import com.lensmods.lenssgs.core.weaponsystems.WeaponAmmoStats;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -53,12 +53,6 @@ public class GunBaseItem extends Item implements IModdable,IClientItemExtensions
         }
         return Component.literal("LOUD INCORRECT BUZZER AKA ERROR");
     }
-/*
-    @Override
-    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
-        LenUtil.showGunData(pStack, pContext, pTooltipComponents, pTooltipFlag);
-    }
-*/
     @Override
     public void initializeClient(Consumer<IClientItemExtensions> consumer) {
         consumer.accept(new IClientItemExtensions() {
@@ -70,39 +64,25 @@ public class GunBaseItem extends Item implements IModdable,IClientItemExtensions
     }
 
     @Override
-    public void onUseTick(Level pLevel, LivingEntity pLivingEntity, ItemStack pStack, int pRemainingUseDuration) {
-        if(pRemainingUseDuration <= 1) {
-            WeaponAmmoStats.attemptReload(pLivingEntity,pStack,pLevel);
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        if(!(entity instanceof Player player))
+        {return;}
+        ReloadTracker tracker = ReloadTracker.getReloadTracker(player);
+        if(!isSelected && tracker.hasReloadTimer(stack)) {
+            tracker.removeTimer(stack);
+        } else if (isSelected && tracker.hasReloadTimer(stack) &&
+                tracker.getRemaining(stack) <= 0) {
+            tracker.removeTimer(stack);
+            WeaponAmmoStats.attemptReload(player,stack,level);
         }
+    }
+    @Override
+    public boolean isBarVisible(ItemStack pStack) {
+        return WeaponAmmoStats.getAmmoMax(pStack) * WeaponAmmoStats.AMMO_POINTS_MUL > WeaponAmmoStats.ammoAmountLeft(pStack);
     }
 
     @Override
-    public int getUseDuration(ItemStack pStack, LivingEntity pEntity) {
-        ItemStack main = pEntity.getMainHandItem();
-        if(main.getOrDefault(LenDataComponents.AMMO_COUNTER,null) != null && main.getOrDefault(LenDataComponents.GUN_COMP,null) != null
-        && main.getOrDefault(LenDataComponents.GUN_STAT_TRAITS,null)!=null) {
-            boolean mag = false;
-            for (GunPartHolder part : main.get(LenDataComponents.GUN_COMP).getPartList()) {
-                if (part.getName().contains(AllowedParts.MAGAZINE)) {
-                    mag =true;
-                    break;
-                }
-            }
-            if(mag) {
-                return main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() * 2;
-            }else return main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() * 12;
-        }
-        return super.getUseDuration(pStack, pEntity);
-    }
-
-    @Override
-    public InteractionResultHolder<ItemStack> use(Level pLevel, Player pPlayer, InteractionHand pUsedHand) {
-        ItemStack main = pPlayer.getItemInHand(pUsedHand);
-        if(main.getOrDefault(LenDataComponents.AMMO_COUNTER,null) != null && main.getOrDefault(LenDataComponents.GUN_STAT_TRAITS,null) != null) {
-            if(main.get(LenDataComponents.AMMO_COUNTER) != main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max()) {
-                pPlayer.startUsingItem(pUsedHand);
-            }
-        }
-        return InteractionResultHolder.pass(main);
+    public int getBarWidth(ItemStack pStack) {
+        return Math.round((float)WeaponAmmoStats.ammoAmountLeft(pStack)/ (float) (WeaponAmmoStats.getAmmoMax(pStack)));
     }
 }

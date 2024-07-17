@@ -12,7 +12,7 @@ public class EffectHandler {
     public static void onEntHarm(LivingDamageEvent.Pre e) {
         if(e.getEntity().hasEffect(LenEnts.SHATTER_EFFECT)) {
             float oldamage = e.getOriginalDamage();
-            e.setNewDamage(oldamage + (e.getEntity().getEffect(LenEnts.SHATTER_EFFECT).getAmplifier() * 1.5f));
+            e.setNewDamage(oldamage + (e.getEntity().getEffect(LenEnts.SHATTER_EFFECT).getAmplifier() * 0.125f));
         }
     }
 }

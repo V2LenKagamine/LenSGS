@@ -76,32 +76,34 @@ public class WeaponAmmoStats {
 
     public static void attemptReload(LivingEntity ent, ItemStack item, Level world) {
         if(item.getOrDefault(LenDataComponents.GUN_STAT_TRAITS,null)!=null && item.getOrDefault(LenDataComponents.AMMO_COUNTER,null)!= null) {
+            if (LenUtil.getMatchingStackList((Player) ent, LenItems.AMMO_BASE.get()).isEmpty()) {
+                return;
+            }
             ItemStack ammo = LenUtil.getMatchingStackList((Player) ent, LenItems.AMMO_BASE.get()).getFirst();
             int ammoCurrent = item.get(LenDataComponents.AMMO_COUNTER);
             GunStats stats = item.get(LenDataComponents.GUN_STAT_TRAITS).getStats();
-            if(ammoAmountLeft(ammo) >=1&& ammo.getOrDefault(LenDataComponents.AMMO_COUNTER,null)!=null) {
+            if(ammo.getOrDefault(LenDataComponents.AMMO_COUNTER,null)==null) {
+                LensSGS.L3NLOGGER.error("Someone is trying to reload with no ammo stats, bad!:{}",ent);
+                return;
+            }
+            if(ammoAmountLeft(ammo) >=1) {
                 int ammoInAmmo = ammo.get(LenDataComponents.AMMO_COUNTER);
                 var ammoTraits = ammo.getOrDefault(LenDataComponents.GUN_STAT_TRAITS,null);
+                int removed = Math.min(stats.getAmmo_max() - ammoCurrent, ammoInAmmo);
+                item.set(LenDataComponents.AMMO_COUNTER, ammoCurrent + removed);
                 if(ammoTraits == null) {
-                    int removed = Math.min(stats.getAmmo_max() - ammoCurrent, ammoInAmmo);
-                    item.set(LenDataComponents.AMMO_COUNTER, ammoCurrent + removed);
                     if (!(((Player) ent).isCreative())) {
                         ammo.set(LenDataComponents.AMMO_COUNTER, ammoInAmmo - removed);
                     }
-                    item.set(LenDataComponents.LAST_AMMO, ammo.get(LenDataComponents.GUN_STAT_TRAITS));
-                    return;
                 } else {
-                    int removed = Math.min(stats.getAmmo_max() - ammoCurrent, ammoInAmmo);
-                    item.set(LenDataComponents.AMMO_COUNTER, ammoCurrent + removed);
-                    if (!(((Player) ent).isCreative()) || ammoTraits.getTraits().stream().noneMatch(trait -> trait.trait().equals(MaterialStats.ECOLOGICAL))) {
+                    if (!(((Player) ent).isCreative() || ammoTraits.getTraits().stream().noneMatch(trait -> trait.trait().equals(MaterialStats.ECOLOGICAL)))) {
                         ammo.set(LenDataComponents.AMMO_COUNTER, ammoInAmmo - removed);
                     }
-                    item.set(LenDataComponents.LAST_AMMO, ammo.get(LenDataComponents.GUN_STAT_TRAITS));
-                    return;
                 }
+                item.set(LenDataComponents.LAST_AMMO, ammo.get(LenDataComponents.GUN_STAT_TRAITS));
+                return;
             }
-            LensSGS.L3NLOGGER.error("Someone is trying to reload with no ammo stats, bad!:{}",ent);
-            return;
+            else {return;}
         }
         LensSGS.L3NLOGGER.error("Someone is trying to reload a gun with no stats, bad!:{}",ent);
     }
@@ -131,7 +133,7 @@ public class WeaponAmmoStats {
         float peirceMul =1;
         float totalPeirceMul = 1f;
 
-        int newFR = ammo ? 0 : 20;
+        int newFR = ammo ? 0 : 13;
         int bonusFR =0;
         float frmul =1;
         float totalFrMul = 1f;
@@ -480,7 +482,7 @@ public class WeaponAmmoStats {
         }
         int finalAmmo = Math.max((int)Math.floor((((newAmmoMax  * ((ammoMul/ (mulammoParts != 0 ? mulammoParts : 1)))))*totalAmmoMul) + bonusAmmoMax), AMMO_POINTS_MUL);
         int finalPeirce = Math.max((int)Math.floor(((newPeirce * (( peirceMul / (mulpierceParts != 0 ? mulpierceParts : 1)))))*totalPeirceMul)+bonusPeirce,1);
-        int finalFr = Math.max((int)Math.floor(((newFR * ((frmul/ (mulfireParts != 0 ? mulfireParts : 1))))) * totalFrMul) + bonusFR,1);
+        int finalFr = Math.max((int)Math.floor(((newFR * ((frmul/ (mulfireParts != 0 ? mulfireParts : 1))))) * totalFrMul) + bonusFR,4);
         float finalInaccuracy = Math.max(((newInacc * (( inaccMod / (mulinaccParts != 0 ? mulinaccParts : 1)))) * totalInaccMul)+ bonusInacc,0);
         float finalProjectileCount = Math.max(((newProj * ((projMul /(mulprojParts  != 0 ? mulprojParts : 1)))) * totalProjMul) + bonusProj,ammo? 1: 0);
         float finalMaxDmg = Math.max(((newdmgMax * ((damageMulMax/ (muldmgMaxParts != 0 ? muldmgMaxParts : 1))))*totalMaxMul) + bonusDmgMax,0.5f);

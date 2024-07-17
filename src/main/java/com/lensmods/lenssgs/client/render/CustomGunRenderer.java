@@ -1,7 +1,9 @@
 package com.lensmods.lenssgs.client.render;
 
 import com.lensmods.lenssgs.LensSGS;
+import com.lensmods.lenssgs.core.data.AllowedParts;
 import com.lensmods.lenssgs.core.datacomps.ModelColorPair;
+import com.lensmods.lenssgs.core.items.AmmoBaseItem;
 import com.lensmods.lenssgs.core.items.GunBaseItem;
 import com.lensmods.lenssgs.core.util.RenderUtil;
 import com.lensmods.lenssgs.init.LenDataComponents;
@@ -47,8 +49,8 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
     }
     private int sprintTrans;
     private int lastSprintTrans;
-    private int sprintCD;
-    private int sprintInt;
+
+    public float recoilTimer = 0;
 
     private float offHandTrans;
     private float lastOffHandTrans;
@@ -62,8 +64,8 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
             float partialTicks = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(true);
             InteractionHand handy = Minecraft.getInstance().player.getMainHandItem() == heldItem ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
             HumanoidArm army = handy == InteractionHand.MAIN_HAND ? HumanoidArm.RIGHT : HumanoidArm.LEFT;
-
-            if(handy == InteractionHand.OFF_HAND)
+            poseStack.pushPose();
+            if(handy == InteractionHand.OFF_HAND&& pDisplayContext!=ItemDisplayContext.GUI)
             {
                 float offhand = 1.0F - Mth.lerp(1, this.lastOffHandTrans, this.offHandTrans);
                 poseStack.translate(0, offhand * -0.6F, 0);
@@ -77,18 +79,68 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
             // Values are based on fuck around and find out.
             //X is L-R, Y is U-D, Z is F-B Rel to Origin
             float side = handy == InteractionHand.MAIN_HAND ? 1:-1;
+            poseStack.translate(0.52, 1.55, (0.052f * -side) - 0.052f);
+            /* Applies basic stuff transforms */
+            int blockLight = player.isOnFire() ? 15 : player.level().getBrightness(LightLayer.BLOCK, BlockPos.containing(player.getEyePosition(partialTicks)));
+            blockLight = Math.min(blockLight, 15);
+            int packedLight = LightTexture.pack(blockLight, player.level().getBrightness(LightLayer.SKY, BlockPos.containing(player.getEyePosition(partialTicks))));
+            if(pDisplayContext.firstPerson() && pDisplayContext != ItemDisplayContext.GUI) {
+                this.applyBobbingTransforms(poseStack, partialTicks);
+                this.applySwayTransforms(poseStack, player, 0, 0, 0, partialTicks);
+                this.applySprintingTransforms(army, poseStack, partialTicks);
+                this.applyShieldTransforms(poseStack, player, partialTicks);
+            }
+            /* Renders the first persons arms from the grip type of the weapon */
+            if(recoilTimer > 0f && pDisplayContext.firstPerson() && pDisplayContext!= ItemDisplayContext.GUI) {
+                poseStack.translate(0,0,Mth.lerp(partialTicks,recoilTimer * 0.15f,0));
+                recoilTimer-=partialTicks;
+            }
+            if(!pDisplayContext.firstPerson() && pDisplayContext != ItemDisplayContext.GUI) {
+                poseStack.translate(-0.12 * side ,-0.12f, 0.2f);
+            }
+            if(pDisplayContext == ItemDisplayContext.GUI) {
+                poseStack.translate(0,-0.6f,0);
+                poseStack.scale(0.75f,0.75f,0.75f);
+                poseStack.mulPose(Axis.YP.rotationDegrees(30f));
+            }
+            this.renderWeapon(Minecraft.getInstance().player, heldItem,army, pDisplayContext, poseStack, pBuffer, packedLight, partialTicks);
+            poseStack.popPose();
+        }
+        if (heldItem.getItem() instanceof AmmoBaseItem) {
+            float partialTicks = Minecraft.getInstance().getTimer().getGameTimeDeltaPartialTick(true);
+            InteractionHand handy = Minecraft.getInstance().player.getMainHandItem() == heldItem ? InteractionHand.MAIN_HAND : InteractionHand.OFF_HAND;
+            HumanoidArm army = handy == InteractionHand.MAIN_HAND ? HumanoidArm.RIGHT : HumanoidArm.LEFT;
+            poseStack.pushPose();
+            if(handy == InteractionHand.OFF_HAND && pDisplayContext!=ItemDisplayContext.GUI)
+            {
+                float offhand = 1.0F - Mth.lerp(1, this.lastOffHandTrans, this.offHandTrans);
+                poseStack.translate(0, offhand * -0.6F, 0);
+            }
+            LocalPlayer player = Objects.requireNonNull(Minecraft.getInstance().player);
+            /* Applies custom bobbing animations */
+            // Values are based on fuck around and find out.
+            //X is L-R, Y is U-D, Z is F-B Rel to Origin
+            float side = handy == InteractionHand.MAIN_HAND ? 1:-1;
             poseStack.translate(0.52 ,1.55, (0.052f*-side) - 0.052f);
             /* Applies basic stuff transforms */
             int blockLight = player.isOnFire() ? 15 : player.level().getBrightness(LightLayer.BLOCK, BlockPos.containing(player.getEyePosition(partialTicks)));
             blockLight = Math.min(blockLight, 15);
             int packedLight = LightTexture.pack(blockLight, player.level().getBrightness(LightLayer.SKY, BlockPos.containing(player.getEyePosition(partialTicks))));
-            this.applyBobbingTransforms(poseStack, partialTicks);
-            this.applySwayTransforms(poseStack, player, 0, 0, 0, partialTicks);
-            this.applySprintingTransforms(army, poseStack, partialTicks);
-            this.applyShieldTransforms(poseStack, player, partialTicks);
-            /* Renders the first persons arms from the grip type of the weapon */
-            poseStack.pushPose();
-            this.renderWeapon(Minecraft.getInstance().player, heldItem,army, pDisplayContext, poseStack, pBuffer, packedLight, partialTicks);
+            if(pDisplayContext.firstPerson() && pDisplayContext!= ItemDisplayContext.GUI) {
+                this.applyBobbingTransforms(poseStack, partialTicks);
+                this.applySwayTransforms(poseStack, player, 0, 0, 0, partialTicks);
+                this.applySprintingTransforms(army, poseStack, partialTicks);
+                this.applyShieldTransforms(poseStack, player, partialTicks);
+            }
+            if(!pDisplayContext.firstPerson()&& pDisplayContext != ItemDisplayContext.GUI) {
+                poseStack.translate(side * -0.1f ,-0.1, (0.012f*-side) - 0.012f);
+            }
+            if(pDisplayContext == ItemDisplayContext.GUI) {
+                poseStack.translate(-0.55f,0.15f,-0.25);
+                poseStack.mulPose(Axis.YP.rotationDegrees(45f));
+                poseStack.scale(2f,2f,2f);
+            }
+            this.renderAmmo(Minecraft.getInstance().player,pDisplayContext,army, heldItem, poseStack, pBuffer, packedLight, partialTicks);
             poseStack.popPose();
         }
     }
@@ -129,7 +181,7 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
         {
             poseStack.translate(x, y, z);
 
-            double zOffset = 0;//Todo
+            double zOffset = 0;//Todo?
             poseStack.translate(0, -0.25, zOffset);
             poseStack.mulPose(Axis.XP.rotationDegrees(Mth.lerp(partialTicks, this.lastFallSway, this.fallSway)));
             poseStack.translate(0, 0.25, -zOffset);
@@ -148,16 +200,41 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
         }
     }
 
+    private void renderAmmo(@Nullable LivingEntity entity, ItemDisplayContext display,HumanoidArm handy,ItemStack stack, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light, float partialTicks)
+    {
+        poseStack.pushPose();
+        if(stack.getOrDefault(LenDataComponents.PART_COLOR_LIST,null) != null) {
 
+            float side = entity.getMainHandItem() == stack ? 1 : -1;
+            poseStack.scale(1.3f,1.3f,1.3f);
+            if(display!=ItemDisplayContext.GUI) {
+                poseStack.translate((0.025f * side) - 0.025f, -0.22f * side, (0.05f * side) - 0.05f);
+                poseStack.mulPose(Axis.YP.rotationDegrees(7.5f * side));
+            }
+            poseStack.mulPose(Axis.XP.rotationDegrees(3.9f));
+            for (ModelColorPair pair : stack.get(LenDataComponents.PART_COLOR_LIST)) {
+                if(!pair.model().contains(AllowedParts.CASING)) {continue;}
+                BakedModel bakedModel;
+                bakedModel = Minecraft.getInstance().getModelManager().getModel(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID, "ammo/box")));
+                if (bakedModel != Minecraft.getInstance().getModelManager().getMissingModel()) {
+                    RenderUtil.applyTransformType(poseStack, display, entity,bakedModel);
+                    RenderUtil.forceItemWithColorBlend(bakedModel,ItemDisplayContext.NONE,null,stack,poseStack,renderTypeBuffer,light, OverlayTexture.NO_OVERLAY,pair.color(),1f);
+                }
+            }
+        }
+        poseStack.popPose();
+    }
     public void renderWeapon(@Nullable LivingEntity entity, ItemStack stack,HumanoidArm handy ,ItemDisplayContext display, PoseStack poseStack, MultiBufferSource renderTypeBuffer, int light, float partialTicks)
     {
         if(stack.getItem() instanceof GunBaseItem)
         {
             float side = entity.getMainHandItem() == stack ? 1 : -1;
             poseStack.scale(1.3f,1.3f,1.3f);
-            poseStack.translate((0.025f*side) - 0.025f,-0.22f*side,(0.05f*side) - 0.05f);
+            if (display != ItemDisplayContext.GUI) {
+                poseStack.translate((0.025f * side) - 0.025f, -0.22f * side, (0.05f * side) - 0.05f);
+                poseStack.mulPose(Axis.YP.rotationDegrees(7.5f * side));
+            }
             poseStack.mulPose(Axis.XP.rotationDegrees(3.9f));
-            poseStack.mulPose(Axis.YP.rotationDegrees(7.5f*side));
             this.renderGun(entity, display,handy,stack, poseStack, renderTypeBuffer, light, partialTicks);
         }
     }

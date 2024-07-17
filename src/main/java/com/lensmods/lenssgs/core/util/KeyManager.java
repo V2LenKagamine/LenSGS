@@ -1,12 +1,17 @@
 package com.lensmods.lenssgs.core.util;
 
 import com.lensmods.lenssgs.LensSGS;
+import com.lensmods.lenssgs.networking.messages.CTSReload;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.ScreenEvent;
+import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import net.neoforged.neoforge.common.util.Lazy;
+import net.neoforged.neoforge.network.PacketDistributor;
 import org.lwjgl.glfw.GLFW;
 //This class is modified from silentchaos512. Go check out Silent's Gear. NOW.
 @EventBusSubscriber(modid = LensSGS.MODID, bus = EventBusSubscriber.Bus.GAME, value = Dist.CLIENT)
@@ -16,6 +21,7 @@ public class KeyManager {
     public static final Lazy<KeyMapping> DISPLAY_CONSTRUCTION = Lazy.of(() -> new KeyMapping("key.lenssgs.displayConstruction", GLFW.GLFW_KEY_LEFT_ALT, "key.categories.lenssgs"));
     public static final Lazy<KeyMapping> CYCLE_BACK = Lazy.of(() -> new KeyMapping("key.lenssgs.cycle.back", GLFW.GLFW_KEY_Z, "key.categories.lenssgs"));
     public static final Lazy<KeyMapping> CYCLE_NEXT = Lazy.of(() -> new KeyMapping("key.lenssgs.cycle.next", GLFW.GLFW_KEY_C, "key.categories.lenssgs"));
+    public static final Lazy<KeyMapping> RELOAD = Lazy.of(() -> new KeyMapping("key.lenssgs.reload", KeyConflictContext.IN_GAME, InputConstants.Type.KEYSYM,GLFW.GLFW_KEY_R,"key.categories.lenssgs"));
 
     private static int cycleCount = 0;
 
@@ -41,6 +47,13 @@ public class KeyManager {
         }
         if (CYCLE_BACK.get().matches(event.getKeyCode(), event.getScanCode())) {
             --cycleCount;
+        }
+    }
+
+    @SubscribeEvent
+    public static void onKeyDownGame(ClientTickEvent.Post event) {
+        while (RELOAD.get().consumeClick()){
+            PacketDistributor.sendToServer(new CTSReload(false));
         }
     }
 

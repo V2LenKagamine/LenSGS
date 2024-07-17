@@ -42,7 +42,7 @@
   "traitLevelList": [
     {
       "allowedParts": [
-        "all"
+        "bullet"
       ],
       "level": 1,
       "trait": "eco_friendly"

@@ -392,7 +392,7 @@ public class RenderUtil
             poseStack.pushPose();
             if(isShortHanded)
             {
-                poseStack.translate(0.1f*side, 0.45, -0.7);
+                poseStack.translate(-0.11f*side, 0.45, -0.75);
                 poseStack.scale(0.75F, 0.75F, 0.75F);
                 poseStack.translate(-4.0 * 0.0625 * side, 0, 0);
                 poseStack.translate(-(armWidth / 2.0) * 0.0625 * side, -1.6, 0);
@@ -416,7 +416,7 @@ public class RenderUtil
                 // Back arm holding the handle,slightly rotated
                 poseStack.pushPose();
                 if (isBullpup){
-                    poseStack.translate(0,0,.2f);
+                    poseStack.translate(0,0,.175f);
                 }
                 poseStack.translate(-0.095f*side, 0.425, -0.75);
                 poseStack.scale(0.75F, 0.75F, 0.75F);

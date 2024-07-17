@@ -21,7 +21,7 @@
       ],
       "modType": "add",
       "stat": "stat_gravity_mod",
-      "val": -0.2
+      "val": -0.01
     },
     {
       "allowedParts": [
@@ -31,7 +31,7 @@
       ],
       "modType": "add",
       "stat": "stat_velocity_mul",
-      "val": 0.2
+      "val": 0.02
     },
     {
       "allowedParts": [
@@ -41,7 +41,7 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 1.0
+      "val": 0.75
     },
     {
       "allowedParts": [
@@ -51,7 +51,7 @@
       ],
       "modType": "add",
       "stat": "stat_max_damage",
-      "val": 1.0
+      "val": 0.75
     }
   ],
   "traitLevelList": [

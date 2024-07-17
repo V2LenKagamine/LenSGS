@@ -46,6 +46,8 @@
   "lenssgs.firerate": "Fire-Rate:",
   "lenssgs.gold": "Gold",
   "lenssgs.grav_mult": "Bullet Gravity:",
+  "lenssgs.gun_click": "Gun Clicks",
+  "lenssgs.gun_shot": "Gun Fires",
   "lenssgs.gunfake1": "This gun is entirely fake.",
   "lenssgs.gunfake2": "That, or the parts are all broken!",
   "lenssgs.gunmat_useful": "This looks usable for a Gun or Ammo...",
@@ -103,5 +105,6 @@
   "lenssgs.tracing": "Revealing",
   "lenssgs.velocity_mult": "Bullet Speed:*",
   "lenssgs.void_metal": "Void Metal",
+  "lenssgs.void_reave": "Void Beckons",
   "lenssgs.voidtouched": "Void's-Maw"
 }

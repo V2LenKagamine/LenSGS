@@ -268,13 +268,22 @@ public class GunRecipe extends CustomRecipe {
                     if (mainboi.get(LenDataComponents.AMMO_COUNTER) < mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max()) {
                         var current = mainboi.get(LenDataComponents.AMMO_COUNTER);
                         int lacking = mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() - current;
-                        int torestore = lacking < 0 ? mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() : Math.max(lacking,4*WeaponAmmoStats.AMMO_POINTS_MUL);
-                        mainboi.set(LenDataComponents.AMMO_COUNTER,torestore);
+                        int torestore = lacking < 0 ? mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() : Math.min(lacking,32*WeaponAmmoStats.AMMO_POINTS_MUL);
+                        mainboi.set(LenDataComponents.AMMO_COUNTER,torestore+current);
                         return mainboi;
                     }
                 }
             }
             if(ing.getItem() instanceof GunPartBaseItem) {//Ok, adding or swapping part here.
+                if(mainboi.getItem() instanceof GunBaseItem) {
+                    if(ing.getOrDefault(LenDataComponents.GUN_PART_HOLDER,null)!=null) {
+                        if(!AllowedParts.ANY_GUN_PART.contains(ing.get(LenDataComponents.GUN_PART_HOLDER).getName())) {return ItemStack.EMPTY;}
+                    }
+                }else if (mainboi.getItem() instanceof AmmoBaseItem) {
+                    if(ing.getOrDefault(LenDataComponents.GUN_PART_HOLDER,null)!=null) {
+                        if(!AllowedParts.ANY_BULLET_PART.contains(ing.get(LenDataComponents.GUN_PART_HOLDER).getName())) {return ItemStack.EMPTY;}
+                    }
+                }
                 GunComp gunData = mainboi.get(LenDataComponents.GUN_COMP);
                 for (GunPartHolder part : gunData.getPartList()) {
                     if(ing.get(LenDataComponents.GUN_PART_HOLDER).getName().equals(part.getName())) { //Ok, we already have a part, swap it.

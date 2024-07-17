@@ -2,6 +2,7 @@ package com.lensmods.lenssgs.init;
 
 import com.lensmods.lenssgs.LensSGS;
 import com.lensmods.lenssgs.core.entity.GenericProjectile;
+import com.lensmods.lenssgs.core.entity.effects.LaceratedEffect;
 import com.lensmods.lenssgs.core.entity.effects.ShatterEffect;
 import com.lensmods.lenssgs.core.util.Color;
 import net.minecraft.core.registries.Registries;
@@ -40,7 +41,7 @@ public class LenEnts {
     public static final DeferredRegister<Potion> POTIONS = DeferredRegister.create(Registries.POTION,LensSGS.MODID);
 
     public static final DeferredHolder<MobEffect, ShatterEffect> SHATTER_EFFECT = EFFECTS.register("shatter",()-> new ShatterEffect(MobEffectCategory.HARMFUL, Color.CORAL.getColor()));
-    public static final DeferredHolder<MobEffect, ShatterEffect> LACERATE_EFFECT = EFFECTS.register("lacerated",()-> new ShatterEffect(MobEffectCategory.HARMFUL, Color.DARKRED.getColor()));
+    public static final DeferredHolder<MobEffect, LaceratedEffect> LACERATE_EFFECT = EFFECTS.register("lacerated",()-> new LaceratedEffect(MobEffectCategory.HARMFUL, Color.DARKRED.getColor()));
     public static final Supplier<Potion> LACERATE_POTION = POTIONS.register("laceration_potion", ()-> new Potion(new MobEffectInstance(LACERATE_EFFECT,600)));
 
 
