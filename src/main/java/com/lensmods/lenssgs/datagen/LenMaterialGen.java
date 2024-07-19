@@ -18,6 +18,7 @@ import java.util.List;
 
 import static com.lensmods.lenssgs.core.data.AllowedParts.*;
 import static com.lensmods.lenssgs.core.data.MaterialStats.*;
+import static com.lensmods.lenssgs.datagen.LenTagKeys.*;
 
 public class LenMaterialGen {
 
@@ -25,7 +26,7 @@ public class LenMaterialGen {
     public static final List<String> NOT_PROPELLANT = List.of(AllowedParts.CASING,AllowedParts.ROUND,AllowedParts.ACTION,AllowedParts.MAGAZINE,AllowedParts.BARREL,AllowedParts.RECEIVER,
             STOCK);
 
-    public static final List<GunMaterial> VANILLA_MATS = List.of(
+    public static final List<GunMaterial> DEFAULT_MATS = List.of(
             new GunMaterial("wood",WOOD_STATS,WOOD_TRAITS,Tags.Items.RODS_WOODEN,Color.BURLYWOOD,List.of(STOCK,ROUND)),
             new GunMaterial("stone", STONE_STATS, null,Tags.Items.COBBLESTONES,Color.GREY,NOT_PROPELLANT),
             new GunMaterial("copper", COPPER_STATS, COPPER_TRAITS,Tags.Items.INGOTS_COPPER,Color.COPPER,NOT_PROPELLANT),
@@ -52,10 +53,23 @@ public class LenMaterialGen {
 
             new GunMaterial("void_metal",VOID_STATS,VOID_TRAITS,Ingredient.of(LenItems.VOIDMETAL),Color.BLACK,NOT_PROPELLANT),
             new GunMaterial("wyrm_steel",WYRM_STATS,WYRM_TRAITS,Ingredient.of(LenItems.WYRMSTEEL),Color.MEDIUMPURPLE,NOT_PROPELLANT),
-            new GunMaterial("blitz_gold",BLITZ_STATS,BLITZ_TRAITS,Ingredient.of(LenItems.BLITZGOLD),Color.GOLDENROD,NOT_PROPELLANT)
+            new GunMaterial("blitz_gold",BLITZ_STATS,BLITZ_TRAITS,Ingredient.of(LenItems.BLITZGOLD),Color.GOLDENROD,NOT_PROPELLANT),
+            //Common Mats
+            new GunMaterial("bronze",BRONZE_STATS,null,BRONZE_TAG,Color.BRONZE,NOT_PROPELLANT),
+            new GunMaterial("refined_obsidian",REF_OBSIDIAN_STATS,REF_OBSIDIAN_TRAITS,REFINED_OB_TAG,Color.OBSIDIAN,NOT_PROPELLANT),
+            new GunMaterial("refined_glowstone",REF_GLOWSTONE_STATS,REF_GLOWSTONE_TRAITS,REFINED_GLOW_TAG,Color.GLOWSTONE,NOT_PROPELLANT),
+            new GunMaterial("steel",STEEL_STATS,null,STEEL_TAG,Color.STEEL,NOT_PROPELLANT),
+            new GunMaterial("osmium",OSMIUM_STATS,null,OSMIUM_TAG,Color.OSMIUM,NOT_PROPELLANT),
+            new GunMaterial("tin",TIN_STATS,null,TIN_TAG,Color.LIGHTGRAY,NOT_PROPELLANT),
+            new GunMaterial("lead",LEAD_STATS,null,LEAD_TAG,Color.LEAD,NOT_PROPELLANT),
+            new GunMaterial("uranium",URANIUM_STATS,URANIUM_TRAITS,URANIUM_TAG,Color.DARKGREEN,NOT_PROPELLANT),
+            new GunMaterial("aluminum",ALUMINUM_STATS,null,ALUMINUM_TAG,Color.ALICEBLUE,NOT_PROPELLANT),
+            new GunMaterial("electrum",ELECTRUM_STATS,ELECTRUM_TRAITS,ELECTRUM_TAG,Color.LIGHTYELLOW,NOT_PROPELLANT),
+            new GunMaterial("plutonium",PLUTONIUM_STATS,PLUTONIUM_TRAITS,PLUTONIUM_TAG,Color.INDIANRED,NOT_PROPELLANT),
+            new GunMaterial("silver",SILVER_STATS,SILVER_TRAITS,SILVER_TAG,Color.SILVER,NOT_PROPELLANT)
     );
 
-    public static RegistrySetBuilder VANILLA_MATERIALS_BUILDER = new RegistrySetBuilder().add(LenDataReg.GUN_MAT_KEY, boot -> VANILLA_MATS.forEach(mat ->{
+    public static RegistrySetBuilder DEFAULT_MATERIALS_BUILDER = new RegistrySetBuilder().add(LenDataReg.GUN_MAT_KEY, boot -> DEFAULT_MATS.forEach(mat ->{
             boot.register(ResourceKey.create(LenDataReg.GUN_MAT_KEY,ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,mat.getMatName())),mat);
     }));
 }

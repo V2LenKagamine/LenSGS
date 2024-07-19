@@ -19,6 +19,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.tags.EntityTypeTags;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -190,6 +191,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
 
     protected void onHitEntity(Entity entity, Vec3 hitVec, Vec3 startVec, Vec3 endVec)
     {
+        float damage = this.getDamage();
         for(TraitLevel trait : traits) {
             switch (trait.trait()) {
                 case MaterialStats.BLAZING: {
@@ -241,9 +243,15 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
                     }
                     break;
                 }
+                case MaterialStats.HALLOW_POINT: {
+                    if(entity.getType().is(EntityTypeTags.UNDEAD)) {
+                        damage *= 1 + (0.1f * trait.level());
+                    }
+                    break;
+                }
             }
         }
-        float damage = this.getDamage();
+
         DamageSource source = LenDamageTypes.Sources.projectile(this.level().registryAccess(), this, this.Owner);
         entity.hurt(source, damage);
     }

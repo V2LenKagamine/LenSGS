@@ -140,7 +140,7 @@ public class LensSGS
         event.getGenerator().addProvider(event.includeServer(), (DataProvider.Factory<LenTagKeys>) out->
                 new LenTagKeys(out,event.getLookupProvider(),BTP.contentsGetter()));
         event.getGenerator().addProvider(event.includeServer(), (DataProvider.Factory<MaterialProvider>) out ->
-                new MaterialProvider(out,LenMaterialGen.VANILLA_MATERIALS_BUILDER, event.getLookupProvider()));
+                new MaterialProvider(out,LenMaterialGen.DEFAULT_MATERIALS_BUILDER, event.getLookupProvider()));
         event.getGenerator().addProvider((event.includeServer()),(DataProvider.Factory<LenRecipeGen>) out -> new LenRecipeGen(out,event.getLookupProvider()));
         event.getGenerator().addProvider(true, (DataProvider.Factory<LenModelGen>) out -> new LenModelGen(out, MODID,event.getExistingFileHelper()));
         event.getGenerator().addProvider(true, (DataProvider.Factory<LenSoundGen>) out -> new LenSoundGen(out,event.getExistingFileHelper()));

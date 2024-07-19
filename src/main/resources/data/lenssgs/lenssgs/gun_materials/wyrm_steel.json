@@ -47,9 +47,10 @@
     },
     {
       "allowedParts": [
+        "barrel",
         "stock",
-        "action",
-        "casing"
+        "casing",
+        "bullet"
       ],
       "modType": "multiply",
       "stat": "stat_min_damage",
@@ -57,9 +58,10 @@
     },
     {
       "allowedParts": [
+        "barrel",
         "stock",
-        "action",
-        "casing"
+        "casing",
+        "bullet"
       ],
       "modType": "multiply",
       "stat": "stat_max_damage",

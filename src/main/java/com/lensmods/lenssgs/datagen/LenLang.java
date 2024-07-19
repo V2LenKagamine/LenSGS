@@ -64,6 +64,7 @@ public class LenLang extends LanguageProvider {
         keyof(VOID_TOUCHED,"Void's-Maw");
         keyof(SHATTERING,"Shattering");
         keyof(LINGERING,"Lingering");
+        keyof(HALLOW_POINT,"Hallow-Point");
         //Keybinds
         add("key.categories.lenssgs","Len's Gun Shenanigans");
         bindkeyof("cycle.back", "Tooltip Cycle Back");
@@ -147,6 +148,19 @@ public class LenLang extends LanguageProvider {
         keyof("blitz_gold","Blitz Gold");
         keyof("copper_rod","Copper Bolt");
         keyof("end_rod","End Rod");
+        //Modded Mats
+        keyof("bronze","Bronze");
+        keyof("refined_obsidian","Refined Obsidian");
+        keyof("refined_glowstone","Refined Glowstone");
+        keyof("steel","Steel");
+        keyof("osmium","Osmium");
+        keyof("tin","Tin");
+        keyof("lead","Lead");
+        keyof("uranium","Uranium");
+        keyof("aluminum","Aluminum");
+        keyof("electrum","Electrum");
+        keyof("plutonium","Plutonium");
+        keyof("silver","Silver");
     }
 
     protected void keyof(String key,String toTranslate) {

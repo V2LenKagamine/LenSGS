@@ -11,13 +11,13 @@
   "color": {
     "alpha": 1.0,
     "blue": 0.0,
-    "green": 0.0,
+    "green": 0.39215687,
     "red": 0.0
   },
   "ingredient": {
-    "item": "lenssgs:void_metal"
+    "tag": "c:ingots/uranium"
   },
-  "partType": "void_metal",
+  "partType": "uranium",
   "statModList": [
     {
       "allowedParts": [
@@ -25,15 +25,7 @@
       ],
       "modType": "multiply",
       "stat": "stat_ammo_max",
-      "val": 1.75
-    },
-    {
-      "allowedParts": [
-        "casing"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 0.75
+      "val": 0.9
     },
     {
       "allowedParts": [
@@ -41,31 +33,31 @@
         "action",
         "casing"
       ],
-      "modType": "multiply",
+      "modType": "add",
       "stat": "stat_fire_rate",
-      "val": 1.2
+      "val": 2.0
     },
     {
       "allowedParts": [
-        "barrel",
         "stock",
+        "action",
         "casing",
         "bullet"
       ],
       "modType": "multiply",
       "stat": "stat_min_damage",
-      "val": 1.1
+      "val": 0.9
     },
     {
       "allowedParts": [
-        "barrel",
         "stock",
+        "action",
         "casing",
         "bullet"
       ],
       "modType": "multiply",
       "stat": "stat_max_damage",
-      "val": 1.1
+      "val": 0.9
     },
     {
       "allowedParts": [
@@ -76,24 +68,7 @@
       ],
       "modType": "multiply",
       "stat": "stat_inaccuracy",
-      "val": 0.9
-    },
-    {
-      "allowedParts": [
-        "bullet",
-        "casing"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_pierce",
-      "val": 0.05
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_projectile_count",
-      "val": 0.05
+      "val": 1.25
     },
     {
       "allowedParts": [
@@ -109,7 +84,15 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 3.5
+      "val": 1.75
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_projectile_count",
+      "val": 1.75
     },
     {
       "allowedParts": [
@@ -117,7 +100,7 @@
       ],
       "modType": "add",
       "stat": "stat_inaccuracy",
-      "val": -3.0
+      "val": -0.5
     }
   ],
   "traitLevelList": [
@@ -125,8 +108,22 @@
       "allowedParts": [
         "bullet"
       ],
+      "level": 6,
+      "trait": "shattering"
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
       "level": 2,
-      "trait": "voidtouched"
+      "trait": "lacerating"
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "level": 2,
+      "trait": "lingering"
     }
   ]
 }

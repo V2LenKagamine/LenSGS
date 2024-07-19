@@ -123,9 +123,6 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
             float side = handy == InteractionHand.MAIN_HAND ? 1:-1;
             poseStack.translate(0.52 ,1.55, (0.052f*-side) - 0.052f);
             /* Applies basic stuff transforms */
-            int blockLight = player.isOnFire() ? 15 : player.level().getBrightness(LightLayer.BLOCK, BlockPos.containing(player.getEyePosition(partialTicks)));
-            blockLight = Math.min(blockLight, 15);
-            int packedLight = LightTexture.pack(blockLight, player.level().getBrightness(LightLayer.SKY, BlockPos.containing(player.getEyePosition(partialTicks))));
             if(pDisplayContext.firstPerson() && pDisplayContext!= ItemDisplayContext.GUI) {
                 this.applyBobbingTransforms(poseStack, partialTicks);
                 this.applySwayTransforms(poseStack, player, 0, 0, 0, partialTicks);
@@ -140,7 +137,7 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
                 poseStack.mulPose(Axis.YP.rotationDegrees(45f));
                 poseStack.scale(2f,2f,2f);
             }
-            this.renderAmmo(Minecraft.getInstance().player,pDisplayContext,army, heldItem, poseStack, pBuffer, packedLight, partialTicks);
+            this.renderAmmo(Minecraft.getInstance().player,pDisplayContext,army, heldItem, poseStack, pBuffer, LightTexture.FULL_BRIGHT, partialTicks);
             poseStack.popPose();
         }
     }

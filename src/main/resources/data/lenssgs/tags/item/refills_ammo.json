@@ -3,6 +3,14 @@
     {
       "id": "#c:gunpowders",
       "required": false
+    },
+    {
+      "id": "minecraft:tnt",
+      "required": false
+    },
+    {
+      "id": "minecraft:wind_charge",
+      "required": false
     }
   ]
 }

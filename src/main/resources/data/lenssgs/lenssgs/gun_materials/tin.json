@@ -10,22 +10,30 @@
   ],
   "color": {
     "alpha": 1.0,
-    "blue": 0.8,
-    "green": 0.8,
-    "red": 0.8
+    "blue": 0.827451,
+    "green": 0.827451,
+    "red": 0.827451
   },
   "ingredient": {
-    "tag": "c:ingots/iron"
+    "tag": "c:ingots/tin"
   },
-  "partType": "iron",
+  "partType": "tin",
   "statModList": [
+    {
+      "allowedParts": [
+        "magazine"
+      ],
+      "modType": "multiply",
+      "stat": "stat_ammo_max",
+      "val": 0.75
+    },
     {
       "allowedParts": [
         "casing"
       ],
       "modType": "multiply",
       "stat": "stat_ammo_max",
-      "val": 0.9
+      "val": 1.05
     },
     {
       "allowedParts": [
@@ -39,47 +47,56 @@
     },
     {
       "allowedParts": [
-        "casing",
+        "stock",
+        "action",
+        "casing"
+      ],
+      "modType": "multiply",
+      "stat": "stat_min_damage",
+      "val": 0.8
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "action",
+        "casing"
+      ],
+      "modType": "multiply",
+      "stat": "stat_max_damage",
+      "val": 0.8
+    },
+    {
+      "allowedParts": [
         "bullet",
-        "prop"
+        "casing"
+      ],
+      "modType": "multiply",
+      "stat": "stat_pierce",
+      "val": 0.8
+    },
+    {
+      "allowedParts": [
+        "bullet"
       ],
       "modType": "add",
       "stat": "stat_max_damage",
-      "val": 0.5
+      "val": -0.5
     },
     {
       "allowedParts": [
         "bullet"
       ],
-      "modType": "multiply",
-      "stat": "stat_velocity_mul",
-      "val": 0.9
+      "modType": "add",
+      "stat": "stat_min_damage",
+      "val": -0.5
     },
     {
       "allowedParts": [
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_gravity_mod",
-      "val": 1.1
-    },
-    {
-      "allowedParts": [
-        "magazine",
-        "receiver"
+        "barrel"
       ],
       "modType": "add",
-      "stat": "stat_fire_rate",
-      "val": 0.75
-    },
-    {
-      "allowedParts": [
-        "barrel",
-        "stock"
-      ],
-      "modType": "add",
-      "stat": "stat_fire_rate",
-      "val": -0.75
+      "stat": "stat_inaccuracy",
+      "val": 1.5
     }
   ],
   "traitLevelList": []

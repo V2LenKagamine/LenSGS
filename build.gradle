@@ -86,6 +86,10 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
     runtimeOnly('curse.maven:JEI-238222:5513346')
     runtimeOnly('curse.maven:JADE-324717:5493270')
+    runtimeOnly('curse.maven:mekanism-268560:5523554')
+    runtimeOnly('curse.maven:cloth-config-348521:5424576')
+    runtimeOnly('curse.maven:modern-industrialization-405388:5529060')
+    runtimeOnly('curse.maven:emi-580555:5497461')
 }
 
 tasks.withType(JavaCompile).configureEach {
