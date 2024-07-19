@@ -71,7 +71,7 @@
       ],
       "modType": "add",
       "stat": "stat_fire_rate",
-      "val": -2.5
+      "val": -0.5
     },
     {
       "allowedParts": [

@@ -3,7 +3,7 @@
   "category": "misc",
   "key": {
     "d": {
-      "tag": "c:storage_blocks/diamond"
+      "tag": "c:gems/diamond"
     },
     "n": {
       "tag": "c:ingots/netherite"
@@ -14,11 +14,11 @@
   },
   "pattern": [
     "nsn",
-    "ndn",
+    "ddd",
     "nsn"
   ],
   "result": {
-    "count": 1,
+    "count": 2,
     "id": "lenssgs:void_metal"
   }
 }

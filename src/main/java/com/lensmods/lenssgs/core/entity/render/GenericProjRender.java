@@ -30,22 +30,22 @@ public class GenericProjRender extends EntityRenderer<GenericProjectile> {
     @Override
     public void render(GenericProjectile entity, float entityYaw, float pTick, PoseStack poseStack, MultiBufferSource pBuffer, int light)
     {
-        if(entity.getVisualItem() == ItemStack.EMPTY || entity.tickCount <= 1)
+        if(entity.tickCount <= 1)
         {
             return;
         }
         poseStack.pushPose();
-            if(entity.getVisualItem().is(Items.ENDER_EYE) && entity.getSecondLife()) {
-                poseStack.translate(-0.5f,-0.5f,-0.5f);
-                RenderUtil.renderSphere(poseStack,pBuffer, LenRenderTypes.END_TRIANGLES,light,
-                        entity.getPercentLifeLeft() < 0.965f ?  1.5f*(Mth.square(entity.getPercentLifeLeft())) :  1.5f*(-10f * Mth.square(entity.getPercentLifeLeft())+10f),18, Color.BLACK);
-            }
-            else {
-                poseStack.mulPose(Axis.YP.rotationDegrees(180F));
-                poseStack.mulPose(Axis.YP.rotationDegrees(entityYaw));
-                poseStack.mulPose(Axis.XP.rotationDegrees(entity.getXRot()));
-                Minecraft.getInstance().getItemRenderer().renderStatic(entity.getVisualItem(), ItemDisplayContext.NONE, light, OverlayTexture.NO_OVERLAY, poseStack, pBuffer, entity.level(), 0);
-            }
+        if(entity.getVisualItem().is(Items.ENDER_EYE) && entity.getSecondLife()) {
+            poseStack.translate(-0.5f,-0.5f,-0.5f);
+            RenderUtil.renderSphere(poseStack,pBuffer, LenRenderTypes.END_TRIANGLES,light,
+                    entity.getPercentLifeLeft() < 0.965f ? 1.5f*(Mth.square(entity.getPercentLifeLeft())) :  1.5f*(-10f * Mth.square(entity.getPercentLifeLeft())+10f),18, Color.BLACK);
+        }
+        else if(entity.getVisualItem() != ItemStack.EMPTY){
+            poseStack.mulPose(Axis.YP.rotationDegrees(180F));
+            poseStack.mulPose(Axis.YP.rotationDegrees(entityYaw));
+            poseStack.mulPose(Axis.XP.rotationDegrees(entity.getXRot()));
+            Minecraft.getInstance().getItemRenderer().renderStatic(entity.getVisualItem(), ItemDisplayContext.NONE, light, OverlayTexture.NO_OVERLAY, poseStack, pBuffer, entity.level(), 0);
+        }
         poseStack.popPose();
     }
 }

@@ -62,7 +62,7 @@
       ],
       "modType": "add",
       "stat": "stat_velocity_mul",
-      "val": -0.25
+      "val": -0.0125
     },
     {
       "allowedParts": [
@@ -72,7 +72,7 @@
       ],
       "modType": "add",
       "stat": "stat_fire_rate",
-      "val": 10.0
+      "val": 2.5
     },
     {
       "allowedParts": [
@@ -80,7 +80,7 @@
       ],
       "modType": "add",
       "stat": "stat_projectile_count",
-      "val": -2.0
+      "val": -1.0
     },
     {
       "allowedParts": [
@@ -106,7 +106,7 @@
       ],
       "modType": "add",
       "stat": "stat_gravity_mod",
-      "val": 0.005
+      "val": 0.0025
     },
     {
       "allowedParts": [

@@ -25,7 +25,8 @@
     },
     {
       "allowedParts": [
-        "bullet"
+        "bullet",
+        "prop"
       ],
       "modType": "add",
       "stat": "stat_min_damage",

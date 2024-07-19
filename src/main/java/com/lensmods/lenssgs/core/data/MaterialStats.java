@@ -51,12 +51,12 @@ public final class MaterialStats {
             new StatMod(MIN_DMG,-1f,ADD,CASING),
             new StatMod(MAX_DMG,0.9f,AVG_MUL,AFFECTS_DMG_MOD),
             new StatMod(MIN_DMG,0.8f,AVG_MUL,AFFECTS_DMG_MOD),
-            new StatMod(VEL_MULT,-0.25f,ADD,AFFECTS_VEL),
-            new StatMod(FIRE_RATE,10f,ADD,AFFECTS_FIRE_RATE),
-            new StatMod(PROJ_COUNT, -2f,ADD,ROUND),
+            new StatMod(VEL_MULT,-0.0125f,ADD,AFFECTS_VEL),
+            new StatMod(FIRE_RATE,2.5f,ADD,AFFECTS_FIRE_RATE),
+            new StatMod(PROJ_COUNT, -1f,ADD,ROUND),
             new StatMod(AMMO_MAX,0.5f, AVG_MUL,MAGAZINE),
             new StatMod(INACCURACY_DEG,2f,ADD,BARREL,ROUND,RECEIVER),
-            new StatMod(GRAVITY_MOD, 0.005f,ADD,ROUND),
+            new StatMod(GRAVITY_MOD, 0.0025f,ADD,ROUND),
             new StatMod(INACCURACY_DEG, -0.75f,ADD,STOCK)
     );
 
@@ -66,7 +66,7 @@ public final class MaterialStats {
             new StatMod(FIRE_RATE,0.95f, AVG_MUL,AFFECTS_FIRE_RATE),
             new StatMod(MAX_DMG,-1F,ADD,AFFECTS_BASE_DMG),
             new StatMod(VEL_MULT,0.9f, AVG_MUL,ROUND),
-            new StatMod(FIRE_RATE,-2.5f,ADD,AFFECTS_FIRE_RATE),
+            new StatMod(FIRE_RATE,-0.5f,ADD,AFFECTS_FIRE_RATE),
             new StatMod(INACCURACY_DEG,2.5f,ADD,BARREL,RECEIVER),
             new StatMod(INACCURACY_DEG,-0.5f,ADD,STOCK)
     );
@@ -79,8 +79,8 @@ public final class MaterialStats {
             new StatMod(MAX_DMG,0.5F,ADD,AFFECTS_BASE_DMG),
             new StatMod(VEL_MULT,0.9f, AVG_MUL,ROUND),
             new StatMod(GRAVITY_MOD,1.1f, AVG_MUL,ROUND),
-            new StatMod(FIRE_RATE,5f,ADD,MAGAZINE,RECEIVER),
-            new StatMod(FIRE_RATE,-5F,ADD,BARREL,STOCK)
+            new StatMod(FIRE_RATE,1.5f,ADD,MAGAZINE,RECEIVER),
+            new StatMod(FIRE_RATE,-1.5F,ADD,BARREL,STOCK)
     );
     public static final List<StatMod> GOLD_STATS = List.of(
             new StatMod(AMMO_MAX,0.6f, AVG_MUL,MAGAZINE),
@@ -89,7 +89,7 @@ public final class MaterialStats {
             new StatMod(MIN_DMG,-1.5f,ADD,ROUND,CASING,RECEIVER),
             new StatMod(INACCURACY_DEG, -1.5f,ADD,BARREL,ACTION),
             new StatMod(INACCURACY_DEG,4F,ADD,STOCK),
-            new StatMod(FIRE_RATE, -7.5f,ADD,AFFECTS_FIRE_RATE),
+            new StatMod(FIRE_RATE, -2.5f,ADD,AFFECTS_FIRE_RATE),
             new StatMod(PROJ_COUNT,3f,ADD,ROUND)
     );
     public static final List<StatMod> DIAMOND_STATS = List.of(
@@ -115,9 +115,9 @@ public final class MaterialStats {
             new StatMod(MAX_DMG,2.5f,ADD,ROUND,ACTION),
             new StatMod(MIN_DMG,-1f,ADD,ROUND,ACTION),
             new StatMod(VEL_MULT,0.75f,AVG_MUL,AFFECTS_VEL),
-            new StatMod(FIRE_RATE,5f,ADD,ACTION,STOCK),
+            new StatMod(FIRE_RATE,2f,ADD,ACTION,STOCK),
             new StatMod(PROJ_COUNT, -2f,ADD,ROUND),
-            new StatMod(INACCURACY_DEG, -2.5f,ADD,STOCK),
+            new StatMod(INACCURACY_DEG, -2.5f,ADD,STOCK,RECEIVER),
             new StatMod(INACCURACY_DEG,1.25f, AVG_MUL,ROUND)
     );
     public static final List<TraitLevel>EMERALD_TRAITS = List.of(
@@ -141,20 +141,62 @@ public final class MaterialStats {
     public static final List<StatMod> VOID_STATS = List.of(
             new StatMod(AMMO_MAX,1.75f, AVG_MUL,MAGAZINE),
             new StatMod(AMMO_MAX,0.75f, AVG_MUL, CASING),
-            new StatMod(FIRE_RATE,0.6F,AVG_MUL,AFFECTS_FIRE_RATE),
+            new StatMod(FIRE_RATE,1.2F,AVG_MUL,AFFECTS_FIRE_RATE),
             new StatMod(MIN_DMG,1.1F,AVG_MUL,AFFECTS_FIRE_RATE),
             new StatMod(MAX_DMG,1.1F,AVG_MUL,AFFECTS_FIRE_RATE),
             new StatMod(INACCURACY_DEG,0.9F,AVG_MUL,STOCK,RECEIVER,ACTION,ROUND),
-            new StatMod(PIERCE,0.05f,MUL_TOTAL,ROUND),
+            new StatMod(PIERCE,0.05f,MUL_TOTAL,ROUND,CASING),
+            new StatMod(PROJ_COUNT,0.05f,MUL_TOTAL,ROUND),
             new StatMod(MAX_DMG,2f,ADD,ROUND),
             new StatMod(MIN_DMG,3.5f,ADD,ROUND),
             new StatMod(INACCURACY_DEG, -3f,ADD,BARREL)
     );
 
     public static final List<TraitLevel> VOID_TRAITS = List.of(
-            new TraitLevel(VOID_TOUCHED,1,ROUND),
-            new TraitLevel(VOID_TOUCHED,1)
+            new TraitLevel(VOID_TOUCHED,2,ROUND)
     );
+
+    public static final List<StatMod> WYRM_STATS = List.of(
+            new StatMod(AMMO_MAX,1.5f, AVG_MUL,MAGAZINE),
+            new StatMod(AMMO_MAX,0.5f, AVG_MUL, CASING),
+            new StatMod(FIRE_RATE,1.3F,AVG_MUL,AFFECTS_FIRE_RATE),
+            new StatMod(MIN_DMG,1.2F,AVG_MUL,AFFECTS_FIRE_RATE),
+            new StatMod(MAX_DMG,1.2F,AVG_MUL,AFFECTS_FIRE_RATE),
+            new StatMod(INACCURACY_DEG,1.1F,AVG_MUL,STOCK,RECEIVER,ACTION,ROUND),
+            new StatMod(PIERCE,0.05f,MUL_TOTAL,ROUND),
+            new StatMod(MAX_DMG,2.25f,ADD,ROUND),
+            new StatMod(MIN_DMG,3.25f,ADD,ROUND),
+            new StatMod(INACCURACY_DEG, 3f,ADD,BARREL)
+    );
+
+    public static final List<TraitLevel> WYRM_TRAITS = List.of(
+            new TraitLevel(LINGERING,1,ROUND),
+            new TraitLevel(SHATTERING,1,ROUND),
+            new TraitLevel(LINGERING,1,ANY_BULLET_PART),
+            new TraitLevel(SHATTERING,1,ANY_BULLET_PART),
+            new TraitLevel(BLAZING,1,ANY_BULLET_PART),
+            new TraitLevel(BLAZING,1)
+    );
+
+    public static final List<StatMod> BLITZ_STATS = List.of(
+            new StatMod(AMMO_MAX,1.25f, AVG_MUL,MAGAZINE),
+            new StatMod(AMMO_MAX,1.25f, AVG_MUL,CASING),
+            new StatMod(FIRE_RATE, -2.5f,ADD,AFFECTS_FIRE_RATE),
+            new StatMod(FIRE_RATE,-0.2F,MUL_TOTAL,AFFECTS_FIRE_RATE),
+            new StatMod(MIN_DMG,0.95F,AVG_MUL,AFFECTS_FIRE_RATE),
+            new StatMod(MAX_DMG,0.95F,AVG_MUL,AFFECTS_FIRE_RATE),
+            new StatMod(INACCURACY_DEG,1.1F,AVG_MUL,STOCK,RECEIVER,ACTION,ROUND),
+            new StatMod(MAX_DMG,1.75f,ADD,ROUND),
+            new StatMod(MIN_DMG,2.25f,ADD,ROUND),
+            new StatMod(INACCURACY_DEG, -1f,ADD,BARREL)
+    );
+
+    public static final List<TraitLevel> BLITZ_TRAITS = List.of(
+            new TraitLevel(SHOCKING,1,ROUND),
+            new TraitLevel(SHOCKING,1,ANY_BULLET_PART),
+            new TraitLevel(SHOCKING,1)
+    );
+
     public static final List<StatMod> GUNPOWDER_STATS = List.of(
             new StatMod(AMMO_MAX,1f, AVG_MUL,PROPELLANT) //This is here because I am too lazy to check that it wont throw a fit at an empty list.
     );
@@ -186,10 +228,20 @@ public final class MaterialStats {
     public static final List<StatMod> SLIME_STATS = List.of(
             new StatMod(MAX_DMG,-0.25F,MUL_TOTAL,ROUND),
             new StatMod(MIN_DMG,-0.25F,MUL_TOTAL,ROUND),
-            new StatMod(INACCURACY_DEG,6f,ADD,STOCK)
+            new StatMod(INACCURACY_DEG,-1f,ADD,STOCK)
     );
     public static final List<TraitLevel> SLIME_TRAITS = List.of(
             new TraitLevel(CONCUSSIVE,1,ROUND)
+    );
+
+    public static final List<StatMod> MAGMA_STATS = List.of(
+            new StatMod(MAX_DMG,0.25F,MUL_TOTAL,ROUND),
+            new StatMod(MIN_DMG,0.25F,MUL_TOTAL,ROUND),
+            new StatMod(INACCURACY_DEG,-2f,ADD,STOCK)
+    );
+    public static final List<TraitLevel> MAGMA_TRAITS = List.of(
+            new TraitLevel(CONCUSSIVE,1,ROUND),
+            new TraitLevel(BLAZING,1,ROUND,STOCK)
     );
 
     public static final List<TraitLevel> PRISMARINE_CRYSTAL_TRAITS = List.of(
@@ -200,7 +252,7 @@ public final class MaterialStats {
 
     public static final List<StatMod> BLAZEROD_STATS =List.of(
             new StatMod(MIN_DMG,0.25f,ADD,BARREL),
-            new StatMod(MIN_DMG, 0.5f,ADD,ROUND)
+            new StatMod(MIN_DMG, 0.5f,ADD,ROUND,PROPELLANT)
     );
     public static final List<TraitLevel> BLAZEROD_TRAITS = List.of(
             new TraitLevel(BLAZING,1)
@@ -217,7 +269,7 @@ public final class MaterialStats {
     );
 
     public static final List<StatMod> BREEZE_ROD_STATS = List.of(
-            new StatMod(GRAVITY_MOD,-0.01f,ADD,BARREL,ROUND),
+            new StatMod(GRAVITY_MOD,-0.004f,ADD,BARREL,ROUND),
             new StatMod(VEL_MULT,0.02f,ADD,BARREL,ROUND,PROPELLANT),
             new StatMod(MIN_DMG,0.75f,ADD,BARREL,ROUND,PROPELLANT),
             new StatMod(MAX_DMG,0.75f,ADD,BARREL,ROUND,PROPELLANT)
@@ -239,11 +291,44 @@ public final class MaterialStats {
             new StatMod(MIN_DMG,0.75f,ADD,ROUND),
             new StatMod(MAX_DMG,1f,ADD,ROUND),
             new StatMod(AMMO_MAX,1.1F,AVG_MUL,ROUND),
-            new StatMod(INACCURACY_DEG,9f,ADD,ROUND)
+            new StatMod(INACCURACY_DEG,2.5f,ADD,ROUND)
     );
     public static final List<TraitLevel> DRAGONS_BREATH_TRAITS = List.of(
             new TraitLevel(LINGERING,1),
             new TraitLevel(BLAZING,3)
+    );
+
+    public static final List<StatMod> END_ROD_STATS = List.of(
+            new StatMod(MIN_DMG,3.5f,ADD,ROUND),
+            new StatMod(MAX_DMG,4.25f,ADD,ROUND),
+            new StatMod(INACCURACY_DEG,-4.5f,ADD,ROUND),
+            new StatMod(PIERCE,3f,ADD,ROUND),
+            new StatMod(VEL_MULT,0.012f,ADD,ROUND),
+            new StatMod(FIRE_RATE,3f,ADD,ROUND),
+            new StatMod(PROJ_COUNT,0.05f,MUL_TOTAL,ROUND),
+            new StatMod(GRAVITY_MOD,-0.9f,MUL_TOTAL,ROUND,BARREL),
+            new StatMod(MIN_DMG,0.75f,ADD,BARREL),
+            new StatMod(MAX_DMG,1.25f,ADD,BARREL)
+    );
+
+    public static final List<TraitLevel> END_ROD_TRAITS = List.of(
+            new TraitLevel(TRACING,1),
+            new TraitLevel(SHATTERING,3)
+    );
+
+    public static final List<StatMod> COPPER_ROD_STATS = List.of(
+            new StatMod(MIN_DMG,3.5f,ADD,ROUND),
+            new StatMod(MAX_DMG,2.25f,ADD,ROUND),
+            new StatMod(INACCURACY_DEG,-3f,ADD,ROUND),
+            new StatMod(FIRE_RATE,3.5f,ADD,ROUND),
+            new StatMod(PIERCE,2f,ADD,ROUND),
+            new StatMod(VEL_MULT,0.006f,ADD,ROUND),
+            new StatMod(PROJ_COUNT,0.05f,MUL_TOTAL,ROUND)
+    );
+
+    public static final List<TraitLevel> COPPER_ROD_TRAITS = List.of(
+            new TraitLevel(SHOCKING,4),
+            new TraitLevel(SHATTERING,2)
     );
 
     public static final List<StatMod> NETHER_STAR_STATS = List.of(
@@ -255,9 +340,12 @@ public final class MaterialStats {
             new StatMod(MAX_DMG,1.25f,AVG_MUL,PROPELLANT)
     );
     public static final List<TraitLevel> NETHER_STAR_TRAITS = List.of(
-            new TraitLevel(SHATTERING,2),
-            new TraitLevel(SHOCKING,2),
-            new TraitLevel(TRACING,2)
+            new TraitLevel(SHATTERING,1,ROUND),
+            new TraitLevel(SHOCKING,1,ROUND),
+            new TraitLevel(TRACING,1,ROUND),
+            new TraitLevel(SHATTERING,1),
+            new TraitLevel(SHOCKING,1),
+            new TraitLevel(TRACING,1)
     );
 
 }

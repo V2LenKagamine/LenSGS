@@ -22,8 +22,7 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.network.PacketDistributor;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class GunFireLogic {
     public static void handleFireMsg(CTSFire message, @NotNull ServerPlayer player) {
@@ -52,6 +51,18 @@ public class GunFireLogic {
                 cdtrack.putCooldown(held,Math.round(cdTime));
                 PacketDistributor.sendToPlayer(player,new STCFireSync(cdTime));
                 ammotraits.addAll(held.get(LenDataComponents.GUN_STAT_TRAITS).getTraits());
+                Map<String,Integer> tempStorage = new LinkedHashMap<>(10);
+                List<TraitLevel> tosend = new ArrayList<>();
+                for(TraitLevel trait : ammotraits) {
+                    if(tempStorage.containsKey(trait.trait())){
+                        int temp = tempStorage.get(trait.trait());
+                        tempStorage.put(trait.trait(),trait.level()+temp);
+                    }else
+                    {
+                        tempStorage.put(trait.trait(),trait.level());
+                    }
+                }
+                tempStorage.forEach((trait,level) -> tosend.add(new TraitLevel(trait,level)));
                 GenericProjectile[] spawned = new GenericProjectile[projAmt];
                 for (int i = 0; i < projAmt; i++) {
                     GenericProjectile boolet = new GenericProjectile(LenEnts.GENERIC_PROJ.get(), worl, player, held);
@@ -59,7 +70,7 @@ public class GunFireLogic {
                     boolet.set_pierce(WeaponAmmoStats.getPierce(held));
                     boolet.setGravityMod(WeaponAmmoStats.getGrav(held));
                     boolet.setVelMult(WeaponAmmoStats.getVelMult(held));
-                    boolet.setTraits(ammotraits);
+                    boolet.setTraits(tosend);
                     worl.addFreshEntity(boolet);
                     spawned[i] = boolet;
                     boolet.tick();
@@ -103,11 +114,15 @@ public class GunFireLogic {
                         break;
                     }
                 }
-                if(!ReloadTracker.getReloadTracker(player).hasReloadTimer(main)) {
-                    if (mag) {
-                        ReloadTracker.getReloadTracker(player).putReloadTime(main, (int)Math.ceil(main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() * 0.25f/WeaponAmmoStats.AMMO_POINTS_MUL));
+                if(ReloadTracker.getReloadTracker(player).hasReloadTimer(player)) {
+                    if (mag&& main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() > WeaponAmmoStats.AMMO_POINTS_MUL) {
+                        int reloadtime = (int)Math.ceil((main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() * 2.5f)/WeaponAmmoStats.AMMO_POINTS_MUL);
+                        player.getCooldowns().addCooldown(main.getItem(),reloadtime);
+                        ReloadTracker.getReloadTracker(player).putReloadTimer(reloadtime);
                     }else {
-                        ReloadTracker.getReloadTracker(player).putReloadTime(main, (int)Math.ceil(main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() * 12f)/WeaponAmmoStats.AMMO_POINTS_MUL);
+                        int reloadtime = (int)Math.ceil((main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() * 30f)/WeaponAmmoStats.AMMO_POINTS_MUL);
+                        player.getCooldowns().addCooldown(main.getItem(),reloadtime);
+                        ReloadTracker.getReloadTracker(player).putReloadTimer(reloadtime);
                     }
                 }
             }

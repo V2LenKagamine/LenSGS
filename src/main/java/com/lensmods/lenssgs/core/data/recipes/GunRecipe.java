@@ -95,13 +95,8 @@ public class GunRecipe extends CustomRecipe {
         }
         if (output.getItem() instanceof AmmoBaseItem && !swapping) {
             List<String> weHave = new ArrayList<>();
-            boolean reloading =false;
             for (ItemStack item : craftingInput.items()) { //Making Ammo check if its valid.
                 if(item.getItem() == Items.AIR) {continue;}
-                if(item.is(LenTagKeys.REFILLS_AMMO_TAG)) {
-                    reloading = true;
-                    continue;
-                }
                 String partName = item.getOrDefault(LenDataComponents.GUN_PART_HOLDER,null)!=null ? item.get(LenDataComponents.GUN_PART_HOLDER).getName(): "FUCK";
                 if(item.getItem() instanceof AmmoBaseItem || (!weHave.contains(partName) && AllowedParts.AMMO_MANDITORY.contains(partName))) {
                     weHave.add(partName);
@@ -109,7 +104,7 @@ public class GunRecipe extends CustomRecipe {
                 }
                 return false;
             }
-            if(weHave.size() == AllowedParts.AMMO_MANDITORY.size() || reloading) {
+            if(weHave.size() == AllowedParts.AMMO_MANDITORY.size()) {
                 return true;
             }
         }
@@ -263,17 +258,6 @@ public class GunRecipe extends CustomRecipe {
     }
     private ItemStack swapOrAdd(CraftingInput craftingInput,ItemStack mainboi,HolderLookup.Provider prov) {
         for(ItemStack ing : craftingInput.items()) {
-            if(ing.is(LenTagKeys.REFILLS_AMMO_TAG) && mainboi.getItem() instanceof AmmoBaseItem) {
-                if(mainboi.getOrDefault(LenDataComponents.AMMO_COUNTER,null)!=null && mainboi.getOrDefault(LenDataComponents.GUN_STAT_TRAITS,null)!=null) {
-                    if (mainboi.get(LenDataComponents.AMMO_COUNTER) < mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max()) {
-                        var current = mainboi.get(LenDataComponents.AMMO_COUNTER);
-                        int lacking = mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() - current;
-                        int torestore = lacking < 0 ? mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() : Math.min(lacking,32*WeaponAmmoStats.AMMO_POINTS_MUL);
-                        mainboi.set(LenDataComponents.AMMO_COUNTER,torestore+current);
-                        return mainboi;
-                    }
-                }
-            }
             if(ing.getItem() instanceof GunPartBaseItem) {//Ok, adding or swapping part here.
                 if(mainboi.getItem() instanceof GunBaseItem) {
                     if(ing.getOrDefault(LenDataComponents.GUN_PART_HOLDER,null)!=null) {

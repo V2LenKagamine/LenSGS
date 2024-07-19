@@ -5,6 +5,7 @@ import com.google.common.collect.Maps;
 import com.lensmods.lenssgs.LensSGS;
 import com.lensmods.lenssgs.core.data.AllowedParts;
 import com.lensmods.lenssgs.core.data.recipes.GunRecipe;
+import com.lensmods.lenssgs.core.data.recipes.RefillRecipe;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import com.lensmods.lenssgs.init.LenItems;
 import com.mojang.datafixers.util.Pair;
@@ -56,21 +57,42 @@ public class LenRecipeGen extends RecipeProvider {
                 .define('g',Items.GUNPOWDER)
                 .unlockedBy("paper",InventoryChangeTrigger.TriggerInstance.hasItems(Items.PAPER))
                 .save(out);
-        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,LenItems.VOIDMETAL,1)
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,LenItems.VOIDMETAL,2)
                 .pattern("nsn")
-                .pattern("ndn")
+                .pattern("ddd")
                 .pattern("nsn")
                 .define('n',Tags.Items.INGOTS_NETHERITE)
-                .define('d',Tags.Items.STORAGE_BLOCKS_DIAMOND)
+                .define('d',Tags.Items.GEMS_DIAMOND)
                 .define('s',Tags.Items.NETHER_STARS)
                 .unlockedBy("netherstar",InventoryChangeTrigger.TriggerInstance.hasItems(Items.NETHER_STAR))
+                .save(out);
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC,LenItems.WYRMSTEEL,1)
+                .pattern(" d ")
+                .pattern("dwd")
+                .pattern(" d ")
+                .define('w',LenItems.VOIDMETAL)
+                .define('d',Items.DRAGON_BREATH)
+                .unlockedBy("void",InventoryChangeTrigger.TriggerInstance.hasItems(LenItems.VOIDMETAL))
+                .save(out);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,LenItems.BLITZGOLD,1)
+                .requires(Tags.Items.INGOTS_GOLD)
+                .requires(Tags.Items.INGOTS_GOLD)
+                .requires(Tags.Items.INGOTS_GOLD)
+                .requires(Tags.Items.INGOTS_GOLD)
+                .requires(Tags.Items.RODS_BLAZE)
+                .requires(Tags.Items.RODS_BLAZE)
+                .requires(Tags.Items.RODS_BREEZE)
+                .requires(Tags.Items.RODS_BREEZE)
+                .unlockedBy("breeze",InventoryChangeTrigger.TriggerInstance.hasItems(Items.BREEZE_ROD))
                 .save(out);
         GunFromItems("make_gun",List.of(LenItems.PART_BASE.get(),LenItems.PART_BASE.get(),LenItems.PART_BASE.get()),LenItems.GUN_BASE.get(),out,false); //The gun
         GunFromItems("make_ammo",List.of(LenItems.PART_BASE.get(),LenItems.PART_BASE.get(),LenItems.PART_BASE.get()),LenItems.AMMO_BASE.get(),out,false); //The Ammo
         GunFromItems("swap_part_gun",List.of(LenItems.PART_BASE.get(),LenItems.GUN_BASE.get()),LenItems.GUN_BASE.get(),out,true);//Swap GunParts
         GunFromItems("swap_part_ammo",List.of(LenItems.PART_BASE.get(),LenItems.AMMO_BASE.get()),LenItems.AMMO_BASE.get(),out,true); //Swap Ammo parts
         GunFromIng("make_part", List.of(Ingredient.of(LenItems.PART_CRAFTER.get()),Ingredient.of(LenTagKeys.GUNAMMO_MAT_TAG)), LenItems.PART_BASE.get(), out,false); //Parts
-        GunFromIng("reload_ammo",List.of(Ingredient.of(LenTagKeys.REFILLS_AMMO_TAG),Ingredient.of(LenItems.AMMO_BASE.get())), LenItems.AMMO_BASE.get(),out,false);
+        refillFromIng("refill_gunpowder",List.of(Ingredient.of(Tags.Items.GUNPOWDERS)),LenItems.AMMO_BASE.get(),out,8);
+        refillFromIng("refill_tnt",List.of(Ingredient.of(Items.TNT)),LenItems.AMMO_BASE.get(),out,50);
+        refillFromIng("refill_wind",List.of(Ingredient.of(Items.WIND_CHARGE)),LenItems.AMMO_BASE.get(),out,12);
         //Stocks
         DataShapedBuilder.betterShaped(RecipeCategory.MISC, new ItemStack(LenItems.PART_CRAFTER.get()),"stock_crafter_short",
                         Pair.of(LenDataComponents.PART_TYPE.get(),AllowedParts.STOCK),
@@ -358,6 +380,17 @@ public class LenRecipeGen extends RecipeProvider {
     }
     protected void GunFromIng(String name, List<Ingredient> ing, Item output, RecipeOutput out,boolean swap) {
         GunRecipe boi = GunRecipe.fromIngs(ing,output,swap);
+        SpecialRecipeBuilder.special(category->boi).save(out,name);
+    }
+    protected void refillFromItems(String name, List<Item> ing, Item output, RecipeOutput out,int perItem) {
+        List<Ingredient> egg = new ArrayList<>();
+        for (Item ingey : ing) {
+            egg.add(Ingredient.of(ingey));
+        }
+        refillFromIng(name,egg,output,out,perItem);
+    }
+    protected void refillFromIng(String name, List<Ingredient> ing, Item output, RecipeOutput out,int perItem) {
+        RefillRecipe boi = new RefillRecipe(ing,output,perItem);
         SpecialRecipeBuilder.special(category->boi).save(out,name);
     }
     public static class DataShapedBuilder extends ShapedRecipeBuilder {

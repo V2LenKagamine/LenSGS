@@ -92,7 +92,7 @@
 		{
 			"name": "buffer_tube_back",
 			"from": [7.65, 2.84289, 15.8],
-			"to": [8.35, 3.54289, 16.65],
+			"to": [8.35, 3.54289, 16.425],
 			"rotation": {"angle": 0, "axis": "z", "origin": [8, 3.19289, 16.775]},
 			"faces": {
 				"north": {"uv": [0, 0, 0, 0], "texture": "#0", "tintindex": 0},

@@ -7,8 +7,8 @@
 	"elements": [
 		{
 			"name": "buffer_tube_back",
-			"from": [7.675, 2.84289, 16.15],
-			"to": [8.325, 3.54289, 17.975],
+			"from": [7.725, 2.84289, 15.75],
+			"to": [8.275, 3.49289, 17.975],
 			"rotation": {"angle": 0, "axis": "z", "origin": [8, 3.19289, 16.325]},
 			"faces": {
 				"north": {"uv": [0, 0, 0, 0], "rotation": 90, "texture": "#0", "tintindex": 0},
@@ -22,7 +22,7 @@
 		{
 			"name": "buffer_tube_back",
 			"from": [7.65, 2.04289, 17.65],
-			"to": [8.35, 3.56789, 18.375],
+			"to": [8.35, 3.51789, 18.375],
 			"rotation": {"angle": 0, "axis": "x", "origin": [8, 4.19289, 18]},
 			"faces": {
 				"north": {"uv": [8.75, 4, 10.75, 5], "rotation": 90, "texture": "#0", "tintindex": 0},
@@ -35,8 +35,8 @@
 		},
 		{
 			"name": "buffer_tube_back",
-			"from": [7.7, 2.61789, 15.875],
-			"to": [8.3, 3.31789, 17.95],
+			"from": [7.75, 2.61789, 15.875],
+			"to": [8.25, 3.31789, 17.95],
 			"rotation": {"angle": 22.5, "axis": "x", "origin": [8, 2.96789, 16.325]},
 			"faces": {
 				"north": {"uv": [0, 0, 0, 0], "rotation": 90, "texture": "#0", "tintindex": 0},

@@ -12,8 +12,12 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
 import net.minecraft.util.Mth;
 import net.minecraft.world.damagesource.DamageSource;
@@ -58,7 +62,6 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     public float getPercentLifeLeft() {
         return ((float) tickCount / life);
     }
-    protected double gravityMod = 0;
     protected float velMult = 1f ;
     protected List<TraitLevel> traits = new ArrayList<>();
     protected boolean secondLife = false;
@@ -66,6 +69,9 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         return secondLife;
     }
     private ItemStack visualItem = ItemStack.EMPTY;
+    private static final EntityDataAccessor<Float> GRAVITY = SynchedEntityData.defineId(GenericProjectile.class, EntityDataSerializers.FLOAT);
+
+    public List<TraitLevel> getTraits() {return traits;}
 
     public GenericProjectile(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
@@ -78,7 +84,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         this.Owner = shooter;
 
         Vec3 dir = this.getDirection(shooter, weapon);
-        this.setDeltaMovement((dir.x *0.5f) * velMult, (dir.y*0.5f) * velMult, (dir.z*0.5f) * velMult);
+        this.setDeltaMovement((dir.x *0.75f) * velMult, (dir.y*0.75f) * velMult, (dir.z*0.75f) * velMult);
         this.updateHeading();
 
         double posX = shooter.xOld + (shooter.getX() - shooter.xOld) / 2.0;
@@ -102,7 +108,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         this.pierce = newval;
     }
     public void setGravityMod(double newval) {
-        this.gravityMod = -newval;
+        this.entityData.set(GRAVITY,(float)-newval );
     }
     public void setVelMult(float newval) {
         this.velMult = newval;
@@ -121,7 +127,6 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
                 return;
             }
 
-            Vec3 hitVec = result.getLocation();
             BlockPos pos = blockHitResult.getBlockPos();
             BlockState state = this.level().getBlockState(pos);
             Block block = state.getBlock();
@@ -169,6 +174,16 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
                 }
             }
             this.onHitEntity(entity, result.getLocation(), startVec, endVec);
+            this.pierce--;
+            if(this.pierce <=0) {
+                if(secondLife) {
+                    this.onDoom();
+                    this.remove(RemovalReason.KILLED);
+                }
+                if (this.isAlive()&& !secondLife) {
+                    this.onExpire();
+                }
+            }
             entity.invulnerableTime = 0;
         }
     }
@@ -186,6 +201,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
                        LightningBolt bonk = new LightningBolt(EntityType.LIGHTNING_BOLT,entity.level());
                        bonk.setPos(hitVec);
                        bonk.setDamage(this.getDamage()*0.25f);
+                       level().addFreshEntity(bonk);
                        bonk.tick();
                     }
                     break;
@@ -207,7 +223,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
                 case MaterialStats.CONCUSSIVE: {
                     if (entity instanceof LivingEntity living) {
                         var vec = this.getDeltaMovement();
-                        living.knockback(2d*trait.level(), -vec.x,-vec.y);
+                        living.knockback(0.75d*trait.level(), -vec.x,-vec.y);
                     }
                     break;
                 }
@@ -230,24 +246,15 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         float damage = this.getDamage();
         DamageSource source = LenDamageTypes.Sources.projectile(this.level().registryAccess(), this, this.Owner);
         entity.hurt(source, damage);
-
-        this.pierce--;
-        if(this.pierce <=0) {
-            if(secondLife) {
-                this.onDoom();
-                this.remove(RemovalReason.KILLED);
-            }
-            if (this.isAlive()&& !secondLife) {
-                this.onExpire();
-            }
-        }
     }
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {}
+    protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
+        pBuilder.define(GRAVITY,0f);
+    }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag pCompound) {
-        this.gravityMod = pCompound.getDouble("gravityMod");
+        this.entityData.set(GRAVITY,(float)pCompound.getDouble("gravityMod"));
         this.life = pCompound.getInt("lifetime");
         this.pierce = pCompound.getInt("pierce");
 
@@ -261,7 +268,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
 
     @Override
     protected void addAdditionalSaveData(CompoundTag pCompound) {
-        pCompound.putDouble("gravityMod",this.gravityMod);
+        pCompound.putDouble("gravityMod",this.entityData.get(GRAVITY));
         pCompound.putInt("lifetime",this.life);
         pCompound.putInt("pierce",this.pierce);
         pCompound.putInt("traitamt",this.traits.isEmpty() ? 0:traits.size());
@@ -276,7 +283,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     @Override
     public void writeSpawnData(RegistryFriendlyByteBuf buffer) {
         buffer.writeInt(this.OwnerID);
-        buffer.writeDouble(this.gravityMod);
+        buffer.writeDouble(this.entityData.get(GRAVITY));
         buffer.writeInt(this.life);
         buffer.writeInt(this.pierce);
         buffer.writeInt(this.traits.isEmpty() ? 0 : traits.size());
@@ -291,7 +298,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     @Override
     public void readSpawnData(RegistryFriendlyByteBuf additionalData) {
         this.OwnerID = additionalData.readInt();
-        this.gravityMod = additionalData.readDouble();
+        this.entityData.set(GRAVITY,(float) additionalData.readDouble());
         this.life = additionalData.readInt();
         this.pierce = additionalData.readInt();
         List<TraitLevel> tstore = new ArrayList<>();
@@ -314,19 +321,37 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     public void tick() {
         super.tick();
         this.updateHeading();
-        for (int i =0; i < 4;i++) {
-            double nextPosX = this.getX() + this.getDeltaMovement().x();
-            double nextPosY = this.getY() + this.getDeltaMovement().y();
-            double nextPosZ = this.getZ() + this.getDeltaMovement().z();
-            this.setPos(nextPosX, nextPosY, nextPosZ);
-            if (this.gravityMod != 0) {
-                this.setDeltaMovement(this.getDeltaMovement().add(0, this.gravityMod, 0));
+        if (!this.level().isClientSide&& !secondLife) {
+            for (int i = 0; i < 6; i++) {
+                double nextPosX = this.getX() + this.getDeltaMovement().x();
+                double nextPosY = this.getY() + this.getDeltaMovement().y();
+                double nextPosZ = this.getZ() + this.getDeltaMovement().z();
+                this.setPos(nextPosX, nextPosY, nextPosZ);
+                if (this.entityData.get(GRAVITY) != 0) {
+                    this.setDeltaMovement(this.getDeltaMovement().add(0, this.entityData.get(GRAVITY) / 6f, 0));
+                }
+                performHitCalcs();
             }
-            performHitCalcs();
         }
-        if(this.tickCount >= this.life)
-        {
-            if(secondLife) {
+        if(this.secondLife && !level().isClientSide) {
+            double rad = 12;
+            Vec3 start = new Vec3(position().x + rad, position().y + rad, position().z + rad);
+            Vec3 end = new Vec3(position().x - rad, position().y - rad, position().z - rad);
+            AABB succbox = new AABB(start, end);
+            List<Entity> targets = level().getEntities(this, succbox, PROJECTILE_TARGETS);
+            for (Entity ent : targets) {
+                if (ent == Owner || ent instanceof GenericProjectile) {
+                    continue;
+                }
+                double delx = (this.position().x() - ent.position().x);
+                double dely = (this.position().y() - ent.position().y);
+                double delz = (this.position().z() - ent.position().z);
+                double dist = rad - distanceTo(ent);
+                ent.addDeltaMovement(new Vec3(delx * (dist) * 0.001d, dely * (dist) * 0.001d, delz * (dist) * 0.001d));
+            }
+        }
+        if (this.tickCount >= this.life) {
+            if (secondLife) {
                 this.onDoom();
                 this.remove(RemovalReason.KILLED);
             }
@@ -372,21 +397,6 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
                     this.onHit(result, startVec, endVec);
                 }
             }
-            else if(!level().isClientSide) {
-                double rad = 12;
-                Vec3 start = new Vec3(position().x + rad,position().y + rad,position().z + rad);
-                Vec3 end = new Vec3(position().x - rad,position().y - rad,position().z - rad);
-                AABB succbox = new AABB(start,end);
-                List<Entity> targets = level().getEntities(this,succbox,PROJECTILE_TARGETS);
-                for (Entity ent : targets) {
-                    if (ent == Owner) {continue;};
-                    double delx = (this.position().x() - ent.position().x);
-                    double dely = (this.position().y() - ent.position().y);
-                    double delz = (this.position().z() - ent.position().z);
-                    double dist = rad - distanceTo(ent);
-                    ent.addDeltaMovement(new Vec3(delx*(dist)*0.00125d,dely*(dist)*0.00125d,delz*(dist)*0.00125d));
-                }
-            }
         }
     }
 
@@ -398,8 +408,8 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
                 setPos(position().add(0f, 0.75f, 0f));
             }
             this.life = (100 + life);
+            this.entityData.set(GRAVITY,0f);
             this.setDeltaMovement(new Vec3(0,0,0));
-            this.setGravityMod(0d);
             playSound(LenSounds.VOID_BOOM.get(),1.75f,1f);
         }
         if (!secondLife) {
@@ -410,28 +420,35 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     protected void onDoom() {
         if(traits.stream().anyMatch(trait -> trait.trait().equals(MaterialStats.EXPLOSIVE))) {
             TraitLevel trait = traits.stream().filter(traitLevel -> traitLevel.trait().equals(MaterialStats.EXPLOSIVE)).findFirst().get();
-            float rad = trait.level() * 1.25f;
-            Vec3 start = new Vec3(position().x + rad,position().y + rad,position().z + rad);
-            Vec3 end = new Vec3(position().x - rad,position().y - rad,position().z - rad);
-            AABB boombox = new AABB(start,end);
-            List<Entity> targets = level().getEntities(this,boombox,PROJECTILE_TARGETS);
-            for (Entity hit : targets) {
-                float damage =this.getDamage()* (0.1f * trait.level());
-                DamageSource source = LenDamageTypes.Sources.projectile(this.level().registryAccess(), this, this.Owner);
-                hit.hurt(source, damage);
-                if(hit instanceof LivingEntity living) {
-                    living.knockback(trait.level()*0.2f,-(position().x),-(position().y));
+            if(!level().isClientSide && LenUtil.randBetween(0,100) < trait.level() * 5f) {
+                float rad = trait.level() * 1.5f;
+                Vec3 start = new Vec3(position().x + rad,position().y + rad,position().z + rad);
+                Vec3 end = new Vec3(position().x - rad,position().y - rad,position().z - rad);
+                AABB doombox = new AABB(start,end);
+                List<Entity> targets = level().getEntities(this,doombox,PROJECTILE_TARGETS);
+                for (Entity hit : targets) {
+                    float damage = this.getDamage()*(0.1f*trait.level());
+                    DamageSource source = LenDamageTypes.Sources.projectile(this.level().registryAccess(), this, this.Owner);
+                    hit.hurt(source, damage);
                 }
+                level().playSound(null,this.position().x,this.position().y,this.position().z, SoundEvents.GENERIC_EXPLODE, SoundSource.PLAYERS,1f,1f);
             }
         }
         if(traits.stream().anyMatch(trait -> trait.trait().equals(MaterialStats.LINGERING))) {
             TraitLevel trait = traits.stream().filter(traitLevel -> traitLevel.trait().equals(MaterialStats.LINGERING)).findFirst().get();
-            AreaEffectCloud cloud = new AreaEffectCloud(this.level(),this.getX(),this.getY()+0.5f,this.getZ());
-            cloud.setDuration(100 * trait.level());
-            cloud.setOwner(this.Owner);
-            cloud.setRadius(2 * trait.level());
-            cloud.setPotionContents(new PotionContents(LenEnts.POTIONS.getRegistry().get().wrapAsHolder(LenEnts.LACERATE_POTION.get())));
-            cloud.tick();
+            if(!level().isClientSide) {
+                AreaEffectCloud cloud = new AreaEffectCloud(this.level(), this.getX(), this.getY() + 1f, this.getZ());
+                cloud.setDuration(100 * trait.level());
+                cloud.setOwner(this.Owner);
+                cloud.setRadius(trait.level());
+                cloud.setWaitTime(0);
+                cloud.setNoGravity(true);
+                cloud.setRadiusPerTick(-0.0125f);
+                cloud.setInvulnerable(true);
+                cloud.setPotionContents(new PotionContents(LenEnts.POTIONS.getRegistry().get().wrapAsHolder(LenEnts.LACERATE_POTION.get())));
+                level().addFreshEntity(cloud);
+                cloud.tick();
+            }
         }
         if(traits.stream().anyMatch(trait -> trait.trait().equals(MaterialStats.VOID_TOUCHED))) {
             TraitLevel trait = traits.stream().filter(traitLevel -> traitLevel.trait().equals(MaterialStats.VOID_TOUCHED)).findFirst().get();

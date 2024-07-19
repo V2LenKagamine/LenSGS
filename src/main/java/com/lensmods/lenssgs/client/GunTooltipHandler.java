@@ -2,6 +2,7 @@ package com.lensmods.lenssgs.client;
 
 import com.lensmods.lenssgs.api.IModdable;
 import com.lensmods.lenssgs.core.data.MaterialMap;
+import com.lensmods.lenssgs.core.data.MaterialStats;
 import com.lensmods.lenssgs.core.datacomps.*;
 import com.lensmods.lenssgs.core.util.Color;
 import com.lensmods.lenssgs.core.util.KeyManager;
@@ -79,7 +80,9 @@ public final class GunTooltipHandler {
             List<StatMod> stats = mat.getStatModList().stream().filter(key -> key.allowedParts().contains(parts.get(index))).toList();
             e.getToolTip().add(translatableOf(parts.get(index)).copy().withColor(Color.LIGHTCYAN.getColor()));
             for (StatMod stat : stats.stream().sorted().toList()) {
-                e.getToolTip().add(translatableOf(stat.stat()).copy().append(spaceAppend(translatableOf(stat.modType()))).append(LenUtil.bonusAppend(String.valueOf(stat.val()))));
+                boolean invert =stat.stat().equals(MaterialStats.FIRE_RATE) ||stat.stat().equals(MaterialStats.GRAVITY_MOD) ||stat.stat().equals(MaterialStats.INACCURACY_DEG);
+                e.getToolTip().add(translatableOf(stat.stat()).copy().append(spaceAppend(translatableOf(stat.modType())))
+                        .append(invert?maliceAppend(String.valueOf(stat.val())):bonusAppend(String.valueOf(stat.val()))));
             }
         }
     }
@@ -110,7 +113,9 @@ public final class GunTooltipHandler {
                     toDisplay.put(trait.trait(),trait.level());
                 }
             }
-            toDisplay.forEach((key,value) ->  e.getToolTip().add(translatableOf(key).copy().withColor(Color.LIGHTCYAN.getColor()).append(spaceAppend(String.valueOf(value)))));
+            toDisplay.forEach((key,value) ->  {
+                    boolean invert = key.equals(MaterialStats.FIRE_RATE) || key.equals(MaterialStats.GRAVITY_MOD) || key.equals(MaterialStats.INACCURACY_DEG);
+                e.getToolTip().add(translatableOf(key).copy().withColor(Color.LIGHTCYAN.getColor()).append(invert?maliceAppend(String.valueOf(value)):bonusAppend(String.valueOf(value))));});
         }
     }
 
@@ -125,36 +130,36 @@ public final class GunTooltipHandler {
                 GunStats lastAmmo = stack.get(LenDataComponents.LAST_AMMO).getStats();
                 tooltips.add(translatableOf("mindmg").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getDamageMin()))).append(bonusAppend(truncateFloat(lastAmmo.getDamageMin())))
                         .append(spaceAppend(translatableOf("maxdmg"))).withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getDamageMax()))).append(bonusAppend(truncateFloat(lastAmmo.getDamageMax()))));
-                tooltips.add(translatableOf("firerate").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getFirerate()))).append(bonusAppend(truncateFloat(lastAmmo.getFirerate())))
+                tooltips.add(translatableOf("firerate").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getFirerate()))).append(maliceAppend(truncateFloat(lastAmmo.getFirerate())))
                         .append(spaceAppend(translatableOf("ammomax"))).withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getAmmo_max() / WeaponAmmoStats.AMMO_POINTS_MUL))));
                 tooltips.add(translatableOf("velocity_mult").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getVelocityMult()))).append(bonusAppend(truncateFloat(lastAmmo.getVelocityMult())))
-                        .append(spaceAppend(translatableOf("grav_mult"))).withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateDouble(realStats.getGravMod()))).append(bonusAppend(truncateDouble(lastAmmo.getGravMod()))));
-                tooltips.add(translatableOf("inacc").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getInaccuracy()))).append(bonusAppend(truncateFloat(lastAmmo.getInaccuracy())))
+                        .append(spaceAppend(translatableOf("grav_mult"))).withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateDouble(realStats.getGravMod()))).append(maliceAppend(truncateDouble(lastAmmo.getGravMod()))));
+                tooltips.add(translatableOf("inacc").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getInaccuracy()))).append(maliceAppend(truncateFloat(lastAmmo.getInaccuracy())))
                         .append(spaceAppend(translatableOf("proj_count"))).withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(lastAmmo.getProjCount()))).append(bonusAppend(truncateFloat(realStats.getProjCount())))
-                        .append(spaceAppend(translatableOf("pierce"))).withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getPierce()))));
+                        .append(spaceAppend(translatableOf("pierce"))).withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(lastAmmo.getPierce()))).append(bonusAppend(truncateFloat(realStats.getPierce()))));
                 tooltips.add(translatableOf("ammo_current").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(WeaponAmmoStats.ammoAmountLeft(stack) / WeaponAmmoStats.AMMO_POINTS_MUL))));
             } else if (WeaponAmmoStats.safeGunStats(stack)) {
                 GunStats realStats = stats.getStats();
-                tooltips.add(translatableOf("mindmg").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getDamageMin())))
-                        .append(spaceAppend(translatableOf("maxdmg"))).withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getDamageMax()))));
-                tooltips.add(translatableOf("firerate").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getFirerate())))
-                        .append(spaceAppend(translatableOf("ammomax"))).withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getAmmo_max() / WeaponAmmoStats.AMMO_POINTS_MUL))));
-                tooltips.add(translatableOf("velocity_mult").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getVelocityMult())))
-                        .append(spaceAppend(translatableOf("grav_mult"))).withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateDouble(realStats.getGravMod()))));
-                tooltips.add(translatableOf("inacc").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getInaccuracy())))
-                        .append(spaceAppend(translatableOf("proj_count"))).withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getProjCount())))
-                        .append(spaceAppend(translatableOf("pierce"))).withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(realStats.getPierce()))));
-                tooltips.add(translatableOf("ammo_current_ammo").copy().withColor(Color.LIGHTBLUE.getColor()).append(spaceAppend(truncateFloat(WeaponAmmoStats.ammoAmountLeft(stack) / WeaponAmmoStats.AMMO_POINTS_MUL))));
+                tooltips.add(translatableOf("mindmg").copy().withColor(Color.LIGHTBLUE.getColor()).append(bonusAppend(truncateFloat(realStats.getDamageMin())))
+                        .append(spaceAppend(translatableOf("maxdmg"))).withColor(Color.LIGHTBLUE.getColor()).append(bonusAppend(truncateFloat(realStats.getDamageMax()))));
+                tooltips.add(translatableOf("firerate").copy().withColor(Color.LIGHTBLUE.getColor()).append(maliceAppend(truncateFloat(realStats.getFirerate())))
+                        .append(spaceAppend(translatableOf("ammomax"))).withColor(Color.LIGHTBLUE.getColor()).append(bonusAppend(truncateFloat(realStats.getAmmo_max() / WeaponAmmoStats.AMMO_POINTS_MUL))));
+                tooltips.add(translatableOf("velocity_mult").copy().withColor(Color.LIGHTBLUE.getColor()).append(bonusAppend(truncateFloat(realStats.getVelocityMult())))
+                        .append(spaceAppend(translatableOf("grav_mult"))).withColor(Color.LIGHTBLUE.getColor()).append(maliceAppend(truncateDouble(realStats.getGravMod()))));
+                tooltips.add(translatableOf("inacc").copy().withColor(Color.LIGHTBLUE.getColor()).append(maliceAppend(truncateFloat(realStats.getInaccuracy())))
+                        .append(spaceAppend(translatableOf("proj_count"))).withColor(Color.LIGHTBLUE.getColor()).append(bonusAppend(truncateFloat(realStats.getProjCount())))
+                        .append(spaceAppend(translatableOf("pierce"))).withColor(Color.LIGHTBLUE.getColor()).append(bonusAppend(truncateFloat(realStats.getPierce()))));
+                tooltips.add(translatableOf("ammo_current_ammo").copy().withColor(Color.LIGHTBLUE.getColor()).append(bonusAppend(truncateFloat(WeaponAmmoStats.ammoAmountLeft(stack) / WeaponAmmoStats.AMMO_POINTS_MUL))));
             }
         }
         if (KeyManager.DISPLAY_TRAITS.get().isDown()) {
             if(WeaponAmmoStats.safeGunComp(stack)) {
+                Map<String,Integer> toDisplay = new HashMap<>();
                 var partH = stack.get(LenDataComponents.GUN_COMP);
                 for (GunPartHolder part : partH.getPartList()) {
                     GunMaterial mat = MaterialMap.loadedMats(prov).get(part.getMaterial());
                     if (mat != null) {
                         List<TraitLevel> mattraits = mat.getTraitLevelList().stream().filter(key -> key.allowedParts().contains(part.getName()) || key.allowedParts().contains("all")).toList();
-                        Map<String,Integer> toDisplay = new HashMap<>();
                         for (TraitLevel trait : mattraits.stream().sorted().toList()) {
                             if(toDisplay.containsKey(trait.trait())) {
                                 int temp = toDisplay.get(trait.trait());
@@ -164,9 +169,9 @@ public final class GunTooltipHandler {
                                 toDisplay.put(trait.trait(),trait.level());
                             }
                         }
-                        toDisplay.forEach((key,value) ->  e.getToolTip().add(translatableOf(key).copy().withColor(Color.LIGHTCYAN.getColor()).append(spaceAppend(String.valueOf(value)))));
                     }
                 }
+                toDisplay.forEach((key,value) ->  e.getToolTip().add(translatableOf(key).copy().withColor(Color.LIGHTCYAN.getColor()).append(spaceAppend(String.valueOf(value)))));
             }
         }
         if (stack.getOrDefault(LenDataComponents.GUN_PART_HOLDER, null) != null) {
@@ -177,7 +182,9 @@ public final class GunTooltipHandler {
                 List<TraitLevel> mattraits = mat.getTraitLevelList().stream().filter(key -> (key.allowedParts().contains(partH.getName())) || key.allowedParts().contains("all")).toList();
                 if (KeyManager.DISPLAY_STATS.get().isDown()) {
                     for (StatMod stat : matstats) {
-                        e.getToolTip().add(translatableOf(stat.stat()).copy().append(spaceAppend(translatableOf(stat.modType()))).append(LenUtil.bonusAppend(String.valueOf(stat.val()))));
+                        boolean invert =stat.stat().equals(MaterialStats.FIRE_RATE) ||stat.stat().equals(MaterialStats.GRAVITY_MOD) ||stat.stat().equals(MaterialStats.INACCURACY_DEG);
+                        e.getToolTip().add(translatableOf(stat.stat()).copy().append(spaceAppend(translatableOf(stat.modType())))
+                                .append(invert?maliceAppend(String.valueOf(stat.val())):bonusAppend(String.valueOf(stat.val()))));
                     }
                 }
                 if (KeyManager.DISPLAY_TRAITS.get().isDown()) {
@@ -191,7 +198,9 @@ public final class GunTooltipHandler {
                             toDisplay.put(trait.trait(),trait.level());
                         }
                     }
-                    toDisplay.forEach((key,value) ->  e.getToolTip().add(translatableOf(key).copy().withColor(Color.LIGHTCYAN.getColor()).append(spaceAppend(String.valueOf(value)))));
+                    toDisplay.forEach((key,value) ->  {
+                        boolean invert = key.equals(MaterialStats.FIRE_RATE) || key.equals(MaterialStats.GRAVITY_MOD) || key.equals(MaterialStats.INACCURACY_DEG);
+                        e.getToolTip().add(translatableOf(key).copy().withColor(Color.LIGHTCYAN.getColor()).append(invert?maliceAppend(String.valueOf(value)):bonusAppend(String.valueOf(value))));});
                 }
             }
         } else if (KeyManager.DISPLAY_CONSTRUCTION.get().isDown() && WeaponAmmoStats.safeGunComp(stack)) {

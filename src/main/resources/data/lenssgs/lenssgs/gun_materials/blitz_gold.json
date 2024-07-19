@@ -10,14 +10,14 @@
   ],
   "color": {
     "alpha": 1.0,
-    "blue": 0.0,
-    "green": 0.0,
-    "red": 0.0
+    "blue": 0.1254902,
+    "green": 0.64705884,
+    "red": 0.85490197
   },
   "ingredient": {
-    "item": "lenssgs:void_metal"
+    "item": "lenssgs:blitz_gold"
   },
-  "partType": "void_metal",
+  "partType": "blitz_gold",
   "statModList": [
     {
       "allowedParts": [
@@ -25,7 +25,7 @@
       ],
       "modType": "multiply",
       "stat": "stat_ammo_max",
-      "val": 1.75
+      "val": 1.25
     },
     {
       "allowedParts": [
@@ -33,7 +33,7 @@
       ],
       "modType": "multiply",
       "stat": "stat_ammo_max",
-      "val": 0.75
+      "val": 1.25
     },
     {
       "allowedParts": [
@@ -41,9 +41,19 @@
         "action",
         "casing"
       ],
-      "modType": "multiply",
+      "modType": "add",
       "stat": "stat_fire_rate",
-      "val": 1.2
+      "val": -2.5
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "action",
+        "casing"
+      ],
+      "modType": "total_multiply",
+      "stat": "stat_fire_rate",
+      "val": -0.2
     },
     {
       "allowedParts": [
@@ -53,7 +63,7 @@
       ],
       "modType": "multiply",
       "stat": "stat_min_damage",
-      "val": 1.1
+      "val": 0.95
     },
     {
       "allowedParts": [
@@ -63,7 +73,7 @@
       ],
       "modType": "multiply",
       "stat": "stat_max_damage",
-      "val": 1.1
+      "val": 0.95
     },
     {
       "allowedParts": [
@@ -74,24 +84,7 @@
       ],
       "modType": "multiply",
       "stat": "stat_inaccuracy",
-      "val": 0.9
-    },
-    {
-      "allowedParts": [
-        "bullet",
-        "casing"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_pierce",
-      "val": 0.05
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_projectile_count",
-      "val": 0.05
+      "val": 1.1
     },
     {
       "allowedParts": [
@@ -99,7 +92,7 @@
       ],
       "modType": "add",
       "stat": "stat_max_damage",
-      "val": 2.0
+      "val": 1.75
     },
     {
       "allowedParts": [
@@ -107,7 +100,7 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 3.5
+      "val": 2.25
     },
     {
       "allowedParts": [
@@ -115,7 +108,7 @@
       ],
       "modType": "add",
       "stat": "stat_inaccuracy",
-      "val": -3.0
+      "val": -1.0
     }
   ],
   "traitLevelList": [
@@ -123,8 +116,24 @@
       "allowedParts": [
         "bullet"
       ],
-      "level": 2,
-      "trait": "voidtouched"
+      "level": 1,
+      "trait": "shocking"
+    },
+    {
+      "allowedParts": [
+        "casing",
+        "bullet",
+        "prop"
+      ],
+      "level": 1,
+      "trait": "shocking"
+    },
+    {
+      "allowedParts": [
+        "all"
+      ],
+      "level": 1,
+      "trait": "shocking"
     }
   ]
 }

@@ -70,7 +70,7 @@
       ],
       "modType": "add",
       "stat": "stat_fire_rate",
-      "val": 5.0
+      "val": 1.5
     },
     {
       "allowedParts": [
@@ -79,7 +79,7 @@
       ],
       "modType": "add",
       "stat": "stat_fire_rate",
-      "val": -5.0
+      "val": -1.5
     }
   ],
   "traitLevelList": []

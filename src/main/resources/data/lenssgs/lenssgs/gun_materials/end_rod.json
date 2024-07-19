@@ -1,18 +1,18 @@
 {
   "allowedOn": [
     "bullet",
-    "prop"
+    "barrel"
   ],
   "color": {
     "alpha": 1.0,
-    "blue": 1.0,
+    "blue": 0.8784314,
     "green": 1.0,
     "red": 1.0
   },
   "ingredient": {
-    "item": "minecraft:nether_star"
+    "item": "minecraft:end_rod"
   },
-  "partType": "netherstar",
+  "partType": "end_rod",
   "statModList": [
     {
       "allowedParts": [
@@ -20,7 +20,7 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 0.75
+      "val": 3.5
     },
     {
       "allowedParts": [
@@ -28,39 +28,70 @@
       ],
       "modType": "add",
       "stat": "stat_max_damage",
+      "val": 4.25
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_inaccuracy",
+      "val": -4.5
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_pierce",
+      "val": 3.0
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_velocity_mul",
+      "val": 0.012
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_fire_rate",
+      "val": 3.0
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "total_multiply",
+      "stat": "stat_projectile_count",
+      "val": 0.05
+    },
+    {
+      "allowedParts": [
+        "bullet",
+        "barrel"
+      ],
+      "modType": "total_multiply",
+      "stat": "stat_gravity_mod",
+      "val": -0.9
+    },
+    {
+      "allowedParts": [
+        "barrel"
+      ],
+      "modType": "add",
+      "stat": "stat_min_damage",
       "val": 0.75
     },
     {
       "allowedParts": [
-        "bullet",
-        "prop"
+        "barrel"
       ],
       "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": 7.5
-    },
-    {
-      "allowedParts": [
-        "bullet",
-        "prop"
-      ],
-      "modType": "add",
-      "stat": "stat_projectile_count",
-      "val": 5.0
-    },
-    {
-      "allowedParts": [
-        "prop"
-      ],
-      "modType": "multiply",
-      "stat": "stat_min_damage",
-      "val": 1.25
-    },
-    {
-      "allowedParts": [
-        "prop"
-      ],
-      "modType": "multiply",
       "stat": "stat_max_damage",
       "val": 1.25
     }
@@ -68,45 +99,17 @@
   "traitLevelList": [
     {
       "allowedParts": [
-        "bullet"
-      ],
-      "level": 1,
-      "trait": "shattering"
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 1,
-      "trait": "shocking"
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 1,
-      "trait": "tracing"
-    },
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
-      "trait": "shattering"
-    },
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
-      "trait": "shocking"
-    },
-    {
-      "allowedParts": [
         "all"
       ],
       "level": 1,
       "trait": "tracing"
+    },
+    {
+      "allowedParts": [
+        "all"
+      ],
+      "level": 3,
+      "trait": "shattering"
     }
   ]
 }

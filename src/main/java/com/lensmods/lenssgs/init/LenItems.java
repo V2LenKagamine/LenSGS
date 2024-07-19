@@ -18,6 +18,8 @@ public class LenItems {
 
     public static final DeferredItem<Item> GUNPRINTER_PAPER = ITEMS.registerSimpleItem("gunprinter_paper", new Item.Properties());
     public static final DeferredItem<Item> VOIDMETAL = ITEMS.registerSimpleItem("void_metal",new Item.Properties());
+    public static final DeferredItem<Item> WYRMSTEEL = ITEMS.registerSimpleItem("wyrm_steel",new Item.Properties());
+    public static final DeferredItem<Item> BLITZGOLD = ITEMS.registerSimpleItem("blitz_gold",new Item.Properties());
     public static final DeferredItem<GunBaseItem> GUN_BASE = ITEMS.register("base_gun_holder",()-> new GunBaseItem(
             new Item.Properties()
                     .stacksTo(1)

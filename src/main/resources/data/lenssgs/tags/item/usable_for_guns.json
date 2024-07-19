@@ -61,6 +61,18 @@
       "required": false
     },
     {
+      "id": "minecraft:end_rod",
+      "required": false
+    },
+    {
+      "id": "minecraft:magma_cream",
+      "required": false
+    },
+    {
+      "id": "minecraft:lightning_rod",
+      "required": false
+    },
+    {
       "id": "minecraft:nether_star",
       "required": false
     },
@@ -73,11 +85,19 @@
       "required": false
     },
     {
+      "id": "minecraft:dragon_breath",
+      "required": false
+    },
+    {
       "id": "lenssgs:void_metal",
       "required": false
     },
     {
-      "id": "minecraft:dragon_breath",
+      "id": "lenssgs:blitz_gold",
+      "required": false
+    },
+    {
+      "id": "lenssgs:wyrm_steel",
       "required": false
     }
   ]

@@ -1,0 +1,13 @@
+{
+  "type": "lenssgs:refill_recipe",
+  "inputs": [
+    {
+      "item": "minecraft:wind_charge"
+    }
+  ],
+  "output": {
+    "count": 1,
+    "id": "lenssgs:base_ammo_holder"
+  },
+  "toRestore": 12
+}

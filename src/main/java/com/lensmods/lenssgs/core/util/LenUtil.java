@@ -113,4 +113,8 @@ public class LenUtil {
         int color = Double.parseDouble(number) >= 0 ? Color.LIGHTGREEN.getColor() : Color.LIGHTPINK.getColor();
         return Component.literal(Double.parseDouble(number) >= 0? "+":"").withColor(color).append(Component.literal(number)).withColor(color);
     }
+    public static Component maliceAppend(String number) {
+        int color = Double.parseDouble(number) >= 0 ? Color.LIGHTPINK.getColor() : Color.LIGHTGREEN.getColor();
+        return Component.literal(Double.parseDouble(number) >= 0? "+":"").withColor(color).append(Component.literal(number)).withColor(color);
+    }
 }

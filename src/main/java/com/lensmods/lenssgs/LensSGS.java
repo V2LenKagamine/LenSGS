@@ -39,7 +39,6 @@ import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
-import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -75,6 +74,8 @@ public class LensSGS
             .displayItems((parameters, output) -> {
                 output.accept(LenItems.GUNPRINTER_PAPER.get());
                 output.accept(LenItems.VOIDMETAL.get());
+                output.accept(LenItems.WYRMSTEEL.get());
+                output.accept(LenItems.BLITZGOLD.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
@@ -109,8 +110,6 @@ public class LensSGS
         modEventBus.addListener(PacketReg::register);
         modEventBus.addListener(this::gatherData);
         modEventBus.addListener(LenDataReg::register);
-        // Register the item to a creative tab
-        modEventBus.addListener(this::addCreative);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
@@ -122,13 +121,6 @@ public class LensSGS
         L3NLOGGER.info("HELLO FROM COMMON SETUP");
         if (Config.logDirtBlock)
             L3NLOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
-    }
-
-    // Add the example block item to the building blocks tab
-    private void addCreative(BuildCreativeModeTabContentsEvent event)
-    {
-        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS)
-            event.accept(LenItems.AMMO_BASE);
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

@@ -21,7 +21,7 @@
       ],
       "modType": "add",
       "stat": "stat_gravity_mod",
-      "val": -0.01
+      "val": -0.004
     },
     {
       "allowedParts": [

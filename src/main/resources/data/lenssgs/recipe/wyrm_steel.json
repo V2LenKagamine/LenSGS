@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "d": {
+      "item": "minecraft:dragon_breath"
+    },
+    "w": {
+      "item": "lenssgs:void_metal"
+    }
+  },
+  "pattern": [
+    " d ",
+    "dwd",
+    " d "
+  ],
+  "result": {
+    "count": 1,
+    "id": "lenssgs:wyrm_steel"
+  }
+}

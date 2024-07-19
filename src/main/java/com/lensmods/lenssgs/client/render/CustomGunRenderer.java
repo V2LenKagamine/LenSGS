@@ -91,8 +91,8 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
                 this.applyShieldTransforms(poseStack, player, partialTicks);
             }
             /* Renders the first persons arms from the grip type of the weapon */
-            if(recoilTimer > 0f && pDisplayContext.firstPerson() && pDisplayContext!= ItemDisplayContext.GUI) {
-                poseStack.translate(0,0,Mth.lerp(partialTicks,recoilTimer * 0.15f,0));
+            if(recoilTimer > 0f && pDisplayContext.firstPerson() && pDisplayContext != ItemDisplayContext.GUI) {
+                poseStack.translate(0,0,recoilTimer * 0.025f);
                 recoilTimer-=partialTicks;
             }
             if(!pDisplayContext.firstPerson() && pDisplayContext != ItemDisplayContext.GUI) {
@@ -136,7 +136,7 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
                 poseStack.translate(side * -0.1f ,-0.1, (0.012f*-side) - 0.012f);
             }
             if(pDisplayContext == ItemDisplayContext.GUI) {
-                poseStack.translate(-0.55f,0.15f,-0.25);
+                poseStack.translate(-0.55f,0.15f,-0.3);
                 poseStack.mulPose(Axis.YP.rotationDegrees(45f));
                 poseStack.scale(2f,2f,2f);
             }

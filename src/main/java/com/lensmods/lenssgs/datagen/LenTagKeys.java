@@ -25,7 +25,9 @@ public class LenTagKeys extends ItemTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
         this.tag(REFILLS_AMMO_TAG);
         this.tag(REFILLS_AMMO_TAG)
-                .addOptionalTag(Tags.Items.GUNPOWDERS);
+                .addOptionalTag(Tags.Items.GUNPOWDERS)
+                .addOptional(ResourceLocation.withDefaultNamespace("tnt"))
+                .addOptional(ResourceLocation.withDefaultNamespace("wind_charge"));
 
         this.tag(GUNAMMO_MAT_TAG);
         this.tag(GUNAMMO_MAT_TAG)
@@ -44,10 +46,16 @@ public class LenTagKeys extends ItemTagsProvider {
                 .addOptionalTag(Tags.Items.GEMS_QUARTZ)
                 .addOptionalTag(Tags.Items.GEMS_AMETHYST)
                 .addOptionalTag(Tags.Items.GEMS_EMERALD)
+                .addOptional(ResourceLocation.withDefaultNamespace("end_rod"))
+                .addOptional(ResourceLocation.withDefaultNamespace("magma_cream"))
+                .addOptional(ResourceLocation.withDefaultNamespace("lightning_rod"))
                 .addOptional(ResourceLocation.withDefaultNamespace("nether_star"))
                 .addOptional(ResourceLocation.withDefaultNamespace("prismarine_shard"))
                 .addOptional(ResourceLocation.withDefaultNamespace("tnt"))
+                .addOptional(ResourceLocation.withDefaultNamespace("dragon_breath"))
                 .addOptional(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"void_metal"))
-                .addOptional(ResourceLocation.withDefaultNamespace("dragon_breath"));
+                .addOptional(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"blitz_gold"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"wyrm_steel"));
+
     }
 }

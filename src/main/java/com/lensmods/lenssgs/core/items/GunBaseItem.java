@@ -5,17 +5,13 @@ import com.lensmods.lenssgs.client.render.CustomGunRenderer;
 import com.lensmods.lenssgs.core.data.AllowedParts;
 import com.lensmods.lenssgs.core.datacomps.GunPartHolder;
 import com.lensmods.lenssgs.core.util.LenUtil;
-import com.lensmods.lenssgs.core.weaponsystems.ReloadTracker;
 import com.lensmods.lenssgs.core.weaponsystems.WeaponAmmoStats;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 import java.util.function.Consumer;
@@ -33,6 +29,12 @@ public class GunBaseItem extends Item implements IModdable,IClientItemExtensions
 
     @Override
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
+        if(WeaponAmmoStats.safeGunLastAmmo(newStack)&& WeaponAmmoStats.safeGunLastAmmo(oldStack)) {
+            if(oldStack.getOrDefault(LenDataComponents.AMMO_COUNTER,null)!=null && newStack.getOrDefault(LenDataComponents.AMMO_COUNTER,null)!=null) {
+                return oldStack.get(LenDataComponents.AMMO_COUNTER)< newStack.get(LenDataComponents.AMMO_COUNTER);
+            }
+            return WeaponAmmoStats.getLastAmmo(oldStack) != WeaponAmmoStats.getLastAmmo(newStack);
+        }
         return slotChanged;
     }
     @Override
@@ -62,20 +64,20 @@ public class GunBaseItem extends Item implements IModdable,IClientItemExtensions
             }
         });
     }
-
+/*
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        if(!(entity instanceof Player player))
+        if(!(entity instanceof Player player) || level.isClientSide )
         {return;}
         ReloadTracker tracker = ReloadTracker.getReloadTracker(player);
-        if(!isSelected && tracker.hasReloadTimer(stack)) {
-            tracker.removeTimer(stack);
-        } else if (isSelected && tracker.hasReloadTimer(stack) &&
-                tracker.getRemaining(stack) <= 0) {
-            tracker.removeTimer(stack);
+        if(player.getMainHandItem().getItem()!=stack.getItem() && tracker.hasReloadTimer(player)) {
+            player.getCooldowns().removeCooldown(stack.getItem());
+        } else if (player.getMainHandItem().getItem()==stack.getItem() && tracker.hasReloadTimer(player) &&
+                tracker.getRemaining() <= 0) {
             WeaponAmmoStats.attemptReload(player,stack,level);
         }
     }
+ */
     @Override
     public boolean isBarVisible(ItemStack pStack) {
         return WeaponAmmoStats.getAmmoMax(pStack) * WeaponAmmoStats.AMMO_POINTS_MUL > WeaponAmmoStats.ammoAmountLeft(pStack);

@@ -86,7 +86,7 @@ public class WeaponAmmoStats {
                 LensSGS.L3NLOGGER.error("Someone is trying to reload with no ammo stats, bad!:{}",ent);
                 return;
             }
-            if(ammoAmountLeft(ammo) >=1) {
+            if(ammoAmountLeft(ammo) >= AMMO_POINTS_MUL) {
                 int ammoInAmmo = ammo.get(LenDataComponents.AMMO_COUNTER);
                 var ammoTraits = ammo.getOrDefault(LenDataComponents.GUN_STAT_TRAITS,null);
                 int removed = Math.min(stats.getAmmo_max() - ammoCurrent, ammoInAmmo);
@@ -96,7 +96,7 @@ public class WeaponAmmoStats {
                         ammo.set(LenDataComponents.AMMO_COUNTER, ammoInAmmo - removed);
                     }
                 } else {
-                    if (!(((Player) ent).isCreative() || ammoTraits.getTraits().stream().noneMatch(trait -> trait.trait().equals(MaterialStats.ECOLOGICAL)))) {
+                    if (!(((Player) ent).isCreative() || ammoTraits.getTraits().stream().anyMatch(trait -> trait.trait().equals(MaterialStats.ECOLOGICAL)))) {
                         ammo.set(LenDataComponents.AMMO_COUNTER, ammoInAmmo - removed);
                     }
                 }
@@ -123,7 +123,7 @@ public class WeaponAmmoStats {
         boolean ammo = gun.getItem() instanceof AmmoBaseItem;
 
         List<TraitLevel> finalTraits = new ArrayList<>(); //Todo: get traits and set appropriately
-        int newAmmoMax = ammo ? 100* AMMO_POINTS_MUL :AMMO_POINTS_MUL;
+        int newAmmoMax = ammo ? 250 * AMMO_POINTS_MUL :AMMO_POINTS_MUL;
         int bonusAmmoMax =0;
         float ammoMul =1;
         float totalAmmoMul = 1f;
@@ -133,7 +133,7 @@ public class WeaponAmmoStats {
         float peirceMul =1;
         float totalPeirceMul = 1f;
 
-        int newFR = ammo ? 0 : 13;
+        int newFR = ammo ? 0 : 10;
         int bonusFR =0;
         float frmul =1;
         float totalFrMul = 1f;
@@ -157,12 +157,12 @@ public class WeaponAmmoStats {
         float totalMaxMul=1f;
         float totalMinMul = 1f;
 
-        float newVelMul=0f;
+        float newVelMul= ammo ? 0.06f : 0;
         float bonusVel =0;
         float velMul =1f;
         float totalVelMul =1f;
 
-        double newGrav=0d;
+        double newGrav=ammo?0.002d:0d;
         double bonusGrav=0d;
         float gravMod=1f;
         float totalGravMul =1f;
@@ -323,16 +323,17 @@ public class WeaponAmmoStats {
                 case AllowedParts.RECEIVER_PISTOL: {
                     totalMinMul -= 0.2f;
                     totalMaxMul -= 0.1f;
+                    totalAmmoMul -= 0.5f;
                     bonusInacc -= 2.5f;
                     break;
                 }
                 case AllowedParts.RECEIVER_STANDARD: {
-                    totalMinMul += 0.1f;
-                    totalMaxMul += 0.1f;
+                    //Sorry nothing
                     break;
                 }
                 case AllowedParts.RECEIVER_BULLPUP: {
-                    bonusInacc -= 0.25f;
+                    bonusInacc -= 1f;
+                    bonusVel -= 0.001f;
                     break;
                 }
                 case AllowedParts.ACTION_MANUAL: {
@@ -340,12 +341,16 @@ public class WeaponAmmoStats {
                     totalMaxMul += 0.75f;
                     totalMinMul += 0.80f;
                     totalFrMul +=0.5f;
+                    bonusDmgMax += 3f;
+                    bonusDmgMin += 2f;
                     break;
                 }
                 case AllowedParts.ACTION_SINGLE: {
                     totalMaxMul += 0.2f;
                     totalMinMul += 0.3f;
                     totalFrMul += 0.15f;
+                    bonusDmgMax += 2f;
+                    bonusDmgMin += 1.5f;
                     break;
                 }
                 case AllowedParts.ACTION_AUTOMATIC: {
@@ -354,13 +359,13 @@ public class WeaponAmmoStats {
                 }
                 case AllowedParts.BARREL_STUB: {
                     totalInaccMul += 0.1f;
-                    totalFrMul += 0.2f;
+                    totalFrMul -= 0.2f;
                     totalMaxMul -= 0.1f;
                     break;
                 }
                 case AllowedParts.BARREL_SHORT: {
                     totalInaccMul += 0.05f;
-                    totalFrMul += 0.1f;
+                    totalFrMul -= 0.1f;
                     totalMaxMul -= 0.05f;
                     break;
                 }
@@ -371,55 +376,55 @@ public class WeaponAmmoStats {
                 }
                 case AllowedParts.BARREL_LONG: {
                     totalInaccMul -= 0.05f;
-                    totalFrMul -= 0.1f;
+                    totalFrMul += 0.1f;
                     totalMaxMul += 0.05f;
                     break;
                 }
                 case AllowedParts.BARREL_EXTENDED: {
                     totalInaccMul -= 0.1f;
-                    totalFrMul -= 0.2f;
+                    totalFrMul += 0.2f;
                     totalMaxMul += 0.1f;
                     break;
                 }
                 case AllowedParts.STOCK_SHORT: {
                     totalInaccMul -= 0.025f;
-                    totalFrMul += 0.05f;
+                    totalFrMul -= 0.05f;
                     break;
                 }
                 case AllowedParts.STOCK_FULL: {
                     totalInaccMul -= 0.05f;
-                    totalFrMul += 0.025f;
+                    totalFrMul -= 0.025f;
                     break;
                 }
                 case AllowedParts.MAGAZINE_SHORT: {
-                    bonusAmmoMax += 5 * AMMO_POINTS_MUL;
+                    bonusAmmoMax += 14 * AMMO_POINTS_MUL;
                     totalAmmoMul -= 0.1f;
-                    totalFrMul += 0.125f;
-                    bonusInacc -= 0.25f;
+                    totalFrMul -= 0.125f;
+                    bonusInacc -= 1f;
                     break;
                 }
                 case AllowedParts.MAGAZINE_NORMAL: {
-                    bonusAmmoMax += 10 * AMMO_POINTS_MUL;
+                    bonusAmmoMax += 24 * AMMO_POINTS_MUL;
                     break;
                 }
                 case AllowedParts.MAGAZINE_EXTENDED: {
-                    bonusAmmoMax += 15 * AMMO_POINTS_MUL;
+                    bonusAmmoMax += 34 * AMMO_POINTS_MUL;
                     totalAmmoMul += 0.1f;
-                    totalFrMul -= 0.125f;
-                    bonusInacc += 0.25f;
+                    totalFrMul += 0.125f;
+                    bonusInacc += 1f;
                     break;
                 }
                 case AllowedParts.MAGAZINE_BELT: {
-                    bonusAmmoMax += 25 * AMMO_POINTS_MUL;
+                    bonusAmmoMax += 99 * AMMO_POINTS_MUL;
                     totalAmmoMul += 0.25f;
-                    totalFrMul += 0.2f;
-                    bonusInacc -= 2f;
+                    totalFrMul += 0.25f;
+                    bonusInacc += 3f;
                     break;
                 }
                 case AllowedParts.CASING_SMALL: {
-                    totalAmmoMul += 0.125f;
-                    totalMaxMul -= 0.125f;
-                    totalMinMul -= 0.125f;
+                    totalAmmoMul += 0.25f;
+                    totalMaxMul -= 0.25f;
+                    totalMinMul -= 0.25f;
                     break;
                 }
                 case AllowedParts.CASING_NORMAL: {
@@ -427,16 +432,16 @@ public class WeaponAmmoStats {
                     break;
                 }
                 case AllowedParts.CASING_LARGE: {
-                    totalAmmoMul -= 0.125f;
-                    totalMaxMul += 0.125f;
-                    totalMinMul += 0.125f;
+                    totalAmmoMul -= 0.25f;
+                    totalMaxMul += 0.25f;
+                    totalMinMul += 0.25f;
                     break;
                 }
                 case AllowedParts.CASING_SHELL: {
-                    totalAmmoMul -= 0.05f;
-                    totalMaxMul += 0.05f;
-                    totalMinMul += 0.05f;
-                    totalAmmoMul -= 0.05f;
+                    totalAmmoMul -= 0.1f;
+                    totalMaxMul += 0.1f;
+                    totalMinMul += 0.1f;
+                    totalFrMul += 0.1f;
                     break;
                 }
                 case AllowedParts.ROUND_STANDARD: {
@@ -445,21 +450,23 @@ public class WeaponAmmoStats {
                 }
                 case AllowedParts.ROUND_BUCKSHOT: {
                     bonusProj += 5;
-                    totalMaxMul -= 0.75f;
-                    totalMinMul -= 0.75f;
+                    totalMaxMul -= 0.6f;
+                    totalMinMul -= 0.6f;
+                    bonusInacc += 8f;
                     break;
                 }
                 case AllowedParts.ROUND_BIRDSHOT: {
                     bonusProj += 8;
-                    totalMaxMul -= 0.8f;
-                    totalMinMul -= 0.8f;
+                    totalMaxMul -= 0.7f;
+                    totalMinMul -= 0.7f;
+                    bonusInacc += 12f;
                     break;
                 }
                 case AllowedParts.PROPELLANT_LIGHT: {
                     totalAmmoMul += 0.125f;
                     totalMaxMul -= 0.05f;
                     totalMinMul -= 0.05f;
-                    velMul -= 0.08f;
+                    velMul -= 0.01f;
                     bonusPeirce -=1;
                     break;
                 }
@@ -471,7 +478,7 @@ public class WeaponAmmoStats {
                     totalAmmoMul -= 0.125f;
                     totalMaxMul += 0.05f;
                     totalMinMul += 0.05f;
-                    velMul += 0.08f;
+                    velMul += 0.01f;
                     bonusPeirce +=1;
                     break;
                 }
@@ -480,15 +487,16 @@ public class WeaponAmmoStats {
             //rendering thing
             partColorList.add(new ModelColorPair(part.getSubType(),MaterialMap.loadedMats(provider).get(part.getMaterial()).getColor()));
         }
-        int finalAmmo = Math.max((int)Math.floor((((newAmmoMax  * ((ammoMul/ (mulammoParts != 0 ? mulammoParts : 1)))))*totalAmmoMul) + bonusAmmoMax), AMMO_POINTS_MUL);
-        int finalPeirce = Math.max((int)Math.floor(((newPeirce * (( peirceMul / (mulpierceParts != 0 ? mulpierceParts : 1)))))*totalPeirceMul)+bonusPeirce,1);
-        int finalFr = Math.max((int)Math.floor(((newFR * ((frmul/ (mulfireParts != 0 ? mulfireParts : 1))))) * totalFrMul) + bonusFR,4);
-        float finalInaccuracy = Math.max(((newInacc * (( inaccMod / (mulinaccParts != 0 ? mulinaccParts : 1)))) * totalInaccMul)+ bonusInacc,0);
-        float finalProjectileCount = Math.max(((newProj * ((projMul /(mulprojParts  != 0 ? mulprojParts : 1)))) * totalProjMul) + bonusProj,ammo? 1: 0);
-        float finalMaxDmg = Math.max(((newdmgMax * ((damageMulMax/ (muldmgMaxParts != 0 ? muldmgMaxParts : 1))))*totalMaxMul) + bonusDmgMax,0.5f);
-        float finalMinDmg = Math.max(((newdmgMin  * ((damageMulMin/ (muldmgMinParts != 0 ? muldmgMinParts : 1))))*totalMinMul)+bonusDmgMin,0.25f);
-        float finalVel = Math.max(((newVelMul * (( velMul/ (mulvelParts != 0 ? mulvelParts : 1))))*totalVelMul)+ bonusVel,0.05f);
-        double finalGrav = Math.clamp(((newGrav * (gravMod/ (mulgravParts != 0 ? mulgravParts : 1)))*totalGravMul)+ bonusGrav,-0.01d,0.01d);
+        //Calculation out of order, because we need proj. count to slow down the shots, lag reasons.
+        int finalAmmo = Math.max((int)Math.floor(((((newAmmoMax + bonusAmmoMax)  * ((ammoMul/ (mulammoParts != 0 ? mulammoParts : 1)))))*totalAmmoMul)), AMMO_POINTS_MUL);
+        int finalPeirce = Math.max((int)Math.floor((((newPeirce + bonusPeirce) * (( peirceMul / (mulpierceParts != 0 ? mulpierceParts : 1)))))*totalPeirceMul),0);
+        float finalInaccuracy = Math.max((((newInacc + bonusInacc) * (( inaccMod / (mulinaccParts != 0 ? mulinaccParts : 1)))) * totalInaccMul),0);
+        float finalProjectileCount = Math.max((((newProj + bonusProj) * ((projMul /(mulprojParts  != 0 ? mulprojParts : 1)))) * totalProjMul),ammo ? 1 : 0);
+        float finalMaxDmg = Math.max((((newdmgMax + bonusDmgMax) * ((damageMulMax/ (muldmgMaxParts != 0 ? muldmgMaxParts : 1))))*totalMaxMul),ammo ? 0.5f : 0f);
+        float finalMinDmg = Math.max((((newdmgMin+bonusDmgMin)  * ((damageMulMin/ (muldmgMinParts != 0 ? muldmgMinParts : 1))))*totalMinMul),ammo ? 0.25f : 0f);
+        float finalVel = Math.max((((newVelMul + bonusVel)* (( velMul/ (mulvelParts != 0 ? mulvelParts : 1))))*totalVelMul),ammo ? 0.05f : 0 );
+        int finalFr = Math.max((int)Math.floor((((newFR  + bonusFR)* ((frmul/ (mulfireParts != 0 ? mulfireParts : 1))))) * totalFrMul),ammo ? (int)(Math.ceil(finalProjectileCount*1.5f)): 2 );
+        double finalGrav = Math.clamp((((newGrav+ bonusGrav) * (gravMod/ (mulgravParts != 0 ? mulgravParts : 1)))*totalGravMul),-0.02d,0.02d);
         if(finalMinDmg > finalMaxDmg) {
             finalMaxDmg = finalMinDmg;
         }

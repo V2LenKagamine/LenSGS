@@ -38,7 +38,7 @@ public class LenLang extends LanguageProvider {
         keyof("display_traits","Traits");
         keyof("display_composition","Composition");
         keyof("no_ammo","You need to have reloaded with a bullet at least once before firing a gun;Even in creative!");
-        keyof("refills_ammo","Can be used to restore some ammo of a bullet-stack.");
+        add("refills_ammo","Can be used to restore some ammo of a bullet-stack.");
         //Stats
         keyof(AMMO_MAX,"Max Ammo Capacity:");
         keyof(PIERCE,"Peirce:");
@@ -63,6 +63,7 @@ public class LenLang extends LanguageProvider {
         keyof(CONCUSSIVE,"Concussing");
         keyof(VOID_TOUCHED,"Void's-Maw");
         keyof(SHATTERING,"Shattering");
+        keyof(LINGERING,"Lingering");
         //Keybinds
         add("key.categories.lenssgs","Len's Gun Shenanigans");
         bindkeyof("cycle.back", "Tooltip Cycle Back");
@@ -70,9 +71,19 @@ public class LenLang extends LanguageProvider {
         bindkeyof("displayConstruction","Show Gun Parts");
         bindkeyof("displayStats","Display Gun Stats");
         bindkeyof("displayTraits", "Display Gun Traits");
+        bindkeyof("reload","Reload Gun");
         //Items
         itemkeyof("gunprinter_paper","Gun-Printer Paper");
-        itemkeyof("void_metal","Void Metal");
+        itemkeyof("void_metal","Void Metal Ingot");
+        itemkeyof("wyrm_steel","Wyrm Steel Ingot");
+        itemkeyof("blitz_gold","Blitz Gold Ingot");
+        //Effect keys
+        add("item.minecraft.tipped_arrow.effect.laceration_potion","Arrow of Laceration");
+        add("item.minecraft.potion.effect.laceration_potion","Potion of Laceration");
+        add("item.minecraft.splash_potion.effect.laceration_potion","Splash Potion of Laceration");
+        add("item.minecraft.lingering_potion.effect.laceration_potion","Lingering Potion of Laceration");
+        add("effect.lenssgs.lacerated","Lacerated");
+        add("effect.lenssgs.shatter","Shattered");
         //Parts
         keyof(RECEIVER,"Receiver:");
         keyof(ACTION,"Action:");
@@ -105,12 +116,13 @@ public class LenLang extends LanguageProvider {
         keyof(CASING_SHELL,"Shell Casing");
         keyof(ROUND_STANDARD,"Standard Round");
         keyof(ROUND_BUCKSHOT,"Buckshot Round");
-        keyof(ROUND_BIRDSHOT,"Birdshot round");
+        keyof(ROUND_BIRDSHOT,"Birdshot Round");
         keyof(PROPELLANT_LIGHT,"Light Propellant");
         keyof(PROPELLANT_NORMAL,"Standard Propellant");
         keyof(PROPELLANT_HEAVY,"Heavy Propellant");
         keyof("part_crafter","Part Crafter");
         //Materials
+        keyof("wood","Wooden");
         keyof("stone","Stone");
         keyof("copper","Copper");
         keyof("iron","Iron");
@@ -130,6 +142,11 @@ public class LenLang extends LanguageProvider {
         keyof("emerald","Emerald");
         keyof("dragonsbreath","Dragon's Breath");
         keyof("netherstar","Nether Star");
+        keyof("magma_cream","Magma Cream");
+        keyof("wyrm_steel","Wyrm Steel");
+        keyof("blitz_gold","Blitz Gold");
+        keyof("copper_rod","Copper Bolt");
+        keyof("end_rod","End Rod");
     }
 
     protected void keyof(String key,String toTranslate) {

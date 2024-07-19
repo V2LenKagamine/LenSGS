@@ -1,54 +1,50 @@
 package com.lensmods.lenssgs.core.weaponsystems;
 
-import com.google.common.collect.Maps;
-import com.mojang.datafixers.util.Pair;
-import net.minecraft.Util;
-import net.minecraft.client.Minecraft;
+import com.lensmods.lenssgs.core.items.GunBaseItem;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.tick.ServerTickEvent;
 
 import java.util.Map;
 import java.util.WeakHashMap;
-
+@EventBusSubscriber(bus = EventBusSubscriber.Bus.GAME)
 public class ReloadTracker {
-    private static final Map<Player, ReloadTracker> RELOAD_TRACKER_MAP = new WeakHashMap<>();
 
-    private final Map<ItemStack, Pair<Long, Integer>> reloadMap = Maps.newHashMap();
+    private static final Map<Player, ReloadTracker> RELOAD_TRACKER_MAP = new WeakHashMap<>();
+    protected int tillReload = 0;
+    protected boolean reloading;
+    @SubscribeEvent
+    private static void onLevelTick(ServerTickEvent.Post unusued) {
+        if(!RELOAD_TRACKER_MAP.isEmpty()) {
+            RELOAD_TRACKER_MAP.forEach((player,tracker) -> {
+                if(tracker.tillReload>1)
+                {tracker.tillReload--;}
+                else if(player.getMainHandItem().getItem() instanceof GunBaseItem&& tracker.reloading){
+                    WeaponAmmoStats.attemptReload(player,player.getMainHandItem(),player.level());
+                    tracker.reloading =false;
+                }
+            });
+        }
+    }
 
     public static ReloadTracker getReloadTracker(Player player)
     {
         return RELOAD_TRACKER_MAP.computeIfAbsent(player, player1 -> new ReloadTracker());
     }
-    public void removeTimer(ItemStack stack) {
-        if(reloadMap.containsKey(stack)) {
-            reloadMap.remove(stack);
-        }
-    }
-    public void putReloadTime(ItemStack stacc, int time)
-    {
-        if(!reloadMap.containsKey(stacc)) {
-            this.reloadMap.put(stacc, Pair.of(Minecraft.getInstance().level.getGameTime(), time));
-        }
+    public void putReloadTimer(int time) {
+        tillReload = time;
+        reloading=true;
     }
 
-    public boolean hasReloadTimer(ItemStack item)
+    public boolean hasReloadTimer(Player ply)
     {
-        Pair<Long, Integer> pair = this.reloadMap.get(item);
-        if(pair != null)
-        {
-            return Util.getMillis() - pair.getFirst() < pair.getSecond()- 1;//Ehh, close enough
-        }
-        return false;
+        return RELOAD_TRACKER_MAP.containsKey(ply);
     }
 
-    public long getRemaining(ItemStack item)
+    public int getRemaining()
     {
-        Pair<Long, Integer> pair = this.reloadMap.get(item);
-        if(pair != null)
-        {
-            return pair.getFirst() - (Minecraft.getInstance().level.getGameTime() - pair.getSecond());
-        }
-        return 0;
+        return this.tillReload;
     }
 
 }
