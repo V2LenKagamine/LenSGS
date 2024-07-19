@@ -1,27 +1,19 @@
+*Len's Silent Gun Shenanigans*, as originally named, or more properly, *Len's Silenced Guns*, is a Gun Mod currently for 1.21 NeoForge.
+Heavily inspired by the mods [**Silent's Gear**](https://github.com/SilentChaos512/Silent-Gear) and [**MrCrayfish's Gun mod**](https://github.com/MrCrayfish/MrCrayfishGunMod), this mod attempts to combine the two allowing for guns built out of materials modularly.
+Ever wanted a Gold Bullpup with an Iron Barrel that shoots Amethyst Shotgun Rounds? Well now you can!
+This mod aims for a more silly feel, as the creator has little knowledge of guns, and thus experienced range-goers may notice oddities like 'The Belt Fed adapter goes into the magwell' or 'The Ejection Port faces the user'. Dont think too hard about it.
 
-Installation information
-=======
+Currently Contains Inbuilt Compatability with common forge materials, like Osmium, Uranium, Bronze, ETC.
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions at [github](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+Free to include in packs, no permission needed.
+Feel free to steal/reference the code as needed.
+All I ask: Don't re-upload this anywhere, if the user doesn't have 'Len Kagamine' in the name or something of the such, it wasn't me.
 
-> **Note**: For Eclipse, use tasks in `Launch Group` instead of ones founds in `Java Application`. A preparation task must run before launching the game. NeoGradle uses launch groups to do these subsequently.
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+**Datapackable! All materials are loaded from Datapacks, so if you don't see your favorite material, feel free to cram it in one!**
+Know a material that would be *REALLY* good or funny to have be inbuilt? Make an Issue or suggestion! I may add it as an inbuilt, with your permission.
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+***Disclaimer from a not-lawer: This mod is probably very poorly put together, there will almost certainly be bugs, balance issues, crashes, world corruption and other shenanigans occur. The Mod author does not take liability for any damages caused to Minecraft worlds,
+the ender dragon, or the users sanity from using this mod.***
