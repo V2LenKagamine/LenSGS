@@ -21,7 +21,7 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 0.25
+      "val": 0.5
     },
     {
       "allowedParts": [
@@ -30,7 +30,7 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 0.5
+      "val": 0.75
     }
   ],
   "traitLevelList": [

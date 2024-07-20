@@ -30,8 +30,7 @@
     {
       "allowedParts": [
         "bullet",
-        "casing",
-        "receiver"
+        "casing"
       ],
       "modType": "add",
       "stat": "stat_max_damage",
@@ -39,8 +38,27 @@
     },
     {
       "allowedParts": [
+        "receiver",
+        "action",
+        "casing"
+      ],
+      "modType": "add",
+      "stat": "stat_max_damage",
+      "val": 0.75
+    },
+    {
+      "allowedParts": [
+        "receiver",
+        "action",
+        "casing"
+      ],
+      "modType": "add",
+      "stat": "stat_min_damage",
+      "val": 0.5
+    },
+    {
+      "allowedParts": [
         "bullet",
-        "casing",
         "receiver"
       ],
       "modType": "add",

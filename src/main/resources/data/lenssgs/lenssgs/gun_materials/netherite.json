@@ -47,8 +47,9 @@
     },
     {
       "allowedParts": [
-        "stock",
         "action",
+        "receiver",
+        "bullet",
         "casing"
       ],
       "modType": "multiply",
@@ -57,8 +58,9 @@
     },
     {
       "allowedParts": [
-        "stock",
         "action",
+        "receiver",
+        "bullet",
         "casing"
       ],
       "modType": "multiply",
@@ -90,7 +92,7 @@
       ],
       "modType": "add",
       "stat": "stat_max_damage",
-      "val": 1.0
+      "val": 2.0
     },
     {
       "allowedParts": [
@@ -98,7 +100,27 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 2.5
+      "val": 3.5
+    },
+    {
+      "allowedParts": [
+        "receiver",
+        "action",
+        "casing"
+      ],
+      "modType": "add",
+      "stat": "stat_max_damage",
+      "val": 2.0
+    },
+    {
+      "allowedParts": [
+        "receiver",
+        "action",
+        "casing"
+      ],
+      "modType": "add",
+      "stat": "stat_min_damage",
+      "val": 1.5
     },
     {
       "allowedParts": [

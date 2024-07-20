@@ -40,9 +40,9 @@
         "bullet",
         "casing"
       ],
-      "modType": "total_multiply",
+      "modType": "multiply",
       "stat": "stat_pierce",
-      "val": 0.05
+      "val": 1.05
     },
     {
       "allowedParts": [
@@ -67,6 +67,16 @@
       "modType": "add",
       "stat": "stat_min_damage",
       "val": 1.25
+    },
+    {
+      "allowedParts": [
+        "receiver",
+        "action",
+        "casing"
+      ],
+      "modType": "add",
+      "stat": "stat_max_damage",
+      "val": 0.25
     },
     {
       "allowedParts": [

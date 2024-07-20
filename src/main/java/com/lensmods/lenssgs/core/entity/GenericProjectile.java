@@ -59,9 +59,8 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     protected LivingEntity Owner;
     protected float dmg = 0f;
     protected int pierce = 0;
-    protected int life = 40;
     public float getPercentLifeLeft() {
-        return ((float) tickCount / life);
+        return ((float) tickCount / this.entityData.get(LIFE));
     }
     protected float velMult = 1f ;
     protected List<TraitLevel> traits = new ArrayList<>();
@@ -69,9 +68,9 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     public boolean getSecondLife() {
         return secondLife;
     }
-    private ItemStack visualItem = ItemStack.EMPTY;
+    private static final EntityDataAccessor<ItemStack> VISUAL = SynchedEntityData.defineId(GenericProjectile.class,EntityDataSerializers.ITEM_STACK);
     private static final EntityDataAccessor<Float> GRAVITY = SynchedEntityData.defineId(GenericProjectile.class, EntityDataSerializers.FLOAT);
-
+    private static final EntityDataAccessor<Integer> LIFE = SynchedEntityData.defineId(GenericProjectile.class, EntityDataSerializers.INT);
     public List<TraitLevel> getTraits() {return traits;}
 
     public GenericProjectile(EntityType<?> pEntityType, Level pLevel) {
@@ -116,7 +115,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     }
     public void setTraits(List<TraitLevel> traits) { this.traits = traits;}
     public ItemStack getVisualItem() {
-        return this.visualItem;
+        return this.entityData.get(VISUAL);
     }
 
     private void onHit(HitResult result, Vec3 startVec, Vec3 endVec)
@@ -258,12 +257,15 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
         pBuilder.define(GRAVITY,0f);
+        pBuilder.define(VISUAL,ItemStack.EMPTY);
+        pBuilder.define(LIFE,40);
+
     }
 
     @Override
     protected void readAdditionalSaveData(CompoundTag pCompound) {
         this.entityData.set(GRAVITY,(float)pCompound.getDouble("gravityMod"));
-        this.life = pCompound.getInt("lifetime");
+        this.entityData.set(LIFE,pCompound.getInt("lifetime"));
         this.pierce = pCompound.getInt("pierce");
 
         List<TraitLevel> tstore = new ArrayList<>();
@@ -277,7 +279,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     @Override
     protected void addAdditionalSaveData(CompoundTag pCompound) {
         pCompound.putDouble("gravityMod",this.entityData.get(GRAVITY));
-        pCompound.putInt("lifetime",this.life);
+        pCompound.putInt("lifetime",this.entityData.get(LIFE));
         pCompound.putInt("pierce",this.pierce);
         pCompound.putInt("traitamt",this.traits.isEmpty() ? 0:traits.size());
         for(int i = 0; i<traits.size();i++) {
@@ -292,7 +294,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     public void writeSpawnData(RegistryFriendlyByteBuf buffer) {
         buffer.writeInt(this.OwnerID);
         buffer.writeDouble(this.entityData.get(GRAVITY));
-        buffer.writeInt(this.life);
+        buffer.writeInt(this.entityData.get(LIFE));
         buffer.writeInt(this.pierce);
         buffer.writeInt(this.traits.isEmpty() ? 0 : traits.size());
         for(int i = 0; i<traits.size();i++) {
@@ -307,7 +309,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     public void readSpawnData(RegistryFriendlyByteBuf additionalData) {
         this.OwnerID = additionalData.readInt();
         this.entityData.set(GRAVITY,(float) additionalData.readDouble());
-        this.life = additionalData.readInt();
+        this.entityData.set(LIFE,additionalData.readInt());
         this.pierce = additionalData.readInt();
         List<TraitLevel> tstore = new ArrayList<>();
         for (int i = 0; i <additionalData.readInt(); i++ ) {
@@ -329,17 +331,18 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     public void tick() {
         super.tick();
         this.updateHeading();
-        if (!this.level().isClientSide&& !secondLife) {
-            for (int i = 0; i < 6; i++) {
-                double nextPosX = this.getX() + this.getDeltaMovement().x();
-                double nextPosY = this.getY() + this.getDeltaMovement().y();
-                double nextPosZ = this.getZ() + this.getDeltaMovement().z();
+
+        for (int i = 0; i < 6; i++) {
+            double nextPosX = this.getX() + this.getDeltaMovement().x();
+            double nextPosY = this.getY() + this.getDeltaMovement().y();
+            double nextPosZ = this.getZ() + this.getDeltaMovement().z();
+            if(!level().isClientSide) {
                 this.setPos(nextPosX, nextPosY, nextPosZ);
-                if (this.entityData.get(GRAVITY) != 0) {
+                if (!secondLife && this.entityData.get(GRAVITY) != 0) {
                     this.setDeltaMovement(this.getDeltaMovement().add(0, this.entityData.get(GRAVITY) / 6f, 0));
                 }
-                performHitCalcs();
             }
+            performHitCalcs();
         }
         if(this.secondLife && !level().isClientSide) {
             double rad = 12;
@@ -355,10 +358,10 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
                 double dely = (this.position().y() - ent.position().y);
                 double delz = (this.position().z() - ent.position().z);
                 double dist = rad - distanceTo(ent);
-                ent.addDeltaMovement(new Vec3(delx * (dist) * 0.001d, dely * (dist) * 0.001d, delz * (dist) * 0.001d));
+                ent.addDeltaMovement(new Vec3(delx * (dist) * 0.0025d, dely * (dist) * 0.0025d, delz * (dist) * 0.0025d));
             }
         }
-        if (this.tickCount >= this.life) {
+        if (this.tickCount >= this.entityData.get(LIFE)) {
             if (secondLife) {
                 this.onDoom();
                 this.remove(RemovalReason.KILLED);
@@ -370,40 +373,38 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     }
 
     protected void performHitCalcs() {
-        if (!this.level().isClientSide()) {
-            if (!secondLife) {
-                Vec3 startVec = this.position();
-                Vec3 endVec = startVec.add(this.getDeltaMovement());
-                HitResult result = rayTraceBlocks(this.level(), new ClipContext(startVec, endVec, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this), IGNORE_LEAVES);
-                if (result.getType() != HitResult.Type.MISS) {
-                    endVec = result.getLocation();
-                }
+        if (!secondLife) {
+            Vec3 startVec = this.position();
+            Vec3 endVec = startVec.add(this.getDeltaMovement());
+            HitResult result = rayTraceBlocks(this.level(), new ClipContext(startVec, endVec, ClipContext.Block.COLLIDER, ClipContext.Fluid.NONE, this), IGNORE_LEAVES);
+            if (result.getType() != HitResult.Type.MISS) {
+                endVec = result.getLocation();
+            }
 
-                List<EntityResult> hitEntities = null;
-                if (this.pierce == 0) {
-                    EntityResult entityResult = this.findEntityOnPath(startVec, endVec);
-                    if (entityResult != null) {
-                        hitEntities = Collections.singletonList(entityResult);
-                    }
-                } else {
-                    hitEntities = this.findEntitiesOnPath(startVec, endVec);
+            List<EntityResult> hitEntities = null;
+            if (this.pierce == 0) {
+                EntityResult entityResult = this.findEntityOnPath(startVec, endVec);
+                if (entityResult != null) {
+                    hitEntities = Collections.singletonList(entityResult);
                 }
+            } else {
+                hitEntities = this.findEntitiesOnPath(startVec, endVec);
+            }
 
-                if (hitEntities != null && hitEntities.size() > 0) {
-                    for (EntityResult entityResult : hitEntities) {
-                        result = new EntityHitResult(entityResult.getEntity());
-                        if (((EntityHitResult) result).getEntity() instanceof Player player) {
-                            if (this.Owner instanceof Player && !((Player) this.Owner).canHarmPlayer(player)) {
-                                result = null;
-                            }
-                        }
-                        if (result != null) {
-                            this.onHit(result, startVec, endVec);
+            if (hitEntities != null && hitEntities.size() > 0) {
+                for (EntityResult entityResult : hitEntities) {
+                    result = new EntityHitResult(entityResult.getEntity());
+                    if (((EntityHitResult) result).getEntity() instanceof Player player) {
+                        if (this.Owner instanceof Player && !((Player) this.Owner).canHarmPlayer(player)) {
+                            result = null;
                         }
                     }
-                }else {
-                    this.onHit(result, startVec, endVec);
+                    if (result != null) {
+                        this.onHit(result, startVec, endVec);
+                    }
                 }
+            } else {
+                this.onHit(result, startVec, endVec);
             }
         }
     }
@@ -411,12 +412,12 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     protected void onExpire() {
         if(traits.stream().anyMatch(trait -> trait.trait().equals(MaterialStats.VOID_TOUCHED))) {
             this.secondLife = true;
-            this.visualItem = new ItemStack(Items.ENDER_EYE,1);
+            this.entityData.set(VISUAL,new ItemStack(Items.ENDER_EYE,1));
             if(!level().isClientSide) {
                 setPos(position().add(0f, 0.75f, 0f));
+                this.entityData.set(GRAVITY,0f);
             }
-            this.life = (100 + life);
-            this.entityData.set(GRAVITY,0f);
+            this.entityData.set(LIFE,140);
             this.setDeltaMovement(new Vec3(0,0,0));
             playSound(LenSounds.VOID_BOOM.get(),1.75f,1f);
         }
@@ -468,7 +469,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
             for (Entity hit : targets) {
                 float damage = this.getDamage();
                 DamageSource source = LenDamageTypes.Sources.projectile(this.level().registryAccess(), this, this.Owner);
-                hit.hurt(source, damage);
+                hit.hurt(source, damage*(0.05f*trait.level()));
             }
         }
     }

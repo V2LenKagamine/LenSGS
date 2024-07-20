@@ -80,7 +80,7 @@
       ],
       "modType": "total_multiply",
       "stat": "stat_pierce",
-      "val": 0.05
+      "val": -0.95
     },
     {
       "allowedParts": [
@@ -88,7 +88,7 @@
       ],
       "modType": "total_multiply",
       "stat": "stat_projectile_count",
-      "val": 0.05
+      "val": -0.95
     },
     {
       "allowedParts": [
@@ -96,11 +96,31 @@
       ],
       "modType": "add",
       "stat": "stat_max_damage",
-      "val": 2.5
+      "val": 6.5
     },
     {
       "allowedParts": [
         "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_min_damage",
+      "val": 6.5
+    },
+    {
+      "allowedParts": [
+        "receiver",
+        "action",
+        "casing"
+      ],
+      "modType": "add",
+      "stat": "stat_max_damage",
+      "val": 3.0
+    },
+    {
+      "allowedParts": [
+        "receiver",
+        "action",
+        "casing"
       ],
       "modType": "add",
       "stat": "stat_min_damage",

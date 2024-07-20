@@ -19,7 +19,7 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 3.5
+      "val": 4.0
     },
     {
       "allowedParts": [
@@ -27,7 +27,7 @@
       ],
       "modType": "add",
       "stat": "stat_max_damage",
-      "val": 2.25
+      "val": 3.5
     },
     {
       "allowedParts": [
@@ -43,7 +43,7 @@
       ],
       "modType": "add",
       "stat": "stat_fire_rate",
-      "val": 3.5
+      "val": 4.0
     },
     {
       "allowedParts": [
@@ -59,7 +59,7 @@
       ],
       "modType": "add",
       "stat": "stat_velocity_mul",
-      "val": 0.006
+      "val": 0.008
     },
     {
       "allowedParts": [
@@ -67,7 +67,7 @@
       ],
       "modType": "total_multiply",
       "stat": "stat_projectile_count",
-      "val": 0.05
+      "val": -0.95
     }
   ],
   "traitLevelList": [
@@ -80,7 +80,7 @@
     },
     {
       "allowedParts": [
-        "all"
+        "bullet"
       ],
       "level": 2,
       "trait": "shattering"

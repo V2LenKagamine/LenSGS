@@ -27,7 +27,7 @@
       ],
       "modType": "total_multiply",
       "stat": "stat_min_damage",
-      "val": 0.25
+      "val": 0.3
     },
     {
       "allowedParts": [
@@ -35,7 +35,7 @@
       ],
       "modType": "total_multiply",
       "stat": "stat_max_damage",
-      "val": 0.25
+      "val": 0.3
     },
     {
       "allowedParts": [

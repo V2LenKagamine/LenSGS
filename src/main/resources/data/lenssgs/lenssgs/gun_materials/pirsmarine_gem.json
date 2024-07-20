@@ -27,7 +27,7 @@
       ],
       "modType": "add",
       "stat": "stat_max_damage",
-      "val": 1.0
+      "val": 1.5
     }
   ],
   "traitLevelList": [
