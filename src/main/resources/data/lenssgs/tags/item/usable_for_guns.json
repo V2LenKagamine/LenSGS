@@ -147,6 +147,30 @@
     {
       "id": "#c:ingots/silver",
       "required": false
+    },
+    {
+      "id": "#c:ingots/blaze_gold",
+      "required": false
+    },
+    {
+      "id": "#c:ingots/crimson_iron",
+      "required": false
+    },
+    {
+      "id": "#c:ingots/crimson_steel",
+      "required": false
+    },
+    {
+      "id": "#c:ingots/azure_silver",
+      "required": false
+    },
+    {
+      "id": "#c:ingots/azure_electrum",
+      "required": false
+    },
+    {
+      "id": "#c:ingots/tyran_steel",
+      "required": false
     }
   ]
 }

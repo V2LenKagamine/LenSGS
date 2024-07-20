@@ -1,0 +1,120 @@
+{
+  "allowedOn": [
+    "casing",
+    "bullet",
+    "action",
+    "magazine",
+    "barrel",
+    "receiver",
+    "stock"
+  ],
+  "color": {
+    "alpha": 1.0,
+    "blue": 1.0,
+    "green": 0.7490196,
+    "red": 0.0
+  },
+  "ingredient": {
+    "tag": "c:ingots/azure_electrum"
+  },
+  "partType": "azure_electrum",
+  "statModList": [
+    {
+      "allowedParts": [
+        "magazine"
+      ],
+      "modType": "multiply",
+      "stat": "stat_ammo_max",
+      "val": 1.5
+    },
+    {
+      "allowedParts": [
+        "casing"
+      ],
+      "modType": "multiply",
+      "stat": "stat_ammo_max",
+      "val": 0.9
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "action",
+        "casing"
+      ],
+      "modType": "add",
+      "stat": "stat_fire_rate",
+      "val": -2.55
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "action",
+        "casing"
+      ],
+      "modType": "multiply",
+      "stat": "stat_fire_rate",
+      "val": 0.75
+    },
+    {
+      "allowedParts": [
+        "action",
+        "bullet",
+        "casing"
+      ],
+      "modType": "multiply",
+      "stat": "stat_min_damage",
+      "val": 0.85
+    },
+    {
+      "allowedParts": [
+        "action",
+        "bullet",
+        "casing"
+      ],
+      "modType": "multiply",
+      "stat": "stat_max_damage",
+      "val": 0.85
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_max_damage",
+      "val": 0.25
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_min_damage",
+      "val": -0.25
+    }
+  ],
+  "traitLevelList": [
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "level": 4,
+      "trait": "shocking"
+    },
+    {
+      "allowedParts": [
+        "casing"
+      ],
+      "level": 4,
+      "trait": "shocking"
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "action",
+        "receiver"
+      ],
+      "level": 2,
+      "trait": "shocking"
+    }
+  ]
+}

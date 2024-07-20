@@ -66,7 +66,14 @@ public class LenMaterialGen {
             new GunMaterial("aluminum",ALUMINUM_STATS,null,ALUMINUM_TAG,Color.ALICEBLUE,NOT_PROPELLANT),
             new GunMaterial("electrum",ELECTRUM_STATS,ELECTRUM_TRAITS,ELECTRUM_TAG,Color.LIGHTYELLOW,NOT_PROPELLANT),
             new GunMaterial("plutonium",PLUTONIUM_STATS,PLUTONIUM_TRAITS,PLUTONIUM_TAG,Color.INDIANRED,NOT_PROPELLANT),
-            new GunMaterial("silver",SILVER_STATS,SILVER_TRAITS,SILVER_TAG,Color.SILVER,NOT_PROPELLANT)
+            new GunMaterial("silver",SILVER_STATS,SILVER_TRAITS,SILVER_TAG,Color.SILVER,NOT_PROPELLANT),
+            //Sgear Mats
+            new GunMaterial("blaze_gold",BLAZEGOLD_STATS,BLAZEGOLD_TRAITS,BLAZEGOLD_TAG,Color.ORANGERED,NOT_PROPELLANT),
+            new GunMaterial("crimson_iron",CRIMSON_IRON_STATS,CRIMSON_IRON_TRAITS,CRIMSON_IRON_TAG,Color.CRIMSON,NOT_PROPELLANT),
+            new GunMaterial("crimson_steel",CRIMSON_STEEL_STATS,CRIMSON_STEEL_TRAITS,CRIMSON_STEEL_TAG,Color.CRIMSON.blendWith(Color.RED),NOT_PROPELLANT),
+            new GunMaterial("azure_electrum",AZURE_ELECTRUM_STATS,AZURE_ELECTRUM_TRAITS,AZURE_ELECTRUM_TAG,Color.DEEPSKYBLUE,NOT_PROPELLANT),
+            new GunMaterial("azure_silver",AZURE_SILVER_STATS,AZURE_SILVER_TRAITS,AZURE_SILVER_TAG,Color.LIGHTSKYBLUE,NOT_PROPELLANT),
+            new GunMaterial("tyran_steel",TYRAN_STEEL_STATS,TYRAN_STEEL_TRAITS,TYRAN_STEEL_TAG,Color.MEDIUMPURPLE,NOT_PROPELLANT)
     );
 
     public static RegistrySetBuilder DEFAULT_MATERIALS_BUILDER = new RegistrySetBuilder().add(LenDataReg.GUN_MAT_KEY, boot -> DEFAULT_MATS.forEach(mat ->{

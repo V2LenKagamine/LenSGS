@@ -21,4 +21,6 @@ public class LenSounds {
             ()-> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"gunclick")));
     public static final DeferredHolder<SoundEvent,SoundEvent> VOID_BOOM = SOUNDS.register("voidreave",
             ()-> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"voidreave")));
+    public static final DeferredHolder<SoundEvent,SoundEvent> GUN_RELOAD = SOUNDS.register("reload",
+            ()-> SoundEvent.createVariableRangeEvent(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"reload")));
 }

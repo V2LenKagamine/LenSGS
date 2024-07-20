@@ -1,16 +1,20 @@
 package com.lensmods.lenssgs.datagen;
 
 import com.lensmods.lenssgs.LensSGS;
+import com.lensmods.lenssgs.core.util.LenUtil;
 import net.minecraft.data.PackOutput;
+import net.minecraft.network.chat.Component;
 import net.neoforged.neoforge.common.data.LanguageProvider;
 
-import static com.lensmods.lenssgs.core.data.MaterialStats.*;
 import static com.lensmods.lenssgs.core.data.AllowedParts.*;
+import static com.lensmods.lenssgs.core.data.MaterialStats.*;
 
 public class LenLang extends LanguageProvider {
     public LenLang(PackOutput output, String modid, String locale) {
         super(output, modid, locale);
     }
+
+    public static final Component GUN_INSTRUCTIONS = LenUtil.translatableOf("gun_instructions");
 
     @Override
     protected void addTranslations() {
@@ -18,8 +22,22 @@ public class LenLang extends LanguageProvider {
         keyof("gun_click","Gun Clicks");
         keyof("gun_shot","Gun Fires");
         keyof("void_reave","Void Beckons");
+        keyof("gun_reload","Gun Reloads");
         //Generic
         add("itemGroup.lenssgs","Len's SGS");
+        keyof("gun_instructions","To make a gun: You need three things, an Action, a Receiver,and a Barrel." +
+                " Construct any variant of these using 1 of a material and a part crafter. Then, put all three in a crafting table together." +
+                " Bullets can similarly be made using a Casing, Round, And Propellant." +
+                " Guns may optionally contain a Stock and Magazine. These can be added by crafting table, and parts can be swapped at any time." +
+                " Magazines and Stocks can not be removed once added." +
+                " To reload a gun, simply hit the 'reload' keybind and wait." +
+                " You can see what can be a gun material by searching the correct tag." +
+                " Holding the correct keybinds while hoevering a gun material will reveal more about its stats." +
+                " TOTAL simply adds or subtracts to the stat." +
+                " Avg. Multiply's will be added together, then divided by how many there were of that type." +
+                " This means that anything < 1 will LOWER that stat, and anything > 1 will RAISE that stat." +
+                " Total Multiplies will be applied at the end, when all other stats are calculated, and effect the 'Final' stat.");
+        keyof("gun_recipe","Len's SGS Instructions");
         keyof("gunfake1", "This gun is entirely fake.");
         keyof("gunfake2", "That, or the parts are all broken!");
         keyof("gunmat_useful","This looks usable for a Gun or Ammo...");
@@ -161,6 +179,13 @@ public class LenLang extends LanguageProvider {
         keyof("electrum","Electrum");
         keyof("plutonium","Plutonium");
         keyof("silver","Silver");
+        //Sgear
+        keyof("blaze_gold","Blaze Gold");
+        keyof("crimson_iron","Crimson Iron");
+        keyof("crimson_steel","Crimson Steel");
+        keyof("azure_silver","Azure Silver");
+        keyof("azure_electrum","Azure Electrum");
+        keyof("tyran_steel","Tyran Steel");
     }
 
     protected void keyof(String key,String toTranslate) {

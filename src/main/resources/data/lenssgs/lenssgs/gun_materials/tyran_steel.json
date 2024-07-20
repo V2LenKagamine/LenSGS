@@ -1,0 +1,156 @@
+{
+  "allowedOn": [
+    "casing",
+    "bullet",
+    "action",
+    "magazine",
+    "barrel",
+    "receiver",
+    "stock"
+  ],
+  "color": {
+    "alpha": 1.0,
+    "blue": 0.85882354,
+    "green": 0.4392157,
+    "red": 0.5764706
+  },
+  "ingredient": {
+    "tag": "c:ingots/tyran_steel"
+  },
+  "partType": "tyran_steel",
+  "statModList": [
+    {
+      "allowedParts": [
+        "magazine"
+      ],
+      "modType": "multiply",
+      "stat": "stat_ammo_max",
+      "val": 2.0
+    },
+    {
+      "allowedParts": [
+        "casing"
+      ],
+      "modType": "multiply",
+      "stat": "stat_ammo_max",
+      "val": 0.5
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "action",
+        "casing"
+      ],
+      "modType": "multiply",
+      "stat": "stat_fire_rate",
+      "val": 1.4
+    },
+    {
+      "allowedParts": [
+        "casing",
+        "bullet"
+      ],
+      "modType": "multiply",
+      "stat": "stat_min_damage",
+      "val": 1.5
+    },
+    {
+      "allowedParts": [
+        "casing",
+        "bullet"
+      ],
+      "modType": "multiply",
+      "stat": "stat_max_damage",
+      "val": 1.5
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "receiver",
+        "action",
+        "bullet"
+      ],
+      "modType": "multiply",
+      "stat": "stat_inaccuracy",
+      "val": 0.8
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "total_multiply",
+      "stat": "stat_pierce",
+      "val": 0.05
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "total_multiply",
+      "stat": "stat_projectile_count",
+      "val": 0.05
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_max_damage",
+      "val": 2.5
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_min_damage",
+      "val": 3.0
+    },
+    {
+      "allowedParts": [
+        "barrel",
+        "stock"
+      ],
+      "modType": "add",
+      "stat": "stat_inaccuracy",
+      "val": -4.5
+    }
+  ],
+  "traitLevelList": [
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "level": 1,
+      "trait": "voidtouched"
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "level": 1,
+      "trait": "lingering"
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "level": 3,
+      "trait": "lacerating"
+    },
+    {
+      "allowedParts": [
+        "all"
+      ],
+      "level": 2,
+      "trait": "lacerating"
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "level": 4,
+      "trait": "shattering"
+    }
+  ]
+}

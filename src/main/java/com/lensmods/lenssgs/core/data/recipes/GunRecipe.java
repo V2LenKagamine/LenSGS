@@ -62,8 +62,8 @@ public class GunRecipe extends CustomRecipe {
 
     @Override
     public boolean matches(CraftingInput craftingInput, Level level) {
-        if(inputs.size() != craftingInput.items().size()) {return false;} //No more, no less.
         for (ItemStack item : craftingInput.items()) {
+            if(item.isEmpty()) {continue;}
             boolean itemGood = false;
             for (Ingredient ing : inputs) {
                 if (Arrays.stream(ing.getItems()).anyMatch(test -> item.is(test.getItem()))) {
@@ -237,6 +237,12 @@ public class GunRecipe extends CustomRecipe {
         ItemStack gunthing = input.items().stream().filter(item -> item.getItem() instanceof AmmoBaseItem || item.getItem() instanceof GunBaseItem)
                 .findFirst().orElseGet(()->new ItemStack(Items.AIR));
         if(gunthing.is(Items.AIR)) { //Oh we aren't changing parts.
+            for(int i = 0;i<list.size();i++) {
+                ItemStack boi = input.getItem(i);
+                if (boi.getItem() instanceof PartCraftingItem) {
+                    list.set(i,boi.copy());
+                }
+            }
             return list;
         }
         GunComp gunDat = gunthing.get(LenDataComponents.GUN_COMP);
@@ -248,8 +254,8 @@ public class GunRecipe extends CustomRecipe {
                 for(GunPartHolder part : gunDat.getPartList()) {
                     if(part.getName().equals(boi.get(LenDataComponents.GUN_PART_HOLDER).getName())) { //Return part from gun.
                         ItemStack returned = new ItemStack(LenItems.PART_BASE.get());
-                        returned.set(LenDataComponents.GUN_PART_HOLDER,part);
-                        list.set(i,returned);
+                        returned.set(LenDataComponents.GUN_PART_HOLDER, part);
+                        list.set(i, returned);
                     }
                 }
             }

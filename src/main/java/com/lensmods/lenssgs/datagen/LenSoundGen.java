@@ -25,5 +25,7 @@ public class LenSoundGen extends SoundDefinitionsProvider {
                 sound(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"pistolshot")).preload()).subtitle("lenssgs.gun_shot"));
         add(LenSounds.VOID_BOOM, SoundDefinition.definition().with(
                 sound(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"voidreave")).preload()).subtitle("lenssgs.void_reave"));
+        add(LenSounds.GUN_RELOAD, SoundDefinition.definition().with(
+                sound(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"reload")).preload()).subtitle("lenssgs.gun_reload"));
     }
 }

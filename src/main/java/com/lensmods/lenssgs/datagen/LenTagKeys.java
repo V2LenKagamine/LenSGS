@@ -27,6 +27,14 @@ public class LenTagKeys extends ItemTagsProvider {
     public static final TagKey<Item> ELECTRUM_TAG = commonTag("ingots/electrum");
     public static final TagKey<Item> PLUTONIUM_TAG = commonTag("ingots/plutonium");
     public static final TagKey<Item> SILVER_TAG = commonTag("ingots/silver");
+    //Sgear
+    public static final TagKey<Item> BLAZEGOLD_TAG = commonTag("ingots/blaze_gold");
+    public static final TagKey<Item> CRIMSON_IRON_TAG = commonTag("ingots/crimson_iron");
+    public static final TagKey<Item> CRIMSON_STEEL_TAG = commonTag("ingots/crimson_steel");
+    public static final TagKey<Item> AZURE_SILVER_TAG = commonTag("ingots/azure_silver");
+    public static final TagKey<Item> AZURE_ELECTRUM_TAG = commonTag("ingots/azure_electrum");
+    public static final TagKey<Item> TYRAN_STEEL_TAG = commonTag("ingots/tyran_steel");
+
 
 
     public static TagKey<Item> commonTag(String path) {
@@ -86,7 +94,13 @@ public class LenTagKeys extends ItemTagsProvider {
                 .addOptionalTag(ALUMINUM_TAG)
                 .addOptionalTag(ELECTRUM_TAG)
                 .addOptionalTag(PLUTONIUM_TAG)
-                .addOptionalTag(SILVER_TAG);
+                .addOptionalTag(SILVER_TAG)
+                .addOptionalTag(BLAZEGOLD_TAG)
+                .addOptionalTag(CRIMSON_IRON_TAG)
+                .addOptionalTag(CRIMSON_STEEL_TAG)
+                .addOptionalTag(AZURE_SILVER_TAG)
+                .addOptionalTag(AZURE_ELECTRUM_TAG)
+                .addOptionalTag(TYRAN_STEEL_TAG);
 
     }
 }

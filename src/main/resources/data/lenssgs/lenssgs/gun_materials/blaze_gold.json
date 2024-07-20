@@ -1,0 +1,139 @@
+{
+  "allowedOn": [
+    "casing",
+    "bullet",
+    "action",
+    "magazine",
+    "barrel",
+    "receiver",
+    "stock"
+  ],
+  "color": {
+    "alpha": 1.0,
+    "blue": 0.0,
+    "green": 0.27058825,
+    "red": 1.0
+  },
+  "ingredient": {
+    "tag": "c:ingots/blaze_gold"
+  },
+  "partType": "blaze_gold",
+  "statModList": [
+    {
+      "allowedParts": [
+        "magazine"
+      ],
+      "modType": "multiply",
+      "stat": "stat_ammo_max",
+      "val": 1.25
+    },
+    {
+      "allowedParts": [
+        "casing"
+      ],
+      "modType": "multiply",
+      "stat": "stat_ammo_max",
+      "val": 1.25
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "action",
+        "casing"
+      ],
+      "modType": "add",
+      "stat": "stat_fire_rate",
+      "val": -2.5
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "action",
+        "casing"
+      ],
+      "modType": "total_multiply",
+      "stat": "stat_fire_rate",
+      "val": -0.2
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "action",
+        "casing"
+      ],
+      "modType": "multiply",
+      "stat": "stat_min_damage",
+      "val": 0.95
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "action",
+        "casing"
+      ],
+      "modType": "multiply",
+      "stat": "stat_max_damage",
+      "val": 0.95
+    },
+    {
+      "allowedParts": [
+        "stock",
+        "receiver",
+        "action",
+        "bullet"
+      ],
+      "modType": "multiply",
+      "stat": "stat_inaccuracy",
+      "val": 1.1
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_max_damage",
+      "val": 1.75
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_min_damage",
+      "val": 2.25
+    },
+    {
+      "allowedParts": [
+        "barrel"
+      ],
+      "modType": "add",
+      "stat": "stat_inaccuracy",
+      "val": -1.0
+    }
+  ],
+  "traitLevelList": [
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "level": 1,
+      "trait": "blazing"
+    },
+    {
+      "allowedParts": [
+        "casing",
+        "bullet",
+        "prop"
+      ],
+      "level": 1,
+      "trait": "blazing"
+    },
+    {
+      "allowedParts": [
+        "all"
+      ],
+      "level": 1,
+      "trait": "blazing"
+    }
+  ]
+}

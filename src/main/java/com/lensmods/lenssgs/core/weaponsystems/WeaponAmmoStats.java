@@ -9,7 +9,9 @@ import com.lensmods.lenssgs.core.items.AmmoBaseItem;
 import com.lensmods.lenssgs.core.util.LenUtil;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import com.lensmods.lenssgs.init.LenItems;
+import com.lensmods.lenssgs.init.LenSounds;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -101,6 +103,7 @@ public class WeaponAmmoStats {
                     }
                 }
                 item.set(LenDataComponents.LAST_AMMO, ammo.get(LenDataComponents.GUN_STAT_TRAITS));
+                world.playSound(null,ent.position().x,ent.position().y,ent.position().z, LenSounds.GUN_RELOAD, SoundSource.PLAYERS,1f,1f);
                 return;
             }
             else {return;}

@@ -26,6 +26,15 @@
     ],
     "subtitle": "lenssgs.gun_shot"
   },
+  "reload": {
+    "sounds": [
+      {
+        "name": "lenssgs:reload",
+        "preload": true
+      }
+    ],
+    "subtitle": "lenssgs.gun_reload"
+  },
   "rifleshot": {
     "sounds": [
       {

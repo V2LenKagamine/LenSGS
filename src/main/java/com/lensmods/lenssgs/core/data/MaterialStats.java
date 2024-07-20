@@ -511,4 +511,105 @@ public final class MaterialStats {
             new TraitLevel(LACERATING,3,ROUND),
             new TraitLevel(LINGERING,3,ROUND)
     );
+
+    //Sgear Compat
+    public static final List<StatMod> BLAZEGOLD_STATS = List.of(
+            new StatMod(AMMO_MAX,1.25f, AVG_MUL,MAGAZINE),
+            new StatMod(AMMO_MAX,1.25f, AVG_MUL,CASING),
+            new StatMod(FIRE_RATE, -2.5f,ADD,AFFECTS_FIRE_RATE),
+            new StatMod(FIRE_RATE,-0.2F,MUL_TOTAL,AFFECTS_FIRE_RATE),
+            new StatMod(MIN_DMG,0.95F,AVG_MUL,AFFECTS_FIRE_RATE),
+            new StatMod(MAX_DMG,0.95F,AVG_MUL,AFFECTS_FIRE_RATE),
+            new StatMod(INACCURACY_DEG,1.1F,AVG_MUL,STOCK,RECEIVER,ACTION,ROUND),
+            new StatMod(MAX_DMG,1.75f,ADD,ROUND),
+            new StatMod(MIN_DMG,2.25f,ADD,ROUND),
+            new StatMod(INACCURACY_DEG, -1f,ADD,BARREL)
+    );
+
+    public static final List<TraitLevel> BLAZEGOLD_TRAITS = List.of(
+            new TraitLevel(BLAZING,1,ROUND),
+            new TraitLevel(BLAZING,1,ANY_BULLET_PART),
+            new TraitLevel(BLAZING,1)
+    );
+
+    public static final List<StatMod> CRIMSON_IRON_STATS = List.of(
+            new StatMod(AMMO_MAX,1.1f,AVG_MUL,MAGAZINE),
+            new StatMod(AMMO_MAX,0.95f, AVG_MUL, CASING),
+            new StatMod(MAX_DMG,0.75f,ADD,AFFECTS_BASE_DMG),
+            new StatMod(MIN_DMG,0.25f,ADD,AFFECTS_BASE_DMG),
+            new StatMod(VEL_MULT,0.9f, AVG_MUL,ROUND),
+            new StatMod(GRAVITY_MOD,1.1f, AVG_MUL,ROUND),
+            new StatMod(FIRE_RATE,0.75f,ADD,MAGAZINE,RECEIVER),
+            new StatMod(FIRE_RATE,-0.75f,ADD,BARREL,STOCK),
+            new StatMod(INACCURACY_DEG,-0.25f,ADD,BARREL,RECEIVER,STOCK)
+    );
+    public static final List<TraitLevel> CRIMSON_IRON_TRAITS = List.of(
+            new TraitLevel(BLAZING,1,ROUND,CASING)
+    );
+
+    public static final List<StatMod> CRIMSON_STEEL_STATS = List.of(
+            new StatMod(AMMO_MAX,1.3f, AVG_MUL,MAGAZINE),
+            new StatMod(FIRE_RATE,0.85F,AVG_MUL,AFFECTS_FIRE_RATE),
+            new StatMod(MIN_DMG,1.1F,AVG_MUL,BARREL,STOCK,CASING,ROUND),
+            new StatMod(MAX_DMG,1.1F,AVG_MUL,BARREL,STOCK,CASING,ROUND),
+            new StatMod(INACCURACY_DEG,0.85F,AVG_MUL,STOCK,RECEIVER,ACTION,ROUND),
+            new StatMod(MAX_DMG,1.5f,ADD,ROUND),
+            new StatMod(MIN_DMG,1.5f,ADD,ROUND),
+            new StatMod(INACCURACY_DEG, -1.5f,ADD,BARREL,RECEIVER,STOCK)
+    );
+    public static final List<TraitLevel> CRIMSON_STEEL_TRAITS = List.of(
+            new TraitLevel(BLAZING,2,ROUND,CASING)
+    );
+
+    public static final List<StatMod> AZURE_SILVER_STATS = List.of(
+            new StatMod(AMMO_MAX,0.75f, AVG_MUL,MAGAZINE),
+            new StatMod(FIRE_RATE, -3f,ADD,AFFECTS_FIRE_RATE),
+            new StatMod(MAX_DMG,0.25f,ADD,ROUND),
+            new StatMod(MIN_DMG,0.5f,ADD,ROUND),
+            new StatMod(INACCURACY_DEG, -2f,ADD,BARREL,STOCK)
+    );
+    public static final List<TraitLevel> AZURE_SILVER_TRAITS = List.of(
+            new TraitLevel(HALLOW_POINT,3,ROUND),
+            new TraitLevel(HALLOW_POINT,2)
+    );
+
+    public static final List<StatMod> AZURE_ELECTRUM_STATS = List.of(
+            new StatMod(AMMO_MAX,1.5f, AVG_MUL,MAGAZINE),
+            new StatMod(AMMO_MAX,0.9f, AVG_MUL,CASING),
+            new StatMod(FIRE_RATE, -2.55f,ADD,AFFECTS_FIRE_RATE),
+            new StatMod(FIRE_RATE,0.75F,AVG_MUL,AFFECTS_FIRE_RATE),
+            new StatMod(MIN_DMG,0.85F,AVG_MUL,ACTION,ROUND,CASING),
+            new StatMod(MAX_DMG,0.85F,AVG_MUL,ACTION,ROUND,CASING),
+            new StatMod(MAX_DMG,0.25f,ADD,ROUND),
+            new StatMod(MIN_DMG,-0.25f,ADD,ROUND)
+    );
+
+    public static final List<TraitLevel> AZURE_ELECTRUM_TRAITS = List.of(
+            new TraitLevel(SHOCKING,4,ROUND),
+            new TraitLevel(SHOCKING,4,CASING),
+            new TraitLevel(SHOCKING,2,STOCK,ACTION,RECEIVER)
+    );
+
+    public static final List<StatMod> TYRAN_STEEL_STATS = List.of(
+            new StatMod(AMMO_MAX,2f, AVG_MUL,MAGAZINE),
+            new StatMod(AMMO_MAX,0.5f, AVG_MUL, CASING),
+            new StatMod(FIRE_RATE,1.4F,AVG_MUL,AFFECTS_FIRE_RATE),
+            new StatMod(MIN_DMG,1.5F,AVG_MUL,CASING,ROUND),
+            new StatMod(MAX_DMG,1.5F,AVG_MUL,CASING,ROUND),
+            new StatMod(INACCURACY_DEG,0.8F,AVG_MUL,STOCK,RECEIVER,ACTION,ROUND),
+            new StatMod(PIERCE,0.05f,MUL_TOTAL,ROUND),
+            new StatMod(PROJ_COUNT,0.05f,MUL_TOTAL,ROUND),
+            new StatMod(MAX_DMG,2.5f,ADD,ROUND),
+            new StatMod(MIN_DMG,3f,ADD,ROUND),
+            new StatMod(INACCURACY_DEG, -4.5f,ADD,BARREL,STOCK)
+    );
+
+    public static final List<TraitLevel> TYRAN_STEEL_TRAITS = List.of(
+            new TraitLevel(VOID_TOUCHED,1,ROUND),
+            new TraitLevel(LINGERING,1,ROUND),
+            new TraitLevel(LACERATING,3,ROUND),
+            new TraitLevel(LACERATING,2),
+            new TraitLevel(SHATTERING,4,ROUND)
+    );
+
 }
