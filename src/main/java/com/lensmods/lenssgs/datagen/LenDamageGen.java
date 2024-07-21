@@ -18,6 +18,6 @@ public class LenDamageGen extends DamageTypeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider pProvider) {
-        this.tag(DamageTypeTags.IS_PROJECTILE).add(LenDamageTypes.FIREARM);
+        this.tag(DamageTypeTags.NO_KNOCKBACK).add(LenDamageTypes.FIREARM);
     }
 }

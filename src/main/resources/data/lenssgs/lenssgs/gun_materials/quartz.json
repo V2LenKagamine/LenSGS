@@ -19,7 +19,7 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 1.25
+      "val": 1.0
     },
     {
       "allowedParts": [
@@ -27,7 +27,7 @@
       ],
       "modType": "add",
       "stat": "stat_max_damage",
-      "val": 1.25
+      "val": 1.0
     },
     {
       "allowedParts": [

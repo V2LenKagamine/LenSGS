@@ -253,12 +253,14 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
 
         DamageSource source = LenDamageTypes.Sources.projectile(this.level().registryAccess(), this, this.Owner);
         entity.hurt(source, damage);
+        float kb = damage*0.075f;
+        entity.addDeltaMovement(new Vec3(this.getDeltaMovement().x * kb ,this.getDeltaMovement().y * kb,this.getDeltaMovement().z * kb));
     }
     @Override
     protected void defineSynchedData(SynchedEntityData.Builder pBuilder) {
         pBuilder.define(GRAVITY,0f);
         pBuilder.define(VISUAL,ItemStack.EMPTY);
-        pBuilder.define(LIFE,40);
+        pBuilder.define(LIFE,20);
 
     }
 
@@ -322,6 +324,9 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
     private Vec3 getDirection(LivingEntity shooter, ItemStack weapon)
     {
         float inacc = WeaponAmmoStats.getAccuracy(weapon);
+        if(shooter.isCrouching()) {
+            inacc -= 2.5f;
+        }
         if(inacc <= 0) {
             return this.getVectorFromRotation(shooter.getXRot(), shooter.getYRot());
         }
@@ -339,7 +344,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
             if(!level().isClientSide) {
                 this.setPos(nextPosX, nextPosY, nextPosZ);
                 if (!secondLife && this.entityData.get(GRAVITY) != 0) {
-                    this.setDeltaMovement(this.getDeltaMovement().add(0, this.entityData.get(GRAVITY) / 6f, 0));
+                    this.setDeltaMovement(this.getDeltaMovement().add(0, this.entityData.get(GRAVITY) / 5f, 0));
                 }
             }
             performHitCalcs();
@@ -357,8 +362,8 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
                 double delx = (this.position().x() - ent.position().x);
                 double dely = (this.position().y() - ent.position().y);
                 double delz = (this.position().z() - ent.position().z);
-                double dist = rad - distanceTo(ent);
-                ent.addDeltaMovement(new Vec3(delx * (dist) * 0.0025d, dely * (dist) * 0.0025d, delz * (dist) * 0.0025d));
+                Vec3 normal =new Vec3(delx, dely, delz).normalize();
+                ent.addDeltaMovement(new Vec3(normal.x * (rad - distanceTo(ent))*0.0075f,normal.y * (rad - distanceTo(ent))*0.0075f,normal.z * (rad - distanceTo(ent))*0.0075f));
             }
         }
         if (this.tickCount >= this.entityData.get(LIFE)) {
@@ -414,7 +419,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
             this.secondLife = true;
             this.entityData.set(VISUAL,new ItemStack(Items.ENDER_EYE,1));
             if(!level().isClientSide) {
-                setPos(position().add(0f, 0.75f, 0f));
+                setPos(position().add(0f, 0.5f, 0f));
                 this.entityData.set(GRAVITY,0f);
             }
             this.entityData.set(LIFE,140);
@@ -446,10 +451,10 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         if(traits.stream().anyMatch(trait -> trait.trait().equals(MaterialStats.LINGERING))) {
             TraitLevel trait = traits.stream().filter(traitLevel -> traitLevel.trait().equals(MaterialStats.LINGERING)).findFirst().get();
             if(!level().isClientSide) {
-                AreaEffectCloud cloud = new AreaEffectCloud(this.level(), this.getX(), this.getY() + 1f, this.getZ());
-                cloud.setDuration(100 * trait.level());
+                AreaEffectCloud cloud = new AreaEffectCloud(this.level(), this.getX(), this.getY() + 0.25f, this.getZ());
+                cloud.setDuration(25 * trait.level());
                 cloud.setOwner(this.Owner);
-                cloud.setRadius(trait.level());
+                cloud.setRadius(trait.level()*0.5f);
                 cloud.setWaitTime(0);
                 cloud.setNoGravity(true);
                 cloud.setRadiusPerTick(-0.0125f);
@@ -469,7 +474,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
             for (Entity hit : targets) {
                 float damage = this.getDamage();
                 DamageSource source = LenDamageTypes.Sources.projectile(this.level().registryAccess(), this, this.Owner);
-                hit.hurt(source, damage*(0.05f*trait.level()));
+                hit.hurt(source, damage*(0.25f*trait.level()));
             }
         }
     }

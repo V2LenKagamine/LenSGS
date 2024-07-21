@@ -183,6 +183,7 @@ public class Color {
     public static final Color TOMATO = named("Tomato", 0xFF6347);
     public static final Color TURQUOISE = named("Turquoise", 0x40E0D0);
     public static final Color VIOLET = named("Violet", 0xEE82EE);
+    public static final Color VOIDMETAL = named("VoidMetal", 0x1B0A2B);
     public static final Color WHEAT = named("Wheat", 0xF5DEB3);
     public static final Color WHITE = named("White", 0xFFFFFF);
     public static final Color WHITESMOKE = named("WhiteSmoke", 0xF5F5F5);

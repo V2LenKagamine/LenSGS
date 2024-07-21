@@ -7,6 +7,7 @@ import com.lensmods.lenssgs.core.data.MaterialStats;
 import com.lensmods.lenssgs.core.datacomps.*;
 import com.lensmods.lenssgs.core.items.AmmoBaseItem;
 import com.lensmods.lenssgs.core.util.LenUtil;
+import com.lensmods.lenssgs.init.LenConfig;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import com.lensmods.lenssgs.init.LenItems;
 import com.lensmods.lenssgs.init.LenSounds;
@@ -141,7 +142,7 @@ public class WeaponAmmoStats {
         float frmul =1;
         float totalFrMul = 1f;
 
-        float newInacc =0;
+        float newInacc = ammo ? 0.5f : 1.25f;
         float bonusInacc =0;
         float inaccMod =1;
         float totalInaccMul = 1f;
@@ -324,19 +325,25 @@ public class WeaponAmmoStats {
             }
             switch (part.getSubType()) { //The unit of a switch case. Yes these are hardcoded. Dont wanna do data-stuff for them. maybe TODO?
                 case AllowedParts.RECEIVER_PISTOL: {
-                    totalMinMul -= 0.2f;
-                    totalMaxMul -= 0.1f;
-                    totalAmmoMul -= 0.5f;
-                    bonusInacc -= 2.5f;
+                    totalMinMul -= 0.2f * (float) LenConfig.pistol_stat_mul;
+                    totalMaxMul -= 0.1f * (float) LenConfig.pistol_stat_mul;
+                    totalAmmoMul -= 0.5f * (float) LenConfig.pistol_stat_mul;
+                    bonusInacc -= 2.5f * (float) LenConfig.pistol_stat_mul;
                     break;
                 }
                 case AllowedParts.RECEIVER_STANDARD: {
-                    //Sorry nothing
+                    bonusInacc -= 1f;
+                    bonusDmgMax += 0.25f * (float) LenConfig.rifle_stat_mul;
+                    bonusFR += (int)Math.floor(5 * (float) LenConfig.rifle_stat_mul);
+                    totalFrMul += 0.25f * (float) LenConfig.rifle_stat_mul;
+                    bonusDmgMin += 0.75f * (float) LenConfig.rifle_stat_mul;
                     break;
                 }
                 case AllowedParts.RECEIVER_BULLPUP: {
-                    bonusInacc -= 1f;
-                    bonusVel -= 0.001f;
+                    bonusInacc -= 2f;
+                    bonusFR -= (int)Math.floor(2*(float) LenConfig.bullpup_stat_mul);
+                    bonusDmgMax -= 0.5f*(float) LenConfig.bullpup_stat_mul;
+                    bonusDmgMin -= 1.5f*(float) LenConfig.bullpup_stat_mul;
                     break;
                 }
                 case AllowedParts.ACTION_MANUAL: {
@@ -357,7 +364,7 @@ public class WeaponAmmoStats {
                     break;
                 }
                 case AllowedParts.ACTION_AUTOMATIC: {
-                    totalFrMul -=0.2f;
+                    totalFrMul -=0.15f;
                     break;
                 }
                 case AllowedParts.BARREL_STUB: {
@@ -390,11 +397,13 @@ public class WeaponAmmoStats {
                     break;
                 }
                 case AllowedParts.STOCK_SHORT: {
+                    bonusInacc -= 1.25f;
                     totalInaccMul -= 0.025f;
                     totalFrMul -= 0.05f;
                     break;
                 }
                 case AllowedParts.STOCK_FULL: {
+                    bonusInacc -= 2.5f;
                     totalInaccMul -= 0.05f;
                     totalFrMul -= 0.025f;
                     break;
@@ -470,6 +479,7 @@ public class WeaponAmmoStats {
                     totalMaxMul -= 0.05f;
                     totalMinMul -= 0.05f;
                     velMul -= 0.01f;
+                    bonusInacc -=1f;
                     bonusPeirce -=1;
                     break;
                 }
@@ -482,6 +492,7 @@ public class WeaponAmmoStats {
                     totalMaxMul += 0.05f;
                     totalMinMul += 0.05f;
                     velMul += 0.01f;
+                    bonusInacc +=1f;
                     bonusPeirce +=1;
                     break;
                 }
@@ -493,12 +504,16 @@ public class WeaponAmmoStats {
         //Calculation out of order, because we need proj. count to slow down the shots, lag reasons.
         int finalAmmo = Math.max((int)Math.floor(((((newAmmoMax + bonusAmmoMax)  * ((ammoMul/ (mulammoParts != 0 ? mulammoParts : 1)))))*totalAmmoMul)), AMMO_POINTS_MUL);
         int finalPeirce = Math.max((int)Math.floor((((newPeirce + bonusPeirce) * (( peirceMul / (mulpierceParts != 0 ? mulpierceParts : 1)))))*totalPeirceMul),0);
-        float finalInaccuracy = Math.max((((newInacc + bonusInacc) * (( inaccMod / (mulinaccParts != 0 ? mulinaccParts : 1)))) * totalInaccMul),0);
+        float finalInaccuracy = Math.max((((newInacc + bonusInacc) * (( inaccMod / (mulinaccParts != 0 ? mulinaccParts : 1)))) * totalInaccMul),ammo ? 0 : -10f);
         float finalProjectileCount = Math.max((((newProj + bonusProj) * ((projMul /(mulprojParts  != 0 ? mulprojParts : 1)))) * totalProjMul),ammo ? 1 : 0);
-        float finalMaxDmg = Math.max((((newdmgMax + bonusDmgMax) * ((damageMulMax/ (muldmgMaxParts != 0 ? muldmgMaxParts : 1))))*totalMaxMul),ammo ? 0.5f : 0f);
-        float finalMinDmg = Math.max((((newdmgMin+bonusDmgMin)  * ((damageMulMin/ (muldmgMinParts != 0 ? muldmgMinParts : 1))))*totalMinMul),ammo ? 0.25f : 0f);
         float finalVel = Math.max((((newVelMul + bonusVel)* (( velMul/ (mulvelParts != 0 ? mulvelParts : 1))))*totalVelMul),ammo ? 0.05f : 0 );
-        int finalFr = Math.max((int)Math.floor((((newFR  + bonusFR)* ((frmul/ (mulfireParts != 0 ? mulfireParts : 1))))) * totalFrMul),ammo ? (int)(Math.ceil(finalProjectileCount*1.5f)): 2 );
+        //Calculate Firerate from projectiles, then give bonus damage based on fire rate, slow fire = more damage bonus. But also More Projectiles == less Bonus.
+        float projectileMalice = (float)(Math.ceil((finalProjectileCount-1)*1.5f));
+        int finalFr = Math.max((int)Math.floor((((newFR  + bonusFR)* ((frmul/ (mulfireParts != 0 ? mulfireParts : 1))))) * totalFrMul),ammo ? (int)projectileMalice: 2 );
+        float bonusFromFr = ((0.25f*finalFr)/finalProjectileCount!=0? finalProjectileCount : 1);
+        float finalMaxDmg =Math.max((((newdmgMax + bonusDmgMax) * ((damageMulMax/ (muldmgMaxParts != 0 ? muldmgMaxParts : 1))))* totalMaxMul)+bonusFromFr,ammo ? 0.5f : 0f)*(float)LenConfig.global_damage_mult;
+        float finalMinDmg =Math.max((((newdmgMin + bonusDmgMin)  * ((damageMulMin/ (muldmgMinParts != 0 ? muldmgMinParts : 1))))* totalMinMul)+bonusFromFr,ammo ? 0.25f : 0f)*(float)LenConfig.global_damage_mult;
+
         double finalGrav = Math.clamp((((newGrav+ bonusGrav) * (gravMod/ (mulgravParts != 0 ? mulgravParts : 1)))*totalGravMul),-0.02d,0.02d);
         if(finalMinDmg > finalMaxDmg) {
             finalMaxDmg = finalMinDmg;

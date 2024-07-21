@@ -166,6 +166,8 @@ public class LenLang extends LanguageProvider {
         keyof("blitz_gold","Blitz Gold");
         keyof("copper_rod","Copper Bolt");
         keyof("end_rod","End Rod");
+        keyof("fish","Fish?");
+        keyof("fire_charge","Fire Charge");
         //Modded Mats
         keyof("bronze","Bronze");
         keyof("refined_obsidian","Refined Obsidian");

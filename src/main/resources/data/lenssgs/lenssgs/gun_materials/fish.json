@@ -4,22 +4,22 @@
   ],
   "color": {
     "alpha": 1.0,
-    "blue": 0.54509807,
-    "green": 0.54509807,
-    "red": 0.0
+    "blue": 0.75686276,
+    "green": 0.7137255,
+    "red": 1.0
   },
   "ingredient": {
-    "item": "minecraft:prismarine_shard"
+    "tag": "c:foods/raw_fish"
   },
-  "partType": "prismarine",
+  "partType": "fish",
   "statModList": [
     {
       "allowedParts": [
         "bullet"
       ],
       "modType": "add",
-      "stat": "stat_projectile_count",
-      "val": 2.0
+      "stat": "stat_inaccuracy",
+      "val": 5.0
     },
     {
       "allowedParts": [
@@ -27,7 +27,7 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 0.75
+      "val": -2.0
     },
     {
       "allowedParts": [
@@ -35,23 +35,16 @@
       ],
       "modType": "add",
       "stat": "stat_max_damage",
-      "val": 1.25
+      "val": -3.0
     }
   ],
   "traitLevelList": [
     {
       "allowedParts": [
-        "all"
+        "bullet"
       ],
-      "level": 2,
-      "trait": "shattering"
-    },
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
-      "trait": "lacerating"
+      "level": 5,
+      "trait": "concussive"
     }
   ]
 }

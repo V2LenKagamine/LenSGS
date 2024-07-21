@@ -50,8 +50,10 @@ public class LenMaterialGen {
             new GunMaterial("netherstar",NETHER_STAR_STATS,NETHER_STAR_TRAITS,Ingredient.of(Items.NETHER_STAR),Color.WHITE,List.of(ROUND,PROPELLANT)),
             new GunMaterial("copper_rod",COPPER_ROD_STATS,COPPER_ROD_TRAITS,Ingredient.of(Items.LIGHTNING_ROD),Color.COPPER,List.of(ROUND)),
             new GunMaterial("end_rod",END_ROD_STATS,END_ROD_TRAITS,Ingredient.of(Items.END_ROD),Color.LIGHTYELLOW,List.of(ROUND,BARREL)),
+            new GunMaterial("fish",FISH_STATS,FISH_TRAITS,Tags.Items.FOODS_RAW_FISH,Color.LIGHTPINK,List.of(ROUND)),
+            new GunMaterial("fire_charge",FIRE_CHARGE_STATS,FIRE_CHARGE_TRAITS,Ingredient.of(Items.FIRE_CHARGE),Color.LIGHTPINK,List.of(ROUND)),
 
-            new GunMaterial("void_metal",VOID_STATS,VOID_TRAITS,Ingredient.of(LenItems.VOIDMETAL),Color.BLACK,NOT_PROPELLANT),
+            new GunMaterial("void_metal",VOID_STATS,VOID_TRAITS,Ingredient.of(LenItems.VOIDMETAL),Color.VOIDMETAL,NOT_PROPELLANT),
             new GunMaterial("wyrm_steel",WYRM_STATS,WYRM_TRAITS,Ingredient.of(LenItems.WYRMSTEEL),Color.MEDIUMPURPLE,NOT_PROPELLANT),
             new GunMaterial("blitz_gold",BLITZ_STATS,BLITZ_TRAITS,Ingredient.of(LenItems.BLITZGOLD),Color.GOLDENROD,NOT_PROPELLANT),
             //Common Mats

@@ -30,7 +30,7 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 0.75
+      "val": 0.5
     }
   ],
   "traitLevelList": [

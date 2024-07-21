@@ -92,7 +92,7 @@
       ],
       "modType": "add",
       "stat": "stat_max_damage",
-      "val": 3.75
+      "val": 1.5
     },
     {
       "allowedParts": [
@@ -100,7 +100,7 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 3.25
+      "val": 1.0
     },
     {
       "allowedParts": [
@@ -110,7 +110,7 @@
       ],
       "modType": "add",
       "stat": "stat_max_damage",
-      "val": 2.75
+      "val": 0.75
     },
     {
       "allowedParts": [
@@ -120,7 +120,7 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 2.25
+      "val": 0.25
     },
     {
       "allowedParts": [
@@ -129,6 +129,22 @@
       "modType": "add",
       "stat": "stat_inaccuracy",
       "val": -1.0
+    },
+    {
+      "allowedParts": [
+        "barrel"
+      ],
+      "modType": "add",
+      "stat": "stat_min_damage",
+      "val": 0.5
+    },
+    {
+      "allowedParts": [
+        "barrel"
+      ],
+      "modType": "add",
+      "stat": "stat_max_damage",
+      "val": 0.75
     }
   ],
   "traitLevelList": [

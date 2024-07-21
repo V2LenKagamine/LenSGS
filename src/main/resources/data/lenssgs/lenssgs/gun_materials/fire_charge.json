@@ -4,21 +4,21 @@
   ],
   "color": {
     "alpha": 1.0,
-    "blue": 0.54509807,
-    "green": 0.54509807,
-    "red": 0.0
+    "blue": 0.75686276,
+    "green": 0.7137255,
+    "red": 1.0
   },
   "ingredient": {
-    "item": "minecraft:prismarine_shard"
+    "item": "minecraft:fire_charge"
   },
-  "partType": "prismarine",
+  "partType": "fire_charge",
   "statModList": [
     {
       "allowedParts": [
         "bullet"
       ],
       "modType": "add",
-      "stat": "stat_projectile_count",
+      "stat": "stat_inaccuracy",
       "val": 2.0
     },
     {
@@ -27,7 +27,7 @@
       ],
       "modType": "add",
       "stat": "stat_min_damage",
-      "val": 0.75
+      "val": 0.5
     },
     {
       "allowedParts": [
@@ -35,23 +35,16 @@
       ],
       "modType": "add",
       "stat": "stat_max_damage",
-      "val": 1.25
+      "val": 0.5
     }
   ],
   "traitLevelList": [
     {
       "allowedParts": [
-        "all"
+        "bullet"
       ],
-      "level": 2,
-      "trait": "shattering"
-    },
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
-      "trait": "lacerating"
+      "level": 10,
+      "trait": "blazing"
     }
   ]
 }

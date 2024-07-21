@@ -94,6 +94,14 @@
       "modType": "add",
       "stat": "stat_max_damage",
       "val": 1.5
+    },
+    {
+      "allowedParts": [
+        "barrel"
+      ],
+      "modType": "add",
+      "stat": "stat_inaccuracy",
+      "val": -1.25
     }
   ],
   "traitLevelList": [

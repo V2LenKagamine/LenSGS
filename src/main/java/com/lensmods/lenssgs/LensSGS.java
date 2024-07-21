@@ -12,7 +12,6 @@ import com.lensmods.lenssgs.init.*;
 import com.lensmods.lenssgs.networking.PacketReg;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.resources.model.ModelResourceLocation;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataProvider;
 import net.minecraft.network.chat.Component;
@@ -21,7 +20,6 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.neoforged.api.distmarker.Dist;
@@ -107,20 +105,20 @@ public class LensSGS
         NeoForge.EVENT_BUS.register(this);
 
 
+        // Register our mod's ModConfigSpec so that FML can create and load the config file for us
+        modContainer.registerConfig(ModConfig.Type.COMMON, LenConfig.SPEC);
+        modEventBus.addListener(LenConfig::onLoad);
+
         modEventBus.addListener(PacketReg::register);
         modEventBus.addListener(this::gatherData);
         modEventBus.addListener(LenDataReg::register);
 
-        // Register our mod's ModConfigSpec so that FML can create and load the config file for us
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         // Some common setup code
         L3NLOGGER.info("HELLO FROM COMMON SETUP");
-        if (Config.logDirtBlock)
-            L3NLOGGER.info("DIRT BLOCK >> {}", BuiltInRegistries.BLOCK.getKey(Blocks.DIRT));
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call

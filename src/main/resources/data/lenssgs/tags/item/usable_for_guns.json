@@ -61,7 +61,15 @@
       "required": false
     },
     {
+      "id": "#c:foods/raw_fish",
+      "required": false
+    },
+    {
       "id": "minecraft:end_rod",
+      "required": false
+    },
+    {
+      "id": "minecraft:fire_charge",
       "required": false
     },
     {
