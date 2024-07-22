@@ -31,7 +31,7 @@ public class PICooldown {
             Pair<Long, Integer> pair = this.cooldownMap.get(item);
             if(pair != null)
             {
-                return Util.getMillis() - pair.getFirst() < pair.getSecond() - 25;//Ehh, close enough
+                return Util.getMillis() - pair.getFirst() < pair.getSecond() - 50;//Ehh, close enough
             }
             return false;
         }

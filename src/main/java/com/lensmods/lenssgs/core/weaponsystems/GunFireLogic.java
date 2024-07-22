@@ -7,6 +7,7 @@ import com.lensmods.lenssgs.core.datacomps.TraitLevel;
 import com.lensmods.lenssgs.core.entity.GenericProjectile;
 import com.lensmods.lenssgs.core.items.GunBaseItem;
 import com.lensmods.lenssgs.core.util.LenUtil;
+import com.lensmods.lenssgs.init.LenConfig;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import com.lensmods.lenssgs.init.LenEnts;
 import com.lensmods.lenssgs.init.LenSounds;
@@ -37,7 +38,7 @@ public class GunFireLogic {
             player.setYRot(Mth.wrapDegrees(message.yRot()));
 
             PICooldown cdtrack = PICooldown.getCDTracker(player);
-            if(cdtrack.hasCooldown(held) && cdtrack.getRemaining(held) > 100) { //Todo: make Tolerance config or gamerule?
+            if(cdtrack.hasCooldown(held) && cdtrack.getRemaining(held) > LenConfig.gun_tolerance) {
                 return;
             }
             int projAmt = WeaponAmmoStats.getProjAmt(held);

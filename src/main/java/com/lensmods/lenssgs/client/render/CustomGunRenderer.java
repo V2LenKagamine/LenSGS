@@ -90,11 +90,6 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
                 this.applySprintingTransforms(army, poseStack, partialTicks);
                 this.applyShieldTransforms(poseStack, player, partialTicks);
             }
-            /* Renders the first persons arms from the grip type of the weapon */
-            if(recoilTimer > 0f && pDisplayContext.firstPerson() && pDisplayContext != ItemDisplayContext.GUI) {
-                poseStack.translate(0,0,recoilTimer * 0.025f);
-                recoilTimer-=partialTicks;
-            }
             if(!pDisplayContext.firstPerson() && pDisplayContext != ItemDisplayContext.GUI) {
                 poseStack.translate(-0.12 * side ,-0.12f, 0.2f);
             }
@@ -225,6 +220,10 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
     {
         if(stack.getItem() instanceof GunBaseItem)
         {
+            if(recoilTimer > 0f && display.firstPerson() && display != ItemDisplayContext.GUI) {
+                poseStack.translate(0,0,recoilTimer * 0.025f);
+                recoilTimer-=partialTicks;
+            }
             float side = entity.getMainHandItem() == stack ? 1 : -1;
             poseStack.scale(1.3f,1.3f,1.3f);
             if (display != ItemDisplayContext.GUI) {

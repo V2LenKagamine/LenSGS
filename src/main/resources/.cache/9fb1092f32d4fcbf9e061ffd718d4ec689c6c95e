@@ -1,4 +1,4 @@
-// 1.21	2024-07-21T02:18:02.5728831	Recipes
+// 1.21	2024-07-21T19:55:20.7402783	Recipes
 0bfe6dedd3979ceb9ff8e265b9a252df3fb5b72a data/lenssgs/advancement/recipes/combat/automatic_action_crafter.json
 7b65ff88a811aa30bb64620ef453b41de7844c36 data/lenssgs/advancement/recipes/combat/barrel_crafter_extend.json
 49d40425242f7f5ab36417eb7d39540aa9c68a28 data/lenssgs/advancement/recipes/combat/barrel_crafter_long.json
@@ -64,8 +64,8 @@ f2ad09b9d5cde1b44f04dc418b370105bcce5c16 data/lenssgs/recipe/wyrm_steel.json
 e4f6f7be203ade67e89929235708f279007cf799 data/minecraft/recipe/make_ammo.json
 35dd9b87d47d972f4c510ee2d939171a6c539728 data/minecraft/recipe/make_gun.json
 d3b937a2f89a43dac00404a48429d1c52a8797b3 data/minecraft/recipe/make_part.json
-1f64535846aa49921f9caa365b7ed37e8eee0585 data/minecraft/recipe/refill_gunpowder.json
-998611dca3a43e4115de68dc5db148110a6e1e9c data/minecraft/recipe/refill_tnt.json
-b344e3773e66b820551c5556cf55c660ed0fb5ed data/minecraft/recipe/refill_wind.json
+41209e1d67a465ec633341bc406f156deb155ab1 data/minecraft/recipe/refill_gunpowder.json
+810af4b8209921d8e6cc5fa20a28efd75cb35abb data/minecraft/recipe/refill_tnt.json
+736f6101e1fe176b743e84a5dae51d1b60dcc2e0 data/minecraft/recipe/refill_wind.json
 59b1a62bcd2f5cbe5508b4b6014ece463fafb775 data/minecraft/recipe/swap_part_ammo.json
 a67bfa54f8e2aabb762dd4535479e92eb802ac0e data/minecraft/recipe/swap_part_gun.json

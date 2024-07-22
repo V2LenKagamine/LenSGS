@@ -44,7 +44,7 @@ public final class MaterialStats {
             new StatMod(INACCURACY_DEG, -0.5f,ADD,STOCK)
     );
     public static final List<TraitLevel> WOOD_TRAITS = List.of(
-            new TraitLevel(ECOLOGICAL,1,ROUND)
+            new TraitLevel(ECOLOGICAL,10,ROUND)
     );
 
     public static final List<StatMod> STONE_STATS = List.of(

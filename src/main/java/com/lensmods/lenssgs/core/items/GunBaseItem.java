@@ -16,7 +16,7 @@ import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
 
 import java.util.function.Consumer;
 
-public class GunBaseItem extends Item implements IModdable,IClientItemExtensions {
+public class GunBaseItem extends Item implements IModdable {
 
     public GunBaseItem(Properties pProperties) {
         super(pProperties);
@@ -31,9 +31,8 @@ public class GunBaseItem extends Item implements IModdable,IClientItemExtensions
     public boolean shouldCauseReequipAnimation(ItemStack oldStack, ItemStack newStack, boolean slotChanged) {
         if(WeaponAmmoStats.safeGunLastAmmo(newStack)&& WeaponAmmoStats.safeGunLastAmmo(oldStack)) {
             if(oldStack.getOrDefault(LenDataComponents.AMMO_COUNTER,null)!=null && newStack.getOrDefault(LenDataComponents.AMMO_COUNTER,null)!=null) {
-                return oldStack.get(LenDataComponents.AMMO_COUNTER)< newStack.get(LenDataComponents.AMMO_COUNTER);
+                return oldStack.get(LenDataComponents.AMMO_COUNTER)<newStack.get(LenDataComponents.AMMO_COUNTER) && !slotChanged;
             }
-            return WeaponAmmoStats.getLastAmmo(oldStack) != WeaponAmmoStats.getLastAmmo(newStack);
         }
         return slotChanged;
     }
@@ -64,20 +63,6 @@ public class GunBaseItem extends Item implements IModdable,IClientItemExtensions
             }
         });
     }
-/*
-    @Override
-    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        if(!(entity instanceof Player player) || level.isClientSide )
-        {return;}
-        ReloadTracker tracker = ReloadTracker.getReloadTracker(player);
-        if(player.getMainHandItem().getItem()!=stack.getItem() && tracker.hasReloadTimer(player)) {
-            player.getCooldowns().removeCooldown(stack.getItem());
-        } else if (player.getMainHandItem().getItem()==stack.getItem() && tracker.hasReloadTimer(player) &&
-                tracker.getRemaining() <= 0) {
-            WeaponAmmoStats.attemptReload(player,stack,level);
-        }
-    }
- */
     @Override
     public boolean isBarVisible(ItemStack pStack) {
         return WeaponAmmoStats.getAmmoMax(pStack) * WeaponAmmoStats.AMMO_POINTS_MUL > WeaponAmmoStats.ammoAmountLeft(pStack);

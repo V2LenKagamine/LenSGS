@@ -90,9 +90,9 @@ public class LenRecipeGen extends RecipeProvider {
         GunFromItems("swap_part_gun",List.of(LenItems.PART_BASE.get(),LenItems.GUN_BASE.get()),LenItems.GUN_BASE.get(),out,true);//Swap GunParts
         GunFromItems("swap_part_ammo",List.of(LenItems.PART_BASE.get(),LenItems.AMMO_BASE.get()),LenItems.AMMO_BASE.get(),out,true); //Swap Ammo parts
         GunFromIng("make_part", List.of(Ingredient.of(LenItems.PART_CRAFTER.get()),Ingredient.of(LenTagKeys.GUNAMMO_MAT_TAG)), LenItems.PART_BASE.get(), out,false); //Parts
-        refillFromIng("refill_gunpowder",List.of(Ingredient.of(Tags.Items.GUNPOWDERS)),LenItems.AMMO_BASE.get(),out,8);
-        refillFromIng("refill_tnt",List.of(Ingredient.of(Items.TNT)),LenItems.AMMO_BASE.get(),out,50);
-        refillFromIng("refill_wind",List.of(Ingredient.of(Items.WIND_CHARGE)),LenItems.AMMO_BASE.get(),out,12);
+        refillFromIng("refill_gunpowder",List.of(Ingredient.of(Tags.Items.GUNPOWDERS)),LenItems.AMMO_BASE.get(),out,2);
+        refillFromIng("refill_tnt",List.of(Ingredient.of(Items.TNT)),LenItems.AMMO_BASE.get(),out,10);
+        refillFromIng("refill_wind",List.of(Ingredient.of(Items.WIND_CHARGE)),LenItems.AMMO_BASE.get(),out,4);
         //Stocks
         DataShapedBuilder.betterShaped(RecipeCategory.MISC, new ItemStack(LenItems.PART_CRAFTER.get()),"stock_crafter_short",
                         Pair.of(LenDataComponents.PART_TYPE.get(),AllowedParts.STOCK),

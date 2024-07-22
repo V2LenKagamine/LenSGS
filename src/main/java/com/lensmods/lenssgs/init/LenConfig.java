@@ -30,6 +30,13 @@ public class LenConfig {
             .comment("0.1<range<10")
             .defineInRange("pistolstatsmul",1f,0.1f,10f);
 
+    private static final ModConfigSpec.IntValue GUN_FIRE_TOLERANCE = BUILDER
+            .comment("Maximum tolerance between when a gun should be able to fire again and when it actually does; in miliseconds")
+            .comment("Higher -> Guns will fire more often, but laggier clients will have more consistent gameplay.")
+            .comment("Default value is 5. Mod creator does not recommend over 20.")
+            .comment("0<range<1000")
+            .defineInRange("gunfire_tolerance",5,0,1000);
+
     //Keep at Bottom
     public static final ModConfigSpec SPEC = BUILDER.build();
 
@@ -37,6 +44,7 @@ public class LenConfig {
     public static double rifle_stat_mul;
     public static double bullpup_stat_mul;
     public static double pistol_stat_mul;
+    public static int gun_tolerance;
 
     public static void onLoad(final ModConfigEvent event)
     {
@@ -44,5 +52,6 @@ public class LenConfig {
         rifle_stat_mul = RIFLE_STAT_MULTI.get();
         bullpup_stat_mul = BULLPUP_STAT_MULTI.get();
         pistol_stat_mul = PISTOL_STAT_MULTI.get();
+        gun_tolerance = GUN_FIRE_TOLERANCE.get();
     }
 }

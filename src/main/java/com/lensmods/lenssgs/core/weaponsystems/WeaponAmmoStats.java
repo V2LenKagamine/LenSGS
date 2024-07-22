@@ -99,7 +99,12 @@ public class WeaponAmmoStats {
                         ammo.set(LenDataComponents.AMMO_COUNTER, ammoInAmmo - removed);
                     }
                 } else {
-                    if (!(((Player) ent).isCreative() || ammoTraits.getTraits().stream().anyMatch(trait -> trait.trait().equals(MaterialStats.ECOLOGICAL)))) {
+                    boolean noConsume = false;
+                    if(ammoTraits.getTraits().stream().anyMatch(trait -> trait.trait().equals(MaterialStats.ECOLOGICAL))) {
+                        int lvl = ammoTraits.getTraits().stream().filter(trait -> trait.trait().equals(MaterialStats.ECOLOGICAL)).findFirst().get().level();
+                        noConsume = LenUtil.randBetween(0,100) <= (lvl*10f);
+                    }
+                    if (!(((Player) ent).isCreative() || noConsume)) {
                         ammo.set(LenDataComponents.AMMO_COUNTER, ammoInAmmo - removed);
                     }
                 }
@@ -434,9 +439,9 @@ public class WeaponAmmoStats {
                     break;
                 }
                 case AllowedParts.CASING_SMALL: {
-                    totalAmmoMul += 0.25f;
-                    totalMaxMul -= 0.25f;
-                    totalMinMul -= 0.25f;
+                    totalAmmoMul += 0.4f;
+                    totalMaxMul -= 0.4f;
+                    totalMinMul -= 0.4f;
                     break;
                 }
                 case AllowedParts.CASING_NORMAL: {
@@ -444,9 +449,9 @@ public class WeaponAmmoStats {
                     break;
                 }
                 case AllowedParts.CASING_LARGE: {
-                    totalAmmoMul -= 0.25f;
-                    totalMaxMul += 0.25f;
-                    totalMinMul += 0.25f;
+                    totalAmmoMul -= 0.4f;
+                    totalMaxMul += 0.4f;
+                    totalMinMul += 0.4f;
                     break;
                 }
                 case AllowedParts.CASING_SHELL: {
@@ -478,7 +483,8 @@ public class WeaponAmmoStats {
                     totalAmmoMul += 0.125f;
                     totalMaxMul -= 0.05f;
                     totalMinMul -= 0.05f;
-                    velMul -= 0.01f;
+                    bonusDmgMax -= 0.5f;
+                    bonusDmgMin -= 0.5f;
                     bonusInacc -=1f;
                     bonusPeirce -=1;
                     break;
@@ -491,7 +497,8 @@ public class WeaponAmmoStats {
                     totalAmmoMul -= 0.125f;
                     totalMaxMul += 0.05f;
                     totalMinMul += 0.05f;
-                    velMul += 0.01f;
+                    bonusDmgMax += 0.5f;
+                    bonusDmgMin += 0.5f;
                     bonusInacc +=1f;
                     bonusPeirce +=1;
                     break;
@@ -502,19 +509,19 @@ public class WeaponAmmoStats {
             partColorList.add(new ModelColorPair(part.getSubType(),MaterialMap.loadedMats(provider).get(part.getMaterial()).getColor()));
         }
         //Calculation out of order, because we need proj. count to slow down the shots, lag reasons.
-        int finalAmmo = Math.max((int)Math.floor(((((newAmmoMax + bonusAmmoMax)  * ((ammoMul/ (mulammoParts != 0 ? mulammoParts : 1)))))*totalAmmoMul)), AMMO_POINTS_MUL);
-        int finalPeirce = Math.max((int)Math.floor((((newPeirce + bonusPeirce) * (( peirceMul / (mulpierceParts != 0 ? mulpierceParts : 1)))))*totalPeirceMul),0);
-        float finalInaccuracy = Math.max((((newInacc + bonusInacc) * (( inaccMod / (mulinaccParts != 0 ? mulinaccParts : 1)))) * totalInaccMul),ammo ? 0 : -10f);
-        float finalProjectileCount = Math.max((((newProj + bonusProj) * ((projMul /(mulprojParts  != 0 ? mulprojParts : 1)))) * totalProjMul),ammo ? 1 : 0);
-        float finalVel = Math.max((((newVelMul + bonusVel)* (( velMul/ (mulvelParts != 0 ? mulvelParts : 1))))*totalVelMul),ammo ? 0.05f : 0 );
+        int finalAmmo = Math.max((int)Math.floor(((((newAmmoMax + bonusAmmoMax)  * ((ammoMul/ (mulammoParts != 0 ? mulammoParts : 1)))))*Math.clamp(totalAmmoMul,0.05f,10f))), AMMO_POINTS_MUL);
+        int finalPeirce = Math.max((int)Math.floor((((newPeirce + bonusPeirce) * (( peirceMul / (mulpierceParts != 0 ? mulpierceParts : 1)))))*Math.clamp(totalPeirceMul,0.05f,10f)),0);
+        float finalInaccuracy = Math.max((((newInacc + bonusInacc) * (( inaccMod / (mulinaccParts != 0 ? mulinaccParts : 1)))) * Math.clamp(totalInaccMul,0.05f,10f)),ammo ? 0 : -10f);
+        float finalProjectileCount = Math.max((((newProj + bonusProj) * ((projMul /(mulprojParts  != 0 ? mulprojParts : 1)))) * Math.clamp(totalProjMul,0.05f,10f)),ammo ? 1 : 0);
+        float finalVel = Math.max((((newVelMul + bonusVel)* (( velMul/ (mulvelParts != 0 ? mulvelParts : 1))))*Math.clamp(totalVelMul,0.05f,10f)),ammo ? 0.05f : 0 );
         //Calculate Firerate from projectiles, then give bonus damage based on fire rate, slow fire = more damage bonus. But also More Projectiles == less Bonus.
         float projectileMalice = (float)(Math.ceil((finalProjectileCount-1)*1.5f));
-        int finalFr = Math.max((int)Math.floor((((newFR  + bonusFR)* ((frmul/ (mulfireParts != 0 ? mulfireParts : 1))))) * totalFrMul),ammo ? (int)projectileMalice: 2 );
-        float bonusFromFr = ((0.25f*finalFr)/finalProjectileCount!=0? finalProjectileCount : 1);
-        float finalMaxDmg =Math.max((((newdmgMax + bonusDmgMax) * ((damageMulMax/ (muldmgMaxParts != 0 ? muldmgMaxParts : 1))))* totalMaxMul)+bonusFromFr,ammo ? 0.5f : 0f)*(float)LenConfig.global_damage_mult;
-        float finalMinDmg =Math.max((((newdmgMin + bonusDmgMin)  * ((damageMulMin/ (muldmgMinParts != 0 ? muldmgMinParts : 1))))* totalMinMul)+bonusFromFr,ammo ? 0.25f : 0f)*(float)LenConfig.global_damage_mult;
+        int finalFr = Math.max((int)Math.floor((((newFR  + bonusFR)* ((frmul/ (mulfireParts != 0 ? mulfireParts : 1))))) * Math.clamp(totalFrMul,0.05f,10f)),ammo ? (int)projectileMalice: 2 );
+        float bonusFromFr = (((ammo?0.05f:0.1f)*finalFr)/(finalProjectileCount!=0? finalProjectileCount : 1f));
+        float finalMaxDmg =Math.max((((newdmgMax + bonusDmgMax + bonusFromFr) * ((damageMulMax/ (muldmgMaxParts != 0 ? muldmgMaxParts : 1))))* Math.clamp(totalMaxMul,0.05f,10f)),ammo ? 0.5f : 0f)*(float)LenConfig.global_damage_mult;
+        float finalMinDmg =Math.max((((newdmgMin + bonusDmgMin + bonusFromFr)  * ((damageMulMin/ (muldmgMinParts != 0 ? muldmgMinParts : 1))))* Math.clamp(totalMinMul,0.05f,10f)),ammo ? 0.25f : 0f)*(float)LenConfig.global_damage_mult;
 
-        double finalGrav = Math.clamp((((newGrav+ bonusGrav) * (gravMod/ (mulgravParts != 0 ? mulgravParts : 1)))*totalGravMul),-0.02d,0.02d);
+        double finalGrav = Math.clamp((((newGrav+ bonusGrav) * (gravMod/ (mulgravParts != 0 ? mulgravParts : 1)))*Math.clamp(totalGravMul,0.05f,10f)),-0.02d,0.02d);
         if(finalMinDmg > finalMaxDmg) {
             finalMaxDmg = finalMinDmg;
         }
@@ -530,7 +537,7 @@ public class WeaponAmmoStats {
                 finalVel,
                 finalGrav);
         gun.set(LenDataComponents.GUN_STAT_TRAITS,new GunStatTraitPair(finalStats,finalTraits));
-        if(ammo && safeGunStats(gun)) {
+        if(!ammo && safeGunStats(gun)) {
             int lastcount = gun.get(LenDataComponents.AMMO_COUNTER);
             gun.set(LenDataComponents.AMMO_COUNTER,Math.min(lastcount,finalAmmo));
         }

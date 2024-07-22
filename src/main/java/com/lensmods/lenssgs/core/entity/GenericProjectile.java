@@ -224,7 +224,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
                 case MaterialStats.CONCUSSIVE: {
                     if (entity instanceof LivingEntity living) {
                         var vec = this.getDeltaMovement();
-                        living.knockback(0.75d*trait.level(), -vec.x,-vec.y);
+                        living.knockback(0.75d*trait.level(), -vec.x,-vec.z);
                     }
                     break;
                 }

@@ -3,7 +3,6 @@ package com.lensmods.lenssgs.client;
 import com.lensmods.lenssgs.client.render.CustomGunRenderer;
 import com.lensmods.lenssgs.core.data.AllowedParts;
 import com.lensmods.lenssgs.core.items.GunBaseItem;
-import com.lensmods.lenssgs.core.weaponsystems.PICooldown;
 import com.lensmods.lenssgs.core.weaponsystems.WeaponAmmoStats;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import com.lensmods.lenssgs.init.LenSounds;
@@ -32,6 +31,7 @@ public class ClientFireHandler {
     private boolean firing;
 
     private int clickcooldown =0;
+    private int cd =0;
 
     private boolean tabbedin() {
         Minecraft MC = Minecraft.getInstance();
@@ -62,7 +62,9 @@ public class ClientFireHandler {
             {
                 event.setSwingHand(false);
                 event.setCanceled(true);
-                this.shoot(player, heldItem);
+                if(cd <=0) {
+                    this.shoot(player, heldItem);
+                }
                 if(WeaponAmmoStats.safeGunComp(heldItem)) {
                     if(heldItem.get(LenDataComponents.GUN_COMP).getPartList().stream().noneMatch(part -> part.getSubType().equals(AllowedParts.ACTION_AUTOMATIC))){
                         mc.options.keyAttack.setDown(false);
@@ -71,8 +73,10 @@ public class ClientFireHandler {
             }
         }
     }
-    @SubscribeEvent
+    @SubscribeEvent(priority = EventPriority.LOWEST)
     public void postCTick(ClientTickEvent.Post e) {
+        if(cd > 0)
+        {cd--;}
         if(!tabbedin())
         {return;}
         if (clickcooldown >0) {
@@ -115,12 +119,12 @@ public class ClientFireHandler {
                 }
             }
         }
-
-        PICooldown tracker = PICooldown.getCDTracker(player);
-        if(!tracker.hasCooldown(heldItem))
+        if(cd <=0)
         {
-            if(WeaponAmmoStats.safeGunComp(heldItem)) {
-            CustomGunRenderer.get().recoilTimer = heldItem.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getFirerate();
+            if(WeaponAmmoStats.safeGunComp(heldItem) && WeaponAmmoStats.safeGunLastAmmo(heldItem))
+            {
+               cd = heldItem.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getFirerate() + heldItem.get(LenDataComponents.LAST_AMMO).getStats().getFirerate();
+               CustomGunRenderer.get().recoilTimer = cd;
             }
             PacketDistributor.sendToServer(new CTSFire(player.getXRot(),player.getYRot()));
         }
