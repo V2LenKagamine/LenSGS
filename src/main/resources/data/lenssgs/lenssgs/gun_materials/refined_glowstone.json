@@ -6,7 +6,8 @@
     "magazine",
     "barrel",
     "receiver",
-    "stock"
+    "stock",
+    "scope"
   ],
   "color": {
     "alpha": 1.0,

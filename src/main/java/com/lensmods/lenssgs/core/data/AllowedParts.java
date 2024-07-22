@@ -10,6 +10,7 @@ public final class AllowedParts {
     //Optional Parts
     public static final String MAGAZINE = "magazine";
     public static final String STOCK = "stock";
+    public static final String SCOPE = "scope";
     //Receiver Types
     public static final String RECEIVER_PISTOL = "receiver_pistol";
     public static final String RECEIVER_STANDARD = "receiver_standard";
@@ -32,6 +33,11 @@ public final class AllowedParts {
     public static final String MAGAZINE_NORMAL = "magazine_normal";
     public static final String MAGAZINE_EXTENDED = "magazine_extended";
     public static final String MAGAZINE_BELT = "magazine_belt";
+    //Scope-Subtypes
+    public static final String SCOPE_IRONS = "scope_irons";
+    public static final String SCOPE_SHORT = "scope_short";
+    public static final String SCOPE_MEDIUM = "scope_medium";
+    public static final String SCOPE_LONG = "scope_long";
 
     //Bullet main parts
     public static final String CASING = "casing";
@@ -56,8 +62,9 @@ public final class AllowedParts {
     //Lists
     public static final List<String> ANY_PART = List.of(STOCK,BARREL,ACTION,MAGAZINE,CASING,ROUND,PROPELLANT,RECEIVER);
     public static final List<String> ANY_GUN_SUB_PART = List.of(RECEIVER_PISTOL, RECEIVER_BULLPUP, RECEIVER_STANDARD,ACTION_SINGLE,ACTION_MANUAL,ACTION_AUTOMATIC,
-            BARREL_STUB,BARREL_SHORT,BARREL_FAIR,BARREL_LONG,BARREL_EXTENDED,STOCK_SHORT,STOCK_FULL,MAGAZINE_SHORT,MAGAZINE_NORMAL,MAGAZINE_EXTENDED,MAGAZINE_BELT);
-    public static final List<String> ANY_GUN_PART = List.of(STOCK,BARREL,ACTION,MAGAZINE,RECEIVER);
+            BARREL_STUB,BARREL_SHORT,BARREL_FAIR,BARREL_LONG,BARREL_EXTENDED,STOCK_SHORT,STOCK_FULL,MAGAZINE_SHORT,MAGAZINE_NORMAL,MAGAZINE_EXTENDED,MAGAZINE_BELT,
+            SCOPE_IRONS,SCOPE_SHORT,SCOPE_MEDIUM,SCOPE_LONG);
+    public static final List<String> ANY_GUN_PART = List.of(STOCK,BARREL,ACTION,MAGAZINE,RECEIVER,SCOPE);
     public static final List<String> ANY_BULLET_PART = List.of(CASING,ROUND,PROPELLANT);
 
     public static final List<String> GUN_MANDITORY = List.of(RECEIVER,BARREL,ACTION);

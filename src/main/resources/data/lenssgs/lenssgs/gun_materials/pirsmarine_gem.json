@@ -1,6 +1,7 @@
 {
   "allowedOn": [
-    "bullet"
+    "bullet",
+    "scope"
   ],
   "color": {
     "alpha": 1.0,

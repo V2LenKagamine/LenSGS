@@ -28,8 +28,9 @@ public class LenLang extends LanguageProvider {
         keyof("gun_instructions","To make a gun: You need three things, an Action, a Receiver,and a Barrel." +
                 " Construct any variant of these using 1 of a material and a part crafter. Then, put all three in a crafting table together." +
                 " Bullets can similarly be made using a Casing, Round, And Propellant." +
-                " Guns may optionally contain a Stock and Magazine. These can be added by crafting table, and parts can be swapped at any time." +
-                " Magazines and Stocks can not be removed once added." +
+                " Guns may optionally contain a Stock,Magazine and Sights. These can be added by crafting table, and parts can be swapped at any time." +
+                " Magazines,Stocks, and Sights can not be removed once added." +
+                " Sights allow zooming with your use key, but are otherwise cosmetic; make them your favorite color!" +
                 " To reload a gun, simply hit the 'reload' keybind and wait." +
                 " You can see what can be a gun material by searching the correct tag." +
                 " Holding the correct keybinds while hoevering a gun material will reveal more about its stats." +
@@ -112,6 +113,7 @@ public class LenLang extends LanguageProvider {
         keyof(ROUND, "Projectile:");
         keyof(PROPELLANT,"Propellant:");
         keyof(CASING,"Casing:");
+        keyof(SCOPE,"Sights:");
         keyof(RECEIVER_PISTOL,"Pistol Receiver");
         keyof(RECEIVER_STANDARD,"Rifle Receiver");
         keyof(RECEIVER_BULLPUP,"Bullpup Receiver");
@@ -139,6 +141,10 @@ public class LenLang extends LanguageProvider {
         keyof(PROPELLANT_LIGHT,"Light Propellant");
         keyof(PROPELLANT_NORMAL,"Standard Propellant");
         keyof(PROPELLANT_HEAVY,"Heavy Propellant");
+        keyof(SCOPE_IRONS, "Iron Sights");
+        keyof(SCOPE_SHORT,"Reflex Sights");
+        keyof(SCOPE_MEDIUM, "Med-Range Sights");
+        keyof(SCOPE_LONG,"Long-Range Sights");
         keyof("part_crafter","Part Crafter");
         //Materials
         keyof("wood","Wooden");

@@ -368,6 +368,49 @@ public class LenRecipeGen extends RecipeProvider {
                 .define('p', LenItems.GUNPRINTER_PAPER)
                 .unlockedBy("gunpaper", InventoryChangeTrigger.TriggerInstance.hasItems(LenItems.GUNPRINTER_PAPER))
                 .save(out);
+        DataShapedBuilder.betterShaped(RecipeCategory.MISC, new ItemStack(LenItems.PART_CRAFTER.get()),"scope_crafter_irons",
+                        Pair.of(LenDataComponents.PART_TYPE.get(),AllowedParts.SCOPE),
+                        Pair.of(LenDataComponents.PART_SUB_TYPE.get(),AllowedParts.SCOPE_IRONS))
+                .pattern("   ")
+                .pattern(" p ")
+                .pattern(" s ")
+                .define('s', Tags.Items.RODS_WOODEN)
+                .define('p', LenItems.GUNPRINTER_PAPER)
+                .unlockedBy("gunpaper", InventoryChangeTrigger.TriggerInstance.hasItems(LenItems.GUNPRINTER_PAPER))
+                .save(out);
+        DataShapedBuilder.betterShaped(RecipeCategory.MISC, new ItemStack(LenItems.PART_CRAFTER.get()),"scope_crafter_short",
+                        Pair.of(LenDataComponents.PART_TYPE.get(),AllowedParts.SCOPE),
+                        Pair.of(LenDataComponents.PART_SUB_TYPE.get(),AllowedParts.SCOPE_SHORT))
+                .pattern(" g ")
+                .pattern(" p ")
+                .pattern(" s ")
+                .define('s', Tags.Items.RODS_WOODEN)
+                .define('p', LenItems.GUNPRINTER_PAPER)
+                .define('g',Tags.Items.GLASS_BLOCKS)
+                .unlockedBy("gunpaper", InventoryChangeTrigger.TriggerInstance.hasItems(LenItems.GUNPRINTER_PAPER))
+                .save(out);
+        DataShapedBuilder.betterShaped(RecipeCategory.MISC, new ItemStack(LenItems.PART_CRAFTER.get()),"scope_crafter_medium",
+                        Pair.of(LenDataComponents.PART_TYPE.get(),AllowedParts.SCOPE),
+                        Pair.of(LenDataComponents.PART_SUB_TYPE.get(),AllowedParts.SCOPE_MEDIUM))
+                .pattern("g g")
+                .pattern("ppp")
+                .pattern(" s ")
+                .define('s', Tags.Items.RODS_WOODEN)
+                .define('p', LenItems.GUNPRINTER_PAPER)
+                .define('g',Tags.Items.GLASS_BLOCKS)
+                .unlockedBy("gunpaper", InventoryChangeTrigger.TriggerInstance.hasItems(LenItems.GUNPRINTER_PAPER))
+                .save(out);
+        DataShapedBuilder.betterShaped(RecipeCategory.MISC, new ItemStack(LenItems.PART_CRAFTER.get()),"scope_crafter_long",
+                        Pair.of(LenDataComponents.PART_TYPE.get(),AllowedParts.SCOPE),
+                        Pair.of(LenDataComponents.PART_SUB_TYPE.get(),AllowedParts.SCOPE_LONG))
+                .pattern("ggg")
+                .pattern("ppp")
+                .pattern("s s")
+                .define('s', Tags.Items.RODS_WOODEN)
+                .define('p', LenItems.GUNPRINTER_PAPER)
+                .define('g',Tags.Items.GLASS_BLOCKS)
+                .unlockedBy("gunpaper", InventoryChangeTrigger.TriggerInstance.hasItems(LenItems.GUNPRINTER_PAPER))
+                .save(out);
 
     }
 

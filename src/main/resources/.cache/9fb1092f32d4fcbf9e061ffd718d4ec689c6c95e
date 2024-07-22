@@ -1,4 +1,4 @@
-// 1.21	2024-07-21T19:55:20.7402783	Recipes
+// 1.21	2024-07-22T02:43:26.3460141	Recipes
 0bfe6dedd3979ceb9ff8e265b9a252df3fb5b72a data/lenssgs/advancement/recipes/combat/automatic_action_crafter.json
 7b65ff88a811aa30bb64620ef453b41de7844c36 data/lenssgs/advancement/recipes/combat/barrel_crafter_extend.json
 49d40425242f7f5ab36417eb7d39540aa9c68a28 data/lenssgs/advancement/recipes/combat/barrel_crafter_long.json
@@ -23,6 +23,10 @@ f8bebe499fc12c833317ce06455cb00a7adddf23 data/lenssgs/advancement/recipes/combat
 17a8fbd179b337718449d3a28d1fa399e5cc0304 data/lenssgs/advancement/recipes/combat/round_crafter_bird.json
 4d7e354492659ba7e91949125a89de53ebd25047 data/lenssgs/advancement/recipes/combat/round_crafter_buck.json
 18adf32403cd2902e1e3e4c6422a67d7045814bf data/lenssgs/advancement/recipes/combat/round_crafter_standard.json
+32291cd0050395ce0a0d4486a813c95ab0587f9e data/lenssgs/advancement/recipes/combat/scope_crafter_irons.json
+2d8de185ce09d42053f190f0a321d18783206b9e data/lenssgs/advancement/recipes/combat/scope_crafter_long.json
+dc16083bb82c46b8d02d7f26f67b06f403a8a579 data/lenssgs/advancement/recipes/combat/scope_crafter_medium.json
+b2616b353fcd06cf37995691c72b40dc4e053e09 data/lenssgs/advancement/recipes/combat/scope_crafter_short.json
 2ffb83e3f30070951d85ebd9f6782f7e1e0bd7e5 data/lenssgs/advancement/recipes/combat/single_action_crafter.json
 3dd39e15b8dfe55a22705a6ae0c52eb4fd389b95 data/lenssgs/advancement/recipes/combat/stock_crafter_full.json
 7f72ea314602dc849c10cfcb0a52f20dea580ae2 data/lenssgs/advancement/recipes/combat/stock_crafter_short.json
@@ -56,6 +60,10 @@ c766fc7c474a5d4ec143cee78bc0a58e20692da7 data/lenssgs/recipe/receiver_crafter_bu
 414a9f494910660861a8342509e3c7d4898ee80c data/lenssgs/recipe/round_crafter_bird.json
 e9d8417a32d504961f1f9449b61cab0b3896f49f data/lenssgs/recipe/round_crafter_buck.json
 156f6beb22be09d66e7d414bd50c755cc3c4d162 data/lenssgs/recipe/round_crafter_standard.json
+7b1d672124da3f27ca0442e8a4820d4991909de2 data/lenssgs/recipe/scope_crafter_irons.json
+4d66641684c12b232b7e336664ce9c4cb1796b91 data/lenssgs/recipe/scope_crafter_long.json
+6d68e45a269a7c86b8a0131deffdc5227830742b data/lenssgs/recipe/scope_crafter_medium.json
+ca5c246fffe48bddacecc7138cc4ab272342dd39 data/lenssgs/recipe/scope_crafter_short.json
 7581e123cd9aa1c3e65f34036d64bee3f06f4f25 data/lenssgs/recipe/single_action_crafter.json
 8d77793a87ae026ed2e00f9115cd9473c87831db data/lenssgs/recipe/stock_crafter_full.json
 609271d0162d6d21be3f6c5ca3b6015449cfa69b data/lenssgs/recipe/stock_crafter_short.json

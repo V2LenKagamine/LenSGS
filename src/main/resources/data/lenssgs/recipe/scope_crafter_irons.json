@@ -1,0 +1,25 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "p": {
+      "item": "lenssgs:gunprinter_paper"
+    },
+    "s": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    "   ",
+    " p ",
+    " s "
+  ],
+  "result": {
+    "components": {
+      "lenssgs:part_sub_type": "scope_irons",
+      "lenssgs:part_type": "scope"
+    },
+    "count": 1,
+    "id": "lenssgs:part_crafter"
+  }
+}

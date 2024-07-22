@@ -1,6 +1,7 @@
 package com.lensmods.lenssgs.client.render;
 
 import com.lensmods.lenssgs.LensSGS;
+import com.lensmods.lenssgs.client.ADSHandler;
 import com.lensmods.lenssgs.core.data.AllowedParts;
 import com.lensmods.lenssgs.core.datacomps.ModelColorPair;
 import com.lensmods.lenssgs.core.items.AmmoBaseItem;
@@ -84,7 +85,7 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
             int blockLight = player.isOnFire() ? 15 : player.level().getBrightness(LightLayer.BLOCK, BlockPos.containing(player.getEyePosition(partialTicks)));
             blockLight = Math.min(blockLight, 15);
             int packedLight = LightTexture.pack(pDisplayContext!= ItemDisplayContext.GUI? blockLight : 15,player.level().getBrightness(LightLayer.SKY, BlockPos.containing(player.getEyePosition(partialTicks))));
-            if(pDisplayContext.firstPerson() && pDisplayContext != ItemDisplayContext.GUI) {
+            if(pDisplayContext.firstPerson() && pDisplayContext != ItemDisplayContext.GUI && ADSHandler.get().adsProgress()<=0f) {
                 this.applyBobbingTransforms(poseStack, partialTicks);
                 this.applySwayTransforms(poseStack, player, 0, 0, 0, partialTicks);
                 this.applySprintingTransforms(army, poseStack, partialTicks);
@@ -231,6 +232,14 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
                 poseStack.mulPose(Axis.YP.rotationDegrees(7.5f * side));
             }
             poseStack.mulPose(Axis.XP.rotationDegrees(3.9f));
+            if(display.firstPerson() && display != ItemDisplayContext.GUI) {
+                if(ADSHandler.get().adsProgress() != 0) {
+                    float prog = ADSHandler.get().adsProgress();
+                    poseStack.translate(-0.5f * prog, 0.051f * prog,0.4f*prog);
+                    poseStack.mulPose(Axis.YP.rotationDegrees(-7.75f*prog));
+                    poseStack.mulPose(Axis.XP.rotationDegrees(-6f*prog));
+                }
+            }
             this.renderGun(entity, display,handy,stack, poseStack, renderTypeBuffer, light, partialTicks);
         }
     }

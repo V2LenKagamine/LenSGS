@@ -1,5 +1,6 @@
 package com.lensmods.lenssgs;
 
+import com.lensmods.lenssgs.client.ADSHandler;
 import com.lensmods.lenssgs.client.ClientFireHandler;
 import com.lensmods.lenssgs.client.GunTooltipHandler;
 import com.lensmods.lenssgs.client.render.CustomRenderHandler;
@@ -118,7 +119,7 @@ public class LensSGS
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         // Some common setup code
-        L3NLOGGER.info("HELLO FROM COMMON SETUP");
+        L3NLOGGER.info("I miss when mods were mostly debug hellos in console, don't you?");
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
@@ -165,6 +166,7 @@ public class LensSGS
             // Some client setup code
             L3NLOGGER.info("You better appreciate those gun models, they were incredibly difficult to make!");
             NeoForge.EVENT_BUS.register(ClientFireHandler.get());
+            NeoForge.EVENT_BUS.register(ADSHandler.get());//Might need to move this if I want aiming to do anything, TODO?
             NeoForge.EVENT_BUS.register(GunTooltipHandler.INSTANCE);
         }
         @SubscribeEvent
@@ -191,6 +193,7 @@ public class LensSGS
             e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/stock_full_bullpup")));
             e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/stock_short_bullpup")));
             e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/receiver_bullpup_bullpup")));
+            e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/scope_irons_bullpup")));
             e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"ammo/box")));
         }
     }
