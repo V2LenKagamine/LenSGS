@@ -109,19 +109,28 @@ public class GunFireLogic {
             if(main.getOrDefault(LenDataComponents.AMMO_COUNTER,null) != null && main.getOrDefault(LenDataComponents.GUN_COMP,null) != null
                     && main.getOrDefault(LenDataComponents.GUN_STAT_TRAITS,null)!=null) {
                 boolean mag = false;
+                String magname = "none";
                 for (GunPartHolder part : main.get(LenDataComponents.GUN_COMP).getPartList()) {
                     if (part.getName().contains(AllowedParts.MAGAZINE)) {
+                        magname = part.getSubType();
                         mag =true;
                         break;
                     }
                 }
                 if(ReloadTracker.getReloadTracker(player).hasReloadTimer(player)) {
                     if (mag&& main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() > WeaponAmmoStats.AMMO_POINTS_MUL) {
-                        int reloadtime = (int)Math.ceil((main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() * 2.5f)/WeaponAmmoStats.AMMO_POINTS_MUL);
+                        int reloadtime;
+                        switch (magname)  {
+                            case AllowedParts.MAGAZINE_SHORT -> reloadtime = 40;
+                            case AllowedParts.MAGAZINE_NORMAL -> reloadtime = 70;
+                            case AllowedParts.MAGAZINE_EXTENDED -> reloadtime = 100;
+                            case AllowedParts.MAGAZINE_BELT -> reloadtime = 160;
+                            default -> reloadtime = 10;
+                        }
                         player.getCooldowns().addCooldown(main.getItem(),reloadtime);
                         ReloadTracker.getReloadTracker(player).putReloadTimer(reloadtime);
                     }else {
-                        int reloadtime = (int)Math.ceil((main.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() * 30f)/WeaponAmmoStats.AMMO_POINTS_MUL);
+                        int reloadtime = 90;
                         player.getCooldowns().addCooldown(main.getItem(),reloadtime);
                         ReloadTracker.getReloadTracker(player).putReloadTimer(reloadtime);
                     }

@@ -1,6 +1,7 @@
 package com.lensmods.lenssgs.core.data.recipes;
 
 import com.lensmods.lenssgs.core.items.AmmoBaseItem;
+import com.lensmods.lenssgs.core.weaponsystems.WeaponAmmoStats;
 import com.lensmods.lenssgs.datagen.LenTagKeys;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import com.lensmods.lenssgs.init.LenRecipes;
@@ -68,7 +69,7 @@ public class RefillRecipe extends CustomRecipe {
             if (mainboi.get(LenDataComponents.AMMO_COUNTER) < mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max()) {
                 var current = mainboi.get(LenDataComponents.AMMO_COUNTER);
                 int lacking = mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() - current;
-                int perRestore = (int)Math.floor((this.toRestore/100f)*(float)mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max());
+                int perRestore = (int)Math.max(Math.floor((this.toRestore/100f)*(float)mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max()), WeaponAmmoStats.AMMO_POINTS_MUL);
                 int torestore = lacking < 0 ? mainboi.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max() : Math.min(lacking,amnt*perRestore);
                 mainboi.set(LenDataComponents.AMMO_COUNTER,torestore+current);
                 return mainboi;

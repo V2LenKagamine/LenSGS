@@ -4,11 +4,13 @@ import com.lensmods.lenssgs.LensSGS;
 import com.lensmods.lenssgs.core.util.Color;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -54,6 +56,14 @@ public class GunMaterial{
         this.traitLevelList = traitLevels != null ? traitLevels : new ArrayList<>();
         this.color = color;
         this.ingredient = ing;
+        this.blacklistedParts = blacklistedParts;
+    }
+    public GunMaterial(String matName, List<StatMod> statMods, @Nullable List<TraitLevel> traitLevels, ResourceLocation ing, Color color, List<String> blacklistedParts) {
+        this.matName = matName;
+        this.statModList = statMods;
+        this.traitLevelList = traitLevels != null ? traitLevels : new ArrayList<>();
+        this.color = color;
+        this.ingredient = Ingredient.of(BuiltInRegistries.ITEM.get(ing));
         this.blacklistedParts = blacklistedParts;
     }
     public GunMaterial(String matName, List<StatMod> statMods, @Nullable List<TraitLevel> traitLevels, TagKey<Item> ing, Color color, List<String> blacklistedParts) {

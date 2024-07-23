@@ -1,0 +1,89 @@
+{
+  "allowedOn": [
+    "bullet"
+  ],
+  "color": {
+    "alpha": 1.0,
+    "blue": 0.79607844,
+    "green": 0.7529412,
+    "red": 1.0
+  },
+  "ingredient": {
+    "item": "modern_industrialization:invar_rotary_blade"
+  },
+  "partType": "invar_blade",
+  "statModList": [
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "multiply",
+      "stat": "stat_ammo_max",
+      "val": 0.25
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_pierce",
+      "val": 5.0
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_max_damage",
+      "val": 5.5
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_min_damage",
+      "val": 4.25
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "multiply",
+      "stat": "stat_velocity_mul",
+      "val": 1.2
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "add",
+      "stat": "stat_fire_rate",
+      "val": 6.0
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "modType": "total_multiply",
+      "stat": "stat_projectile_count",
+      "val": -0.95
+    }
+  ],
+  "traitLevelList": [
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "level": 10,
+      "trait": "lacerating"
+    },
+    {
+      "allowedParts": [
+        "bullet"
+      ],
+      "level": 2,
+      "trait": "shattering"
+    }
+  ]
+}

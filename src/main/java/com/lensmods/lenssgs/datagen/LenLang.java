@@ -194,6 +194,16 @@ public class LenLang extends LanguageProvider {
         keyof("azure_silver","Azure Silver");
         keyof("azure_electrum","Azure Electrum");
         keyof("tyran_steel","Tyran Steel");
+        //modern Industrialization
+        keyof("stainless_steel","Stainless Steel");
+        keyof("tungsten","Tungsten");
+        keyof("titanium","Titanium");
+        keyof("depleted","Depleted Uranium");
+        keyof("invar_blade","Diamond-Tipped Saw-blade");
+        //Mekanism
+        keyof("infused_alloy","Infused Alloy");
+        keyof("reinforced_alloy","Reinforced Alloy");
+        keyof("atomic_alloy","Atomic Alloy");
     }
 
     protected void keyof(String key,String toTranslate) {

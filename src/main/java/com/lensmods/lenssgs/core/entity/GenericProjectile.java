@@ -201,7 +201,8 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
                     if(LenUtil.randBetween(0f,100f) < trait.level()* 5) {
                        LightningBolt bonk = new LightningBolt(EntityType.LIGHTNING_BOLT,entity.level());
                        bonk.setPos(hitVec);
-                       bonk.setDamage(this.getDamage()*0.25f);
+                       damage+= (this.getDamage()*0.25f);
+                       bonk.setVisualOnly(true);
                        level().addFreshEntity(bonk);
                        bonk.tick();
                     }
@@ -261,7 +262,6 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         pBuilder.define(GRAVITY,0f);
         pBuilder.define(VISUAL,ItemStack.EMPTY);
         pBuilder.define(LIFE,20);
-
     }
 
     @Override

@@ -52,6 +52,7 @@ public class LenMaterialGen {
             new GunMaterial("end_rod",END_ROD_STATS,END_ROD_TRAITS,Ingredient.of(Items.END_ROD),Color.LIGHTYELLOW,List.of(ROUND,BARREL,SCOPE)),
             new GunMaterial("fish",FISH_STATS,FISH_TRAITS,Tags.Items.FOODS_RAW_FISH,Color.LIGHTPINK,List.of(ROUND)),
             new GunMaterial("fire_charge",FIRE_CHARGE_STATS,FIRE_CHARGE_TRAITS,Ingredient.of(Items.FIRE_CHARGE),Color.LIGHTPINK,List.of(ROUND)),
+            new GunMaterial("echo_shard",ECHO_SHARD_STATS,ECHO_SHARD_TRAITS,Ingredient.of(Items.ECHO_SHARD),Color.LIGHTPINK,List.of(ROUND)),
 
             new GunMaterial("void_metal",VOID_STATS,VOID_TRAITS,Ingredient.of(LenItems.VOIDMETAL),Color.VOIDMETAL,NOT_PROPELLANT),
             new GunMaterial("wyrm_steel",WYRM_STATS,WYRM_TRAITS,Ingredient.of(LenItems.WYRMSTEEL),Color.MEDIUMPURPLE,NOT_PROPELLANT),
@@ -75,7 +76,20 @@ public class LenMaterialGen {
             new GunMaterial("crimson_steel",CRIMSON_STEEL_STATS,CRIMSON_STEEL_TRAITS,CRIMSON_STEEL_TAG,Color.CRIMSON.blendWith(Color.RED),NOT_PROPELLANT),
             new GunMaterial("azure_electrum",AZURE_ELECTRUM_STATS,AZURE_ELECTRUM_TRAITS,AZURE_ELECTRUM_TAG,Color.DEEPSKYBLUE,NOT_PROPELLANT),
             new GunMaterial("azure_silver",AZURE_SILVER_STATS,AZURE_SILVER_TRAITS,AZURE_SILVER_TAG,Color.LIGHTSKYBLUE,NOT_PROPELLANT),
-            new GunMaterial("tyran_steel",TYRAN_STEEL_STATS,TYRAN_STEEL_TRAITS,TYRAN_STEEL_TAG,Color.MEDIUMPURPLE,NOT_PROPELLANT)
+            new GunMaterial("tyran_steel",TYRAN_STEEL_STATS,TYRAN_STEEL_TRAITS,TYRAN_STEEL_TAG,Color.MEDIUMPURPLE,NOT_PROPELLANT),
+            //Modern Industrialization
+            new GunMaterial("stainless_steel",STAINLESS_STATS,null,STAINLESS_STEEL_TAG,Color.LIGHTSKYBLUE,NOT_PROPELLANT),
+            new GunMaterial("tungsten",TUNGSTEN_STATS,TUNGSTEN_TRAITS,TUNGSTEN_TAG,Color.REBECCAPURPLE,NOT_PROPELLANT),
+            new GunMaterial("titanium",TITANIUM_STATS,null,TITANIUM_TAG,Color.HOTPINK,NOT_PROPELLANT),
+            new GunMaterial("depleted",DEPLETED_STATS, DEPLETED_TRAITS, ResourceLocation.fromNamespaceAndPath("modern_industrialization","he_uranium_fuel_rod_depleted"),Color.PINK,List.of(ROUND)),
+            new GunMaterial("invar_blade",ROTARY_BLADE_STATS, ROTARY_BLADE_TRAITS, ResourceLocation.fromNamespaceAndPath("modern_industrialization","invar_rotary_blade"),Color.PINK,List.of(ROUND)),
+            //Mekanism
+            new GunMaterial("infused_alloy",INFUSED_ALLOY_STATS,null,INFUSED_ALLOY_TAG,Color.RED,NOT_PROPELLANT),
+            new GunMaterial("reinforced_alloy",REINFORCED_ALLOY_STATS,null,REINFORCED_ALLOY_TAG,Color.LIGHTSKYBLUE,NOT_PROPELLANT),
+            new GunMaterial("atomic_alloy",ATOMIC_ALLOY_STATS,null,ATOMIC_ALLOY_TAG,Color.MEDIUMPURPLE,NOT_PROPELLANT)
+
+
+
     );
 
     public static RegistrySetBuilder DEFAULT_MATERIALS_BUILDER = new RegistrySetBuilder().add(LenDataReg.GUN_MAT_KEY, boot -> DEFAULT_MATS.forEach(mat ->{

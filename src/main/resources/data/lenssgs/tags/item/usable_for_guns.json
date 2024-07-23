@@ -97,6 +97,10 @@
       "required": false
     },
     {
+      "id": "minecraft:echo_shard",
+      "required": false
+    },
+    {
       "id": "lenssgs:void_metal",
       "required": false
     },
@@ -178,6 +182,38 @@
     },
     {
       "id": "#c:ingots/tyran_steel",
+      "required": false
+    },
+    {
+      "id": "#c:ingots/stainless_steel",
+      "required": false
+    },
+    {
+      "id": "#c:ingots/titanium",
+      "required": false
+    },
+    {
+      "id": "#c:ingots/tungsten",
+      "required": false
+    },
+    {
+      "id": "#mekanism:alloys/reinforced",
+      "required": false
+    },
+    {
+      "id": "#mekanism:alloys/infused",
+      "required": false
+    },
+    {
+      "id": "#mekanism:alloys/atomic",
+      "required": false
+    },
+    {
+      "id": "modern_industrialization:he_uranium_fuel_rod_depleted",
+      "required": false
+    },
+    {
+      "id": "modern_industrialization:invar_rotary_blade",
       "required": false
     }
   ]

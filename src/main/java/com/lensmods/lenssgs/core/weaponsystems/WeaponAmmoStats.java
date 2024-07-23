@@ -89,7 +89,7 @@ public class WeaponAmmoStats {
                 LensSGS.L3NLOGGER.error("Someone is trying to reload with no ammo stats, bad!:{}",ent);
                 return;
             }
-            if(ammoAmountLeft(ammo) >= AMMO_POINTS_MUL) {
+            if(ammoAmountLeft(ammo) != item.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max()) {
                 int ammoInAmmo = ammo.get(LenDataComponents.AMMO_COUNTER);
                 var ammoTraits = ammo.getOrDefault(LenDataComponents.GUN_STAT_TRAITS,null);
                 int removed = Math.min(stats.getAmmo_max() - ammoCurrent, ammoInAmmo);
@@ -102,7 +102,7 @@ public class WeaponAmmoStats {
                     boolean noConsume = false;
                     if(ammoTraits.getTraits().stream().anyMatch(trait -> trait.trait().equals(MaterialStats.ECOLOGICAL))) {
                         int lvl = ammoTraits.getTraits().stream().filter(trait -> trait.trait().equals(MaterialStats.ECOLOGICAL)).findFirst().get().level();
-                        noConsume = LenUtil.randBetween(0,100) <= (lvl*10f);
+                        noConsume = LenUtil.randBetween(0,100) <= (lvl*5f);
                     }
                     if (!(((Player) ent).isCreative() || noConsume)) {
                         ammo.set(LenDataComponents.AMMO_COUNTER, ammoInAmmo - removed);

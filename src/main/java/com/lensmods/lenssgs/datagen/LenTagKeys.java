@@ -34,6 +34,14 @@ public class LenTagKeys extends ItemTagsProvider {
     public static final TagKey<Item> AZURE_SILVER_TAG = commonTag("ingots/azure_silver");
     public static final TagKey<Item> AZURE_ELECTRUM_TAG = commonTag("ingots/azure_electrum");
     public static final TagKey<Item> TYRAN_STEEL_TAG = commonTag("ingots/tyran_steel");
+    //Modern Indust
+    public static final TagKey<Item> STAINLESS_STEEL_TAG = commonTag("ingots/stainless_steel");
+    public static final TagKey<Item> TUNGSTEN_TAG = commonTag("ingots/tungsten");
+    public static final TagKey<Item> TITANIUM_TAG = commonTag("ingots/titanium");
+    //Mekanism
+    public static final TagKey<Item> INFUSED_ALLOY_TAG = ItemTags.create(ResourceLocation.fromNamespaceAndPath("mekanism","alloys/infused"));
+    public static final TagKey<Item> REINFORCED_ALLOY_TAG = ItemTags.create(ResourceLocation.fromNamespaceAndPath("mekanism","alloys/reinforced"));
+    public static final TagKey<Item> ATOMIC_ALLOY_TAG = ItemTags.create(ResourceLocation.fromNamespaceAndPath("mekanism","alloys/atomic"));
 
 
 
@@ -50,6 +58,11 @@ public class LenTagKeys extends ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        this.tag(ItemTags.WEAPON_ENCHANTABLE)
+                .addOptionalTag(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"base_gun_holder"));
+        this.tag(ItemTags.SWORD_ENCHANTABLE)
+                .addOptionalTag(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"base_gun_holder"));
+
         this.tag(REFILLS_AMMO_TAG);
         this.tag(REFILLS_AMMO_TAG)
                 .addOptionalTag(Tags.Items.GUNPOWDERS)
@@ -82,6 +95,7 @@ public class LenTagKeys extends ItemTagsProvider {
                 .addOptional(ResourceLocation.withDefaultNamespace("prismarine_shard"))
                 .addOptional(ResourceLocation.withDefaultNamespace("tnt"))
                 .addOptional(ResourceLocation.withDefaultNamespace("dragon_breath"))
+                .addOptional(ResourceLocation.withDefaultNamespace("echo_shard"))
                 .addOptional(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"void_metal"))
                 .addOptional(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"blitz_gold"))
                 .addOptional(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"wyrm_steel"))
@@ -102,7 +116,16 @@ public class LenTagKeys extends ItemTagsProvider {
                 .addOptionalTag(CRIMSON_STEEL_TAG)
                 .addOptionalTag(AZURE_SILVER_TAG)
                 .addOptionalTag(AZURE_ELECTRUM_TAG)
-                .addOptionalTag(TYRAN_STEEL_TAG);
+                .addOptionalTag(TYRAN_STEEL_TAG)
+                .addOptionalTag(STAINLESS_STEEL_TAG)
+                .addOptionalTag(TITANIUM_TAG)
+                .addOptionalTag(TUNGSTEN_TAG)
+                .addOptionalTag(REINFORCED_ALLOY_TAG)
+                .addOptionalTag(INFUSED_ALLOY_TAG)
+                .addOptionalTag(ATOMIC_ALLOY_TAG)
+                .addOptional(ResourceLocation.fromNamespaceAndPath("modern_industrialization","he_uranium_fuel_rod_depleted"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath("modern_industrialization","invar_rotary_blade"))
+        ;
 
     }
 }

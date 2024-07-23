@@ -23,6 +23,11 @@ public class GunBaseItem extends Item implements IModdable {
     }
 
     @Override
+    public boolean isEnchantable(ItemStack stack) {
+        return true;
+    }
+
+    @Override
     public boolean onEntitySwing(ItemStack stack, LivingEntity entity) {
         return true;
     }
