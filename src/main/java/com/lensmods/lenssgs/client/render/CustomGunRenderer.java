@@ -3,10 +3,12 @@ package com.lensmods.lenssgs.client.render;
 import com.lensmods.lenssgs.LensSGS;
 import com.lensmods.lenssgs.client.ADSHandler;
 import com.lensmods.lenssgs.core.data.AllowedParts;
+import com.lensmods.lenssgs.core.datacomps.GunPartHolder;
 import com.lensmods.lenssgs.core.datacomps.ModelColorPair;
 import com.lensmods.lenssgs.core.items.AmmoBaseItem;
 import com.lensmods.lenssgs.core.items.GunBaseItem;
 import com.lensmods.lenssgs.core.util.RenderUtil;
+import com.lensmods.lenssgs.core.weaponsystems.WeaponAmmoStats;
 import com.lensmods.lenssgs.init.LenDataComponents;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -85,7 +87,7 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
             int blockLight = player.isOnFire() ? 15 : player.level().getBrightness(LightLayer.BLOCK, BlockPos.containing(player.getEyePosition(partialTicks)));
             blockLight = Math.min(blockLight, 15);
             int packedLight = LightTexture.pack(pDisplayContext!= ItemDisplayContext.GUI? blockLight : 15,player.level().getBrightness(LightLayer.SKY, BlockPos.containing(player.getEyePosition(partialTicks))));
-            if(pDisplayContext.firstPerson() && pDisplayContext != ItemDisplayContext.GUI && ADSHandler.get().adsProgress()<=0f) {
+            if(pDisplayContext.firstPerson() && pDisplayContext != ItemDisplayContext.GUI) {
                 this.applyBobbingTransforms(poseStack, partialTicks);
                 this.applySwayTransforms(poseStack, player, 0, 0, 0, partialTicks);
                 this.applySprintingTransforms(army, poseStack, partialTicks);
@@ -164,8 +166,10 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
             /* Slows down the bob by half */
             bobbing *= player.isSprinting() ? 8f : 4f;
             /* The new controlled bobbing */
-            poseStack.mulPose(Axis.ZP.rotationDegrees((Mth.sin(distanceWalked * (float) Math.PI) * bobbing * 3.0F)));
-            poseStack.mulPose(Axis.XP.rotationDegrees((Math.abs(Mth.cos(distanceWalked * (float) Math.PI - 0.2F) * bobbing) * 5.0F)));
+            if(!ADSHandler.get().tryingToAim()) {
+                poseStack.mulPose(Axis.ZP.rotationDegrees((Mth.sin(distanceWalked * (float) Math.PI) * bobbing * 3.0F)));
+                poseStack.mulPose(Axis.XP.rotationDegrees((Math.abs(Mth.cos(distanceWalked * (float) Math.PI - 0.2F) * bobbing) * 5.0F)));
+            }
         }
     }
     private void applySwayTransforms(PoseStack poseStack, LocalPlayer player, float x, float y, float z, float partialTicks)
@@ -221,26 +225,39 @@ public class CustomGunRenderer extends BlockEntityWithoutLevelRenderer {
     {
         if(stack.getItem() instanceof GunBaseItem)
         {
-            if(recoilTimer > 0f && display.firstPerson() && display != ItemDisplayContext.GUI) {
-                poseStack.translate(0,0,recoilTimer * 0.025f);
-                recoilTimer-=partialTicks;
-            }
-            float side = entity.getMainHandItem() == stack ? 1 : -1;
-            poseStack.scale(1.3f,1.3f,1.3f);
-            if (display != ItemDisplayContext.GUI) {
-                poseStack.translate((0.025f * side) - 0.025f, -0.22f * side, (0.05f * side) - 0.05f);
-                poseStack.mulPose(Axis.YP.rotationDegrees(7.5f * side));
-            }
-            poseStack.mulPose(Axis.XP.rotationDegrees(3.9f));
-            if(display.firstPerson() && display != ItemDisplayContext.GUI) {
-                if(ADSHandler.get().adsProgress() != 0) {
-                    float prog = ADSHandler.get().adsProgress();
-                    poseStack.translate(-0.5f * prog, 0.051f * prog,0.4f*prog);
-                    poseStack.mulPose(Axis.YP.rotationDegrees(-7.75f*prog));
-                    poseStack.mulPose(Axis.XP.rotationDegrees(-6f*prog));
+            if(WeaponAmmoStats.safeGunComp(stack)) {
+                String scope = "none";
+                boolean bullpup = false;
+                for(GunPartHolder part : stack.get(LenDataComponents.GUN_COMP).getPartList()){
+                    if(part.getName().equals(AllowedParts.SCOPE)) {
+                        scope = part.getSubType();
+                        continue;
+                    }
+                    if(part.getSubType().contains("bullpup")){
+                        bullpup = true;
+                    }
                 }
+                if (recoilTimer > 0f && display.firstPerson() && display != ItemDisplayContext.GUI) {
+                    poseStack.translate(0, 0, ADSHandler.get().adsProgress(scope) < 0.8f ? recoilTimer * 0.025f : Math.clamp(recoilTimer * 0.025f, 0, 0.1f));
+                    recoilTimer -= partialTicks;
+                }
+                float side = entity.getMainHandItem() == stack ? 1 : -1;
+                poseStack.scale(1.3f, 1.3f, 1.3f);
+                if (display != ItemDisplayContext.GUI) {
+                    poseStack.translate((0.025f * side) - 0.025f, -0.22f * side, (0.05f * side) - 0.05f);
+                    poseStack.mulPose(Axis.YP.rotationDegrees(7.5f * side));
+                }
+                poseStack.mulPose(Axis.XP.rotationDegrees(3.9f));
+                if (display.firstPerson() && display != ItemDisplayContext.GUI) {
+                    if (ADSHandler.get().adsProgress(scope) != 0) {
+                        float prog = ADSHandler.get().adsProgress(scope);
+                        poseStack.translate((-0.5f + (bullpup?0.0025f:0)) * prog, 0.051f * prog, 0.4f * prog);
+                        poseStack.mulPose(Axis.YP.rotationDegrees(-7.75f * prog));
+                        poseStack.mulPose(Axis.XP.rotationDegrees(-6f * prog));
+                    }
+                }
+                this.renderGun(entity, display, handy, stack, poseStack, renderTypeBuffer, light, partialTicks);
             }
-            this.renderGun(entity, display,handy,stack, poseStack, renderTypeBuffer, light, partialTicks);
         }
     }
 

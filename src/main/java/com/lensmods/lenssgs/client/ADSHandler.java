@@ -1,6 +1,7 @@
 package com.lensmods.lenssgs.client;
 
 import com.lensmods.lenssgs.core.data.AllowedParts;
+import com.lensmods.lenssgs.core.datacomps.GunPartHolder;
 import com.lensmods.lenssgs.core.items.GunBaseItem;
 import com.lensmods.lenssgs.core.weaponsystems.WeaponAmmoStats;
 import com.lensmods.lenssgs.init.LenDataComponents;
@@ -26,11 +27,25 @@ public class ADSHandler {
         }
         return instance;
     }
-    private static final float maxADS = 0.65f;
     private double aimCurr;
-    private double prevAim;
+    String scope = "none";
+    public enum MAXADS{
+        scope_long(1f,0.65f),
+        scope_medium(0.76f,0.5f),
+        scope_short(0.61f,0.4f),
+        scope_irons(0.46f,0.3f),
+        none(0,0);
+
+        public final float val;
+        public final float adjst;
+
+        MAXADS(float type,float val) {
+            this.val = val;
+            this.adjst = type;
+        }
+    }
     private boolean ADS;
-    public float adsProgress() {return (float) (aimCurr/maxADS);};
+    public float adsProgress(String scope) {return (float) (aimCurr/MAXADS.valueOf(scope).val);}
 
     private ADSHandler() {}
 
@@ -38,7 +53,7 @@ public class ADSHandler {
     @SubscribeEvent(receiveCanceled = true)
     public void onRenderOverlay(RenderGuiLayerEvent.Pre event)
     {
-        if(event.getName().equals(ResourceLocation.withDefaultNamespace("crosshair")) && adsProgress()>0.95f) {
+        if(event.getName().equals(ResourceLocation.withDefaultNamespace("crosshair")) && aimCurr >= 0.3f) {
             event.setCanceled(true);
         }
     }
@@ -46,17 +61,26 @@ public class ADSHandler {
     public void playerTick(PlayerTickEvent.Pre e) {
         Player plyr = e.getEntity();
         if(!plyr.isLocalPlayer()) {return;}
-        prevAim = aimCurr;
-        if(ADS) {
-            if(aimCurr < maxADS) {
-                aimCurr+=0.05f;
-                if(aimCurr > maxADS){
-                    aimCurr = maxADS;
+        if(ADS && plyr.getMainHandItem().getItem() instanceof GunBaseItem) {
+            if(WeaponAmmoStats.safeGunComp(plyr.getMainHandItem()) && scope.equals("none")) {
+                for(GunPartHolder part : plyr.getMainHandItem().get(LenDataComponents.GUN_COMP).getPartList()) {
+                    if(part.getName().equals(AllowedParts.SCOPE)) {
+                        scope = part.getSubType();
+                        break;
+                    }
+                }
+            }
+            if (aimCurr < MAXADS.valueOf(scope).val) {
+                aimCurr += 0.05f;
+                if (aimCurr > MAXADS.valueOf(scope).val) {
+                    aimCurr = MAXADS.valueOf(scope).val;
+                    scope = "none";
                 }
             }
         }else{
             if(aimCurr>0){
                 aimCurr-=0.05f;
+                scope = "none";
                 if(aimCurr<0){
                     aimCurr =0;
                 }

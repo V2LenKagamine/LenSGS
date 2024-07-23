@@ -194,6 +194,9 @@ public class LensSGS
             e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/stock_short_bullpup")));
             e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/receiver_bullpup_bullpup")));
             e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/scope_irons_bullpup")));
+            e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/scope_short_bullpup")));
+            e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/scope_medium_bullpup")));
+            e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"gunparts/scope_long_bullpup")));
             e.register(ModelResourceLocation.standalone(ResourceLocation.fromNamespaceAndPath(MODID,"ammo/box")));
         }
     }
