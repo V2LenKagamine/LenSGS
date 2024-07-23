@@ -34,7 +34,7 @@ public class ADSHandler {
         scope_medium(0.76f,0.5f),
         scope_short(0.61f,0.4f),
         scope_irons(0.46f,0.3f),
-        none(0,0);
+        none(1,0.65f);
 
         public final float val;
         public final float adjst;
