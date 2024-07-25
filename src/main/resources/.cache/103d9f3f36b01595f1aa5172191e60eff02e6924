@@ -1,4 +1,4 @@
-// 1.21	2024-07-23T07:28:29.2321966	Registries
+// 1.21	2024-07-25T01:51:48.2033447	Registries
 612db91cae99950c147115da1130bff65663c443 data/lenssgs/lenssgs/gun_materials/aluminum.json
 6756e10b560ef860007d36d6f1cf48583cee83b5 data/lenssgs/lenssgs/gun_materials/amethyst.json
 aae1ad72b952763546f80052f10475cb3760f2b0 data/lenssgs/lenssgs/gun_materials/atomic_alloy.json
@@ -24,6 +24,7 @@ b5894e39c87ec509477b9af740e1d93fdb6de1a1 data/lenssgs/lenssgs/gun_materials/emer
 a752815f4537bdb3e8fec01bd08aeb5d0b72a094 data/lenssgs/lenssgs/gun_materials/fish.json
 cc452213e80401143db04c46258618eb132f3f1a data/lenssgs/lenssgs/gun_materials/gold.json
 c9d511f043ec0d22f427780bfbed50015abd4bb8 data/lenssgs/lenssgs/gun_materials/gunpowder.json
+97e66071d8605de850a63ed843235494adde8c17 data/lenssgs/lenssgs/gun_materials/hocufe.json
 b1f4fda1723e6ce2b2792e22bdc2184e8788b64b data/lenssgs/lenssgs/gun_materials/infused_alloy.json
 2d50485bb3019d982cd3ef854b3693b0b2074ae2 data/lenssgs/lenssgs/gun_materials/invar_blade.json
 c0c5b279407b6dfe4570a3947c80744d3b712c67 data/lenssgs/lenssgs/gun_materials/iron.json
@@ -31,6 +32,7 @@ c0c5b279407b6dfe4570a3947c80744d3b712c67 data/lenssgs/lenssgs/gun_materials/iron
 c13c720a39145f2aa6d83092a4d4a67643f5799e data/lenssgs/lenssgs/gun_materials/magma_cream.json
 55377489104c12f9269189ee900e8fd27a10c587 data/lenssgs/lenssgs/gun_materials/netherite.json
 c74c511cd8f9aa0fe3f0734d87f13080fd3ab55a data/lenssgs/lenssgs/gun_materials/netherstar.json
+229a570e0c8369372110d49dc5a6bbb82c5397e6 data/lenssgs/lenssgs/gun_materials/nurukukan.json
 ab72ea74bfbc0c61fd23b853582caa1dac43e740 data/lenssgs/lenssgs/gun_materials/osmium.json
 4aba7e92275bd8debfc6c1095801d9b44e8979bc data/lenssgs/lenssgs/gun_materials/pirsmarine_gem.json
 6ff6e702d15843c433f9c93ef98fe05da0062abb data/lenssgs/lenssgs/gun_materials/plutonium.json

@@ -100,12 +100,20 @@ public class WeaponAmmoStats {
                     }
                 } else {
                     boolean noConsume = false;
+                    boolean mend = false;
                     if(ammoTraits.getTraits().stream().anyMatch(trait -> trait.trait().equals(MaterialStats.ECOLOGICAL))) {
                         int lvl = ammoTraits.getTraits().stream().filter(trait -> trait.trait().equals(MaterialStats.ECOLOGICAL)).findFirst().get().level();
                         noConsume = LenUtil.randBetween(0,100) <= (lvl*5f);
                     }
+                    if(ammoTraits.getTraits().stream().anyMatch(trait -> trait.trait().equals(MaterialStats.ETERNAL))) {
+                        int lvl = ammoTraits.getTraits().stream().filter(trait -> trait.trait().equals(MaterialStats.ETERNAL)).findFirst().get().level();
+                        mend = LenUtil.randBetween(0,100) <= (lvl*5f);
+                    }
                     if (!(((Player) ent).isCreative() || noConsume)) {
                         ammo.set(LenDataComponents.AMMO_COUNTER, ammoInAmmo - removed);
+                    }
+                    if(!(((Player) ent).isCreative() || mend)) {
+                        ammo.set(LenDataComponents.AMMO_COUNTER, Math.min(ammo.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max(),ammoInAmmo + removed));
                     }
                 }
                 item.set(LenDataComponents.LAST_AMMO, ammo.get(LenDataComponents.GUN_STAT_TRAITS));
@@ -131,7 +139,7 @@ public class WeaponAmmoStats {
         } //WALL OF VARIABLES
         boolean ammo = gun.getItem() instanceof AmmoBaseItem;
 
-        List<TraitLevel> finalTraits = new ArrayList<>(); //Todo: get traits and set appropriately
+        List<TraitLevel> finalTraits = new ArrayList<>();
         int newAmmoMax = ammo ? 250 * AMMO_POINTS_MUL :AMMO_POINTS_MUL;
         int bonusAmmoMax =0;
         float ammoMul =1;
@@ -339,9 +347,10 @@ public class WeaponAmmoStats {
                 case AllowedParts.RECEIVER_STANDARD: {
                     bonusInacc -= 1f;
                     bonusDmgMax += 0.25f * (float) LenConfig.rifle_stat_mul;
+                    bonusDmgMin += 0.75f * (float) LenConfig.rifle_stat_mul;
                     bonusFR += (int)Math.floor(5 * (float) LenConfig.rifle_stat_mul);
                     totalFrMul += 0.25f * (float) LenConfig.rifle_stat_mul;
-                    bonusDmgMin += 0.75f * (float) LenConfig.rifle_stat_mul;
+                    totalAmmoMul -= 0.65F * (float) LenConfig.rifle_stat_mul;
                     break;
                 }
                 case AllowedParts.RECEIVER_BULLPUP: {

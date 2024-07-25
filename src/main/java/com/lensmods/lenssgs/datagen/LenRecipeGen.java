@@ -28,6 +28,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.ShapedRecipe;
 import net.minecraft.world.item.crafting.ShapedRecipePattern;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 
 import java.util.*;
@@ -84,6 +85,23 @@ public class LenRecipeGen extends RecipeProvider {
                 .requires(Tags.Items.RODS_BREEZE)
                 .requires(Tags.Items.RODS_BREEZE)
                 .unlockedBy("breeze",InventoryChangeTrigger.TriggerInstance.hasItems(Items.BREEZE_ROD))
+                .save(out);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,LenItems.HOCOFE,1)
+                .requires(Tags.Items.INGOTS_IRON)
+                .requires(Tags.Items.INGOTS_COPPER)
+                .requires(Tags.Items.INGOTS_COPPER)
+                .requires(Tags.Items.INGOTS_COPPER)
+                .requires(Blocks.HONEY_BLOCK)
+                .unlockedBy("honey",InventoryChangeTrigger.TriggerInstance.hasItems(Items.HONEY_BLOCK))
+                .save(out);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC,LenItems.NURUKUKAN,1)
+                .requires(LenItems.VOIDMETAL)
+                .requires(LenItems.VOIDMETAL)
+                .requires(Tags.Items.NETHER_STARS)
+                .requires(Tags.Items.NETHER_STARS)
+                .requires(LenItems.HOCOFE)
+                .requires(LenItems.HOCOFE)
+                .unlockedBy("honeymetal",InventoryChangeTrigger.TriggerInstance.hasItems(LenItems.HOCOFE))
                 .save(out);
         GunFromItems("make_gun",List.of(LenItems.PART_BASE.get(),LenItems.PART_BASE.get(),LenItems.PART_BASE.get()),LenItems.GUN_BASE.get(),out,false); //The gun
         GunFromItems("make_ammo",List.of(LenItems.PART_BASE.get(),LenItems.PART_BASE.get(),LenItems.PART_BASE.get()),LenItems.AMMO_BASE.get(),out,false); //The Ammo

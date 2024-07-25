@@ -1,4 +1,4 @@
-// 1.21	2024-07-23T07:28:29.2341983	Recipes
+// 1.21	2024-07-25T01:51:48.2063489	Recipes
 0bfe6dedd3979ceb9ff8e265b9a252df3fb5b72a data/lenssgs/advancement/recipes/combat/automatic_action_crafter.json
 7b65ff88a811aa30bb64620ef453b41de7844c36 data/lenssgs/advancement/recipes/combat/barrel_crafter_extend.json
 49d40425242f7f5ab36417eb7d39540aa9c68a28 data/lenssgs/advancement/recipes/combat/barrel_crafter_long.json
@@ -32,6 +32,8 @@ b2616b353fcd06cf37995691c72b40dc4e053e09 data/lenssgs/advancement/recipes/combat
 7f72ea314602dc849c10cfcb0a52f20dea580ae2 data/lenssgs/advancement/recipes/combat/stock_crafter_short.json
 cbebd88546367727b52c0f4bff7fd406fe531517 data/lenssgs/advancement/recipes/misc/blitz_gold.json
 a12f5036e0b549de1d50fef08fcf983c5750ca93 data/lenssgs/advancement/recipes/misc/gunprinter_paper.json
+a05c10bbb3753b18fd0a4438a65a57911c94fe0e data/lenssgs/advancement/recipes/misc/hocufe_ingot.json
+2965d63beb5609a7427ecd246f964a26380971da data/lenssgs/advancement/recipes/misc/nurukukan_ingot.json
 958b78b7e40b6029dfcf946be2b1cd0dee4da8d5 data/lenssgs/advancement/recipes/misc/void_metal.json
 ef588a41b170fc0865d7b9ef4b15cb8d986d0c3c data/lenssgs/advancement/recipes/misc/wyrm_steel.json
 1013f1338a816f83e30e98bbd264cda04e2e3cd2 data/lenssgs/recipe/automatic_action_crafter.json
@@ -46,11 +48,13 @@ edbffbe46b4981481234fd42347bd1059bbc7b95 data/lenssgs/recipe/blitz_gold.json
 c616ff25b535146837bd2ff6848dcc4de8097b49 data/lenssgs/recipe/casing_crafter_shell.json
 d2debef143b6e0e988ee0d435929778332551da2 data/lenssgs/recipe/casing_crafter_small.json
 35379208b00a98bb82c8bf394e82144469162330 data/lenssgs/recipe/gunprinter_paper.json
+43ff703b4c087ad3045436a12cc886291da07a9e data/lenssgs/recipe/hocufe_ingot.json
 bf2610ff6b06aeefe3b02747a1a4e0ea33f32d65 data/lenssgs/recipe/mag_crafter_belt.json
 ecbc9ff1954516023e5cc19d30cd2ab8c1eda4e2 data/lenssgs/recipe/mag_crafter_extended.json
 960abacd5a4aaf41c69538734cf815df3649a317 data/lenssgs/recipe/mag_crafter_normal.json
 6f4de5b2403c062965de7441b8a7dacc61ed154c data/lenssgs/recipe/mag_crafter_short.json
 54abceb6c32b2467aa621bfa51d2abedf099a572 data/lenssgs/recipe/manual_action_crafter.json
+0a2f5100d2e9ab0d6d00612d64bd23ea5a0dd653 data/lenssgs/recipe/nurukukan_ingot.json
 b55059dba65988da28a0c5061e8e912b6e875746 data/lenssgs/recipe/prop_crafter_heavy.json
 c9c8321cc5be8b6b15ead96dea98f484f821c4f4 data/lenssgs/recipe/prop_crafter_light.json
 c62d7c98ce6074dec3ad52b6f9194883f6c24139 data/lenssgs/recipe/prop_crafter_normal.json

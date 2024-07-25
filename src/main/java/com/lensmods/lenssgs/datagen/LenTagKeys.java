@@ -1,6 +1,7 @@
 package com.lensmods.lenssgs.datagen;
 
 import com.lensmods.lenssgs.LensSGS;
+import com.lensmods.lenssgs.init.LenItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.ItemTagsProvider;
@@ -59,9 +60,9 @@ public class LenTagKeys extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         this.tag(ItemTags.WEAPON_ENCHANTABLE)
-                .addOptionalTag(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"base_gun_holder"));
+                .add(LenItems.GUN_BASE.get());
         this.tag(ItemTags.SWORD_ENCHANTABLE)
-                .addOptionalTag(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"base_gun_holder"));
+                .add(LenItems.GUN_BASE.get());
 
         this.tag(REFILLS_AMMO_TAG);
         this.tag(REFILLS_AMMO_TAG)
@@ -99,6 +100,8 @@ public class LenTagKeys extends ItemTagsProvider {
                 .addOptional(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"void_metal"))
                 .addOptional(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"blitz_gold"))
                 .addOptional(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"wyrm_steel"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"hocufe_ingot"))
+                .addOptional(ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"nurukukan_ingot"))
                 .addOptionalTag(BRONZE_TAG)
                 .addOptionalTag(REFINED_OB_TAG)
                 .addOptionalTag(REFINED_GLOW_TAG)

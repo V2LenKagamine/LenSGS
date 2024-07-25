@@ -113,6 +113,14 @@
       "required": false
     },
     {
+      "id": "lenssgs:hocufe_ingot",
+      "required": false
+    },
+    {
+      "id": "lenssgs:nurukukan_ingot",
+      "required": false
+    },
+    {
       "id": "#c:ingots/bronze",
       "required": false
     },

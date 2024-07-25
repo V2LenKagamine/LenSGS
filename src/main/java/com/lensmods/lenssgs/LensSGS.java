@@ -75,6 +75,8 @@ public class LensSGS
                 output.accept(LenItems.VOIDMETAL.get());
                 output.accept(LenItems.WYRMSTEEL.get());
                 output.accept(LenItems.BLITZGOLD.get());
+                output.accept(LenItems.HOCOFE.get());
+                output.accept(LenItems.NURUKUKAN.get());
             }).build());
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.

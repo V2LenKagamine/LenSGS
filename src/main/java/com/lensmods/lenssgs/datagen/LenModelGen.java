@@ -17,5 +17,7 @@ public class LenModelGen extends ItemModelProvider {
         basicItem(LenItems.BLITZGOLD.get());
         basicItem(LenItems.VOIDMETAL.get());
         basicItem(LenItems.WYRMSTEEL.get());
+        basicItem(LenItems.NURUKUKAN.get());
+        basicItem(LenItems.HOCOFE.get());
     }
 }

@@ -32,6 +32,7 @@ public final class MaterialStats {
     public static final String VOID_TOUCHED = "voidtouched";
     public static final String LINGERING = "lingering";
     public static final String HALLOW_POINT = "hallowpoint";
+    public static final String ETERNAL = "eternal";
 
     //STAT MOD MODE
     public static final String MUL_TOTAL = "total_multiply"; // Add all together, multiply final product by this number.
@@ -181,6 +182,48 @@ public final class MaterialStats {
             new StatMod(INACCURACY_DEG, -3f,ADD,BARREL),
             new StatMod(MIN_DMG,0.75f,ADD,BARREL),
             new StatMod(MAX_DMG,0.5f,ADD,BARREL)
+    );
+
+    public static final List<StatMod> HOCUFE_STATS = List.of(
+            new StatMod(AMMO_MAX,1.2f, AVG_MUL,MAGAZINE),
+            new StatMod(FIRE_RATE,1f,ADD,AFFECTS_FIRE_RATE),
+            new StatMod(MAX_DMG,0.75f,ADD,RECEIVER,ACTION,CASING),
+            new StatMod(MIN_DMG,0.5f,ADD,RECEIVER,ACTION,CASING),
+            new StatMod(MAX_DMG,2F,ADD,AFFECTS_BASE_DMG),
+            new StatMod(VEL_MULT,0.85f, AVG_MUL,ROUND),
+            new StatMod(GRAVITY_MOD,1.3f, AVG_MUL,ROUND),
+            new StatMod(FIRE_RATE,0.5f,ADD,MAGAZINE,RECEIVER),
+            new StatMod(FIRE_RATE,-1F,ADD,BARREL,STOCK),
+            new StatMod(MIN_DMG,0.5f,ADD,BARREL),
+            new StatMod(MAX_DMG,0.5f,ADD,BARREL)
+    );
+
+    public static final List<TraitLevel> HOCUFE_TRAITS =List.of(
+            new TraitLevel(ECOLOGICAL,5,ROUND,CASING)
+    );
+
+    public static final List<StatMod> NURUKUKAN_STATS = List.of(
+            new StatMod(AMMO_MAX,0.25f, AVG_MUL,MAGAZINE),
+            new StatMod(AMMO_MAX,0.5f, AVG_MUL, CASING),
+            new StatMod(FIRE_RATE,1.5F,AVG_MUL,AFFECTS_FIRE_RATE),
+            new StatMod(MIN_DMG,1.05F,AVG_MUL,ACTION,CASING,ROUND),
+            new StatMod(MAX_DMG,1.05F,AVG_MUL,ACTION,CASING,ROUND),
+            new StatMod(PIERCE,-0.95f,MUL_TOTAL,ROUND,CASING),
+            new StatMod(PROJ_COUNT,-0.95f,MUL_TOTAL,ROUND),
+            new StatMod(MAX_DMG,3f,ADD,ROUND),
+            new StatMod(MIN_DMG,3.5f,ADD,ROUND),
+            new StatMod(FIRE_RATE,18f,ADD,ROUND),
+            new StatMod(MAX_DMG,1.5f,ADD,RECEIVER,ACTION,CASING),
+            new StatMod(MIN_DMG,1f,ADD,RECEIVER,ACTION,CASING),
+            new StatMod(INACCURACY_DEG, -4.5f,ADD,BARREL),
+            new StatMod(MIN_DMG,0.75f,ADD,BARREL),
+            new StatMod(MAX_DMG,0.5f,ADD,BARREL)
+    );
+
+    public static final List<TraitLevel> NURUKUKAN_TRAITS =List.of(
+            new TraitLevel(ETERNAL,15,ROUND,CASING),
+            new TraitLevel(ECOLOGICAL,5,ROUND,CASING),
+            new TraitLevel(ETERNAL,10,MAGAZINE)
     );
 
     public static final List<TraitLevel> VOID_TRAITS = List.of(

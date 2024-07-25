@@ -54,9 +54,11 @@ public class LenMaterialGen {
             new GunMaterial("fire_charge",FIRE_CHARGE_STATS,FIRE_CHARGE_TRAITS,Ingredient.of(Items.FIRE_CHARGE),Color.LIGHTPINK,List.of(ROUND)),
             new GunMaterial("echo_shard",ECHO_SHARD_STATS,ECHO_SHARD_TRAITS,Ingredient.of(Items.ECHO_SHARD),Color.LIGHTPINK,List.of(ROUND)),
 
+            new GunMaterial("hocufe",HOCUFE_STATS,HOCUFE_TRAITS,Ingredient.of(LenItems.HOCOFE),Color.DARKGOLDENROD,NOT_PROPELLANT),
             new GunMaterial("void_metal",VOID_STATS,VOID_TRAITS,Ingredient.of(LenItems.VOIDMETAL),Color.VOIDMETAL,NOT_PROPELLANT),
             new GunMaterial("wyrm_steel",WYRM_STATS,WYRM_TRAITS,Ingredient.of(LenItems.WYRMSTEEL),Color.MEDIUMPURPLE,NOT_PROPELLANT),
             new GunMaterial("blitz_gold",BLITZ_STATS,BLITZ_TRAITS,Ingredient.of(LenItems.BLITZGOLD),Color.GOLDENROD,NOT_PROPELLANT),
+            new GunMaterial("nurukukan",NURUKUKAN_STATS,NURUKUKAN_TRAITS,Ingredient.of(LenItems.NURUKUKAN),Color.VOIDMETAL.blendWith(Color.DARKGOLDENROD),NOT_PROPELLANT),
             //Common Mats
             new GunMaterial("bronze",BRONZE_STATS,null,BRONZE_TAG,Color.BRONZE,NOT_PROPELLANT),
             new GunMaterial("refined_obsidian",REF_OBSIDIAN_STATS,REF_OBSIDIAN_TRAITS,REFINED_OB_TAG,Color.OBSIDIAN,NOT_PROPELLANT),

@@ -29,7 +29,7 @@ public class LenLang extends LanguageProvider {
                 " Construct any variant of these using 1 of a material and a part crafter. Then, put all three in a crafting table together." +
                 " Bullets can similarly be made using a Casing, Round, And Propellant." +
                 " Guns may optionally contain a Stock,Magazine and Sights. These can be added by crafting table, and parts can be swapped at any time." +
-                " Magazines,Stocks, and Sights can not be removed once added." +
+                " Magazines,Stocks, and Sights can not be removed once added;but can be swapped for another." +
                 " Sights allow zooming with your use key, but are otherwise cosmetic; make them your favorite color!" +
                 " To reload a gun, simply hit the 'reload' keybind and wait." +
                 " You can see what can be a gun material by searching the correct tag." +
@@ -84,6 +84,7 @@ public class LenLang extends LanguageProvider {
         keyof(SHATTERING,"Shattering");
         keyof(LINGERING,"Lingering");
         keyof(HALLOW_POINT,"Hallow-Point");
+        keyof(ETERNAL,"Eternal");
         //Keybinds
         add("key.categories.lenssgs","Len's Gun Shenanigans");
         bindkeyof("cycle.back", "Tooltip Cycle Back");
@@ -97,6 +98,8 @@ public class LenLang extends LanguageProvider {
         itemkeyof("void_metal","Void Metal Ingot");
         itemkeyof("wyrm_steel","Wyrm Steel Ingot");
         itemkeyof("blitz_gold","Blitz Gold Ingot");
+        itemkeyof("hocufe_ingot","HoCuFe Ingot");
+        itemkeyof("nurukukan_ingot","Nuru-Kukan Ingot");
         //Effect keys
         add("item.minecraft.tipped_arrow.effect.laceration_potion","Arrow of Laceration");
         add("item.minecraft.potion.effect.laceration_potion","Potion of Laceration");
@@ -170,6 +173,8 @@ public class LenLang extends LanguageProvider {
         keyof("magma_cream","Magma Cream");
         keyof("wyrm_steel","Wyrm Steel");
         keyof("blitz_gold","Blitz Gold");
+        keyof("hocufe","HoCuFe");
+        keyof("nurukukan","Nuru-Kukan");
         keyof("copper_rod","Copper Bolt");
         keyof("end_rod","End Rod");
         keyof("fish","Fish?");

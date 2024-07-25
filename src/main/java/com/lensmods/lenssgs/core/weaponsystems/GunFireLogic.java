@@ -1,6 +1,7 @@
 package com.lensmods.lenssgs.core.weaponsystems;
 
 import com.lensmods.lenssgs.core.data.AllowedParts;
+import com.lensmods.lenssgs.core.data.MaterialStats;
 import com.lensmods.lenssgs.core.datacomps.GunPartHolder;
 import com.lensmods.lenssgs.core.datacomps.GunStatTraitPair;
 import com.lensmods.lenssgs.core.datacomps.TraitLevel;
@@ -51,7 +52,8 @@ public class GunFireLogic {
                 int cdTime =held.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getFirerate() + lastAmmoLoaded.getStats().getFirerate();
                 cdtrack.putCooldown(held,Math.round(cdTime));
                 PacketDistributor.sendToPlayer(player,new STCFireSync(cdTime));
-                ammotraits.addAll(held.get(LenDataComponents.GUN_STAT_TRAITS).getTraits());
+                List<TraitLevel> gunTraits = held.get(LenDataComponents.GUN_STAT_TRAITS).getTraits();
+                ammotraits.addAll(gunTraits);
                 Map<String,Integer> tempStorage = new LinkedHashMap<>(10);
                 List<TraitLevel> tosend = new ArrayList<>();
                 for(TraitLevel trait : ammotraits) {
@@ -76,7 +78,12 @@ public class GunFireLogic {
                     spawned[i] = boolet;
                     boolet.tick();
                 }
-                if (!player.isCreative()) {
+                boolean eternal = gunTraits.stream().anyMatch(trait-> trait.trait().equals(MaterialStats.ETERNAL));
+                boolean nocon = false;
+                if(eternal) {
+                    nocon = LenUtil.randBetween(0f,100f) <= gunTraits.stream().filter(trait-> trait.trait().equals(MaterialStats.ETERNAL)).findFirst().get().level()*5f;
+                }
+                if (!player.isCreative() || !nocon) {
                     int temp = held.get(LenDataComponents.AMMO_COUNTER);
                     held.set(LenDataComponents.AMMO_COUNTER, temp - WeaponAmmoStats.AMMO_POINTS_MUL);
                 }

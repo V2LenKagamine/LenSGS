@@ -1,8 +1,5 @@
 {
   "values": [
-    {
-      "id": "#lenssgs:base_gun_holder",
-      "required": false
-    }
+    "lenssgs:base_gun_holder"
   ]
 }
