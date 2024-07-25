@@ -83,7 +83,7 @@ public class GunFireLogic {
                 if(eternal) {
                     nocon = LenUtil.randBetween(0f,100f) <= gunTraits.stream().filter(trait-> trait.trait().equals(MaterialStats.ETERNAL)).findFirst().get().level()*5f;
                 }
-                if (!player.isCreative() || !nocon) {
+                if (!player.isCreative() || nocon) {
                     int temp = held.get(LenDataComponents.AMMO_COUNTER);
                     held.set(LenDataComponents.AMMO_COUNTER, temp - WeaponAmmoStats.AMMO_POINTS_MUL);
                 }
