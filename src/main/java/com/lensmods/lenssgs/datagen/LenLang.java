@@ -25,6 +25,7 @@ public class LenLang extends LanguageProvider {
         keyof("gun_reload","Gun Reloads");
         //Generic
         add("itemGroup.lenssgs","Len's SGS");
+        add("death.attack.lenssgs.firearm","%s was forcefully overdosed with bullets.");
         keyof("gun_instructions","To make a gun: You need three things, an Action, a Receiver,and a Barrel." +
                 " Construct any variant of these using 1 of a material and a part crafter. Then, put all three in a crafting table together." +
                 " Bullets can similarly be made using a Casing, Round, And Propellant." +

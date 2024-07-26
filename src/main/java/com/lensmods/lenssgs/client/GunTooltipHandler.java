@@ -63,6 +63,7 @@ public final class GunTooltipHandler {
         e.getToolTip().add(KeyManager.DISPLAY_STATS.get().getTranslatedKeyMessage().copy().withColor(KeyManager.DISPLAY_STATS.get().isDown() ? Color.LIGHTBLUE.getColor() : Color.LIGHTCORAL.getColor())
                 .append(spaceAppend(KeyManager.DISPLAY_TRAITS.get().getTranslatedKeyMessage().copy().withColor(KeyManager.DISPLAY_TRAITS.get().isDown() ? Color.LIGHTBLUE.getColor() : Color.LIGHTCORAL.getColor())))
                 .append(showComp ? spaceAppend(KeyManager.DISPLAY_CONSTRUCTION.get().getTranslatedKeyMessage().copy().withColor(KeyManager.DISPLAY_CONSTRUCTION.get().isDown() ? Color.LIGHTBLUE.getColor() : Color.LIGHTCORAL.getColor())) : Component.empty()));
+        e.getToolTip().add(Component.literal("Press ").append(KeyManager.CYCLE_NEXT.get().getTranslatedKeyMessage()).append(Component.literal(" or ")).append(KeyManager.CYCLE_BACK.get().getTranslatedKeyMessage()).append(Component.literal(" to cycle part types.")).copy().withStyle(ChatFormatting.GRAY));
 
     }
 

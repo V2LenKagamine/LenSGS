@@ -112,7 +112,7 @@ public class WeaponAmmoStats {
                     if (!(((Player) ent).isCreative() || noConsume)) {
                         ammo.set(LenDataComponents.AMMO_COUNTER, ammoInAmmo - removed);
                     }
-                    if(!(((Player) ent).isCreative() || mend)) {
+                    if(!(((Player) ent).isCreative()) && mend) {
                         ammo.set(LenDataComponents.AMMO_COUNTER, Math.min(ammo.get(LenDataComponents.GUN_STAT_TRAITS).getStats().getAmmo_max(),ammoInAmmo + removed));
                     }
                 }
