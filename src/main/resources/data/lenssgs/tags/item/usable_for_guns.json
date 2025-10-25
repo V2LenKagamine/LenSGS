@@ -1,228 +1,228 @@
 {
-  "values": [
-    {
-      "id": "#c:rods/wooden",
-      "required": false
-    },
-    {
-      "id": "#c:cobblestones",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/copper",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/iron",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/gold",
-      "required": false
-    },
-    {
-      "id": "#c:gems/diamond",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/netherite",
-      "required": false
-    },
-    {
-      "id": "#c:gunpowders",
-      "required": false
-    },
-    {
-      "id": "#c:rods/blaze",
-      "required": false
-    },
-    {
-      "id": "#c:slimeballs",
-      "required": false
-    },
-    {
-      "id": "#c:gems/prismarine",
-      "required": false
-    },
-    {
-      "id": "#c:rods/breeze",
-      "required": false
-    },
-    {
-      "id": "#c:gems/quartz",
-      "required": false
-    },
-    {
-      "id": "#c:gems/amethyst",
-      "required": false
-    },
-    {
-      "id": "#c:gems/emerald",
-      "required": false
-    },
-    {
-      "id": "#c:foods/raw_fish",
-      "required": false
-    },
-    {
-      "id": "minecraft:end_rod",
-      "required": false
-    },
-    {
-      "id": "minecraft:fire_charge",
-      "required": false
-    },
-    {
-      "id": "minecraft:magma_cream",
-      "required": false
-    },
-    {
-      "id": "minecraft:lightning_rod",
-      "required": false
-    },
-    {
-      "id": "minecraft:nether_star",
-      "required": false
-    },
-    {
-      "id": "minecraft:prismarine_shard",
-      "required": false
-    },
-    {
-      "id": "minecraft:tnt",
-      "required": false
-    },
-    {
-      "id": "minecraft:dragon_breath",
-      "required": false
-    },
-    {
-      "id": "minecraft:echo_shard",
-      "required": false
-    },
-    {
-      "id": "lenssgs:void_metal",
-      "required": false
-    },
-    {
-      "id": "lenssgs:blitz_gold",
-      "required": false
-    },
-    {
-      "id": "lenssgs:wyrm_steel",
-      "required": false
-    },
-    {
-      "id": "lenssgs:hocufe_ingot",
-      "required": false
-    },
-    {
-      "id": "lenssgs:nurukukan_ingot",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/bronze",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/refined_obsidian",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/refined_glowstone",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/steel",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/osmium",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/tin",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/lead",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/uranium",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/aluminum",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/electrum",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/plutonium",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/silver",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/blaze_gold",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/crimson_iron",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/crimson_steel",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/azure_silver",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/azure_electrum",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/tyran_steel",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/stainless_steel",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/titanium",
-      "required": false
-    },
-    {
-      "id": "#c:ingots/tungsten",
-      "required": false
-    },
-    {
-      "id": "#mekanism:alloys/reinforced",
-      "required": false
-    },
-    {
-      "id": "#mekanism:alloys/infused",
-      "required": false
-    },
-    {
-      "id": "#mekanism:alloys/atomic",
-      "required": false
-    },
-    {
-      "id": "modern_industrialization:he_uranium_fuel_rod_depleted",
-      "required": false
-    },
-    {
-      "id": "modern_industrialization:invar_rotary_blade",
-      "required": false
-    }
-  ]
+    "values": [
+        {
+            "id": "#c:rods/wooden",
+            "required": false
+        },
+        {
+            "id": "#c:cobblestones",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/copper",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/iron",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/gold",
+            "required": false
+        },
+        {
+            "id": "#c:gems/diamond",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/netherite",
+            "required": false
+        },
+        {
+            "id": "#c:gunpowders",
+            "required": false
+        },
+        {
+            "id": "#c:rods/blaze",
+            "required": false
+        },
+        {
+            "id": "#c:slimeballs",
+            "required": false
+        },
+        {
+            "id": "#c:gems/prismarine",
+            "required": false
+        },
+        {
+            "id": "#c:rods/breeze",
+            "required": false
+        },
+        {
+            "id": "#c:gems/quartz",
+            "required": false
+        },
+        {
+            "id": "#c:gems/amethyst",
+            "required": false
+        },
+        {
+            "id": "#c:gems/emerald",
+            "required": false
+        },
+        {
+            "id": "#c:foods/raw_fish",
+            "required": false
+        },
+        {
+            "id": "minecraft:end_rod",
+            "required": false
+        },
+        {
+            "id": "minecraft:fire_charge",
+            "required": false
+        },
+        {
+            "id": "minecraft:magma_cream",
+            "required": false
+        },
+        {
+            "id": "minecraft:lightning_rod",
+            "required": false
+        },
+        {
+            "id": "minecraft:nether_star",
+            "required": false
+        },
+        {
+            "id": "minecraft:prismarine_shard",
+            "required": false
+        },
+        {
+            "id": "minecraft:tnt",
+            "required": false
+        },
+        {
+            "id": "minecraft:dragon_breath",
+            "required": false
+        },
+        {
+            "id": "minecraft:echo_shard",
+            "required": false
+        },
+        {
+            "id": "lenssgs:void_metal",
+            "required": false
+        },
+        {
+            "id": "lenssgs:blitz_gold",
+            "required": false
+        },
+        {
+            "id": "lenssgs:wyrm_steel",
+            "required": false
+        },
+        {
+            "id": "lenssgs:hocufe_ingot",
+            "required": false
+        },
+        {
+            "id": "lenssgs:nurukukan_ingot",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/bronze",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/refined_obsidian",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/refined_glowstone",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/steel",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/osmium",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/tin",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/lead",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/uranium",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/aluminum",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/electrum",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/plutonium",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/silver",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/blaze_gold",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/crimson_iron",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/crimson_steel",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/azure_silver",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/azure_electrum",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/tyran_steel",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/stainless_steel",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/titanium",
+            "required": false
+        },
+        {
+            "id": "#c:ingots/tungsten",
+            "required": false
+        },
+        {
+            "id": "#mekanism:alloys/reinforced",
+            "required": false
+        },
+        {
+            "id": "#mekanism:alloys/infused",
+            "required": false
+        },
+        {
+            "id": "#mekanism:alloys/atomic",
+            "required": false
+        },
+        {
+            "id": "modern_industrialization:he_uranium_fuel_rod_depleted",
+            "required": false
+        },
+        {
+            "id": "modern_industrialization:invar_rotary_blade",
+            "required": false
+        }
+    ]
 }

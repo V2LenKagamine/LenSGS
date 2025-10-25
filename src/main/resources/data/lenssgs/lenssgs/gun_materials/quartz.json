@@ -1,58 +1,58 @@
 {
-  "allowedOn": [
-    "bullet",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.9607843,
-    "green": 0.9607843,
-    "red": 0.9607843
-  },
-  "ingredient": {
-    "tag": "c:gems/quartz"
-  },
-  "partType": "quartz",
-  "statModList": [
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 1.0
+    "allowedOn": [
+        "bullet",
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.9607843,
+        "green": 0.9607843,
+        "red": 0.9607843
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 1.0
+    "ingredient": {
+        "tag": "c:gems/quartz"
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_projectile_count",
-      "val": 2.0
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
-      "trait": "shattering"
-    },
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
-      "trait": "lacerating"
-    }
-  ]
+    "partType": "quartz",
+    "statModList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 1.0
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 1.0
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_projectile_count",
+            "val": 2.0
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "all"
+            ],
+            "level": 1,
+            "trait": "shattering"
+        },
+        {
+            "allowedParts": [
+                "all"
+            ],
+            "level": 1,
+            "trait": "lacerating"
+        }
+    ]
 }

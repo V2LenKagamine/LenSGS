@@ -1,25 +1,25 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    {
-      "tag": "c:ingots/iron"
-    },
-    {
-      "tag": "c:ingots/copper"
-    },
-    {
-      "tag": "c:ingots/copper"
-    },
-    {
-      "tag": "c:ingots/copper"
-    },
-    {
-      "item": "minecraft:honey_block"
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        {
+            "tag": "c:ingots/iron"
+        },
+        {
+            "tag": "c:ingots/copper"
+        },
+        {
+            "tag": "c:ingots/copper"
+        },
+        {
+            "tag": "c:ingots/copper"
+        },
+        {
+            "item": "minecraft:honey_block"
+        }
+    ],
+    "result": {
+        "count": 1,
+        "id": "lenssgs:hocufe_ingot"
     }
-  ],
-  "result": {
-    "count": 1,
-    "id": "lenssgs:hocufe_ingot"
-  }
 }

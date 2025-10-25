@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "lenssgs:item/blitz_gold"
-  }
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "lenssgs:item/blitz_gold"
+    }
 }

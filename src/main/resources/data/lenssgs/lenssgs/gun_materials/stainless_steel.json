@@ -1,136 +1,136 @@
 {
-  "allowedOn": [
-    "casing",
-    "bullet",
-    "action",
-    "magazine",
-    "barrel",
-    "receiver",
-    "stock",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.98039216,
-    "green": 0.80784315,
-    "red": 0.5294118
-  },
-  "ingredient": {
-    "tag": "c:ingots/stainless_steel"
-  },
-  "partType": "stainless_steel",
-  "statModList": [
-    {
-      "allowedParts": [
-        "magazine"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 1.3
-    },
-    {
-      "allowedParts": [
-        "stock",
-        "action",
-        "casing"
-      ],
-      "modType": "multiply",
-      "stat": "stat_fire_rate",
-      "val": 1.05
-    },
-    {
-      "allowedParts": [
-        "action",
+    "allowedOn": [
         "casing",
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_min_damage",
-      "val": 1.1
-    },
-    {
-      "allowedParts": [
+        "bullet",
         "action",
-        "casing",
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_max_damage",
-      "val": 1.1
-    },
-    {
-      "allowedParts": [
-        "stock",
-        "receiver",
-        "action",
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_inaccuracy",
-      "val": 0.85
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 1.5
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 1.5
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.75
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.25
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.5
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.5
-    },
-    {
-      "allowedParts": [
+        "magazine",
         "barrel",
         "receiver",
-        "stock"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": -2.0
-    }
-  ],
-  "traitLevelList": []
+        "stock",
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.98039216,
+        "green": 0.80784315,
+        "red": 0.5294118
+    },
+    "ingredient": {
+        "tag": "c:ingots/stainless_steel"
+    },
+    "partType": "stainless_steel",
+    "statModList": [
+        {
+            "allowedParts": [
+                "magazine"
+            ],
+            "modType": "multiply",
+            "stat": "stat_ammo_max",
+            "val": 1.3
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "action",
+                "casing"
+            ],
+            "modType": "multiply",
+            "stat": "stat_fire_rate",
+            "val": 1.05
+        },
+        {
+            "allowedParts": [
+                "action",
+                "casing",
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_min_damage",
+            "val": 1.1
+        },
+        {
+            "allowedParts": [
+                "action",
+                "casing",
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_max_damage",
+            "val": 1.1
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "receiver",
+                "action",
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_inaccuracy",
+            "val": 0.85
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 1.5
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 1.5
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.75
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.25
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "barrel",
+                "receiver",
+                "stock"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": -2.0
+        }
+    ],
+    "traitLevelList": []
 }

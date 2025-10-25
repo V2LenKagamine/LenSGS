@@ -1,16 +1,16 @@
 {
-  "type": "lenssgs:gun_recipe",
-  "inputs": [
-    {
-      "item": "lenssgs:part_crafter"
+    "type": "lenssgs:gun_recipe",
+    "inputs": [
+        {
+            "item": "lenssgs:part_crafter"
+        },
+        {
+            "tag": "lenssgs:usable_for_guns"
+        }
+    ],
+    "output": {
+        "count": 1,
+        "id": "lenssgs:gun_part_base"
     },
-    {
-      "tag": "lenssgs:usable_for_guns"
-    }
-  ],
-  "output": {
-    "count": 1,
-    "id": "lenssgs:gun_part_base"
-  },
-  "swapping": false
+    "swapping": false
 }

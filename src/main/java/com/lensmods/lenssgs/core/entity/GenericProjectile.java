@@ -313,8 +313,9 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         this.entityData.set(GRAVITY,(float) additionalData.readDouble());
         this.entityData.set(LIFE,additionalData.readInt());
         this.pierce = additionalData.readInt();
-        List<TraitLevel> tstore = new ArrayList<>();
-        for (int i = 0; i <additionalData.readInt(); i++ ) {
+        int tcount = additionalData.readInt();
+        List<TraitLevel> tstore = new ArrayList<>(tcount);
+        for (int i = 0; i < tcount; i++ ) {
             tstore.add(new TraitLevel(additionalData.readUtf(),additionalData.readInt()));
         }
         this.traits = tstore;
@@ -451,7 +452,7 @@ public class GenericProjectile extends Entity implements IEntityWithComplexSpawn
         if(traits.stream().anyMatch(trait -> trait.trait().equals(MaterialStats.LINGERING))) {
             TraitLevel trait = traits.stream().filter(traitLevel -> traitLevel.trait().equals(MaterialStats.LINGERING)).findFirst().get();
             if(!level().isClientSide) {
-                AreaEffectCloud cloud = new AreaEffectCloud(this.level(), this.getX(), this.getY() + 0.25f, this.getZ());
+                AreaEffectCloud cloud = new AreaEffectCloud(this.level(), this.getX(), this.getY() + .025f, this.getZ());
                 cloud.setDuration(25 * trait.level());
                 cloud.setOwner(this.Owner);
                 cloud.setRadius(trait.level()*0.5f);

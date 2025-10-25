@@ -1,25 +1,25 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "key": {
-    "p": {
-      "item": "lenssgs:gunprinter_paper"
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+        "p": {
+            "item": "lenssgs:gunprinter_paper"
+        },
+        "s": {
+            "tag": "c:gunpowders"
+        }
     },
-    "s": {
-      "tag": "c:gunpowders"
+    "pattern": [
+        "   ",
+        " s ",
+        "sps"
+    ],
+    "result": {
+        "components": {
+            "lenssgs:part_sub_type": "prop_heavy",
+            "lenssgs:part_type": "prop"
+        },
+        "count": 1,
+        "id": "lenssgs:part_crafter"
     }
-  },
-  "pattern": [
-    "   ",
-    " s ",
-    "sps"
-  ],
-  "result": {
-    "components": {
-      "lenssgs:part_sub_type": "prop_heavy",
-      "lenssgs:part_type": "prop"
-    },
-    "count": 1,
-    "id": "lenssgs:part_crafter"
-  }
 }

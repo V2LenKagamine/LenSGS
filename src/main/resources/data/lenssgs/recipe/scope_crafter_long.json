@@ -1,28 +1,28 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "key": {
-    "g": {
-      "tag": "c:glass_blocks"
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+        "g": {
+            "tag": "c:glass_blocks"
+        },
+        "p": {
+            "item": "lenssgs:gunprinter_paper"
+        },
+        "s": {
+            "tag": "c:rods/wooden"
+        }
     },
-    "p": {
-      "item": "lenssgs:gunprinter_paper"
-    },
-    "s": {
-      "tag": "c:rods/wooden"
+    "pattern": [
+        "ggg",
+        "ppp",
+        "s s"
+    ],
+    "result": {
+        "components": {
+            "lenssgs:part_sub_type": "scope_long",
+            "lenssgs:part_type": "scope"
+        },
+        "count": 1,
+        "id": "lenssgs:part_crafter"
     }
-  },
-  "pattern": [
-    "ggg",
-    "ppp",
-    "s s"
-  ],
-  "result": {
-    "components": {
-      "lenssgs:part_sub_type": "scope_long",
-      "lenssgs:part_type": "scope"
-    },
-    "count": 1,
-    "id": "lenssgs:part_crafter"
-  }
 }

@@ -1,25 +1,25 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "equipment",
-  "key": {
-    "p": {
-      "item": "lenssgs:gunprinter_paper"
+    "type": "minecraft:crafting_shaped",
+    "category": "equipment",
+    "key": {
+        "p": {
+            "item": "lenssgs:gunprinter_paper"
+        },
+        "s": {
+            "tag": "c:rods/wooden"
+        }
     },
-    "s": {
-      "tag": "c:rods/wooden"
+    "pattern": [
+        " p ",
+        " s ",
+        " s "
+    ],
+    "result": {
+        "components": {
+            "lenssgs:part_sub_type": "magazine_short",
+            "lenssgs:part_type": "magazine"
+        },
+        "count": 1,
+        "id": "lenssgs:part_crafter"
     }
-  },
-  "pattern": [
-    " p ",
-    " s ",
-    " s "
-  ],
-  "result": {
-    "components": {
-      "lenssgs:part_sub_type": "magazine_short",
-      "lenssgs:part_type": "magazine"
-    },
-    "count": 1,
-    "id": "lenssgs:part_crafter"
-  }
 }

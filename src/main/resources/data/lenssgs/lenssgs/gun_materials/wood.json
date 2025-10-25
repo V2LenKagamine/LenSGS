@@ -1,52 +1,52 @@
 {
-  "allowedOn": [
-    "stock",
-    "bullet",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.5294118,
-    "green": 0.72156864,
-    "red": 0.87058824
-  },
-  "ingredient": {
-    "tag": "c:rods/wooden"
-  },
-  "partType": "wood",
-  "statModList": [
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_min_damage",
-      "val": -0.95
+    "allowedOn": [
+        "stock",
+        "bullet",
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.5294118,
+        "green": 0.72156864,
+        "red": 0.87058824
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_max_damage",
-      "val": -0.95
+    "ingredient": {
+        "tag": "c:rods/wooden"
     },
-    {
-      "allowedParts": [
-        "stock"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": -0.5
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 10,
-      "trait": "eco_friendly"
-    }
-  ]
+    "partType": "wood",
+    "statModList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_min_damage",
+            "val": -0.95
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_max_damage",
+            "val": -0.95
+        },
+        {
+            "allowedParts": [
+                "stock"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": -0.5
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "level": 10,
+            "trait": "eco_friendly"
+        }
+    ]
 }

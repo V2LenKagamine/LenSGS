@@ -55,7 +55,7 @@ public class GunMaterial{
         this.statModList = statMods;
         this.traitLevelList = traitLevels != null ? traitLevels : new ArrayList<>();
         this.color = color;
-        this.ingredient = ing;
+        this.ingredient = ing != null ? ing : Ingredient.EMPTY;
         this.blacklistedParts = blacklistedParts;
     }
     public GunMaterial(String matName, List<StatMod> statMods, @Nullable List<TraitLevel> traitLevels, ResourceLocation ing, Color color, List<String> blacklistedParts) {
@@ -63,7 +63,11 @@ public class GunMaterial{
         this.statModList = statMods;
         this.traitLevelList = traitLevels != null ? traitLevels : new ArrayList<>();
         this.color = color;
-        this.ingredient = Ingredient.of(BuiltInRegistries.ITEM.get(ing));
+        if(Ingredient.of(BuiltInRegistries.ITEM.get(ing)) != null) {
+            this.ingredient = Ingredient.of(BuiltInRegistries.ITEM.get(ing));
+        } else {
+            this.ingredient = Ingredient.EMPTY;
+        }
         this.blacklistedParts = blacklistedParts;
     }
     public GunMaterial(String matName, List<StatMod> statMods, @Nullable List<TraitLevel> traitLevels, TagKey<Item> ing, Color color, List<String> blacklistedParts) {

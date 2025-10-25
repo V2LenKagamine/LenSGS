@@ -1,32 +1,32 @@
 {
-  "parent": "minecraft:recipes/root",
-  "criteria": {
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "lenssgs:void_metal"
-      },
-      "trigger": "minecraft:recipe_unlocked"
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+        "has_the_recipe": {
+            "conditions": {
+                "recipe": "lenssgs:void_metal"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+        },
+        "netherstar": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "minecraft:nether_star"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        }
     },
-    "netherstar": {
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:nether_star"
-          }
+    "requirements": [
+        [
+            "has_the_recipe",
+            "netherstar"
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
+    ],
+    "rewards": {
+        "recipes": [
+            "lenssgs:void_metal"
+        ]
     }
-  },
-  "requirements": [
-    [
-      "has_the_recipe",
-      "netherstar"
-    ]
-  ],
-  "rewards": {
-    "recipes": [
-      "lenssgs:void_metal"
-    ]
-  }
 }

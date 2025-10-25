@@ -1,32 +1,32 @@
 {
-  "parent": "minecraft:recipes/root",
-  "criteria": {
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "lenssgs:wyrm_steel"
-      },
-      "trigger": "minecraft:recipe_unlocked"
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+        "has_the_recipe": {
+            "conditions": {
+                "recipe": "lenssgs:wyrm_steel"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+        },
+        "void": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "lenssgs:void_metal"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        }
     },
-    "void": {
-      "conditions": {
-        "items": [
-          {
-            "items": "lenssgs:void_metal"
-          }
+    "requirements": [
+        [
+            "has_the_recipe",
+            "void"
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
+    ],
+    "rewards": {
+        "recipes": [
+            "lenssgs:wyrm_steel"
+        ]
     }
-  },
-  "requirements": [
-    [
-      "has_the_recipe",
-      "void"
-    ]
-  ],
-  "rewards": {
-    "recipes": [
-      "lenssgs:wyrm_steel"
-    ]
-  }
 }

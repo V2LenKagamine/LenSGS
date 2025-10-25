@@ -1,27 +1,27 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "a": {
-      "item": "minecraft:arrow"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "a": {
+            "item": "minecraft:arrow"
+        },
+        "g": {
+            "item": "minecraft:gunpowder"
+        },
+        "i": {
+            "tag": "c:dyes/white"
+        },
+        "p": {
+            "item": "minecraft:paper"
+        }
     },
-    "g": {
-      "item": "minecraft:gunpowder"
-    },
-    "i": {
-      "tag": "c:dyes/white"
-    },
-    "p": {
-      "item": "minecraft:paper"
+    "pattern": [
+        "apg",
+        "pip",
+        "gpa"
+    ],
+    "result": {
+        "count": 4,
+        "id": "lenssgs:gunprinter_paper"
     }
-  },
-  "pattern": [
-    "apg",
-    "pip",
-    "gpa"
-  ],
-  "result": {
-    "count": 4,
-    "id": "lenssgs:gunprinter_paper"
-  }
 }

@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "lenssgs:item/gunprinter_paper"
-  }
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "lenssgs:item/gunprinter_paper"
+    }
 }

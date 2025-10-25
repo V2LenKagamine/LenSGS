@@ -1,160 +1,160 @@
 {
-  "allowedOn": [
-    "casing",
-    "bullet",
-    "action",
-    "magazine",
-    "barrel",
-    "receiver",
-    "stock",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.16470589,
-    "green": 0.16078432,
-    "red": 0.19215687
-  },
-  "ingredient": {
-    "tag": "c:ingots/netherite"
-  },
-  "partType": "netherite",
-  "statModList": [
-    {
-      "allowedParts": [
-        "magazine"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 1.5
-    },
-    {
-      "allowedParts": [
-        "casing"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 0.8
-    },
-    {
-      "allowedParts": [
-        "stock",
-        "action",
-        "casing"
-      ],
-      "modType": "multiply",
-      "stat": "stat_fire_rate",
-      "val": 1.25
-    },
-    {
-      "allowedParts": [
-        "action",
-        "receiver",
+    "allowedOn": [
+        "casing",
         "bullet",
-        "casing"
-      ],
-      "modType": "multiply",
-      "stat": "stat_min_damage",
-      "val": 1.05
-    },
-    {
-      "allowedParts": [
         "action",
+        "magazine",
+        "barrel",
         "receiver",
-        "bullet",
-        "casing"
-      ],
-      "modType": "multiply",
-      "stat": "stat_max_damage",
-      "val": 1.05
-    },
-    {
-      "allowedParts": [
         "stock",
-        "receiver",
-        "action",
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_inaccuracy",
-      "val": 0.8
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.16470589,
+        "green": 0.16078432,
+        "red": 0.19215687
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_pierce",
-      "val": 3.0
+    "ingredient": {
+        "tag": "c:ingots/netherite"
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 1.5
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 2.75
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 1.0
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.75
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": -2.5
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_projectile_count",
-      "val": -0.2
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.5
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.5
-    }
-  ],
-  "traitLevelList": []
+    "partType": "netherite",
+    "statModList": [
+        {
+            "allowedParts": [
+                "magazine"
+            ],
+            "modType": "multiply",
+            "stat": "stat_ammo_max",
+            "val": 1.5
+        },
+        {
+            "allowedParts": [
+                "casing"
+            ],
+            "modType": "multiply",
+            "stat": "stat_ammo_max",
+            "val": 0.8
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "action",
+                "casing"
+            ],
+            "modType": "multiply",
+            "stat": "stat_fire_rate",
+            "val": 1.25
+        },
+        {
+            "allowedParts": [
+                "action",
+                "receiver",
+                "bullet",
+                "casing"
+            ],
+            "modType": "multiply",
+            "stat": "stat_min_damage",
+            "val": 1.05
+        },
+        {
+            "allowedParts": [
+                "action",
+                "receiver",
+                "bullet",
+                "casing"
+            ],
+            "modType": "multiply",
+            "stat": "stat_max_damage",
+            "val": 1.05
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "receiver",
+                "action",
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_inaccuracy",
+            "val": 0.8
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_pierce",
+            "val": 3.0
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 1.5
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 2.75
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 1.0
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.75
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": -2.5
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_projectile_count",
+            "val": -0.2
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.5
+        }
+    ],
+    "traitLevelList": []
 }

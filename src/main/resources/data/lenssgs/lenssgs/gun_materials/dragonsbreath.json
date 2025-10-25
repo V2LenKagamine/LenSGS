@@ -1,65 +1,65 @@
 {
-  "allowedOn": [
-    "bullet"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.5764706,
-    "green": 0.078431375,
-    "red": 1.0
-  },
-  "ingredient": {
-    "item": "minecraft:dragon_breath"
-  },
-  "partType": "dragonsbreath",
-  "statModList": [
-    {
-      "allowedParts": [
+    "allowedOn": [
         "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 1.5
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.5764706,
+        "green": 0.078431375,
+        "red": 1.0
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 1.75
+    "ingredient": {
+        "item": "minecraft:dragon_breath"
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 1.1
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": 0.5
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
-      "trait": "lingering"
-    },
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 3,
-      "trait": "blazing"
-    }
-  ]
+    "partType": "dragonsbreath",
+    "statModList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 1.5
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 1.75
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_ammo_max",
+            "val": 1.1
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": 0.5
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "all"
+            ],
+            "level": 1,
+            "trait": "lingering"
+        },
+        {
+            "allowedParts": [
+                "all"
+            ],
+            "level": 3,
+            "trait": "blazing"
+        }
+    ]
 }

@@ -1,149 +1,149 @@
 {
-  "allowedOn": [
-    "casing",
-    "bullet",
-    "action",
-    "magazine",
-    "barrel",
-    "receiver",
-    "stock",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.8784314,
-    "green": 1.0,
-    "red": 1.0
-  },
-  "ingredient": {
-    "tag": "c:ingots/electrum"
-  },
-  "partType": "electrum",
-  "statModList": [
-    {
-      "allowedParts": [
-        "magazine"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 1.1
-    },
-    {
-      "allowedParts": [
-        "casing"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 0.8
-    },
-    {
-      "allowedParts": [
-        "stock",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_fire_rate",
-      "val": -0.75
-    },
-    {
-      "allowedParts": [
-        "stock",
-        "action",
-        "casing"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_fire_rate",
-      "val": -0.05
-    },
-    {
-      "allowedParts": [
-        "action",
+    "allowedOn": [
+        "casing",
         "bullet",
-        "casing"
-      ],
-      "modType": "multiply",
-      "stat": "stat_min_damage",
-      "val": 0.25
-    },
-    {
-      "allowedParts": [
         "action",
-        "bullet",
-        "casing"
-      ],
-      "modType": "multiply",
-      "stat": "stat_max_damage",
-      "val": 0.25
-    },
-    {
-      "allowedParts": [
+        "magazine",
+        "barrel",
         "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.5
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.25
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": -0.25
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.25
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.25
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 3,
-      "trait": "shocking"
-    },
-    {
-      "allowedParts": [
-        "casing"
-      ],
-      "level": 2,
-      "trait": "shocking"
-    },
-    {
-      "allowedParts": [
         "stock",
-        "action",
-        "receiver"
-      ],
-      "level": 1,
-      "trait": "shocking"
-    }
-  ]
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.8784314,
+        "green": 1.0,
+        "red": 1.0
+    },
+    "ingredient": {
+        "tag": "c:ingots/electrum"
+    },
+    "partType": "electrum",
+    "statModList": [
+        {
+            "allowedParts": [
+                "magazine"
+            ],
+            "modType": "multiply",
+            "stat": "stat_ammo_max",
+            "val": 1.1
+        },
+        {
+            "allowedParts": [
+                "casing"
+            ],
+            "modType": "multiply",
+            "stat": "stat_ammo_max",
+            "val": 0.8
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_fire_rate",
+            "val": -0.75
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "action",
+                "casing"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_fire_rate",
+            "val": -0.05
+        },
+        {
+            "allowedParts": [
+                "action",
+                "bullet",
+                "casing"
+            ],
+            "modType": "multiply",
+            "stat": "stat_min_damage",
+            "val": 0.25
+        },
+        {
+            "allowedParts": [
+                "action",
+                "bullet",
+                "casing"
+            ],
+            "modType": "multiply",
+            "stat": "stat_max_damage",
+            "val": 0.25
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.25
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": -0.25
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.25
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.25
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "level": 3,
+            "trait": "shocking"
+        },
+        {
+            "allowedParts": [
+                "casing"
+            ],
+            "level": 2,
+            "trait": "shocking"
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "action",
+                "receiver"
+            ],
+            "level": 1,
+            "trait": "shocking"
+        }
+    ]
 }

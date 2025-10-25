@@ -3,7 +3,7 @@ plugins {
     id 'eclipse'
     id 'idea'
     id 'maven-publish'
-    id 'net.neoforged.gradle.userdev' version '7.0.154'
+    id 'net.neoforged.gradle.userdev' version '7.1.1'
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -88,13 +88,11 @@ configurations {
 
 dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
-    runtimeOnly('curse.maven:JEI-238222:5545020')
-    runtimeOnly('curse.maven:JADE-324717:5493270')
-    runtimeOnly('curse.maven:mekanism-268560:5523554')
-    runtimeOnly('curse.maven:cloth-config-348521:5424576')
-    runtimeOnly('curse.maven:modern-industrialization-405388:5529060')
-    runtimeOnly('curse.maven:emi-580555:5497461')
-    compileOnly('dev.emi:emi-neoforge:1.1.10+1.21:api')
+    runtimeOnly('curse.maven:JEI-238222:7129287')
+    runtimeOnly('curse.maven:JADE-324717:6853386')
+    runtimeOnly('curse.maven:mekanism-268560:7132168')
+    runtimeOnly('curse.maven:cloth-config-348521:5729127')
+    runtimeOnly('curse.maven:greg-890405:6792853')
 }
 
 tasks.withType(JavaCompile).configureEach {

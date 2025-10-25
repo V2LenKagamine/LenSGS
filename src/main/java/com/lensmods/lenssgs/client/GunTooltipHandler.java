@@ -40,9 +40,13 @@ public final class GunTooltipHandler {
                 data -> (Arrays.stream(data.value().getIngredient().getItems())).anyMatch(maybe -> maybe.is(stacc.getItem()))).findFirst();
 
         gunmat.ifPresent(gunMaterialReference -> {
-            renderGunMaterial(e, stacc, gunMaterialReference.value());
-            renderGunTraits(e, stacc, gunMaterialReference.value());
-            appendToolTips(e, stacc);
+            if (!(KeyManager.DISPLAY_STATS.get().isDown()) && !(KeyManager.DISPLAY_TRAITS.get().isDown())) {
+                e.getToolTip().add(translatableOf("gunmat_useful").copy().withStyle(ChatFormatting.GRAY));
+            } else {
+                renderGunMaterial(e, stacc, gunMaterialReference.value());
+                renderGunTraits(e, stacc, gunMaterialReference.value());
+            }
+            //appendToolTips(e, stacc);
         });
 
         if (stacc.getItem() instanceof IModdable) {
@@ -69,7 +73,6 @@ public final class GunTooltipHandler {
 
     private static void renderGunMaterial(ItemTooltipEvent e, ItemStack stacc, GunMaterial mat) {
         if (!(KeyManager.DISPLAY_STATS.get().isDown())) {
-            e.getToolTip().add(translatableOf("gunmat_useful").copy().withStyle(ChatFormatting.GRAY));
             return;
         }
         if (e.getFlags().isAdvanced()) {
@@ -78,6 +81,7 @@ public final class GunTooltipHandler {
         List<String> parts = new ArrayList<>(mat.getAllowedParts());
         if (!parts.isEmpty()) {
             int index = KeyManager.getMaterialCycleIndex(parts.size());
+            e.getToolTip().add(LenUtil.translatableOf("display_stats").copy().withColor(Color.LIGHTBLUE.getColor()));
             List<StatMod> stats = mat.getStatModList().stream().filter(key -> key.allowedParts().contains(parts.get(index))).toList();
             e.getToolTip().add(translatableOf(parts.get(index)).copy().withColor(Color.LIGHTCYAN.getColor()));
             for (StatMod stat : stats.stream().sorted().toList()) {
@@ -85,6 +89,7 @@ public final class GunTooltipHandler {
                 e.getToolTip().add(translatableOf(stat.stat()).copy().append(spaceAppend(translatableOf(stat.modType())))
                         .append(invert?maliceAppend(String.valueOf(stat.val())):bonusAppend(String.valueOf(stat.val()))));
             }
+            e.getToolTip().add(Component.literal("Press ").append(KeyManager.CYCLE_NEXT.get().getTranslatedKeyMessage()).append(Component.literal(" or ")).append(KeyManager.CYCLE_BACK.get().getTranslatedKeyMessage()).append(Component.literal(" to cycle part types.")).copy().withStyle(ChatFormatting.GRAY));
         }
     }
 
@@ -102,6 +107,7 @@ public final class GunTooltipHandler {
             if (mat.getTraitLevelList() == null) {
                 return;
             }
+            e.getToolTip().add(LenUtil.translatableOf("display_traits").copy().withColor(Color.LIGHTBLUE.getColor()));
             e.getToolTip().add(translatableOf(parts.get(index)).copy().withStyle(ChatFormatting.GRAY));
             List<TraitLevel> traits = mat.getTraitLevelList().stream().filter(key -> (key.allowedParts().contains(parts.get(index)) || key.allowedParts().contains("all"))).toList();
             Map<String,Integer> toDisplay = new HashMap<>();
@@ -114,9 +120,14 @@ public final class GunTooltipHandler {
                     toDisplay.put(trait.trait(),trait.level());
                 }
             }
+            if(toDisplay.isEmpty()) {
+                e.getToolTip().add(Component.literal("None").copy().withColor(Color.LIGHTGRAY.getColor()));
+            } else {
             toDisplay.forEach((key,value) ->  {
                     boolean invert = key.equals(MaterialStats.FIRE_RATE) || key.equals(MaterialStats.GRAVITY_MOD) || key.equals(MaterialStats.INACCURACY_DEG);
                 e.getToolTip().add(translatableOf(key).copy().withColor(Color.LIGHTCYAN.getColor()).append(invert?maliceAppend(String.valueOf(value)):bonusAppend(String.valueOf(value))));});
+            }
+            e.getToolTip().add(Component.literal("Press ").append(KeyManager.CYCLE_NEXT.get().getTranslatedKeyMessage()).append(Component.literal(" or ")).append(KeyManager.CYCLE_BACK.get().getTranslatedKeyMessage()).append(Component.literal(" to cycle part types.")).copy().withStyle(ChatFormatting.GRAY));
         }
     }
 

@@ -1,124 +1,124 @@
 {
-  "allowedOn": [
-    "bullet",
-    "barrel",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.8784314,
-    "green": 1.0,
-    "red": 1.0
-  },
-  "ingredient": {
-    "item": "minecraft:end_rod"
-  },
-  "partType": "end_rod",
-  "statModList": [
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 3.5
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 4.25
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": -4.5
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_pierce",
-      "val": 3.0
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_velocity_mul",
-      "val": 0.012
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_fire_rate",
-      "val": 3.5
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_projectile_count",
-      "val": -0.95
-    },
-    {
-      "allowedParts": [
+    "allowedOn": [
         "bullet",
-        "barrel"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_gravity_mod",
-      "val": -0.9
+        "barrel",
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.8784314,
+        "green": 1.0,
+        "red": 1.0
     },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 1.25
+    "ingredient": {
+        "item": "minecraft:end_rod"
     },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 1.5
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": -1.25
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
-      "trait": "tracing"
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 3,
-      "trait": "shattering"
-    }
-  ]
+    "partType": "end_rod",
+    "statModList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 3.5
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 4.25
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": -4.5
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_pierce",
+            "val": 3.0
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_velocity_mul",
+            "val": 0.012
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_fire_rate",
+            "val": 3.5
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_projectile_count",
+            "val": -0.95
+        },
+        {
+            "allowedParts": [
+                "bullet",
+                "barrel"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_gravity_mod",
+            "val": -0.9
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 1.25
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 1.5
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": -1.25
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "all"
+            ],
+            "level": 1,
+            "trait": "tracing"
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "level": 3,
+            "trait": "shattering"
+        }
+    ]
 }

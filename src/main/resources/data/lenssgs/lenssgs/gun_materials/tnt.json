@@ -1,66 +1,66 @@
 {
-  "allowedOn": [
-    "prop"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.3137255,
-    "green": 0.49803922,
-    "red": 1.0
-  },
-  "ingredient": {
-    "item": "minecraft:tnt"
-  },
-  "partType": "tnt",
-  "statModList": [
-    {
-      "allowedParts": [
+    "allowedOn": [
         "prop"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_ammo_max",
-      "val": -0.5
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.3137255,
+        "green": 0.49803922,
+        "red": 1.0
     },
-    {
-      "allowedParts": [
-        "prop"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_min_damage",
-      "val": 0.15
+    "ingredient": {
+        "item": "minecraft:tnt"
     },
-    {
-      "allowedParts": [
-        "prop"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_max_damage",
-      "val": 0.15
-    },
-    {
-      "allowedParts": [
-        "prop"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_inaccuracy",
-      "val": 0.75
-    },
-    {
-      "allowedParts": [
-        "prop"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_velocity_mul",
-      "val": 0.5
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
-      "trait": "explosive"
-    }
-  ]
+    "partType": "tnt",
+    "statModList": [
+        {
+            "allowedParts": [
+                "prop"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_ammo_max",
+            "val": -0.5
+        },
+        {
+            "allowedParts": [
+                "prop"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_min_damage",
+            "val": 0.15
+        },
+        {
+            "allowedParts": [
+                "prop"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_max_damage",
+            "val": 0.15
+        },
+        {
+            "allowedParts": [
+                "prop"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_inaccuracy",
+            "val": 0.75
+        },
+        {
+            "allowedParts": [
+                "prop"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_velocity_mul",
+            "val": 0.5
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "all"
+            ],
+            "level": 1,
+            "trait": "explosive"
+        }
+    ]
 }

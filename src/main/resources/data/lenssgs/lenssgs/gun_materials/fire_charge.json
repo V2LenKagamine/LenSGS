@@ -1,50 +1,50 @@
 {
-  "allowedOn": [
-    "bullet"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.75686276,
-    "green": 0.7137255,
-    "red": 1.0
-  },
-  "ingredient": {
-    "item": "minecraft:fire_charge"
-  },
-  "partType": "fire_charge",
-  "statModList": [
-    {
-      "allowedParts": [
+    "allowedOn": [
         "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": 2.0
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.75686276,
+        "green": 0.7137255,
+        "red": 1.0
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.5
+    "ingredient": {
+        "item": "minecraft:fire_charge"
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.5
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 10,
-      "trait": "blazing"
-    }
-  ]
+    "partType": "fire_charge",
+    "statModList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": 2.0
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.5
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "level": 10,
+            "trait": "blazing"
+        }
+    ]
 }

@@ -1,46 +1,46 @@
 {
-  "allowedOn": [
-    "bullet",
-    "barrel",
-    "prop",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.18039216,
-    "green": 0.79607844,
-    "red": 1.0
-  },
-  "ingredient": {
-    "tag": "c:rods/blaze"
-  },
-  "partType": "blaze",
-  "statModList": [
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.5
-    },
-    {
-      "allowedParts": [
+    "allowedOn": [
         "bullet",
-        "prop"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.5
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
-      "trait": "blazing"
-    }
-  ]
+        "barrel",
+        "prop",
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.18039216,
+        "green": 0.79607844,
+        "red": 1.0
+    },
+    "ingredient": {
+        "tag": "c:rods/blaze"
+    },
+    "partType": "blaze",
+    "statModList": [
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "bullet",
+                "prop"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.5
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "all"
+            ],
+            "level": 1,
+            "trait": "blazing"
+        }
+    ]
 }

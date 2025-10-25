@@ -1,52 +1,52 @@
 {
-  "allowedOn": [
-    "bullet",
-    "stock",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.19607843,
-    "green": 0.8039216,
-    "red": 0.19607843
-  },
-  "ingredient": {
-    "tag": "c:slimeballs"
-  },
-  "partType": "slime",
-  "statModList": [
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_max_damage",
-      "val": 0.25
+    "allowedOn": [
+        "bullet",
+        "stock",
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.19607843,
+        "green": 0.8039216,
+        "red": 0.19607843
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_min_damage",
-      "val": 0.25
+    "ingredient": {
+        "tag": "c:slimeballs"
     },
-    {
-      "allowedParts": [
-        "stock"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": -1.0
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 1,
-      "trait": "concussive"
-    }
-  ]
+    "partType": "slime",
+    "statModList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_max_damage",
+            "val": 0.25
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_min_damage",
+            "val": 0.25
+        },
+        {
+            "allowedParts": [
+                "stock"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": -1.0
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "level": 1,
+            "trait": "concussive"
+        }
+    ]
 }

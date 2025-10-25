@@ -42,7 +42,7 @@ public class LenLang extends LanguageProvider {
         keyof("gun_recipe","Len's SGS Instructions");
         keyof("gunfake1", "This gun is entirely fake.");
         keyof("gunfake2", "That, or the parts are all broken!");
-        keyof("gunmat_useful","This looks usable for a Gun or Ammo...");
+        keyof("gunmat_useful","Press a 'Display' key for more info.");
         keyof("mindmg","Min Damage:");
         keyof("maxdmg","Max Damage:");
         keyof("firerate", "Fire-Rate:");
@@ -58,10 +58,10 @@ public class LenLang extends LanguageProvider {
         keyof("display_traits","Traits");
         keyof("display_composition","Composition");
         keyof("no_ammo","You need to have reloaded with a bullet at least once before firing a gun;Even in creative!");
-        add("refills_ammo","Can be used to restore some ammo of a bullet-stack.");
+        add("refills_ammo","Craft with bullet stack to gain some ammo.");
         //Stats
         keyof(AMMO_MAX,"Max Ammo Capacity:");
-        keyof(PIERCE,"Peirce:");
+        keyof(PIERCE,"Pierce:");
         keyof(FIRE_RATE, "Fire-Rate:");
         keyof(PROJ_COUNT,"Projectiles:");
         keyof(MAX_DMG,"Maximum-Damage:");
@@ -90,7 +90,7 @@ public class LenLang extends LanguageProvider {
         add("key.categories.lenssgs","Len's Gun Shenanigans");
         bindkeyof("cycle.back", "Tooltip Cycle Back");
         bindkeyof("cycle.next", "Tooltip Cycle Forward");
-        bindkeyof("displayConstruction","Show Gun Parts");
+        bindkeyof("displayConstruction","Display Gun Parts");
         bindkeyof("displayStats","Display Gun Stats");
         bindkeyof("displayTraits", "Display Gun Traits");
         bindkeyof("reload","Reload Gun");

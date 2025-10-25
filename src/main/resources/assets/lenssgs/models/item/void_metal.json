@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "lenssgs:item/void_metal"
-  }
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "lenssgs:item/void_metal"
+    }
 }

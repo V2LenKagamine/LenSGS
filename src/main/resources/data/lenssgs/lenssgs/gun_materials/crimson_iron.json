@@ -1,150 +1,150 @@
 {
-  "allowedOn": [
-    "casing",
-    "bullet",
-    "action",
-    "magazine",
-    "barrel",
-    "receiver",
-    "stock",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.23529412,
-    "green": 0.078431375,
-    "red": 0.8627451
-  },
-  "ingredient": {
-    "tag": "c:ingots/crimson_iron"
-  },
-  "partType": "crimson_iron",
-  "statModList": [
-    {
-      "allowedParts": [
-        "magazine"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 1.1
-    },
-    {
-      "allowedParts": [
-        "casing"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 0.95
-    },
-    {
-      "allowedParts": [
+    "allowedOn": [
         "casing",
         "bullet",
-        "prop"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 1.25
-    },
-    {
-      "allowedParts": [
-        "casing",
-        "bullet",
-        "prop"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 1.0
-    },
-    {
-      "allowedParts": [
-        "receiver",
         "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.5
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.25
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_velocity_mul",
-      "val": 0.9
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_gravity_mod",
-      "val": 1.1
-    },
-    {
-      "allowedParts": [
         "magazine",
-        "receiver"
-      ],
-      "modType": "add",
-      "stat": "stat_fire_rate",
-      "val": 0.75
-    },
-    {
-      "allowedParts": [
-        "barrel",
-        "stock"
-      ],
-      "modType": "add",
-      "stat": "stat_fire_rate",
-      "val": -0.75
-    },
-    {
-      "allowedParts": [
         "barrel",
         "receiver",
-        "stock"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": -0.25
+        "stock",
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.23529412,
+        "green": 0.078431375,
+        "red": 0.8627451
     },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.75
+    "ingredient": {
+        "tag": "c:ingots/crimson_iron"
     },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.75
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "bullet",
-        "casing"
-      ],
-      "level": 1,
-      "trait": "blazing"
-    }
-  ]
+    "partType": "crimson_iron",
+    "statModList": [
+        {
+            "allowedParts": [
+                "magazine"
+            ],
+            "modType": "multiply",
+            "stat": "stat_ammo_max",
+            "val": 1.1
+        },
+        {
+            "allowedParts": [
+                "casing"
+            ],
+            "modType": "multiply",
+            "stat": "stat_ammo_max",
+            "val": 0.95
+        },
+        {
+            "allowedParts": [
+                "casing",
+                "bullet",
+                "prop"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 1.25
+        },
+        {
+            "allowedParts": [
+                "casing",
+                "bullet",
+                "prop"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 1.0
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.25
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_velocity_mul",
+            "val": 0.9
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_gravity_mod",
+            "val": 1.1
+        },
+        {
+            "allowedParts": [
+                "magazine",
+                "receiver"
+            ],
+            "modType": "add",
+            "stat": "stat_fire_rate",
+            "val": 0.75
+        },
+        {
+            "allowedParts": [
+                "barrel",
+                "stock"
+            ],
+            "modType": "add",
+            "stat": "stat_fire_rate",
+            "val": -0.75
+        },
+        {
+            "allowedParts": [
+                "barrel",
+                "receiver",
+                "stock"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": -0.25
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.75
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.75
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "bullet",
+                "casing"
+            ],
+            "level": 1,
+            "trait": "blazing"
+        }
+    ]
 }

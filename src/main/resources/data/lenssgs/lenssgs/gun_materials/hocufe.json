@@ -1,132 +1,132 @@
 {
-  "allowedOn": [
-    "casing",
-    "bullet",
-    "action",
-    "magazine",
-    "barrel",
-    "receiver",
-    "stock",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.043137256,
-    "green": 0.5254902,
-    "red": 0.72156864
-  },
-  "ingredient": {
-    "item": "lenssgs:hocufe_ingot"
-  },
-  "partType": "hocufe",
-  "statModList": [
-    {
-      "allowedParts": [
-        "magazine"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 1.2
-    },
-    {
-      "allowedParts": [
-        "stock",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_fire_rate",
-      "val": 1.0
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.75
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.5
-    },
-    {
-      "allowedParts": [
+    "allowedOn": [
         "casing",
         "bullet",
-        "prop"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 2.0
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_velocity_mul",
-      "val": 0.85
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_gravity_mod",
-      "val": 1.3
-    },
-    {
-      "allowedParts": [
+        "action",
         "magazine",
-        "receiver"
-      ],
-      "modType": "add",
-      "stat": "stat_fire_rate",
-      "val": 0.5
-    },
-    {
-      "allowedParts": [
         "barrel",
-        "stock"
-      ],
-      "modType": "add",
-      "stat": "stat_fire_rate",
-      "val": -1.0
+        "receiver",
+        "stock",
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.043137256,
+        "green": 0.5254902,
+        "red": 0.72156864
     },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.5
+    "ingredient": {
+        "item": "lenssgs:hocufe_ingot"
     },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.5
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "bullet",
-        "casing"
-      ],
-      "level": 5,
-      "trait": "eco_friendly"
-    }
-  ]
+    "partType": "hocufe",
+    "statModList": [
+        {
+            "allowedParts": [
+                "magazine"
+            ],
+            "modType": "multiply",
+            "stat": "stat_ammo_max",
+            "val": 1.2
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_fire_rate",
+            "val": 1.0
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.75
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "casing",
+                "bullet",
+                "prop"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 2.0
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_velocity_mul",
+            "val": 0.85
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_gravity_mod",
+            "val": 1.3
+        },
+        {
+            "allowedParts": [
+                "magazine",
+                "receiver"
+            ],
+            "modType": "add",
+            "stat": "stat_fire_rate",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "barrel",
+                "stock"
+            ],
+            "modType": "add",
+            "stat": "stat_fire_rate",
+            "val": -1.0
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.5
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "bullet",
+                "casing"
+            ],
+            "level": 5,
+            "trait": "eco_friendly"
+        }
+    ]
 }

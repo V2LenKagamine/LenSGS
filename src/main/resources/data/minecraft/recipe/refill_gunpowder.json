@@ -1,13 +1,13 @@
 {
-  "type": "lenssgs:refill_recipe",
-  "inputs": [
-    {
-      "tag": "c:gunpowders"
-    }
-  ],
-  "output": {
-    "count": 1,
-    "id": "lenssgs:base_ammo_holder"
-  },
-  "toRestore": 5
+    "type": "lenssgs:refill_recipe",
+    "inputs": [
+        {
+            "tag": "c:gunpowders"
+        }
+    ],
+    "output": {
+        "count": 1,
+        "id": "lenssgs:base_ammo_holder"
+    },
+    "toRestore": 5
 }

@@ -1,116 +1,116 @@
 {
-  "allowedOn": [
-    "casing",
-    "bullet",
-    "action",
-    "magazine",
-    "barrel",
-    "receiver",
-    "stock",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.41568628,
-    "green": 0.42352942,
-    "red": 0.42352942
-  },
-  "ingredient": {
-    "tag": "c:ingots/lead"
-  },
-  "partType": "lead",
-  "statModList": [
-    {
-      "allowedParts": [
-        "magazine"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 0.8
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_inaccuracy",
-      "val": 0.9
-    },
-    {
-      "allowedParts": [
+    "allowedOn": [
+        "casing",
         "bullet",
-        "casing"
-      ],
-      "modType": "multiply",
-      "stat": "stat_pierce",
-      "val": 1.05
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_projectile_count",
-      "val": 0.05
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 1.0
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 1.0
-    },
-    {
-      "allowedParts": [
-        "receiver",
         "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.25
+        "magazine",
+        "barrel",
+        "receiver",
+        "stock",
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.41568628,
+        "green": 0.42352942,
+        "red": 0.42352942
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_gravity_mod",
-      "val": 0.003
+    "ingredient": {
+        "tag": "c:ingots/lead"
     },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": -0.25
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": -0.5
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": 1.5
-    }
-  ],
-  "traitLevelList": []
+    "partType": "lead",
+    "statModList": [
+        {
+            "allowedParts": [
+                "magazine"
+            ],
+            "modType": "multiply",
+            "stat": "stat_ammo_max",
+            "val": 0.8
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_inaccuracy",
+            "val": 0.9
+        },
+        {
+            "allowedParts": [
+                "bullet",
+                "casing"
+            ],
+            "modType": "multiply",
+            "stat": "stat_pierce",
+            "val": 1.05
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_projectile_count",
+            "val": 0.05
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 1.0
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 1.0
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.25
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_gravity_mod",
+            "val": 0.003
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": -0.25
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": -0.5
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": 1.5
+        }
+    ],
+    "traitLevelList": []
 }

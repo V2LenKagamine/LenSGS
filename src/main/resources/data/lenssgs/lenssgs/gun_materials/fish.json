@@ -1,50 +1,50 @@
 {
-  "allowedOn": [
-    "bullet"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.75686276,
-    "green": 0.7137255,
-    "red": 1.0
-  },
-  "ingredient": {
-    "tag": "c:foods/raw_fish"
-  },
-  "partType": "fish",
-  "statModList": [
-    {
-      "allowedParts": [
+    "allowedOn": [
         "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": 5.0
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.75686276,
+        "green": 0.7137255,
+        "red": 1.0
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": -2.0
+    "ingredient": {
+        "tag": "c:foods/raw_fish"
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": -3.0
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 5,
-      "trait": "concussive"
-    }
-  ]
+    "partType": "fish",
+    "statModList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": 5.0
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": -2.0
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": -3.0
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "level": 5,
+            "trait": "concussive"
+        }
+    ]
 }

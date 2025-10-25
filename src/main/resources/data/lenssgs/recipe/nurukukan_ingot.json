@@ -1,28 +1,28 @@
 {
-  "type": "minecraft:crafting_shapeless",
-  "category": "misc",
-  "ingredients": [
-    {
-      "item": "lenssgs:void_metal"
-    },
-    {
-      "item": "lenssgs:void_metal"
-    },
-    {
-      "tag": "c:nether_stars"
-    },
-    {
-      "tag": "c:nether_stars"
-    },
-    {
-      "item": "lenssgs:hocufe_ingot"
-    },
-    {
-      "item": "lenssgs:hocufe_ingot"
+    "type": "minecraft:crafting_shapeless",
+    "category": "misc",
+    "ingredients": [
+        {
+            "item": "lenssgs:void_metal"
+        },
+        {
+            "item": "lenssgs:void_metal"
+        },
+        {
+            "tag": "c:nether_stars"
+        },
+        {
+            "tag": "c:nether_stars"
+        },
+        {
+            "item": "lenssgs:hocufe_ingot"
+        },
+        {
+            "item": "lenssgs:hocufe_ingot"
+        }
+    ],
+    "result": {
+        "count": 1,
+        "id": "lenssgs:nurukukan_ingot"
     }
-  ],
-  "result": {
-    "count": 1,
-    "id": "lenssgs:nurukukan_ingot"
-  }
 }

@@ -1,164 +1,164 @@
 {
-  "allowedOn": [
-    "casing",
-    "bullet",
-    "action",
-    "magazine",
-    "barrel",
-    "receiver",
-    "stock",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.0,
-    "green": 0.39215687,
-    "red": 0.0
-  },
-  "ingredient": {
-    "tag": "c:ingots/uranium"
-  },
-  "partType": "uranium",
-  "statModList": [
-    {
-      "allowedParts": [
-        "magazine"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 0.9
-    },
-    {
-      "allowedParts": [
-        "stock",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_fire_rate",
-      "val": 2.0
-    },
-    {
-      "allowedParts": [
-        "action",
+    "allowedOn": [
         "casing",
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_min_damage",
-      "val": 0.9
-    },
-    {
-      "allowedParts": [
+        "bullet",
         "action",
-        "casing",
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_max_damage",
-      "val": 0.9
-    },
-    {
-      "allowedParts": [
+        "magazine",
+        "barrel",
+        "receiver",
         "stock",
-        "receiver",
-        "action",
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_inaccuracy",
-      "val": 1.25
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.0,
+        "green": 0.39215687,
+        "red": 0.0
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 1.5
+    "ingredient": {
+        "tag": "c:ingots/uranium"
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 1.0
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.75
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.5
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_projectile_count",
-      "val": 1.75
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": -0.5
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.5
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.75
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 6,
-      "trait": "shattering"
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 2,
-      "trait": "lacerating"
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 2,
-      "trait": "lingering"
-    }
-  ]
+    "partType": "uranium",
+    "statModList": [
+        {
+            "allowedParts": [
+                "magazine"
+            ],
+            "modType": "multiply",
+            "stat": "stat_ammo_max",
+            "val": 0.9
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_fire_rate",
+            "val": 2.0
+        },
+        {
+            "allowedParts": [
+                "action",
+                "casing",
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_min_damage",
+            "val": 0.9
+        },
+        {
+            "allowedParts": [
+                "action",
+                "casing",
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_max_damage",
+            "val": 0.9
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "receiver",
+                "action",
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_inaccuracy",
+            "val": 1.25
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 1.5
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 1.0
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.75
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_projectile_count",
+            "val": 1.75
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": -0.5
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.75
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "level": 6,
+            "trait": "shattering"
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "level": 2,
+            "trait": "lacerating"
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "level": 2,
+            "trait": "lingering"
+        }
+    ]
 }

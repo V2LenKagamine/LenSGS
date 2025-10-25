@@ -1,120 +1,120 @@
 {
-  "allowedOn": [
-    "casing",
-    "bullet",
-    "action",
-    "magazine",
-    "barrel",
-    "receiver",
-    "stock",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.7529412,
-    "green": 0.7529412,
-    "red": 0.7529412
-  },
-  "ingredient": {
-    "tag": "c:ingots/silver"
-  },
-  "partType": "silver",
-  "statModList": [
-    {
-      "allowedParts": [
-        "magazine"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 0.75
-    },
-    {
-      "allowedParts": [
-        "stock",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_fire_rate",
-      "val": -2.0
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": -0.75
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": -0.25
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.25
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": -0.25
-    },
-    {
-      "allowedParts": [
-        "barrel",
-        "stock"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": -1.5
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.25
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.25
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
+    "allowedOn": [
+        "casing",
         "bullet",
-        "casing"
-      ],
-      "level": 2,
-      "trait": "hallowpoint"
+        "action",
+        "magazine",
+        "barrel",
+        "receiver",
+        "stock",
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.7529412,
+        "green": 0.7529412,
+        "red": 0.7529412
     },
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
-      "trait": "hallowpoint"
-    }
-  ]
+    "ingredient": {
+        "tag": "c:ingots/silver"
+    },
+    "partType": "silver",
+    "statModList": [
+        {
+            "allowedParts": [
+                "magazine"
+            ],
+            "modType": "multiply",
+            "stat": "stat_ammo_max",
+            "val": 0.75
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_fire_rate",
+            "val": -2.0
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": -0.75
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": -0.25
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.25
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": -0.25
+        },
+        {
+            "allowedParts": [
+                "barrel",
+                "stock"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": -1.5
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.25
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.25
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "bullet",
+                "casing"
+            ],
+            "level": 2,
+            "trait": "hallowpoint"
+        },
+        {
+            "allowedParts": [
+                "all"
+            ],
+            "level": 1,
+            "trait": "hallowpoint"
+        }
+    ]
 }

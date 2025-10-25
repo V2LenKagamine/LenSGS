@@ -1,60 +1,60 @@
 {
-  "allowedOn": [
-    "bullet",
-    "stock",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.0,
-    "green": 0.27058825,
-    "red": 1.0
-  },
-  "ingredient": {
-    "item": "minecraft:magma_cream"
-  },
-  "partType": "magma_cream",
-  "statModList": [
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_max_damage",
-      "val": 0.5
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_min_damage",
-      "val": 0.5
-    },
-    {
-      "allowedParts": [
-        "stock"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": -0.5
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 1,
-      "trait": "concussive"
-    },
-    {
-      "allowedParts": [
+    "allowedOn": [
         "bullet",
-        "stock"
-      ],
-      "level": 1,
-      "trait": "blazing"
-    }
-  ]
+        "stock",
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.0,
+        "green": 0.27058825,
+        "red": 1.0
+    },
+    "ingredient": {
+        "item": "minecraft:magma_cream"
+    },
+    "partType": "magma_cream",
+    "statModList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_max_damage",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_min_damage",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "stock"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": -0.5
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "level": 1,
+            "trait": "concussive"
+        },
+        {
+            "allowedParts": [
+                "bullet",
+                "stock"
+            ],
+            "level": 1,
+            "trait": "blazing"
+        }
+    ]
 }

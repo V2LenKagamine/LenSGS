@@ -1,56 +1,56 @@
 {
-  "bullpupshot": {
-    "sounds": [
-      {
-        "name": "lenssgs:bullpupshot",
-        "preload": true
-      }
-    ],
-    "subtitle": "lenssgs.gun_shot"
-  },
-  "gunclick": {
-    "sounds": [
-      {
-        "name": "lenssgs:gunclick",
-        "preload": true
-      }
-    ],
-    "subtitle": "lenssgs.gun_click"
-  },
-  "pistolshot": {
-    "sounds": [
-      {
-        "name": "lenssgs:pistolshot",
-        "preload": true
-      }
-    ],
-    "subtitle": "lenssgs.gun_shot"
-  },
-  "reload": {
-    "sounds": [
-      {
-        "name": "lenssgs:reload",
-        "preload": true
-      }
-    ],
-    "subtitle": "lenssgs.gun_reload"
-  },
-  "rifleshot": {
-    "sounds": [
-      {
-        "name": "lenssgs:rifleshot",
-        "preload": true
-      }
-    ],
-    "subtitle": "lenssgs.gun_shot"
-  },
-  "voidreave": {
-    "sounds": [
-      {
-        "name": "lenssgs:voidreave",
-        "preload": true
-      }
-    ],
-    "subtitle": "lenssgs.void_reave"
-  }
+    "bullpupshot": {
+        "sounds": [
+            {
+                "name": "lenssgs:bullpupshot",
+                "preload": true
+            }
+        ],
+        "subtitle": "lenssgs.gun_shot"
+    },
+    "gunclick": {
+        "sounds": [
+            {
+                "name": "lenssgs:gunclick",
+                "preload": true
+            }
+        ],
+        "subtitle": "lenssgs.gun_click"
+    },
+    "pistolshot": {
+        "sounds": [
+            {
+                "name": "lenssgs:pistolshot",
+                "preload": true
+            }
+        ],
+        "subtitle": "lenssgs.gun_shot"
+    },
+    "reload": {
+        "sounds": [
+            {
+                "name": "lenssgs:reload",
+                "preload": true
+            }
+        ],
+        "subtitle": "lenssgs.gun_reload"
+    },
+    "rifleshot": {
+        "sounds": [
+            {
+                "name": "lenssgs:rifleshot",
+                "preload": true
+            }
+        ],
+        "subtitle": "lenssgs.gun_shot"
+    },
+    "voidreave": {
+        "sounds": [
+            {
+                "name": "lenssgs:voidreave",
+                "preload": true
+            }
+        ],
+        "subtitle": "lenssgs.void_reave"
+    }
 }

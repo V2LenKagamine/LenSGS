@@ -1,199 +1,199 @@
 {
-  "allowedOn": [
-    "casing",
-    "bullet",
-    "action",
-    "magazine",
-    "barrel",
-    "receiver",
-    "stock",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.85882354,
-    "green": 0.4392157,
-    "red": 0.5764706
-  },
-  "ingredient": {
-    "item": "lenssgs:wyrm_steel"
-  },
-  "partType": "wyrm_steel",
-  "statModList": [
-    {
-      "allowedParts": [
-        "magazine"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 1.5
-    },
-    {
-      "allowedParts": [
-        "casing"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 0.5
-    },
-    {
-      "allowedParts": [
+    "allowedOn": [
+        "casing",
+        "bullet",
+        "action",
+        "magazine",
+        "barrel",
+        "receiver",
         "stock",
-        "action",
-        "casing"
-      ],
-      "modType": "multiply",
-      "stat": "stat_fire_rate",
-      "val": 1.3
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.85882354,
+        "green": 0.4392157,
+        "red": 0.5764706
     },
-    {
-      "allowedParts": [
-        "action",
-        "casing",
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_min_damage",
-      "val": 1.2
+    "ingredient": {
+        "item": "lenssgs:wyrm_steel"
     },
-    {
-      "allowedParts": [
-        "action",
-        "casing",
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_max_damage",
-      "val": 1.2
-    },
-    {
-      "allowedParts": [
-        "stock",
-        "receiver",
-        "action",
-        "bullet"
-      ],
-      "modType": "multiply",
-      "stat": "stat_inaccuracy",
-      "val": 1.1
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "total_multiply",
-      "stat": "stat_pierce",
-      "val": -0.95
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 2.5
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 2.75
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 1.5
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 1.5
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": 3.0
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 1.25
-    },
-    {
-      "allowedParts": [
-        "barrel"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 1.5
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 1,
-      "trait": "lingering"
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 1,
-      "trait": "shattering"
-    },
-    {
-      "allowedParts": [
-        "casing",
-        "bullet",
-        "prop"
-      ],
-      "level": 1,
-      "trait": "lingering"
-    },
-    {
-      "allowedParts": [
-        "casing",
-        "bullet",
-        "prop"
-      ],
-      "level": 1,
-      "trait": "shattering"
-    },
-    {
-      "allowedParts": [
-        "casing",
-        "bullet",
-        "prop"
-      ],
-      "level": 1,
-      "trait": "blazing"
-    },
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
-      "trait": "blazing"
-    }
-  ]
+    "partType": "wyrm_steel",
+    "statModList": [
+        {
+            "allowedParts": [
+                "magazine"
+            ],
+            "modType": "multiply",
+            "stat": "stat_ammo_max",
+            "val": 1.5
+        },
+        {
+            "allowedParts": [
+                "casing"
+            ],
+            "modType": "multiply",
+            "stat": "stat_ammo_max",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "action",
+                "casing"
+            ],
+            "modType": "multiply",
+            "stat": "stat_fire_rate",
+            "val": 1.3
+        },
+        {
+            "allowedParts": [
+                "action",
+                "casing",
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_min_damage",
+            "val": 1.2
+        },
+        {
+            "allowedParts": [
+                "action",
+                "casing",
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_max_damage",
+            "val": 1.2
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "receiver",
+                "action",
+                "bullet"
+            ],
+            "modType": "multiply",
+            "stat": "stat_inaccuracy",
+            "val": 1.1
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "total_multiply",
+            "stat": "stat_pierce",
+            "val": -0.95
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 2.5
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 2.75
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 1.5
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 1.5
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": 3.0
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 1.25
+        },
+        {
+            "allowedParts": [
+                "barrel"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 1.5
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "level": 1,
+            "trait": "lingering"
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "level": 1,
+            "trait": "shattering"
+        },
+        {
+            "allowedParts": [
+                "casing",
+                "bullet",
+                "prop"
+            ],
+            "level": 1,
+            "trait": "lingering"
+        },
+        {
+            "allowedParts": [
+                "casing",
+                "bullet",
+                "prop"
+            ],
+            "level": 1,
+            "trait": "shattering"
+        },
+        {
+            "allowedParts": [
+                "casing",
+                "bullet",
+                "prop"
+            ],
+            "level": 1,
+            "trait": "blazing"
+        },
+        {
+            "allowedParts": [
+                "all"
+            ],
+            "level": 1,
+            "trait": "blazing"
+        }
+    ]
 }

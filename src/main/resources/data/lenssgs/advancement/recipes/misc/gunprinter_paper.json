@@ -1,32 +1,32 @@
 {
-  "parent": "minecraft:recipes/root",
-  "criteria": {
-    "has_the_recipe": {
-      "conditions": {
-        "recipe": "lenssgs:gunprinter_paper"
-      },
-      "trigger": "minecraft:recipe_unlocked"
+    "parent": "minecraft:recipes/root",
+    "criteria": {
+        "has_the_recipe": {
+            "conditions": {
+                "recipe": "lenssgs:gunprinter_paper"
+            },
+            "trigger": "minecraft:recipe_unlocked"
+        },
+        "paper": {
+            "conditions": {
+                "items": [
+                    {
+                        "items": "minecraft:paper"
+                    }
+                ]
+            },
+            "trigger": "minecraft:inventory_changed"
+        }
     },
-    "paper": {
-      "conditions": {
-        "items": [
-          {
-            "items": "minecraft:paper"
-          }
+    "requirements": [
+        [
+            "has_the_recipe",
+            "paper"
         ]
-      },
-      "trigger": "minecraft:inventory_changed"
+    ],
+    "rewards": {
+        "recipes": [
+            "lenssgs:gunprinter_paper"
+        ]
     }
-  },
-  "requirements": [
-    [
-      "has_the_recipe",
-      "paper"
-    ]
-  ],
-  "rewards": {
-    "recipes": [
-      "lenssgs:gunprinter_paper"
-    ]
-  }
 }

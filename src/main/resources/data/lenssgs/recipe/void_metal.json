@@ -1,24 +1,24 @@
 {
-  "type": "minecraft:crafting_shaped",
-  "category": "misc",
-  "key": {
-    "d": {
-      "tag": "c:gems/diamond"
+    "type": "minecraft:crafting_shaped",
+    "category": "misc",
+    "key": {
+        "d": {
+            "tag": "c:gems/diamond"
+        },
+        "n": {
+            "tag": "c:ingots/netherite"
+        },
+        "s": {
+            "tag": "c:nether_stars"
+        }
     },
-    "n": {
-      "tag": "c:ingots/netherite"
-    },
-    "s": {
-      "tag": "c:nether_stars"
+    "pattern": [
+        "nsn",
+        "ddd",
+        "nsn"
+    ],
+    "result": {
+        "count": 2,
+        "id": "lenssgs:void_metal"
     }
-  },
-  "pattern": [
-    "nsn",
-    "ddd",
-    "nsn"
-  ],
-  "result": {
-    "count": 2,
-    "id": "lenssgs:void_metal"
-  }
 }

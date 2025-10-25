@@ -1,142 +1,142 @@
 {
-  "allowedOn": [
-    "casing",
-    "bullet",
-    "action",
-    "magazine",
-    "barrel",
-    "receiver",
-    "stock",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 0.5019608,
-    "green": 0.5019608,
-    "red": 0.5019608
-  },
-  "ingredient": {
-    "tag": "c:cobblestones"
-  },
-  "partType": "stone",
-  "statModList": [
-    {
-      "allowedParts": [
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": -1.0
-    },
-    {
-      "allowedParts": [
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": -1.0
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": -0.25
-    },
-    {
-      "allowedParts": [
-        "receiver",
-        "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.25
-    },
-    {
-      "allowedParts": [
-        "stock",
-        "barrel"
-      ],
-      "modType": "multiply",
-      "stat": "stat_max_damage",
-      "val": 0.9
-    },
-    {
-      "allowedParts": [
-        "stock",
-        "barrel"
-      ],
-      "modType": "multiply",
-      "stat": "stat_min_damage",
-      "val": 0.8
-    },
-    {
-      "allowedParts": [
-        "barrel",
+    "allowedOn": [
         "casing",
         "bullet",
-        "prop"
-      ],
-      "modType": "add",
-      "stat": "stat_velocity_mul",
-      "val": -0.0125
-    },
-    {
-      "allowedParts": [
-        "stock",
         "action",
-        "casing"
-      ],
-      "modType": "add",
-      "stat": "stat_fire_rate",
-      "val": 2.5
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_projectile_count",
-      "val": -1.0
-    },
-    {
-      "allowedParts": [
-        "magazine"
-      ],
-      "modType": "multiply",
-      "stat": "stat_ammo_max",
-      "val": 0.5
-    },
-    {
-      "allowedParts": [
+        "magazine",
         "barrel",
-        "bullet",
-        "receiver"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": 2.0
+        "receiver",
+        "stock",
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 0.5019608,
+        "green": 0.5019608,
+        "red": 0.5019608
     },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_gravity_mod",
-      "val": 0.0025
+    "ingredient": {
+        "tag": "c:cobblestones"
     },
-    {
-      "allowedParts": [
-        "stock"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": -0.75
-    }
-  ],
-  "traitLevelList": []
+    "partType": "stone",
+    "statModList": [
+        {
+            "allowedParts": [
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": -1.0
+        },
+        {
+            "allowedParts": [
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": -1.0
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": -0.25
+        },
+        {
+            "allowedParts": [
+                "receiver",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.25
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "barrel"
+            ],
+            "modType": "multiply",
+            "stat": "stat_max_damage",
+            "val": 0.9
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "barrel"
+            ],
+            "modType": "multiply",
+            "stat": "stat_min_damage",
+            "val": 0.8
+        },
+        {
+            "allowedParts": [
+                "barrel",
+                "casing",
+                "bullet",
+                "prop"
+            ],
+            "modType": "add",
+            "stat": "stat_velocity_mul",
+            "val": -0.0125
+        },
+        {
+            "allowedParts": [
+                "stock",
+                "action",
+                "casing"
+            ],
+            "modType": "add",
+            "stat": "stat_fire_rate",
+            "val": 2.5
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_projectile_count",
+            "val": -1.0
+        },
+        {
+            "allowedParts": [
+                "magazine"
+            ],
+            "modType": "multiply",
+            "stat": "stat_ammo_max",
+            "val": 0.5
+        },
+        {
+            "allowedParts": [
+                "barrel",
+                "bullet",
+                "receiver"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": 2.0
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_gravity_mod",
+            "val": 0.0025
+        },
+        {
+            "allowedParts": [
+                "stock"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": -0.75
+        }
+    ],
+    "traitLevelList": []
 }

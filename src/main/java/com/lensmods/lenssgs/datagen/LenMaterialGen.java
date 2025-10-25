@@ -83,8 +83,8 @@ public class LenMaterialGen {
             new GunMaterial("stainless_steel",STAINLESS_STATS,null,STAINLESS_STEEL_TAG,Color.LIGHTSKYBLUE,NOT_PROPELLANT),
             new GunMaterial("tungsten",TUNGSTEN_STATS,TUNGSTEN_TRAITS,TUNGSTEN_TAG,Color.REBECCAPURPLE,NOT_PROPELLANT),
             new GunMaterial("titanium",TITANIUM_STATS,null,TITANIUM_TAG,Color.HOTPINK,NOT_PROPELLANT),
-            new GunMaterial("depleted",DEPLETED_STATS, DEPLETED_TRAITS, ResourceLocation.fromNamespaceAndPath("modern_industrialization","he_uranium_fuel_rod_depleted"),Color.PINK,List.of(ROUND)),
-            new GunMaterial("invar_blade",ROTARY_BLADE_STATS, ROTARY_BLADE_TRAITS, ResourceLocation.fromNamespaceAndPath("modern_industrialization","invar_rotary_blade"),Color.PINK,List.of(ROUND)),
+            //new GunMaterial("depleted",DEPLETED_STATS, DEPLETED_TRAITS, ResourceLocation.fromNamespaceAndPath("modern_industrialization","he_uranium_fuel_rod_depleted"),Color.PINK,List.of(ROUND)),
+            //new GunMaterial("invar_blade",ROTARY_BLADE_STATS, ROTARY_BLADE_TRAITS, ResourceLocation.fromNamespaceAndPath("modern_industrialization","invar_rotary_blade"),Color.PINK,List.of(ROUND)),
             //Mekanism
             new GunMaterial("infused_alloy",INFUSED_ALLOY_STATS,null,INFUSED_ALLOY_TAG,Color.RED,NOT_PROPELLANT),
             new GunMaterial("reinforced_alloy",REINFORCED_ALLOY_STATS,null,REINFORCED_ALLOY_TAG,Color.LIGHTSKYBLUE,NOT_PROPELLANT),

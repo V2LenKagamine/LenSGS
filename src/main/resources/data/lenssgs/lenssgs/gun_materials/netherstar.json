@@ -1,113 +1,113 @@
 {
-  "allowedOn": [
-    "bullet",
-    "prop",
-    "scope"
-  ],
-  "color": {
-    "alpha": 1.0,
-    "blue": 1.0,
-    "green": 1.0,
-    "red": 1.0
-  },
-  "ingredient": {
-    "item": "minecraft:nether_star"
-  },
-  "partType": "netherstar",
-  "statModList": [
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_min_damage",
-      "val": 0.75
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "modType": "add",
-      "stat": "stat_max_damage",
-      "val": 0.75
-    },
-    {
-      "allowedParts": [
+    "allowedOn": [
         "bullet",
-        "prop"
-      ],
-      "modType": "add",
-      "stat": "stat_inaccuracy",
-      "val": 7.5
+        "prop",
+        "scope"
+    ],
+    "color": {
+        "alpha": 1.0,
+        "blue": 1.0,
+        "green": 1.0,
+        "red": 1.0
     },
-    {
-      "allowedParts": [
-        "bullet",
-        "prop"
-      ],
-      "modType": "add",
-      "stat": "stat_projectile_count",
-      "val": 5.0
+    "ingredient": {
+        "item": "minecraft:nether_star"
     },
-    {
-      "allowedParts": [
-        "prop"
-      ],
-      "modType": "multiply",
-      "stat": "stat_min_damage",
-      "val": 1.3
-    },
-    {
-      "allowedParts": [
-        "prop"
-      ],
-      "modType": "multiply",
-      "stat": "stat_max_damage",
-      "val": 1.3
-    }
-  ],
-  "traitLevelList": [
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 1,
-      "trait": "shattering"
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 1,
-      "trait": "shocking"
-    },
-    {
-      "allowedParts": [
-        "bullet"
-      ],
-      "level": 1,
-      "trait": "tracing"
-    },
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
-      "trait": "shattering"
-    },
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
-      "trait": "shocking"
-    },
-    {
-      "allowedParts": [
-        "all"
-      ],
-      "level": 1,
-      "trait": "tracing"
-    }
-  ]
+    "partType": "netherstar",
+    "statModList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_min_damage",
+            "val": 0.75
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "modType": "add",
+            "stat": "stat_max_damage",
+            "val": 0.75
+        },
+        {
+            "allowedParts": [
+                "bullet",
+                "prop"
+            ],
+            "modType": "add",
+            "stat": "stat_inaccuracy",
+            "val": 7.5
+        },
+        {
+            "allowedParts": [
+                "bullet",
+                "prop"
+            ],
+            "modType": "add",
+            "stat": "stat_projectile_count",
+            "val": 5.0
+        },
+        {
+            "allowedParts": [
+                "prop"
+            ],
+            "modType": "multiply",
+            "stat": "stat_min_damage",
+            "val": 1.3
+        },
+        {
+            "allowedParts": [
+                "prop"
+            ],
+            "modType": "multiply",
+            "stat": "stat_max_damage",
+            "val": 1.3
+        }
+    ],
+    "traitLevelList": [
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "level": 1,
+            "trait": "shattering"
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "level": 1,
+            "trait": "shocking"
+        },
+        {
+            "allowedParts": [
+                "bullet"
+            ],
+            "level": 1,
+            "trait": "tracing"
+        },
+        {
+            "allowedParts": [
+                "all"
+            ],
+            "level": 1,
+            "trait": "shattering"
+        },
+        {
+            "allowedParts": [
+                "all"
+            ],
+            "level": 1,
+            "trait": "shocking"
+        },
+        {
+            "allowedParts": [
+                "all"
+            ],
+            "level": 1,
+            "trait": "tracing"
+        }
+    ]
 }
