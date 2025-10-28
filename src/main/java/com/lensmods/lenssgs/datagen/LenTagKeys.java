@@ -126,8 +126,6 @@ public class LenTagKeys extends ItemTagsProvider {
                 .addOptionalTag(REINFORCED_ALLOY_TAG)
                 .addOptionalTag(INFUSED_ALLOY_TAG)
                 .addOptionalTag(ATOMIC_ALLOY_TAG)
-                .addOptional(ResourceLocation.fromNamespaceAndPath("modern_industrialization","he_uranium_fuel_rod_depleted"))
-                .addOptional(ResourceLocation.fromNamespaceAndPath("modern_industrialization","invar_rotary_blade"))
         ;
 
     }

@@ -1,5 +1,5 @@
-// 1.21.1	2025-10-24T19:52:17.8475785	Tags for minecraft:item mod id vanilla
+// 1.21.1	2025-10-28T11:36:29.7787746	Tags for minecraft:item mod id vanilla
 33f0b8782691e6ce66803be997a518c3c5a33ac4 data/lenssgs/tags/item/refills_ammo.json
-1e90612634822dd8af534edea7946e9caf54fc42 data/lenssgs/tags/item/usable_for_guns.json
+2fa430ec8eeb9015fc4180228b674840e1cdd3ab data/lenssgs/tags/item/usable_for_guns.json
 58808e61ce3ec6079f28fd657166009dfc77ed8b data/minecraft/tags/item/enchantable/sword.json
 58808e61ce3ec6079f28fd657166009dfc77ed8b data/minecraft/tags/item/enchantable/weapon.json

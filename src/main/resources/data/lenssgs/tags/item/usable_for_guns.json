@@ -215,14 +215,6 @@
         {
             "id": "#mekanism:alloys/atomic",
             "required": false
-        },
-        {
-            "id": "modern_industrialization:he_uranium_fuel_rod_depleted",
-            "required": false
-        },
-        {
-            "id": "modern_industrialization:invar_rotary_blade",
-            "required": false
         }
     ]
 }

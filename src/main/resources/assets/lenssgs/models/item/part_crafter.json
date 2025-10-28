@@ -1,6 +1,194 @@
 {
     "parent": "minecraft:item/generated",
+    "overrides": [
+        {
+            "model": "lenssgs:item/receiver_pistol",
+            "predicate": {
+                "lenssgs:crafter_type": 0.0
+            }
+        },
+        {
+            "model": "lenssgs:item/receiver_standard",
+            "predicate": {
+                "lenssgs:crafter_type": 0.01
+            }
+        },
+        {
+            "model": "lenssgs:item/receiver_bullpup",
+            "predicate": {
+                "lenssgs:crafter_type": 0.02
+            }
+        },
+        {
+            "model": "lenssgs:item/action_manual",
+            "predicate": {
+                "lenssgs:crafter_type": 0.1
+            }
+        },
+        {
+            "model": "lenssgs:item/action_single",
+            "predicate": {
+                "lenssgs:crafter_type": 0.11
+            }
+        },
+        {
+            "model": "lenssgs:item/action_automatic",
+            "predicate": {
+                "lenssgs:crafter_type": 0.12
+            }
+        },
+        {
+            "model": "lenssgs:item/barrel_stub",
+            "predicate": {
+                "lenssgs:crafter_type": 0.2
+            }
+        },
+        {
+            "model": "lenssgs:item/barrel_short",
+            "predicate": {
+                "lenssgs:crafter_type": 0.21
+            }
+        },
+        {
+            "model": "lenssgs:item/barrel_normal",
+            "predicate": {
+                "lenssgs:crafter_type": 0.22
+            }
+        },
+        {
+            "model": "lenssgs:item/barrel_long",
+            "predicate": {
+                "lenssgs:crafter_type": 0.23
+            }
+        },
+        {
+            "model": "lenssgs:item/barrel_extended",
+            "predicate": {
+                "lenssgs:crafter_type": 0.24
+            }
+        },
+        {
+            "model": "lenssgs:item/stock_short",
+            "predicate": {
+                "lenssgs:crafter_type": 0.3
+            }
+        },
+        {
+            "model": "lenssgs:item/stock_full",
+            "predicate": {
+                "lenssgs:crafter_type": 0.31
+            }
+        },
+        {
+            "model": "lenssgs:item/magazine_short",
+            "predicate": {
+                "lenssgs:crafter_type": 0.4
+            }
+        },
+        {
+            "model": "lenssgs:item/magazine_normal",
+            "predicate": {
+                "lenssgs:crafter_type": 0.41
+            }
+        },
+        {
+            "model": "lenssgs:item/magazine_extended",
+            "predicate": {
+                "lenssgs:crafter_type": 0.42
+            }
+        },
+        {
+            "model": "lenssgs:item/magazine_belt",
+            "predicate": {
+                "lenssgs:crafter_type": 0.43
+            }
+        },
+        {
+            "model": "lenssgs:item/scope_irons",
+            "predicate": {
+                "lenssgs:crafter_type": 0.5
+            }
+        },
+        {
+            "model": "lenssgs:item/scope_short",
+            "predicate": {
+                "lenssgs:crafter_type": 0.51
+            }
+        },
+        {
+            "model": "lenssgs:item/scope_medium",
+            "predicate": {
+                "lenssgs:crafter_type": 0.52
+            }
+        },
+        {
+            "model": "lenssgs:item/scope_long",
+            "predicate": {
+                "lenssgs:crafter_type": 0.53
+            }
+        },
+        {
+            "model": "lenssgs:item/casing_small",
+            "predicate": {
+                "lenssgs:crafter_type": 0.6
+            }
+        },
+        {
+            "model": "lenssgs:item/casing_normal",
+            "predicate": {
+                "lenssgs:crafter_type": 0.61
+            }
+        },
+        {
+            "model": "lenssgs:item/casing_large",
+            "predicate": {
+                "lenssgs:crafter_type": 0.62
+            }
+        },
+        {
+            "model": "lenssgs:item/casing_shell",
+            "predicate": {
+                "lenssgs:crafter_type": 0.63
+            }
+        },
+        {
+            "model": "lenssgs:item/round_standard",
+            "predicate": {
+                "lenssgs:crafter_type": 0.7
+            }
+        },
+        {
+            "model": "lenssgs:item/round_buck",
+            "predicate": {
+                "lenssgs:crafter_type": 0.71
+            }
+        },
+        {
+            "model": "lenssgs:item/round_bird",
+            "predicate": {
+                "lenssgs:crafter_type": 0.72
+            }
+        },
+        {
+            "model": "lenssgs:item/prop_light",
+            "predicate": {
+                "lenssgs:crafter_type": 0.8
+            }
+        },
+        {
+            "model": "lenssgs:item/prop_normal",
+            "predicate": {
+                "lenssgs:crafter_type": 0.81
+            }
+        },
+        {
+            "model": "lenssgs:item/prop_heavy",
+            "predicate": {
+                "lenssgs:crafter_type": 0.82
+            }
+        }
+    ],
     "textures": {
-        "layer0": "lenssgs:item/part_crafter"
+        "layer0": "lenssgs:item/crafters/base"
     }
 }

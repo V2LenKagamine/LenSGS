@@ -1,4 +1,5 @@
 {
+	"format_version": "1.21.6",
 	"textures": {
 		"0": "lenssgs:item/partbox",
 		"particle": "lenssgs:item/partbox"
@@ -52,5 +53,24 @@
 				"down": {"uv": [0, 8.05, 8, 16], "rotation": 180, "texture": "#0"}
 			}
 		}
-	]
+	],
+	"display": {
+		"ground": {
+			"translation": [0, -2.5, 0]
+		},
+		"gui": {
+			"rotation": [45, 45, 0],
+			"translation": [0, -2.5, 0],
+			"scale": [1.5, 1.5, 1.5]
+		},
+		"fixed": {
+			"rotation": [0, 90, 0],
+			"translation": [0, -4, 0],
+			"scale": [2, 2, 2]
+		},
+		"on_shelf": {
+			"rotation": [0, 90, 0],
+			"scale": [2, 2, 2]
+		}
+	}
 }

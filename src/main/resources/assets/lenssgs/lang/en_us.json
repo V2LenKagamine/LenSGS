@@ -16,7 +16,7 @@
     "key.categories.lenssgs": "Len's Gun Shenanigans",
     "key.lenssgs.cycle.back": "Tooltip Cycle Back",
     "key.lenssgs.cycle.next": "Tooltip Cycle Forward",
-    "key.lenssgs.displayConstruction": "Show Gun Parts",
+    "key.lenssgs.displayConstruction": "Display Gun Parts",
     "key.lenssgs.displayStats": "Display Gun Stats",
     "key.lenssgs.displayTraits": "Display Gun Traits",
     "key.lenssgs.reload": "Reload Gun",
@@ -81,7 +81,7 @@
     "lenssgs.gun_shot": "Gun Fires",
     "lenssgs.gunfake1": "This gun is entirely fake.",
     "lenssgs.gunfake2": "That, or the parts are all broken!",
-    "lenssgs.gunmat_useful": "This looks usable for a Gun or Ammo...",
+    "lenssgs.gunmat_useful": "Press a 'Display' key for more info.",
     "lenssgs.gunpowder": "Gunpowder",
     "lenssgs.hallowpoint": "Hallow-Point",
     "lenssgs.hocufe": "HoCuFe",
@@ -143,7 +143,7 @@
     "lenssgs.stat_inaccuracy": "Inaccuracy:",
     "lenssgs.stat_max_damage": "Maximum-Damage:",
     "lenssgs.stat_min_damage": "Minimum-Damage:",
-    "lenssgs.stat_pierce": "Peirce:",
+    "lenssgs.stat_pierce": "Pierce:",
     "lenssgs.stat_projectile_count": "Projectiles:",
     "lenssgs.stat_velocity_mul": "Velocity:",
     "lenssgs.steel": "Steel",
@@ -165,5 +165,5 @@
     "lenssgs.voidtouched": "Void's-Maw",
     "lenssgs.wood": "Wooden",
     "lenssgs.wyrm_steel": "Wyrm Steel",
-    "refills_ammo": "Can be used to restore some ammo of a bullet-stack."
+    "refills_ammo": "Craft with bullet stack to gain some ammo."
 }

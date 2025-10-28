@@ -7,11 +7,13 @@ import com.lensmods.lenssgs.client.render.CustomRenderHandler;
 import com.lensmods.lenssgs.core.data.AllowedParts;
 import com.lensmods.lenssgs.core.data.MaterialProvider;
 import com.lensmods.lenssgs.core.entity.render.GenericProjRender;
+import com.lensmods.lenssgs.core.items.PartCraftingItem;
 import com.lensmods.lenssgs.core.util.KeyManager;
 import com.lensmods.lenssgs.datagen.*;
 import com.lensmods.lenssgs.init.*;
 import com.lensmods.lenssgs.networking.PacketReg;
 import com.mojang.logging.LogUtils;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.resources.model.ModelResourceLocation;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.DataProvider;
@@ -68,7 +70,7 @@ public class LensSGS
     // Creates a creative tab with the id "examplemod:example_tab" for the example item, that is placed after the combat tab
     public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.lenssgs")) //The language key for the title of your CreativeModeTab
-            .withTabsBefore(CreativeModeTabs.COMBAT)
+            .withTabsAfter(CreativeModeTabs.COMBAT)
             .icon(() -> LenItems.GUNPRINTER_PAPER.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(LenItems.GUNPRINTER_PAPER.get());
@@ -170,6 +172,11 @@ public class LensSGS
             NeoForge.EVENT_BUS.register(ClientFireHandler.get());
             NeoForge.EVENT_BUS.register(ADSHandler.get());//Might need to move this if I want aiming to do anything, TODO?
             NeoForge.EVENT_BUS.register(GunTooltipHandler.INSTANCE);
+            event.enqueueWork(() -> {
+                ItemProperties.register(LenItems.PART_CRAFTER.asItem(),
+                        ResourceLocation.fromNamespaceAndPath(LensSGS.MODID,"crafter_type"),
+                        (stack,level,player,seed) -> PartCraftingItem.getOverlayFloat(stack));
+            });
         }
         @SubscribeEvent
         public static void registerEntRenders(EntityRenderersEvent.RegisterRenderers event) {

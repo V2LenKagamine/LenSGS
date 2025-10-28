@@ -1,0 +1,7 @@
+{
+    "parent": "minecraft:item/generated",
+    "textures": {
+        "layer0": "lenssgs:item/crafters/base",
+        "layer1": "lenssgs:item/crafters/r_buck"
+    }
+}
