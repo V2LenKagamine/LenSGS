@@ -1,0 +1,51 @@
+{
+  "name": "Parts and Purpose",
+  "icon": "lenssgs:gunprinter_paper",
+  "category": "lenssgs:gunmaking",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "There are six gun parts in total, barrels, actions, receivers, stocks, magazines, and sights. Each have a different purpose in the actual weapon."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Receiver: The frame of the gun basically. Required. $(br) Pistol frames are slightly weaker,but easy to handle, making them surprisingly accurate. $(br) Standard frames are everything from single shot powerhouses to lead sprayers,having a wide damage range. Their size makes them slighly less accurate. $(br) Bullpup frames are slower, but fairly accurate and have very little variance in damage."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Action: How many bullet per bullet? Required. Manual action: Slow, heavy hitting shots; low mag capacity. Single Action: A middle ground, deals good damage, but still capable of spraying lead.  Automatic Action: Just flings lead, no need to click every shot. Gives no bonuses other than fire rate."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Barrel: Where the bullet comes out. Required. Each barrel is longer than the last, with short barrels giving fire rate at the cost of damage and accuracy, and longer barrels giving accuracy and damage at the cost of fire rate."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Stock: Holds the gun steady. Gives Accuracy, and lets you fire slightly faster. Short stocks lean to fire rate, while full stocks lean to accuracy."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Magazine: Lets you fire more than once per reload. Quite useful. Bigger magazines hold more, but take longer to reload. Smaller magazines also give slight fire rate and accuracy bonuses; while larger ones give penalties. The Normal magazine just gives ammo capacity."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Sights: Don't really do anything other than let you zoom with right click and look neat. Pick your favorite!"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "There are also, of course, bullet parts. The 3 being all required, they are casings, rounds, and propellant."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Casing: Smaller casings mean less propellant for damage, but also let you cram more of them into boxes and mags. Shells offer a more balanced spread of stats at the cost of slightly less ammo than normal casings."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Round: The actual projectile. Not much to do here than make them smaller and cram more in. Buckshot and Birdshot sacrifice damage and accuracy for amount of projectiles. Traits are king here."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "Propellant: Simple; More powder, more damage. Of course, you also lose some accuracy and ammo space, but who doesn't want big boom?"
+    }
+  ]
+}

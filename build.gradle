@@ -92,6 +92,7 @@ dependencies {
     runtimeOnly('curse.maven:mekanism-268560:7132168')
     runtimeOnly('curse.maven:cloth-config-348521:5729127')
     runtimeOnly('curse.maven:greg-890405:6792853')
+    runtimeOnly('curse.maven:patchouli-306770:6842247')
 }
 
 tasks.withType(JavaCompile).configureEach {

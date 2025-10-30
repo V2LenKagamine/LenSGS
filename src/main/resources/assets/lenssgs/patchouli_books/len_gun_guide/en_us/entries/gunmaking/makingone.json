@@ -1,0 +1,15 @@
+{
+  "name": "Basic Composition",
+  "icon": "lenssgs:gunprinter_paper",
+  "category": "lenssgs:gunmaking",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "To make your own lead flinger: You will need at the very least three things; an Action, a Receiver, and a Barrel. You can construct them out of any valid material, and any of the variants will work. Afterwards, put all 3 in a crafting interface and obtain your result!"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "After making a gun, parts can easily be swapped for new ones, or new parts added, by simply crafting the weapon with the part. The old part will pop out for re-use or disposal later. Note that parts can't [yet] be outright removed. Non-Essential parts are magazines,sights, and stocks; but all are generally just stat boosts."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "name": "Traits Explained",
+  "icon": "lenssgs:void_metal",
+  "category": "lenssgs:traitmats",
+  "pages": [
+    {
+      "type": "patchouli:text",
+      "text": "Ever see all those weird words on a gun or material and think 'What does that do?'? Wonder no longer!"
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li) Blazing:Ignite target 5 seconds per level. $(li)Shocking: Summon Lightning at 5% chance per level dealing 25% of the damage of the hit."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li) Tracing: Target glows for 10 seconds per level. $(li) Blinding: Target is blinded for 10 seconds per level. $(li) Concussive:Deals .75 Knockback per trait level. "
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li) Lacerating:Deals Lacerate for 2.5 seconds per level. $(li) Shattering: Deals Shatter for 5 seconds per level;Effect is the level of the trait."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li) Hallow Point: Deals 10% more damage per level to 'undead'. $(li)Explosive: On bullet death; explode in a 1.5 block radius 5% of the time; Each level increases the chance and radius linearly."
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li) Lingering: Leave a Lacerate potion cloud for 1.25 seconds in a 0.5 block radius, both stacking linearly per level. $(li) Void Touched: Create a hole to the Void, slowly expanding and sucking in mobs until collapsing, dealing 25% of the hits damage per level in an AoE. "
+    },
+    {
+      "type": "patchouli:text",
+      "text": "$(li) Ecological:5% chance per level to not use ammo on reload.  $(li) Eternal: 5% chance per level to give ammo to the ammo stack instead of taking it."
+    }
+  ]
+}

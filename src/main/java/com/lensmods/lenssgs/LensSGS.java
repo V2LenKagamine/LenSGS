@@ -68,9 +68,9 @@ public class LensSGS
     public static final DeferredBlock<Block> EXAMPLE_BLOCK = BLOCKS.registerSimpleBlock("example_block", BlockBehaviour.Properties.of().mapColor(MapColor.STONE));
 
     // Creates a creative tab with the id "examplemod:example_tab" for the example item, that is placed after the combat tab
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("theguntab", () -> CreativeModeTab.builder()
             .title(Component.translatable("itemGroup.lenssgs")) //The language key for the title of your CreativeModeTab
-            .withTabsAfter(CreativeModeTabs.COMBAT)
+            .withTabsBefore(CreativeModeTabs.SPAWN_EGGS)
             .icon(() -> LenItems.GUNPRINTER_PAPER.get().getDefaultInstance())
             .displayItems((parameters, output) -> {
                 output.accept(LenItems.GUNPRINTER_PAPER.get());

@@ -39,5 +39,6 @@ public class LenItems {
     ));
     public static final DeferredItem<PartCraftingItem> PART_CRAFTER =ITEMS.register("part_crafter",()-> new PartCraftingItem(
             new Item.Properties()
+                    .stacksTo(1)
     ));
 }
